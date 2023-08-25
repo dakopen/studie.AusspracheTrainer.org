@@ -1,0 +1,12 @@
+<body>
+    <form action="{% url 'analyze' %}" method="post" enctype="multipart/form-data">
+        <label for="audioFile">Audio hochladen:</label>
+        <input type="file" id="audioFile" name="audioFile" accept="audio/*">
+        <br>
+        <label for="text">Text eingeben:</label>
+        <input type="text" id="text" name="text">
+        <br>
+        <input type="submit" value="Absenden">
+    </form>
+</body>
+  

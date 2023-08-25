@@ -1,0 +1,114 @@
+/* NAVBAR navbar */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+li {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+.header {
+    border-bottom: 1px solid #E2E8F0;
+    background-color: var(--white);
+}
+
+.navbar {
+    display: flex;
+    position: fixed;
+    width: 100%;
+    z-index: 999;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75em 1.5em;
+    border-bottom: 1px solid var(--lila);
+}
+
+.hamburger {
+    display: none;
+}
+
+.bar {
+    display: block;
+    width: 25px;
+    height: 3px;
+    margin: 5px auto;
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+    background-color: #101010;
+}
+
+.nav-menu {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 999;
+}
+
+.nav-item {
+    margin-left: 2em;
+}
+
+.nav-link {
+    font-size: 1.6em;
+    font-weight: 400;
+    color: var(--black);
+}
+
+.nav-link:hover {
+    color: var(--lila);
+}
+
+.nav-logo {
+    justify-content: center;
+    vertical-align: middle;
+    font-size: 0px;
+}
+
+@media only screen and (max-width: 768px) {
+    .nav-menu {
+        position: fixed;
+        right: -100%;
+        top: 4em;
+        flex-direction: column;
+        background-color: #fff;
+        width: 100%;
+        border-radius: 10px;
+        text-align: center;
+        transition: 0.3s;
+        box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
+    }
+    .nav-menu.active {
+        right: 0;
+        padding-bottom: 100vh;
+    }
+    .nav-item {
+        margin: 1em 0;
+    }
+    .hamburger {
+        display: block;
+        cursor: pointer;
+    }
+    .hamburger.active .bar:nth-child(2) {
+        opacity: 0;
+    }
+    .hamburger.active .bar:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+    }
+    .hamburger.active .bar:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
+    }
+    body.unscrollable {
+        overflow: hidden;
+    }
+}
+
+.space {
+    margin-top: 4em;
+}

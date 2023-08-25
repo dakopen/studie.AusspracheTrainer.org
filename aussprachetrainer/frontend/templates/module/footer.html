@@ -1,0 +1,20 @@
+{% load i18n %}
+{% load static %}
+
+<footer class="footer" style="background-color:var(--white);">
+    <div class="container">
+        <div class="footer-logo">
+            <img src="{% static 'frontend/assets/images/AT-default.svg' %}" alt="AusspracheTrainer">
+        </div>        
+        <div class="footer-menu">
+            <ul>
+                <li><a href="{% url 'contact' %}">{% trans "Kontakt" %}</a></li>
+                <li><a href="{% url 'legal_notice' %}">{% trans "Impressum" %}</a></li>
+                <li><a href="{% url 'privacy_policy' %}">{% trans "Datenschutz" %}</a></li>
+            </ul>
+        </div>
+        <div class="footer-copyright">
+            <p>&copy; {% now "Y" %} Daniel Busch</p>
+        </div>
+    </div>
+</footer>

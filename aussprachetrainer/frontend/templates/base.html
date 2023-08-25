@@ -1,0 +1,34 @@
+{% load i18n %}
+{% load static %}
+
+<html lang="{{ LANGUAGE_CODE }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'frontend/assets/css/global.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'frontend/assets/css/header.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'frontend/assets/css/footer.css' %}" type="text/css">
+
+    <link rel="icon" href="{% static 'frontend/assets/images/favicon.png' %}" type="image/png">
+    <title>{% block title %}Default Title{% endblock %}</title>
+    <!-- other meta tags -->
+    {% block extra_head %}{% endblock %}
+</head>
+
+<body>
+    <!-- ***** Header Area Start ***** -->
+    {% include "module/header.html" %}
+    <!-- ***** Header Area End ***** -->
+
+    <div class="space"></div>
+    <br><br>
+
+    {% block content %}{% endblock %}
+
+    <!-- ***** Footer Area Start ***** -->
+    {% include "module/footer.html" %}
+    <!-- ***** Footer Area End ***** -->
+    <script src="{% static 'frontend/assets/js/base.js' %}"></script> 
+</body>
+
+</html>

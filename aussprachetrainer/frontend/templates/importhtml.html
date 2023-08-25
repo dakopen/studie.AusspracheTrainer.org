@@ -1,0 +1,21 @@
+{% load i18n %} <!-- Load the internationalization tags -->
+
+<h1>{% trans "Willkommen" %}</h1> <!-- Translated greeting -->
+
+<!-- Language Switcher -->
+<div>
+    <label>{% trans "Wähle Sprache aus" %}</label>
+    <select onchange="location = this.value;">
+        {% get_available_languages as LANGUAGES %}
+        {% for lang_code, lang_name in LANGUAGES %}
+            <option value="/{{ lang_code }}/" {% if lang_code == LANGUAGE_CODE %}selected{% endif %}>
+                {{ lang_name }}
+            </option>
+        {% endfor %}
+    </select>
+</div>
+
+
+<!-- Other Content -->
+<p>{% trans "diese seite unterstützt mehrere Sprachen." %}</p>
+<p>{% trans "diese Seite ist cool" %}</p>

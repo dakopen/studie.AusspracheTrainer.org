@@ -7,8 +7,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 1.0.0\n"
-"Report-Msgid-Bugs-To: dakopen185+atbugs@gmail.com\n"
-"POT-Creation-Date: 2023-08-25 17:55+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-08-25 19:38+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Daniel Busch <dakopen185@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,18 +17,30 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-#: .\frontend\templates\testfile.html:8
-msgid "Meine mehrsprachige Seite"
-msgstr "My multilanguage page"
 
-#: .\frontend\templates\testfile.html:11
+#: .\frontend\templates\base.html:24 .\frontend\templates\module\header.html:14
+msgid "Deutsch123"
+msgstr ""
+
+#: .\frontend\templates\importhtml.html:3
+#: .\frontend\templates\testfile2.html:12
 msgid "Willkommen"
 msgstr "Welcome"
 
-#: .\frontend\templates\testfile.html:15
+#: .\frontend\templates\importhtml.html:7
+#: .\frontend\templates\testfile2.html:16
 msgid "Wähle Sprache aus"
 msgstr "Select language"
 
-#: .\frontend\templates\testfile.html:28
+#: .\frontend\templates\importhtml.html:20
+#: .\frontend\templates\testfile2.html:29
 msgid "diese seite unterstützt mehrere Sprachen."
 msgstr "this site supports multiple languages"
+
+#: .\frontend\templates\importhtml.html:21
+msgid "diese Seite ist cool"
+msgstr ""
+
+#: .\frontend\templates\testfile2.html:7
+msgid "Meine mehrsprachige Seite"
+msgstr "My multilanguage page"
