@@ -1,12 +1,12 @@
-<body>
-    <form action="{% url 'analyze' %}" method="post" enctype="multipart/form-data">
-        <label for="audioFile">Audio hochladen:</label>
-        <input type="file" id="audioFile" name="audioFile" accept="audio/*">
-        <br>
-        <label for="text">Text eingeben:</label>
-        <input type="text" id="text" name="text">
-        <br>
-        <input type="submit" value="Absenden">
-    </form>
-</body>
-  
+{% load i18n %}
+
+<form action="{% url 'initiate_analysis' %}" method="post" enctype="multipart/form-data">
+    <label for="audioFile">{% trans "Audio hochladen:" %}</label>
+    <input type="file" id="audioFile" name="audio_file" accept="audio/*">
+    <br>
+    <label for="text">{% trans "Text eingeben:" %}</label>
+    <input type="text" id="text" name="text">
+    <br>
+    <input type="submit" value={% trans "Absenden" %}>
+    {% csrf_token %}
+</form>

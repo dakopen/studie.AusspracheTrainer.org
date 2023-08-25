@@ -21,7 +21,6 @@ from django.conf.urls.i18n import i18n_patterns
 urlpatterns = i18n_patterns(
     path('admin/', admin.site.urls),
     path('', include('frontend.urls')),
-    path('analyze/', include('analyze.urls')),
     # other paths...
 )
 
