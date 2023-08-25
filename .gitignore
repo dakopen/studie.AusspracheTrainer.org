@@ -151,4 +151,19 @@ cython_debug/
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
 
+# Images
+*.jpg
+*.jpeg
+*.png
+*.gif
+*.ico
+*.svg
+
+# Audio
+*.mp3
+*.wav
+*.ogg
+*.flac
+*.m4a
+
 anleitung-ignore.txt
