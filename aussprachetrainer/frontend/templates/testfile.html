@@ -1,0 +1,31 @@
+{% load i18n %} <!-- Load the internationalization tags -->
+
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}"> <!-- Set the language attribute based on the current language -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% trans "My Multilingual Site" %}</title> <!-- Translated title -->
+</head>
+<body>
+    <h1>{% trans "Welcome" %}</h1> <!-- Translated greeting -->
+
+    <!-- Language Switcher -->
+    <div>
+        <label>{% trans "Choose Language:" %}</label>
+        <select onchange="location = this.value;">
+            {% get_available_languages as LANGUAGES %}
+            {% for lang_code, lang_name in LANGUAGES %}
+                <option value="{% language lang_code %}" {% if lang_code == LANGUAGE_CODE %}selected{% endif %}>
+                    {{ lang_name }}
+                </option>
+                {% endlanguage %}
+            {% endfor %}
+        </select>
+    </div>
+
+    <!-- Other Content -->
+    <p>{% trans "This site supports multiple languages. Use the selector above to change the language." %}</p>
+
+</body>
+</html>
