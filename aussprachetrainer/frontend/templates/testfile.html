@@ -5,14 +5,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% trans "My Multilingual Site" %}</title> <!-- Translated title -->
+    <title>{% trans "Meine mehrsprachige Seite" %}</title> <!-- Translated title -->
 </head>
 <body>
-    <h1>{% trans "Welcome" %}</h1> <!-- Translated greeting -->
+    <h1>{% trans "Willkommen" %}</h1> <!-- Translated greeting -->
 
     <!-- Language Switcher -->
     <div>
-        <label>{% trans "Choose Language:" %}</label>
+        <label>{% trans "Wähle Sprache aus" %}</label>
         <select onchange="location = this.value;">
             {% get_available_languages as LANGUAGES %}
             {% for lang_code, lang_name in LANGUAGES %}
@@ -25,7 +25,7 @@
     
 
     <!-- Other Content -->
-    <p>{% trans "This site supports multiple languages. Use the selector above to change the language." %}</p>
+    <p>{% trans "diese seite unterstützt mehrere Sprachen." %}</p>
 
 </body>
 </html>
