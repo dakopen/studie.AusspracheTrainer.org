@@ -43,6 +43,8 @@ def privacy_policy(request):
 
     return render_into_base(request, _("Datenschutzerklärung"), "privacy_policy.html")
 
+def waiting_page(request, task_id):
+    return render_into_base(request, _("Warte auf Ergebnis"), "waiting_page.html", {"task_id": task_id})
 
 def initiate_analysis(request):
     # Extract the form data here
@@ -56,36 +58,14 @@ def initiate_analysis(request):
     # Save audio file to disk
     file_name = 'audio_files/' + random_name  # Make sure the folder exists
     default_storage.save(file_name, ContentFile(audio_file.read()))
-
+    print(default_storage.exists(file_name))
     task = analyze_task.delay(text, file_name)
+    # print(task.id) : e.g. 64b00283-99bb-45f0-97be-24e78519af49
     return redirect('waiting_page', task_id=task.id)
 
 
 def check_status(request, task_id):
     task = AsyncResult(task_id)
+    print(f"Task ID: {task_id}, Task Status: {task.status}, Task Result: {task.result}")
     response_data = {'status': task.status, 'result': task.result if task.successful() else None}
     return JsonResponse(response_data)
-
-
-"""SPÄTER IM JAVASCRIPT DANN:
-
-function checkStatus(taskId) {
-    fetch(`/check_status/${taskId}/`)
-        .then(response => response.json())
-        .then(data => {
-            if (data.status === 'SUCCESS') {
-                // Handle the result here
-                displayResult(data.result);
-            } else if (data.status !== 'FAILURE') {
-                // If the task is still pending or running, check again in a few seconds
-                setTimeout(() => checkStatus(taskId), 3000);
-            } else {
-                // Handle failure here
-                displayError();
-            }
-        });
-}
-
-// Start checking the status
-checkStatus(taskId);
-"""

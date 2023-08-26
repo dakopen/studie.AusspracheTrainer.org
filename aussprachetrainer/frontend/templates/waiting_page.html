@@ -1,0 +1,11 @@
+{% load i18n %}
+{% load static %}
+
+<h1>{% trans "Warte kurz" %}</h1>
+<div id="result"></div>
+<script src="{% static 'frontend/assets/js/backend.js' %}"></script>
+<script>
+window.onload = function() {
+    checkStatus("{{ task_id }}");
+};
+</script>
