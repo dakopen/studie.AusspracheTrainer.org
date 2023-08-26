@@ -82,8 +82,12 @@ def analysis_error(request):
 
 
 def change_language(request):
-    # replace /de/ to de
+    if not request.GET.get("lang"):
+        return HttpResponse("Current language: " + translation.get_language())
+    
+    # strip /xx/ to xx
     lang = request.GET.get("lang").replace("/", "").replace("\\", "")
+    assert lang in [code for code, name in settings.LANGUAGES]
     translation.activate(lang)
     response = HttpResponse(lang)
     response.set_cookie(settings.LANGUAGE_COOKIE_NAME, lang)

@@ -26,10 +26,6 @@ window.addEventListener(
 function changeLanguage(language) {
     // Make an AJAX call to change the language
     fetch(`/change_language/?lang=${language}`)
-        .then(response => response.json())
-        .then(data => {
-            console.log(data.message);  // DEBUG:  Display a message in the console
-        })
         .catch(error => {
             console.error('Error changing language:', error);
         });
