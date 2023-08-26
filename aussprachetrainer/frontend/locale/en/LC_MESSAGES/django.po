@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-25 19:38+0200\n"
+"POT-Creation-Date: 2023-08-26 12:16+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Daniel Busch <dakopen185@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,29 +18,69 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: .\frontend\templates\base.html:24 .\frontend\templates\module\header.html:14
-msgid "Deutsch123"
-msgstr ""
-
-#: .\frontend\templates\importhtml.html:3
-#: .\frontend\templates\testfile2.html:12
+#: frontend/templates/importhtml.html:3
 msgid "Willkommen"
 msgstr "Welcome"
 
-#: .\frontend\templates\importhtml.html:7
-#: .\frontend\templates\testfile2.html:16
+#: frontend/templates/importhtml.html:7
 msgid "Wähle Sprache aus"
 msgstr "Select language"
 
-#: .\frontend\templates\importhtml.html:20
-#: .\frontend\templates\testfile2.html:29
+#: frontend/templates/importhtml.html:20
 msgid "diese seite unterstützt mehrere Sprachen."
 msgstr "this site supports multiple languages"
 
-#: .\frontend\templates\importhtml.html:21
+#: frontend/templates/importhtml.html:21
 msgid "diese Seite ist cool"
-msgstr ""
+msgstr "This site is cool"
 
-#: .\frontend\templates\testfile2.html:7
-msgid "Meine mehrsprachige Seite"
-msgstr "My multilanguage page"
+#: frontend/templates/module/footer.html:11 frontend/views.py:36
+msgid "Kontakt"
+msgstr "Contact"
+
+#: frontend/templates/module/footer.html:12 frontend/views.py:41
+msgid "Impressum"
+msgstr "Legal notice"
+
+#: frontend/templates/module/footer.html:13
+msgid "Datenschutz"
+msgstr "Privacy policy"
+
+#: frontend/templates/module/header.html:11
+msgid "Deutsch123"
+msgstr "Englisch456"
+
+#: frontend/templates/result_error.html:2
+msgid "Ein Fehler beim Analysieren ist aufgetreten."
+msgstr "An error occurred while analyzing."
+
+#: frontend/templates/upload_audio.html:4
+msgid "Audio hochladen:"
+msgstr "upload audio:"
+
+#: frontend/templates/upload_audio.html:7
+msgid "Text eingeben:"
+msgstr "enter text:"
+
+#: frontend/templates/upload_audio.html:10
+msgid "Absenden"
+msgstr "enter"
+
+#: frontend/templates/waiting_page.html:4
+msgid "Warte kurz"
+msgstr "please wait"
+
+#: frontend/views.py:31
+msgid "AusspracheTrainer"
+msgstr "AusspracheTrainer"
+
+#: frontend/views.py:46
+msgid "Datenschutzerklärung"
+msgstr "privacy policy"
+
+#: frontend/views.py:49
+msgid "Warte auf Ergebnis"
+msgstr "wait for result"
+
+#~ msgid "Meine mehrsprachige Seite"
+#~ msgstr "My multilanguage page"

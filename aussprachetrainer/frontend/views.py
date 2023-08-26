@@ -2,11 +2,15 @@ from django.shortcuts import render, redirect
 from django.core.files.storage import default_storage
 from django.core.files.base import ContentFile
 from django.utils.translation import gettext as _
+from django.utils import translation
+from django.template.loader import render_to_string
 from analyze.tasks import analyze_task
+from celery.result import AsyncResult
+from django.http import JsonResponse, HttpResponse
+from django.conf import settings
+
 import uuid
 import os
-from celery.result import AsyncResult
-from django.http import JsonResponse
 
 def render_into_base(request, title, filepaths, context=None, content_type=None, status=None, using=None):
     """
@@ -69,3 +73,18 @@ def check_status(request, task_id):
     print(f"Task ID: {task_id}, Task Status: {task.status}, Task Result: {task.result}")
     response_data = {'status': task.status, 'result': task.result if task.successful() else None}
     return JsonResponse(response_data)
+
+
+def analysis_error(request):
+
+    template_content = render_to_string("result_error.html")
+    return JsonResponse(template_content, safe=False)
+
+
+def change_language(request):
+    # replace /de/ to de
+    lang = request.GET.get("lang").replace("/", "").replace("\\", "")
+    translation.activate(lang)
+    response = HttpResponse(lang)
+    response.set_cookie(settings.LANGUAGE_COOKIE_NAME, lang)
+    return response
