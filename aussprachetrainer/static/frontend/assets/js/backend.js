@@ -20,9 +20,7 @@ function checkStatus(taskId) {
 
             if (data.status === 'SUCCESS') {
                 // Handle the result here
-                //displayResult(data.result);                
-                // DEBUG::
-                displayError();
+                displayResult(data.result);                
 
             } else if (data.status !== 'FAILURE') {
                 // If the task is still pending or running, check again in a few seconds

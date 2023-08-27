@@ -12,11 +12,16 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 import os
+from aussprachetrainer.keyvault_manager import get_secret
+
+def before_send(event, hint):
+    return None  # Discarding all events
+
 
 import sentry_sdk
 from sentry_sdk.integrations.django import DjangoIntegration
 sentry_sdk.init(
-dsn="https://8c306e7425f34fd94efa6d6a29331df4@o4505771582750720.ingest.sentry.io/4505771586420736",
+dsn= "https://8c306e7425f34fd94efa6d6a29331df4@o4505771582750720.ingest.sentry.io/4505771586420736",
 integrations=[DjangoIntegration()],
 # If you wish to associate users to errors (assuming you are using
 # django.contrib.auth) you may enable sending PII data.
@@ -30,6 +35,7 @@ traces_sample_rate=1.0,
 # of sampled transactions.
 # We recommend adjusting this value in production,
 profiles_sample_rate=1.0,
+before_send=before_send # Wegmachen, wenn Errors getrackt werden sollen
 )
 
 
@@ -164,3 +170,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CELERY_BROKER_URL = 'redis://localhost:6379/0'
 CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
+
+MS_SPEECH_SERVICES_API_KEY = get_secret("AzureSpeechKey1")
+MS_SPEECH_SERVICES_REGION = "germanywestcentral"

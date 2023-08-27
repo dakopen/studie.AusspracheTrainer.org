@@ -1,0 +1,1 @@
+Used MIT License Microsoft Code: https://github.com/Azure-Samples/cognitive-services-speech-sdk/blob/1c5f3432f5b6d26b14ee5c55891ac0e8191ec450/samples/python/console/speech_sample.py#L784C3-L784C3

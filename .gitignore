@@ -167,3 +167,16 @@ cython_debug/
 *.m4a
 
 anleitung-ignore.txt
+.vscode
+local-debug.txt
+
+# Redis files
+dump.rdb
+appendonly.aof
+
+# Openssl
+openssl-1.1.1u/
+openssl-1.1.1v/
+
+*.tar
+*.tar.gz

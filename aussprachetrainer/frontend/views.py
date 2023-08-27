@@ -4,7 +4,7 @@ from django.core.files.base import ContentFile
 from django.utils.translation import gettext as _
 from django.utils import translation
 from django.template.loader import render_to_string
-from analyze.tasks import analyze_task
+from analyze.tasks import async_pronunciation_assessment
 from celery.result import AsyncResult
 from django.http import JsonResponse, HttpResponse
 from django.conf import settings
@@ -62,9 +62,10 @@ def initiate_analysis(request):
     # Save audio file to disk
     file_name = 'audio_files/' + random_name  # Make sure the folder exists
     default_storage.save(file_name, ContentFile(audio_file.read()))
-    print(default_storage.exists(file_name))
-    task = analyze_task.delay(text, file_name)
-    # print(task.id) : e.g. 64b00283-99bb-45f0-97be-24e78519af49
+    print(f"Saved file to {file_name}")
+    
+    task = async_pronunciation_assessment.delay(file_name, text, "de-DE") # TODO: replace language with given language from user input
+    print(f"Task ID: {task.id}")
     return redirect('waiting_page', task_id=task.id)
 
 
