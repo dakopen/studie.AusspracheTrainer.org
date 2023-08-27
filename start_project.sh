@@ -2,6 +2,7 @@
 
 # Kill all processes on port 8000
 fuser -k 8000/tcp
+sleep 1
 
 # Start Redis
 redis-server &

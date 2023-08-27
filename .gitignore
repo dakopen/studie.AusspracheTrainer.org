@@ -169,6 +169,7 @@ cython_debug/
 anleitung-ignore.txt
 .vscode
 local-debug.txt
+json-debug.json
 
 # Redis files
 dump.rdb

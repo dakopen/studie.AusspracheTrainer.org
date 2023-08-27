@@ -8,10 +8,6 @@ from aussprachetrainer.settings import MS_SPEECH_SERVICES_API_KEY as speech_key
 from aussprachetrainer.settings import MS_SPEECH_SERVICES_REGION as service_region
 
 speech_config = speechsdk.SpeechConfig(subscription=speech_key, region=service_region)
-speech_config.set_property(speechsdk.PropertyId.Speech_LogFilename, "your_log_file.txt")  # Log to a file
-speech_config.set_property_by_name("OutputTraceToConsole", "true")
-speech_config.set_property_by_name("SpeechSDK_Speech_Log_Level", "5")
-
 
 def pronunciation_assessment_continuous_from_file(filename, reference_text, language):
     """Performs continuous pronunciation assessment asynchronously with input from an audio file.
@@ -43,21 +39,13 @@ def pronunciation_assessment_continuous_from_file(filename, reference_text, lang
 
     def recognized(evt: speechsdk.SpeechRecognitionEventArgs):
         pronunciation_result = speechsdk.PronunciationAssessmentResult(evt.result)
-        print('    Accuracy score: {}, pronunciation score: {}, completeness score : {}, fluency score: {}'.format(
-            pronunciation_result.accuracy_score, pronunciation_result.pronunciation_score,
-            pronunciation_result.completeness_score, pronunciation_result.fluency_score
-        ))
-        # write to local debug txt
-        with open("local-debug.txt", "a+") as writefile:
-            writefile.write('    Accuracy score: {}, pronunciation score: {}, completeness score : {}, fluency score: {}\n'.format(
-                pronunciation_result.accuracy_score, pronunciation_result.pronunciation_score,
-                pronunciation_result.completeness_score, pronunciation_result.fluency_score
-            ))
+
         nonlocal recognized_words, fluency_scores, durations
         recognized_words += pronunciation_result.words
         fluency_scores.append(pronunciation_result.fluency_score)
         json_result = evt.result.properties.get(speechsdk.PropertyId.SpeechServiceResponse_JsonResult)
         jo = json.loads(json_result)
+        
         nb = jo['NBest'][0]
         durations.append(sum([int(w['Duration']) for w in nb['Words']]))
 
@@ -72,16 +60,11 @@ def pronunciation_assessment_continuous_from_file(filename, reference_text, lang
     speech_recognizer.session_stopped.connect(stop_cb)
     speech_recognizer.canceled.connect(stop_cb)
 
-    print("About to start continuous recognition...")
-    print(filename)
-    print(os.path.exists(filename))
     # Start continuous pronunciation assessment
     speech_recognizer.start_continuous_recognition()
     while not done:
         time.sleep(.5)
-        print("...")
     
-    print("About to stop continuous recognition...")
     speech_recognizer.stop_continuous_recognition()
 
     # we need to convert the reference text to lower case, and split to words, then remove the punctuations.

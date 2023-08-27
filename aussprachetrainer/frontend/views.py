@@ -62,16 +62,13 @@ def initiate_analysis(request):
     # Save audio file to disk
     file_name = 'audio_files/' + random_name  # Make sure the folder exists
     default_storage.save(file_name, ContentFile(audio_file.read()))
-    print(f"Saved file to {file_name}")
     
     task = async_pronunciation_assessment.delay(file_name, text, "de-DE") # TODO: replace language with given language from user input
-    print(f"Task ID: {task.id}")
     return redirect('waiting_page', task_id=task.id)
 
 
 def check_status(request, task_id):
     task = AsyncResult(task_id)
-    print(f"Task ID: {task_id}, Task Status: {task.status}, Task Result: {task.result}")
     response_data = {'status': task.status, 'result': task.result if task.successful() else None}
     return JsonResponse(response_data)
 
