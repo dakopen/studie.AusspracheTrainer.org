@@ -36,7 +36,6 @@ jobs:
 
     - name: Run Tests
       run: |
-        cd aussprachetrainer
-        python manage.py test
+        python aussprachetrainer/manage.py test
 
     # Add any additional steps for deployment, etc.
