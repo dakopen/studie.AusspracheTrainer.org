@@ -165,6 +165,8 @@ cython_debug/
 *.ogg
 *.flac
 *.m4a
+!ich-habe-etwas-mehr-durst-als-ich-vor-einer-stunde-noch-hatte.wav
+
 
 anleitung-ignore.txt
 .vscode

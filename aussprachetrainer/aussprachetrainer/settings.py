@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 from pathlib import Path
 import os
 from aussprachetrainer.keyvault_manager import get_secret
+from django.core.management.utils import get_random_secret_key  
 
 def before_send(event, hint):
     return None  # Discarding all events
@@ -21,21 +22,21 @@ def before_send(event, hint):
 import sentry_sdk
 from sentry_sdk.integrations.django import DjangoIntegration
 sentry_sdk.init(
-dsn= "https://8c306e7425f34fd94efa6d6a29331df4@o4505771582750720.ingest.sentry.io/4505771586420736",
-integrations=[DjangoIntegration()],
-# If you wish to associate users to errors (assuming you are using
-# django.contrib.auth) you may enable sending PII data.
-send_default_pii=True,
-# Set traces_sample_rate to 1.0 to capture 100%
-# of transactions for performance monitoring.
-# We recommend adjusting this value in production.
-traces_sample_rate=1.0,
-# To set a uniform sample rate
-# Set profiles_sample_rate to 1.0 to profile 100%
-# of sampled transactions.
-# We recommend adjusting this value in production,
-profiles_sample_rate=1.0,
-before_send=before_send # Wegmachen, wenn Errors getrackt werden sollen
+    dsn= "https://8c306e7425f34fd94efa6d6a29331df4@o4505771582750720.ingest.sentry.io/4505771586420736",
+    integrations=[DjangoIntegration()],
+    # If you wish to associate users to errors (assuming you are using
+    # django.contrib.auth) you may enable sending PII data.
+    send_default_pii=True,
+    # Set traces_sample_rate to 1.0 to capture 100%
+    # of transactions for performance monitoring.
+    # We recommend adjusting this value in production.
+    traces_sample_rate=1.0,
+    # To set a uniform sample rate
+    # Set profiles_sample_rate to 1.0 to profile 100%
+    # of sampled transactions.
+    # We recommend adjusting this value in production,
+    profiles_sample_rate=1.0,
+    before_send=before_send # Wegmachen, wenn Errors getrackt werden sollen
 )
 
 
@@ -46,8 +47,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-d7!!v44-3r8p8swemu5^032s&=4zz$!n1mzcb6f6o@x80s1^gp'
+SECRET_KEY = get_random_secret_key()
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
