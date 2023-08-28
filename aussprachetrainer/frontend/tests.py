@@ -1,7 +1,8 @@
 from django.test import TestCase
 from django.urls import reverse
-from django.utils import translation
 from django.core.management import call_command
+from django.utils import translation
+from django.conf import settings
 import os.path
 
 class FrontendTests(TestCase):
@@ -12,8 +13,10 @@ class FrontendTests(TestCase):
         self.assertContains(response, 'AusspracheTrainer')
 
     def test_images(self):
-        self.assertTrue(os.path.exists('static/frontend/assets/images/favicon.png'))
-        self.assertTrue(os.path.exists('static/frontend/assets/images/AT-default.svg'))
+        # this only makes sense when running on prod
+        if settings.DEBUG is False:
+            self.assertTrue(os.path.exists('static/frontend/assets/images/favicon.png'))
+            self.assertTrue(os.path.exists('static/frontend/assets/images/AT-default.svg'))
 
 class MultiLanguageTestCase(TestCase):        
 
