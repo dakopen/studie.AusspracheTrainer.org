@@ -25,7 +25,7 @@ jobs:
       uses: actions/checkout@v2
       with:
           repository: dakopen/AusspracheTrainer.org
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.GITHUB_PAT_access_aussprachetrainer_2024 }}
       
     - name: Setup Python Environment
       uses: actions/setup-python@v2
