@@ -9,16 +9,12 @@ on:
 jobs:
   build:
     runs-on: ubuntu-20.04
-    environment: 
-      name: .env 
+    env: 
+      AZURE_KEYVAULT_URL: ${{ secrets.AZURE_KEYVAULT_URL }}
 
     steps:
     - name: Checkout Repository
       uses: actions/checkout@v2
-
-    - name: Set up .env
-      env:
-        AZURE_KEYVAULT_URL: ${{ secrets.AZURE_KEYVAULT_URL }}
       
     - name: Setup Python Environment
       uses: actions/setup-python@v2
