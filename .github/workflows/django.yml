@@ -23,9 +23,6 @@ jobs:
       
     - name: Checkout Repository
       uses: actions/checkout@v2
-      with:
-          ref: main
-          token: ${{ secrets.GITHUB_TOKEN }}
       
     - name: Setup Python Environment
       uses: actions/setup-python@v2
