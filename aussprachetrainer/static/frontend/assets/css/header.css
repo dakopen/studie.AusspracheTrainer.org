@@ -10,10 +10,6 @@ li {
     list-style: none;
 }
 
-a {
-    text-decoration: none;
-}
-
 .header {
     border-bottom: 1px solid #E2E8F0;
     background-color: var(--white);

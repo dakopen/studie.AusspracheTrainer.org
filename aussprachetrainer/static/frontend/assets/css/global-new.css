@@ -1,0 +1,145 @@
+/* styles.css */
+:root {
+    --lila: #7E20FC;
+    --rosa: #AA6BFD;
+    --white: #FFFFFF;
+    --red: Red;
+    --darkred: #990000;
+    --black: Black;
+    --white-rosa: #FBF9FE;
+    --light-rosa: #ECDFFE;
+}
+
+@font-face {
+    font-family: "Montserrat";
+    src: url("/static/frontend/assets/fonts/Montserrat-Regular.ttf") format('truetype');
+}
+
+/* General Styles */
+body {
+    font-family: "Montserrat";
+    margin: 0;
+    padding: 0;
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: var(--black);
+}
+
+/* Form Styles */
+form {
+    width: 100%;
+    max-width: 1000px;
+}
+
+form p {
+    margin-bottom: 1rem;
+}
+
+form label {
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+form input[type="text"],
+form input[type="email"],
+form input[type="password"],
+form input[type="number"],
+form select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 1rem;
+    border: 1px solid var(--lila);
+    border-radius: 5px;
+}
+
+form button {
+    background-color: var(--rosa);
+    color: var(--white);
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    width: 100%;
+    border-radius: 5px;
+}
+
+form button:hover {
+    background-color: var(--lila);
+}
+
+/* Table Styles */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 2rem;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid var(--lila);
+}
+
+th {
+    background-color: var(--rosa);
+    color: var(--white);
+}
+
+/* Link Styles */
+a {
+    transition: color 0.3s ease;
+    text-decoration: none;
+}
+
+a:hover {
+    color: var(--rosa);
+}
+
+/* Button Styles */
+.button {
+    background-color: var(--rosa);
+    color: var(--white);
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.button:hover {
+    background-color: var(--lila);
+}
+
+/* Paragraphs and Blockquotes */
+p, blockquote {
+    margin-bottom: 1rem;
+}
+
+blockquote {
+    border-left: 4px solid var(--rosa);
+    padding-left: 1rem;
+    font-style: italic;
+}
+
+/* Utility Classes */
+.text-center {
+    text-align: center;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.text-rosa {
+    color: var(--rosa);
+}
+
+.text-lila {
+    color: var(--lila);
+}
+
+.required {
+    color: var(--darkred);
+}
