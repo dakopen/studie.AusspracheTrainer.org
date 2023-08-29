@@ -12,3 +12,6 @@ git config --global user.email "dakopen185@gmail.com"
 git config --global user.name "Daniel Busch"
 
 ADD: .env with AZURE_KEYVAULT_URL=https://...
+
+sudo apt install azure-cli
+az login
