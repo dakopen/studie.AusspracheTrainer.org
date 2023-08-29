@@ -22,6 +22,7 @@ urlpatterns = i18n_patterns(
     path('admin/', admin.site.urls),
     path('', include('frontend.urls')),
     path('auth/', include('user_auth.urls')),
+    path('dashboard/', include('dashboard.urls')),
     # path('sentry-debug/', lambda request: 1 / 0), # For testing Sentry
     # other paths...
 )

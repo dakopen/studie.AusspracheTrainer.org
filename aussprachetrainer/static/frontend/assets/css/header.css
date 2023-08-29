@@ -52,12 +52,15 @@ li {
 }
 
 .nav-link {
-    font-size: 1.6em;
-    font-weight: 400;
+    margin-bottom: 0rem;
     color: var(--black);
 }
 
-.nav-link:hover {
+.nav-link a {
+    color: var(--black);
+}
+
+.nav-link a:hover {
     color: var(--lila);
 }
 
