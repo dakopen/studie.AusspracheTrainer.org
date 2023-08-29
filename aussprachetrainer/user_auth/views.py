@@ -8,6 +8,7 @@ from django.utils.translation import gettext as _
 
 class UserLoginView(LoginView):
     template_name = 'user_auth/login.html'
+    next_page = 'dashboard'
 
 class UserLogoutView(LogoutView):
     next_page = '/'
@@ -18,7 +19,8 @@ def register_view(request):
         if form.is_valid():
             user = form.save()
             login(request, user)
-            return redirect('some_view_name') # TODO: change
+            return redirect('dashboard')
     else:
         form = RegisterForm()
+
     return render_into_base(request, _('Registrieren'), 'user_auth/register.html', {'form': form})

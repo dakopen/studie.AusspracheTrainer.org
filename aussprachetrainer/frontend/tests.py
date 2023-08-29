@@ -30,4 +30,3 @@ class MultiLanguageTestCase(TestCase):
 
         if not mo_already_existed:
             os.remove('frontend/locale/en/LC_MESSAGES/django.mo')
-

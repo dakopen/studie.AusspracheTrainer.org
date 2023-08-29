@@ -1,0 +1,22 @@
+{% load i18n %}
+
+<body>
+    <div class="container">
+        <h1>{% trans "Anmelden" %}</h1>
+        <form method="post">
+            {% csrf_token %}
+            {% for field in form %}
+                <p>
+                    <label for="{{ field.id_for_label }}">
+                        {{ field.label }}{% if field.field.required %}<span class="required">*</span>{% endif %}
+                    </label>
+                    {{ field }}
+                    {% if field.errors %}
+                        <span class="error">{{ field.errors.0 }}</span>
+                    {% endif %}
+                </p>
+            {% endfor %}
+            <button type="submit">{% trans "Anmelden" %}</button>
+        </form>
+    </div>
+</body>
