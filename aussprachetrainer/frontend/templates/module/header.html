@@ -20,6 +20,7 @@
             </li>
             <li class="nav-item">
                 <p class="nav-link"><a href="{% url 'logout' %}">{% trans "Logout" %}</a></p>
+                <!-- maybe move to user account settings to prevent accidental logout -->
             </li>
             {% else %}
             <li class="nav-item">

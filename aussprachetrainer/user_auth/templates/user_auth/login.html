@@ -5,6 +5,9 @@
         <h1>{% trans "Anmelden" %}</h1>
         <form method="post">
             {% csrf_token %}
+            {% if form.non_field_errors %}
+                <p class="error">{% trans "Falscher Benutzername oder Passwort." %}</p>
+            {% endif %}
             {% for field in form %}
                 <p>
                     <label for="{{ field.id_for_label }}">
