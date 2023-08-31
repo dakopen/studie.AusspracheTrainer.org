@@ -9,8 +9,11 @@
     <link rel="stylesheet" href="{% static 'frontend/assets/css/header.css' %}" type="text/css">
     <link rel="stylesheet" href="{% static 'frontend/assets/css/footer.css' %}" type="text/css">
 
+    {% block css %}{% endblock %}
+
     <link rel="icon" href="{% static 'frontend/assets/images/favicon.png' %}" type="image/png">
-    <title>{% block title %}Default Title{% endblock %}</title>
+
+    <title>{% block title %}AusspracheTrainer{% endblock %}</title>
     
     <!-- Script that need Django Patterns -->
     <script> 

@@ -12,7 +12,7 @@ from django.conf import settings
 import uuid
 import os
 
-def render_into_base(request, title, filepaths, context=None, content_type=None, status=None, using=None):
+def render_into_base(request, title, filepaths, context=None, content_type=None, status=None, using=None, css=None):
     """
     Render a template into the base template.
     """
@@ -24,6 +24,11 @@ def render_into_base(request, title, filepaths, context=None, content_type=None,
     
     context["title"] = title
     context["filepaths"] = filepaths
+
+    if css:
+        if not isinstance(css, list):
+            css = [css]
+    context["css"] = css
 
     return render(request, 'extend_base.html', context, content_type, status, using)
 

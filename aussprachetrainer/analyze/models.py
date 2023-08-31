@@ -9,6 +9,7 @@ class PronunciationAssessmentResult(models.Model):
     sentence = models.TextField()
     recognized_sentence = models.TextField()
     word_assessment = models.JSONField()
+    language = models.CharField(max_length=5)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

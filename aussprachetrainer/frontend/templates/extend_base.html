@@ -3,6 +3,14 @@
 
 {% block title %}{{ title }}{% endblock %}
 
+{% block css %}
+    {% if css %}
+        {% for css_file in css %}
+            <link rel="stylesheet" href="{% static css_file %}" type="text/css">
+        {% endfor %}
+    {% endif %}
+{% endblock %}
+
 {% block content %}
     {% for filepath in filepaths%}
         {% include filepath %}

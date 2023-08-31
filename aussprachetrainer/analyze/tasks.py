@@ -22,6 +22,7 @@ def async_pronunciation_assessment(filename, reference_text, language, user_id=N
         sentence=reference_text,
         recognized_sentence=" ".join(result["RecognizedWords"]),
         word_assessment=result["Words"],
+        language=language
     )
 
     return result

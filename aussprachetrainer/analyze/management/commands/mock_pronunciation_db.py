@@ -24,6 +24,8 @@ class Command(BaseCommand):
                     "word": "sample",
                     "accuracy_score": random.uniform(50.0, 100.0),
                     "error_type": "None"
-                }
+                },
+                language='en-US'
+
             )
             self.stdout.write(self.style.SUCCESS(f'Successfully created record {i+1}'))
