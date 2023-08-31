@@ -63,7 +63,9 @@ def initiate_analysis(request):
     file_name = 'audio_files/' + random_name  # Make sure the folder exists
     default_storage.save(file_name, ContentFile(audio_file.read()))
     
-    task = async_pronunciation_assessment.delay(file_name, text, "de-DE") # TODO: replace language with given language from user input
+    user_id = request.user.id if request.user.is_authenticated else None
+
+    task = async_pronunciation_assessment.delay(file_name, text, "de-DE", user_id=user_id) # TODO: replace language with given language from user input
     return redirect('waiting_page', task_id=task.id)
 
 

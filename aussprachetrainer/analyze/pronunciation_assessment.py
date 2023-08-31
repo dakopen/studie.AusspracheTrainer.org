@@ -118,13 +118,15 @@ def pronunciation_assessment_continuous_from_file(filename, reference_text, lang
     completeness_score = len([w for w in recognized_words if w.error_type == "None"]) / len(reference_words) * 100
     completeness_score = completeness_score if completeness_score <= 100 else 100
 
+    print([x.word.lower() for x in recognized_words])
     results = {
         'Paragraph': {
             'accuracy_score': accuracy_score,
             'completeness_score': completeness_score,
             'fluency_score': fluency_score,
         },
-        'Words': []
+        'Words': [],
+        'RecognizedWords': [x.word for x in recognized_words]
     }
 
     for idx, word in enumerate(final_words):

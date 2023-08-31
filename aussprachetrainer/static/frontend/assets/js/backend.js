@@ -10,7 +10,7 @@ function checkStatus(taskId) {
             const languagePrefix = currentUrl.split('/')[3];
 
             // Construct the new URL with the same language prefix
-            const defaultUrl = `/${languagePrefix}/`;
+            const defaultUrl = `/${languagePrefix}/result/`;
 
             // Replace the current URL with the default URL
             window.history.pushState(null, null, defaultUrl);

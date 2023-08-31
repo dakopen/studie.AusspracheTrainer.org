@@ -134,7 +134,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Authentication
 
-AUTH_USER_MODEL = 'user_auth.CustomUser'
+#AUTH_USER_MODEL = 'user_auth.User'
 LOGIN_URL = '/auth/login/'
 
 
