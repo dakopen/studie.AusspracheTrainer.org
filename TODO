@@ -1,0 +1,5 @@
+# TODO: Multiple Things
+- PronunciationAssessment does not work correctly when the Audiofile is
+    (way) longer than the reference text; maybe also use Google 
+    and when it is longer than the reference text it uses a different approach
+
