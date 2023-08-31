@@ -1,0 +1,18 @@
+{% load i18n %}
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% trans "Dashboard" %}</title>
+</head>
+<body>
+    <h1>{% trans "Willkommen zum Dashboard!" %}</h1>
+    <p>{% trans "Wähle eine Übung aus:" %}</p>
+    <ul>
+        <li><a href="#">{% trans "Vokale üben" %}</a></li>
+        <li><a href="#">{% trans "Konsonanten üben" %}</a></li>
+        <li><a href="#">{% trans "Sätze üben" %}</a></li>
+    </ul>
+</body>
+</html>

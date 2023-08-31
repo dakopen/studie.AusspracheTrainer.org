@@ -10,10 +10,6 @@ li {
     list-style: none;
 }
 
-a {
-    text-decoration: none;
-}
-
 .header {
     border-bottom: 1px solid #E2E8F0;
     background-color: var(--white);
@@ -56,12 +52,15 @@ a {
 }
 
 .nav-link {
-    font-size: 1.6em;
-    font-weight: 400;
+    margin-bottom: 0rem;
     color: var(--black);
 }
 
-.nav-link:hover {
+.nav-link a {
+    color: var(--black);
+}
+
+.nav-link a:hover {
     color: var(--lila);
 }
 

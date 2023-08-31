@@ -66,6 +66,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'frontend',
     'analyze',
+    'user_auth',
+    'dashboard',
 ]
 
 MIDDLEWARE = [
@@ -130,6 +132,11 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# Authentication
+
+AUTH_USER_MODEL = 'user_auth.CustomUser'
+LOGIN_URL = '/auth/login/'
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
@@ -173,3 +180,4 @@ CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
 
 MS_SPEECH_SERVICES_API_KEY = get_secret("AzureSpeechKey1")
 MS_SPEECH_SERVICES_REGION = "germanywestcentral"
+

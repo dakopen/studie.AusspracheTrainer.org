@@ -7,10 +7,30 @@
             <img src="{% static 'frontend/assets/images/AT-with-text.svg' %}" alt="AusspracheTrainer" style="max-width: 300px; width: 90%;">
         </a>
         <ul class="nav-menu">
+
+            {% if user.is_authenticated %}
             <li class="nav-item">
-                <p>{% trans "Deutsch123" %}</p>
-                <!--<a href="{\% url 'kontakt' \%}" class="nav-link">Kontakt</a>-->
+                <p style="margin-bottom: 0rem;">{% trans "Fortschritt" %}</p>
+                <!-- Also adopt the url style below-->
             </li>
+            <li class="nav-item">
+                <p style="margin-bottom: 0rem;">{% trans "Lernen" %}</p>
+                <!-- Also adopt the url style below-->
+
+            </li>
+            <li class="nav-item">
+                <p class="nav-link"><a href="{% url 'logout' %}">{% trans "Logout" %}</a></p>
+                <!-- maybe move to user account settings to prevent accidental logout -->
+            </li>
+            {% else %}
+            <li class="nav-item">
+                <p class="nav-link"><a href="{% url 'login' %}">{% trans "Login" %}</a></p>
+            </li>
+            <li class="nav-item">
+                <p class="nav-link"><a href="{% url 'register' %}">{% trans "Registrieren" %}</a></p>
+            </li>
+            {% endif %}
+
             <li class="nav-item">
                 <div>
                     <select onchange="location = this.value; changeLanguage(this.value);">
