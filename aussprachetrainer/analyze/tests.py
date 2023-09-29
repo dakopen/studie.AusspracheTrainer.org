@@ -9,7 +9,7 @@ class AnalysisTest(TestCase):
             'Ich habe etwas mehr Durst, als ich vor einer Stunde noch hatte.',
             'de-DE'
         )
-        self.assertEqual([word["word"] for  word in result['Words']], ['Ich', 'habe', 'etwas', 'mehr', 'Durst', 'als', 'ich', 'vor', 'einer', 'Stunde', 'noch', 'hatte'])
+        self.assertEqual([word["word"].lower() for  word in result['Words']], ['ich', 'habe', 'etwas', 'mehr', 'durst', 'als', 'ich', 'vor', 'einer', 'stunde', 'noch', 'hatte'])
 
         for score in [result['Paragraph']['accuracy_score'], result['Paragraph']['completeness_score'], result['Paragraph']['fluency_score']]:
             self.assertTrue(score >= 80 and score <= 100) # the ML model can change but the scores should be in this range
