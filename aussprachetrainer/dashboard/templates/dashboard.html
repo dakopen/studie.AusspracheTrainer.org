@@ -1,59 +1,62 @@
 {% load i18n %}
 {% load static %}
 
-<!--https://medium.com/@pppped/how-to-code-a-responsive-circular-percentage-chart-with-svg-and-css-3632f8cd7705-->
-# TODO: FIX THIS THAT THEY ARE SMALLER BUT STILL WORKING
-<div class="flex-wrapper">
-    <div class="single-chart left">
-        <svg viewBox="0 0 24 24" class="circular-chart left">
-            <path class="circle-bg left"
-                  d="M12 1.3895
-                     a 10.61 10.61 0 0 1 0 21.221
-                     a 10.61 10.61 0 0 1 0 -21.221"
-            />
-            <path class="circle"
-                  stroke-dasharray="{{ avg_accuracy|floatformat:0 }}, 66.7"
-                  d="M12 1.3895
-                     a 10.61 10.61 0 0 1 0 21.221
-                     a 10.61 10.61 0 0 1 0 -21.221"
-            />
-            <text x="12" y="13.57" class="percentage">{{ avg_accuracy|floatformat:2 }}%</text>
-        </svg>
-    </div>
-    
-    <div class="single-chart">
-      <svg viewBox="0 0 36 36" class="circular-chart main">
-        <path class="circle-bg main"
-          d="M18 2.0845
-            a 15.9155 15.9155 0 0 1 0 31.831
-            a 15.9155 15.9155 0 0 1 0 -31.831"
-        />
-        <path class="circle main"
-          stroke-dasharray="{{ avg_aussprachetrainer|floatformat:0 }}, 100"
-          d="M18 2.0845
-            a 15.9155 15.9155 0 0 1 0 31.831
-            a 15.9155 15.9155 0 0 1 0 -31.831"
-        />
-        <text x="18" y="20.35" class="percentage">{{ avg_aussprachetrainer|floatformat:2 }}%</text>
-      </svg>    
-      <span class="subtitle main">{% trans "AusspracheTrainer" %}</span>
-    </div>
-  
-    <div class="single-chart">
-      <svg viewBox="0 0 36 36" class="circular-chart right">
-        <path class="circle-bg right"
-          d="M18 2.0845
-            a 10.6103 10.6103 0 0 1 0 21.221
-            a 10.6103 10.6103 0 0 1 0 -21.221"
-        />
-        <path class="circle right"
-          stroke-dasharray="{{ avg_fluency|floatformat:0 }}, 100"
-          d="M18 2.0845
-            a 10.6103 10.6103 0 0 1 0 21.221
-            a 10.6103 10.6103 0 0 1 0 -21.221"
-        />
-        <text x="18" y="20.35" class="percentage">{{ avg_fluency|floatformat:2 }}%</text>
-      </svg>
-      <span class="subtitle">{% trans "Sprechfluss" %}</span>
-    </div>
+<script src="{% static 'frontend/assets/js/jarodeComponent.js' %}"></script> 
+<script>
+    window.onload = function() {
+        jarodeItemsInit();
+    }
+</script>
+
+<div class="circle-container">
+  <div class="jarode-items-percent score-rectangle"
+    data-number="{{ avg_accuracy }}"
+    data-duration="2"
+    data-circle-stroke-width="15"
+    data-box-box-shadow="none"
+    data-box-background="none"
+    data-box-border="none"
+    data-number-color="dodgerblue"
+    data-circle-stroke-color="dodgerblue"
+    data-text-color="dodgerblue"
+    data-text="{% trans "Genauigkeit" %}"
+    data-text-font-size="1.2rem"
+    data-hover-text="{% trans "Dieser Score zeigt an, wie gut Deine Aussprache mit der richtigen Aussprache übereinstimmt." %}">
   </div>
+
+  <div class="jarode-items-percent score-rectangle"
+    data-number="{{ avg_aussprachetrainer }}"
+    data-duration="2"
+    data-number-color="var(--lila)"
+    data-circle-stroke-color="var(--lila)"
+    data-circle-stroke-width="18"
+    data-box-box-shadow="none"
+    data-box-background="none"
+    data-box-border="none"
+    data-circle-size="100"
+    data-number-size="3rem"
+    data-text={% trans "AusspracheTrainer" %}
+    data-text-color="var(--lila)"
+    data-text-font-size="1.5rem"
+    data-hover-text="{% trans "In diesem Score sind mehrere Faktoren wie die Genauigkeit, der Redefluss und die Schwierigkeit eingerechnet." %}">
+  </div>
+
+  <div class="jarode-items-percent score-rectangle"
+      data-number="{{ avg_fluency }}"
+      data-duration="2"
+      data-number-color="orange"
+      data-circle-stroke-color="orange"
+      data-circle-stroke-width="15"
+      data-box-box-shadow="none"
+      data-box-background="none"
+      data-box-border="none"
+      data-text="{% trans "Redefluss" %}"
+      data-text-color="orange"
+      data-text-font-size="1.2rem"
+      data-hover-text="{% trans "Der Redefluss Score besagt, ..." %}">
+    </div>
+
+</div>
+
+
+<script src="{% static 'frontend/assets/js/dashboard.js' %}"></script>

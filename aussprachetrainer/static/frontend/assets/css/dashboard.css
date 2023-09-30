@@ -1,78 +1,72 @@
-.flex-wrapper {
-    display: flex;
-    flex-flow: row nowrap;
-  }
-
-.single-chart {
-    width: 33%;
-    justify-content: space-around ;
-}
-
-.circular-chart {
-    display: block;
-    margin: 10px auto;
-    max-width: 80%;
-    max-height: 250px;
-}
-
-.circle-bg {
-    fill: none;
-    stroke: #eee;
-}
-
-.circle-bg.main {
-    stroke-width: 3.8;
-}
-
-.circle-bg.left .circle-bg.right {
-    stroke-width: 2.53;
-}
-
 .circle {
-    fill: none;
-    stroke-linecap: round;
-    animation: progress 1s ease-out forwards;
+    position: relative;
+    transform: rotate(-90deg);
 }
 
-.circle.main {
-    stroke-width: 2.8;
+.circle-container {
+    max-width: 1400px;
+    display: flex;  /* Using Flexbox */
+    justify-content: space-between;  /* Distribute the space equally between the circles */
+    align-items: center;  /* Vertically center the circles */
+    margin: 0 auto;  /* Center the container horizontally */
 }
 
-.circle.left .circle.right {
-    stroke-width: 1.866;
+.jarode-items-percent {
+    margin: 0 20px;  /* Add some margin for extra spacing */
 }
 
-@keyframes progress {
-    0% {
-        stroke-dasharray: 0 100;
-    }
-}
-
-.circular-chart.left .circle {
-    stroke: #ff9f00;
-}
-
-.circular-chart.main .circle {
-    stroke: var(--lila);
-}
-
-.circular-chart.right .circle {
-    stroke: #3c9ee5;
-}
-
-.percentage {
-    fill: var(--black);
-    font-size: 0.4em;
-    text-anchor: middle;
-}
-
-.subtitle {
-    display: block;
+.score-rectangle {
+    background-color: var(--white-rosa);  /* Close to the background color */
+    padding: 20px;
+    border-radius: 8px;  /* Smoother corners */
     text-align: center;
-    font-size: 16px;
-    color: var(--black);
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);  /* Very subtle shadow */
+    transition: all 0.3s ease-in-out;  /* Smooth transition for all changes */
 }
 
-.subtitle.main {
-    font-size: 22px;
+
+
+.score-rectangle:hover {
+    transform: translateY(-5px);  /* Moves the box up when hovered
+    animation: friendlyHover 0.3s ease-in-out;  /* Applies the shake animation */
 }
+
+
+.tooltip {
+    position: absolute;
+    color: var(--white);
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    bottom: 65%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.tooltip::before {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+}
+
+/*
+@keyframes friendlyHover {
+    0% { transform: translateY(0) rotate(0); }
+    30% { transform: translateY(-2px) rotate(-0.5deg);}
+    60% { transform: translateY(1px) rotate(2deg); }
+    100% { transform: translateY(0) rotate(0); }
+  }
+  
+
+@keyframes shakeNotClickable {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    50% { transform: translateX(5px); }
+    75% { transform: translateX(-5px); }
+    100% { transform: translateX(0); }
+  }
+*/

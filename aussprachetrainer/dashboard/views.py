@@ -16,6 +16,10 @@ def dashboard_view(request):
     #       every time a new PronunciationAssessmentResult is created.
     #       The latest scores are weighted more, and some also ommission are taken into
     #       account and other stuff. 
+    if averages['avg_accuracy'] is None:
+        averages['avg_accuracy'] = "?"
+    if averages['avg_fluency'] is None:
+        averages['avg_fluency'] = "?"
 
     context = {
         'avg_accuracy': averages['avg_accuracy'],
