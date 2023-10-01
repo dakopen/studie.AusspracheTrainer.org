@@ -1,6 +1,12 @@
 const canvas = document.getElementById("visualizer");
 const ctx = canvas.getContext("2d");
 
+const offscreenCanvas = document.createElement('canvas');
+const offscreenCtx = offscreenCanvas.getContext('2d');
+offscreenCanvas.width = canvas.width;
+offscreenCanvas.height = canvas.height;
+
+
 const audioContext = new AudioContext();
 const analyser = audioContext.createAnalyser();
 analyser.fftSize = 2048;
@@ -58,8 +64,17 @@ recButton.addEventListener("click", () => {
     stopRecording();
     cancelAnimationFrame(animationFrameId);
     recButton.innerText = 'Record';
+
+    // Capture entire offscreen canvas content and display it as an image
+    const canvasImage = offscreenCanvas.toDataURL();
+    const imgElement = document.createElement("img");
+    imgElement.src = canvasImage;
+    document.body.appendChild(imgElement);
   }
 });
+
+let y, yMirrored;
+let offscreenX = 0;
 
 function draw() {
   if (!isRecording) return;
@@ -75,19 +90,33 @@ function draw() {
 
   if (counter <= 1) {
     const yHeight = Math.max((smoothFrequency / 64) * canvas.height / 2, 1);
-    const y = canvas.height / 2 - yHeight;
-    const yMirrored = canvas.height / 2 + yHeight;
+    y = canvas.height / 2 - yHeight;
+    yMirrored = canvas.height / 2 + yHeight;
 
     ctx.beginPath();
     ctx.moveTo(x, y);
     ctx.lineTo(x, yMirrored);
     ctx.strokeStyle = 'var(--lila)';
     ctx.stroke();
+
+    offscreenCtx.beginPath();
+    offscreenCtx.moveTo(offscreenX, y);
+    offscreenCtx.lineTo(offscreenX, yMirrored);
+    offscreenCtx.strokeStyle = 'var(--lila)';
+    offscreenCtx.stroke();
+    offscreenX += 4;
   } else if (counter <= 3) {
     // Gap
   } else {
     counter = 0;
   }
+
+
+
+  // draw on offscreen canvas which is later showed
+
+  
+
 
   counter++;
   lastMeanFrequency = meanFrequency;
