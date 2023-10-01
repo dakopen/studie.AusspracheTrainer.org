@@ -18,13 +18,17 @@ def dashboard_view(request):
     #       account and other stuff. 
     if averages['avg_accuracy'] is None:
         averages['avg_accuracy'] = "?"
+    else:
+        averages['avg_accuracy'] = round(averages['avg_accuracy'])
     if averages['avg_fluency'] is None:
         averages['avg_fluency'] = "?"
+    else:
+        averages['avg_fluency'] = round(averages['avg_fluency'])
 
     context = {
         'avg_accuracy': averages['avg_accuracy'],
         'avg_fluency': averages['avg_fluency'],
-        'avg_aussprachetrainer': 90.5, # TODO: see above (mock data here)
+        'avg_aussprachetrainer': round(90.34), # TODO: see above (mock data here)
     }
 
 

@@ -1,0 +1,81 @@
+/* BIN ICON */
+#bin-icon {
+    position: absolute;
+    width: 28px; 
+    height: 28px;
+}
+
+#bin-icon.inactive {
+    pointer-events:none;
+    opacity: 0;
+    transition: opacity 0.25s;
+}
+
+#bin-icon.active {
+    opacity: 1;
+    pointer-events: auto;
+    transition: opacity 2s;
+}
+
+
+/* TEXTAREA textarea */
+.textarea-responsive {
+    resize: none;
+    padding-left: 0.35em;
+    padding-right: 0.35em;
+    line-height: 1em;
+    padding-top: 0.2em;
+    padding-bottom: 0.4em;
+    vertical-align: middle;
+    border-radius: 25px;
+    border: solid 4px #aa6bfd;
+    font-size: max(min(2.5vw, 50px), 30px);
+    outline: none;
+    height: 1.6em;
+    overflow: hidden;
+    white-space: break-spaces;
+    font-family: "Montserrat";
+    font-weight: 500;
+}
+
+.textarea-responsive:focus {
+    box-shadow: -10px 5px 15px 0px #aa6bfd95, 10px -5px 15px 0px #5c50fe80;
+}
+
+
+.button-container {
+    position: absolute; /* Absolute positioning on button container */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+}
+
+#record-button {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+}
+
+.grey {
+    color: grey;
+}
+
+#visualizer {
+    position: relative;
+}
+.audio-container {
+    width: 85%;
+    position: relative;
+    max-width: 800px;
+    height: 100px;
+    margin: auto;
+    mask-image: linear-gradient(to right, transparent, white 10%, white 100%);
+}

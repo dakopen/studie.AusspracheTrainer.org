@@ -1,6 +1,5 @@
 function addInfoToolboxesToIcons(){
     const infoIcons = document.querySelectorAll(".fas.fa-info-circle");
-    console.log(infoIcons)
 
     infoIcons.forEach((icon) => {
       icon.addEventListener("mouseenter", function(event) {

@@ -20,7 +20,7 @@ function jarodeItemsInit(parameters = {}) {
 
             createPourcentBox(pourcentItems[i] , parameters );
 
-            let number =  pourcentItems[i].dataset.number;
+            let number = pourcentItems[i].dataset.number;
             let dashoffsetCircle =  circleDashoffset(pourcentItems[i]);
             let dashoffsetNumber =  dashoffsetCircle - ((dashoffsetCircle/100)*number);
 
@@ -94,7 +94,7 @@ function createPourcentBox(el , parameters = {} ){
     let circleBackground = el.dataset.circleBackground ? el.dataset.circleBackground :  parameters.circleBackground ? parameters.circleBackground : "none";
     let circleStrokeWidth =  parseInt(el.dataset.circleStrokeWidth ? el.dataset.circleStrokeWidth :   parameters.circleStrokeWidth ? parameters.circleStrokeWidth : 15);
     let circleDasharray = (circleSize*2)*Math.PI;
-    let number = circleDasharray - ((circleDasharray/100)*el.dataset.number);
+    let number = circleDasharray - ((circleDasharray/100)*(el.dataset.number));
     el.dataset.circleDasharray = ""+number;
 
     const newSvg = document.createElementNS(svgNS,"svg");
@@ -215,7 +215,8 @@ function elementInViewport(el) {
 
     } else {
 
-        animateValue(el.children[0].children[0].children[1].children[0], 0, 0, 0);
+        //animateValue(el.children[0].children[0].children[1].children[0], 0, 0, 0);
+        animateValue(el.children[0].children[0].children[2].children[0], 0, 0, 0);
         el.children[0].children[0].children[0].children[1].style.animation = 'circleReverse'+el.dataset.index+' 0s forwards';
         el.dataset.onAnimate = "on";
     }
