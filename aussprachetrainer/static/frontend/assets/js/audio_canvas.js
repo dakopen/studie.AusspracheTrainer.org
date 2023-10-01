@@ -33,9 +33,9 @@ let stream;
 navigator.mediaDevices.getUserMedia({ audio: true })
   .then((userStream) => {
     stream = userStream;
-    const audio = document.createElement("audio");
-    audio.srcObject = stream;
-    audio.play();
+    //const audio = document.createElement("audio");
+    //audio.srcObject = stream;
+    //audio.play();
     const source = audioContext.createMediaStreamSource(stream);
     source.connect(analyser);
   })
@@ -99,6 +99,7 @@ function draw() {
     ctx.strokeStyle = 'var(--lila)';
     ctx.stroke();
 
+    // draw an offscreen canvas
     offscreenCtx.beginPath();
     offscreenCtx.moveTo(offscreenX, y);
     offscreenCtx.lineTo(offscreenX, yMirrored);
@@ -110,12 +111,6 @@ function draw() {
   } else {
     counter = 0;
   }
-
-
-
-  // draw on offscreen canvas which is later showed
-
-  
 
 
   counter++;
