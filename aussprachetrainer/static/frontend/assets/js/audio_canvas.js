@@ -3,7 +3,7 @@ const ctx = canvas.getContext("2d");
 
 const offscreenCanvas = document.createElement('canvas');
 const offscreenCtx = offscreenCanvas.getContext('2d');
-offscreenCanvas.width = canvas.width;
+offscreenCanvas.width = 15000;  // more than enough
 offscreenCanvas.height = canvas.height;
 
 
@@ -111,7 +111,6 @@ function draw() {
   } else {
     counter = 0;
   }
-
 
   counter++;
   lastMeanFrequency = meanFrequency;
