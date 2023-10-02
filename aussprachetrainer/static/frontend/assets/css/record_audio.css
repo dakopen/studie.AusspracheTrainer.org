@@ -62,6 +62,7 @@
     border-radius: 50%;
     width: 100px;
     height: 100px;
+    transition: top 1s;
 }
 
 .grey {

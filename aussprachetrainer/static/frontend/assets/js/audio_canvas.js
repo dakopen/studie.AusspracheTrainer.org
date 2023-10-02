@@ -18,31 +18,38 @@ let chunks = [];
 
 const startRecording = () => {
   chunks = [];
-  mediaRecorder = new MediaRecorder(stream);
-  mediaRecorder.addEventListener("dataavailable", (event) => {
-    chunks.push(event.data);
-  });
-  mediaRecorder.start();
+  navigator.mediaDevices.getUserMedia({ audio: true })
+    .then((userStream) => {
+      stream = userStream;
+      //const audio = document.createElement("audio");
+      //audio.srcObject = stream;
+      //audio.play();
+      const source = audioContext.createMediaStreamSource(stream);
+      source.connect(analyser);
+      mediaRecorder = new MediaRecorder(stream);
+      mediaRecorder.addEventListener("dataavailable", (event) => {
+        chunks.push(event.data);
+      });
+      mediaRecorder.start();
+
+      // start the animation and stuff
+      animationFrameId = requestAnimationFrame(draw);
+      recButton.innerText = 'Stop';
+    })
+    .catch((error) => {
+      console.error(error);
+    });
 };
+
+const recButton = document.getElementById("record-button");
+const recButtonContainer = document.querySelector(".button-container");
+const audioContainer = document.querySelector(".audio-container");
 
 const stopRecording = () => {
   mediaRecorder.stop();
 };
 
 let stream;
-navigator.mediaDevices.getUserMedia({ audio: true })
-  .then((userStream) => {
-    stream = userStream;
-    //const audio = document.createElement("audio");
-    //audio.srcObject = stream;
-    //audio.play();
-    const source = audioContext.createMediaStreamSource(stream);
-    source.connect(analyser);
-  })
-  .catch((error) => {
-    console.error(error);
-  });
-
 let x = canvas.width / 2 - document.getElementById("record-button").offsetWidth / 2;
 
 let lastMeanFrequency = 0;
@@ -51,15 +58,33 @@ let counter = 0;
 
 let isRecording = false;
 
-// Event listener for record button
-const recButton = document.getElementById("record-button");
+const moveRecButtonDown = () => {
+  const recButtonContainer = document.querySelector(".button-container");
+  const audioContainer = document.querySelector(".audio-container");
+
+  let currentTop = parseInt(window.getComputedStyle(recButtonContainer).getPropertyValue('top'), 10);
+  let currentHeight = parseInt(window.getComputedStyle(audioContainer).getPropertyValue('height'), 10);
+
+  let newTop = currentTop + 125;
+  let newHeight = currentHeight + 125;
+  recButtonContainer.style.transition = 'top 0.5s ease-in-out';
+  audioContainer.style.transition = 'height 0.5s ease-in-out';
+  
+
+
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      recButtonContainer.style.top = newTop + 'px';
+      audioContainer.style.height = newHeight + 'px';
+    });
+  });
+};
+
 
 recButton.addEventListener("click", () => {
   isRecording = !isRecording;
   if (isRecording) {
     startRecording();
-    animationFrameId = requestAnimationFrame(draw);
-    recButton.innerText = 'Stop';
   } else {
     stopRecording();
     cancelAnimationFrame(animationFrameId);
@@ -70,6 +95,8 @@ recButton.addEventListener("click", () => {
     const imgElement = document.createElement("img");
     imgElement.src = canvasImage;
     document.body.appendChild(imgElement);
+
+    moveRecButtonDown();
   }
 });
 
