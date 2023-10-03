@@ -29,7 +29,7 @@
     vertical-align: middle;
     border-radius: 25px;
     border: solid 4px #aa6bfd;
-    font-size: max(min(2.5vw, 50px), 30px);
+    font-size: max(min(3vw, 50px), 30px);
     outline: none;
     height: 1.6em;
     overflow: hidden;
@@ -45,7 +45,7 @@
 
 .button-container {
     position: absolute; /* Absolute positioning on button container */
-    top: 50%;
+    top: 20%;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 2;
@@ -76,7 +76,7 @@
     width: 85%;
     position: relative;
     max-width: 800px;
-    height: 100px;
+    height: 250px;
     margin: auto;
     mask-image: linear-gradient(to right, transparent, white 10%, white 100%);
 }

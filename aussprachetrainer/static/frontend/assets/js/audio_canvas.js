@@ -47,6 +47,12 @@ const audioContainer = document.querySelector(".audio-container");
 
 const stopRecording = () => {
   mediaRecorder.stop();
+
+  // Stop all tracks to release the media stream
+  if (stream) {
+    const tracks = stream.getTracks();
+    tracks.forEach((track) => track.stop());
+  }
 };
 
 let stream;
@@ -69,15 +75,9 @@ const moveRecButtonDown = () => {
   let newHeight = currentHeight + 125;
   recButtonContainer.style.transition = 'top 0.5s ease-in-out';
   audioContainer.style.transition = 'height 0.5s ease-in-out';
-  
 
-
-  requestAnimationFrame(() => {
-    requestAnimationFrame(() => {
-      recButtonContainer.style.top = newTop + 'px';
-      audioContainer.style.height = newHeight + 'px';
-    });
-  });
+  audioContainer.style.height = newHeight + 'px';
+  recButtonContainer.style.top = newTop + 'px';
 };
 
 
