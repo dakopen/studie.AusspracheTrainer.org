@@ -71,8 +71,8 @@ const moveRecButtonDown = () => {
   let currentTop = parseInt(window.getComputedStyle(recButtonContainer).getPropertyValue('top'), 10);
   let currentHeight = parseInt(window.getComputedStyle(audioContainer).getPropertyValue('height'), 10);
 
-  let newTop = currentTop + 125;
-  let newHeight = currentHeight + 125;
+  let newTop = currentTop + 150;
+  let newHeight = currentHeight + 150;
   recButtonContainer.style.transition = 'top 0.5s ease-in-out';
   audioContainer.style.transition = 'height 0.5s ease-in-out';
 
@@ -97,6 +97,14 @@ recButton.addEventListener("click", () => {
     document.body.appendChild(imgElement);
 
     moveRecButtonDown();
+
+    // replace canvas with offscreen canvas
+    offscreenCanvas.className = 'offscreen-canvas-class';
+    canvas.replaceWith(offscreenCanvas);
+
+    void offscreenCanvas.offsetWidth;
+    offscreenCanvas.style.left = "50%";
+    
   }
 });
 

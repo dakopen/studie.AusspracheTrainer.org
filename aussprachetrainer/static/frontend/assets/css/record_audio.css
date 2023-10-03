@@ -20,6 +20,7 @@
 
 /* TEXTAREA textarea */
 .textarea-responsive {
+    display: inline-block;
     resize: none;
     padding-left: 0.35em;
     padding-right: 0.35em;
@@ -51,6 +52,11 @@
     z-index: 2;
 }
 
+.center-container {
+    position: relative;
+    text-align: center;
+}
+
 #record-button {
     background-color: #4CAF50;
     border: none;
@@ -60,13 +66,22 @@
     display: inline-block;
     font-size: 16px;
     border-radius: 50%;
-    width: 100px;
-    height: 100px;
+    width: 130px;
+    height: 130px;
     transition: top 1s;
 }
 
-.grey {
+.center-container {
+    position: relative;
+    text-align: center;
+}
+
+
+.bin {
     color: grey;
+    margin-left: 5px;
+    position: absolute;
+    top: 5px;
 }
 
 #visualizer {
@@ -76,7 +91,13 @@
     width: 85%;
     position: relative;
     max-width: 800px;
-    height: 250px;
+    height: 325px;
     margin: auto;
-    mask-image: linear-gradient(to right, transparent, white 10%, white 100%);
+    mask-image: linear-gradient(to right, transparent, white 10%, white 90%, transparent);
+}
+
+.offscreen-canvas-class {
+    position: absolute;
+    left: 0%;
+    transition: left 1s ease-in-out; /* Adjust time and easing as desired */
 }
