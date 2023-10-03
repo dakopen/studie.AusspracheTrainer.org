@@ -10,9 +10,9 @@ from django.http import JsonResponse, HttpResponse
 from django.conf import settings
 
 import uuid
-import os
-import json
+from pydub import AudioSegment
 import base64
+import io
 
 
 def render_into_base(request, title, filepaths, context=None, content_type=None, status=None, using=None, css=None):
@@ -63,32 +63,31 @@ def initiate_analysis(request):
     audio_data_url = request.POST.get('audio_data')
     text = request.POST.get('text_data')
 
-    print(audio_data_url, "----")
     audio_data_base64 = audio_data_url.split(',')[1]
     audio_data = base64.b64decode(audio_data_base64)
-    audio_file = ContentFile(audio_data, name='audio.mp3')
+    random_name = str(uuid.uuid4()) + ".mp3"
 
-    # At this point, `audio_file` is a Django `ContentFile` object
-    # containing your MP3 data. You can save it to a model like so:
-    # your_model_instance.audio_field.save('audio.mp3', audio_file)
+    buffer = io.BytesIO()
 
- 
+    audio_segment = AudioSegment.from_ogg(io.BytesIO(audio_data))
 
+    audio_segment.export(buffer, format="mp3")
 
-    # Generate a random name while preserving the original extension
-    original_name, extension = os.path.splitext(audio_file.name)
-    random_name = str(uuid.uuid4()) + extension
+    buffer.seek(0)
+
+    content_file = ContentFile(buffer.read(), name=random_name)
+
     
     # Save audio file to disk
-    file_name = 'audio_files/' + random_name  # Make sure the folder exists
-    default_storage.save(file_name, ContentFile(audio_file.read()))
+    file_name = 'audio_files/' + random_name  
+    default_storage.save(file_name, content_file)
     
     user_id = request.user.id if request.user.is_authenticated else None
 
     task = async_pronunciation_assessment.delay(file_name, text, "de-DE", user_id=user_id) # TODO: replace language with given language from user input
-    # return redirect('waiting_page', task_id=task.id)
     return JsonResponse({'task_id': task.id})
-
+ICH WEIß NICHT WAS FALSCH IST ABER ES KOMMT IMMER EIN FAILURE
+DAFÜR KLAPPT DER REST, ALSO DIE AUDIO WIRD AUFGENOMMEN UND ANGEZEIGT UND SO
 
 def check_status(request, task_id):
     task = AsyncResult(task_id)

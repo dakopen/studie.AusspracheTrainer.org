@@ -35,10 +35,9 @@ const startRecording = () => {
       };
 
       mediaRecorder.addEventListener("dataavailable", (event) => {
-        console.log('Data available:', event.data);
         chunks.push(event.data);
       });
-      mediaRecorder.start(500);
+      mediaRecorder.start(100);
 
       // start the animation and stuff
       animationFrameId = requestAnimationFrame(draw);
@@ -61,22 +60,26 @@ const stopRecording = () => {
   console.log('MediaRecorder stopped:', mediaRecorder);
   // Combine the chunks to form a Blob
   console.log(chunks)
-  var blob = new Blob(chunks, { 'type': 'audio/mp3' });
+  var blob = new Blob(chunks, { 'type': 'audio/ogg' });
   console.log(blob)
 
   const reader = new FileReader();
   reader.onload = () => {
     const base64data = reader.result;
     document.getElementById('hiddenAudioData').value = base64data;
-    console.log(base64data)
+    
+    document.getElementById('hiddenTextData').value = textarea.val();
+    
+    $('#recordAudioForm').submit();
   };
+
   reader.onerror = (error) => {
     console.error('FileReader Error: ', error);
   };
-  reader.readAsDataURL(blob);
-  document.getElementById('hiddenTextData').value = textarea.val();
 
-  $('#recordAudioForm').submit();
+  reader.readAsDataURL(blob);
+
+
 
 };
 
@@ -183,3 +186,33 @@ function draw() {
   lastMeanFrequency = meanFrequency;
   animationFrameId = requestAnimationFrame(draw);
 }
+
+
+
+$(document).ready(function() {
+  $('#recordAudioForm').on('submit', function(e) {
+    e.preventDefault();  // Prevent the form from submitting the traditional way
+
+    var formData = new FormData(this);  // Create a FormData object from the form
+
+    $.ajax({
+      url: $(this).attr('action'),  // Get the action URL from the form
+      type: 'POST',
+      data: formData,
+      processData: false,
+      contentType: false,
+      headers: {
+        'X-CSRFToken': $('input[name=csrfmiddlewaretoken]').val()  // Get the CSRF token from the form
+      },
+      success: function(data) {
+        var taskID = data.task_id;
+        checkStatus(taskID);
+        console.log('Task ID:', taskID);  // Log the task ID to the console
+        
+      },
+      error: function(err) {
+        console.error('Error:', err);
+      }
+    });
+  });
+});

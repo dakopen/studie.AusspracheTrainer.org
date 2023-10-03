@@ -26,6 +26,7 @@ function checkStatus(taskId) {
                 // If the task is still pending or running, check again in a few seconds
                 setTimeout(() => checkStatus(taskId), 2000);
             } else {
+                console.log(data);
                 // Handle failure here
                 displayError();
             }
