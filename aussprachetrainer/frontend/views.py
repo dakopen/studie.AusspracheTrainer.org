@@ -12,6 +12,8 @@ from django.conf import settings
 import uuid
 import os
 import json
+import base64
+
 
 def render_into_base(request, title, filepaths, context=None, content_type=None, status=None, using=None, css=None):
     """
@@ -58,13 +60,20 @@ def waiting_page(request, task_id):
     return render_into_base(request, _("Warte auf Ergebnis"), "waiting_page.html", {"task_id": task_id})
 
 def initiate_analysis(request):
-    # Extract the form data here
-    print("---")
-    print(request.body)
-    print(request.POST)
-    print(request.FILES)
-    text = request.POST["text"]
-    audio_file = request.FILES["audio_file"]
+    audio_data_url = request.POST.get('audio_data')
+    text = request.POST.get('text_data')
+
+    print(audio_data_url, "----")
+    audio_data_base64 = audio_data_url.split(',')[1]
+    audio_data = base64.b64decode(audio_data_base64)
+    audio_file = ContentFile(audio_data, name='audio.mp3')
+
+    # At this point, `audio_file` is a Django `ContentFile` object
+    # containing your MP3 data. You can save it to a model like so:
+    # your_model_instance.audio_field.save('audio.mp3', audio_file)
+
+ 
+
 
     # Generate a random name while preserving the original extension
     original_name, extension = os.path.splitext(audio_file.name)

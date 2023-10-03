@@ -14,6 +14,8 @@ const bufferLength = analyser.frequencyBinCount;
 const dataArray = new Uint8Array(bufferLength);
 
 let mediaRecorder;
+
+
 let chunks = [];
 
 const startRecording = () => {
@@ -26,11 +28,17 @@ const startRecording = () => {
       //audio.play();
       const source = audioContext.createMediaStreamSource(stream);
       source.connect(analyser);
-      mediaRecorder = new MediaRecorder(stream);
+      mediaRecorder = new MediaRecorder(stream );
+      
+      mediaRecorder.onerror = (event) => {
+        console.error('MediaRecorder error:', event.error);
+      };
+
       mediaRecorder.addEventListener("dataavailable", (event) => {
+        console.log('Data available:', event.data);
         chunks.push(event.data);
       });
-      mediaRecorder.start();
+      mediaRecorder.start(500);
 
       // start the animation and stuff
       animationFrameId = requestAnimationFrame(draw);
@@ -41,6 +49,7 @@ const startRecording = () => {
     });
 };
 
+
 const stopRecording = () => {
   mediaRecorder.stop();
 
@@ -49,25 +58,25 @@ const stopRecording = () => {
     const tracks = stream.getTracks();
     tracks.forEach((track) => track.stop());
   }
-
+  console.log('MediaRecorder stopped:', mediaRecorder);
   // Combine the chunks to form a Blob
-  const blob = new Blob(chunks, { 'type': 'audio/mp3' });
+  console.log(chunks)
+  var blob = new Blob(chunks, { 'type': 'audio/mp3' });
+  console.log(blob)
 
-  // Create a FormData object and append the blob to it
-  let formData = new FormData();
-  formData.append('audio_file', blob, 'audio.mp3');
-  formData.append('text', textarea.val());
-  // Make an AJAX request to send the FormData object to the server
-  fetch('/analyze/', {
-    method: 'POST',
-    body: {"test": "test"},
-  })
-  .then(response => response.json())
-  .then(data => {
-    // The task id is returned here, you can now keep checking for results
-    let taskID = data.task_id;
-    checkStatus(taskID);
-  });
+  const reader = new FileReader();
+  reader.onload = () => {
+    const base64data = reader.result;
+    document.getElementById('hiddenAudioData').value = base64data;
+    console.log(base64data)
+  };
+  reader.onerror = (error) => {
+    console.error('FileReader Error: ', error);
+  };
+  reader.readAsDataURL(blob);
+  document.getElementById('hiddenTextData').value = textarea.val();
+
+  $('#recordAudioForm').submit();
 
 };
 
@@ -102,7 +111,9 @@ const moveRecButtonDown = () => {
   recButtonContainer.style.top = newTop + 'px';
 };
 
-recButton.addEventListener("click", () => {
+recButton.addEventListener('click', function(e) {
+  e.preventDefault();
+  
   isRecording = !isRecording;
   if (isRecording) {
     startRecording();

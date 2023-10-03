@@ -1,19 +1,23 @@
 {% load static %}
-<div class="center-container">
-    <textarea placeholder="Übungssatz" id="textarea" class="textarea-responsive" maxlength="300" autocapitalize="off"></textarea>
-    <i class="fas fa-trash-alt bin" onclick="clearTextarea()"></i>
-</div>
-
-
-<br>
-<br>
-<br>
-<div class="audio-container">
-    <div class="button-container">
-        <button class="round-button" id="record-button">Click me!</button>
+<form action="{% url 'initiate_analysis' %}" method="post" enctype="multipart/form-data" id="recordAudioForm">
+    <div class="center-container">
+        <textarea placeholder="Übungssatz" id="textarea" class="textarea-responsive" maxlength="300" autocapitalize="off"></textarea>
+        <i class="fas fa-trash-alt bin" onclick="clearTextarea()"></i>
     </div>
-    <canvas id="visualizer" width="800" height="130"></canvas>
-</div>
+
+    <br>
+    <br>
+    <br>
+    <div class="audio-container">
+        <div class="button-container">
+            <button class="round-button" id="record-button">Click me!</button>
+        </div>
+        <canvas id="visualizer" width="800" height="130"></canvas>
+    </div>
+    <input type="hidden" id="hiddenAudioData" name="audio_data">
+    <input type="hidden" id="hiddenTextData" name="text_data">
+    {% csrf_token %}
+</form>
  
 <br>
 <br>
@@ -32,3 +36,36 @@ ein laser baut sich auf und wird durchgescannt
 
 <script src="{% static 'frontend/assets/js/record_audio.js' %}"></script>
 <script src="{% static 'frontend/assets/js/audio_canvas.js' %}"></script>
+
+
+<script>
+    $(document).ready(function() {
+      $('#recordAudioForm').on('submit', function(e) {
+        e.preventDefault();  // Prevent the form from submitting the traditional way
+  
+        var formData = new FormData(this);  // Create a FormData object from the form
+  
+        $.ajax({
+          url: $(this).attr('action'),  // Get the action URL from the form
+          type: 'POST',
+          data: formData,
+          processData: false,
+          contentType: false,
+          headers: {
+            'X-CSRFToken': $('input[name=csrfmiddlewaretoken]').val()  // Get the CSRF token from the form
+          },
+          success: function(data) {
+            var taskID = data.task_id;
+            console.log('Task ID:', taskID);  // Log the task ID to the console
+            
+            // Save the task ID to a variable, local storage, or wherever you need
+            localStorage.setItem('taskID', taskID);  // Example: Save to local storage
+          },
+          error: function(err) {
+            console.error('Error:', err);
+          }
+        });
+      });
+    });
+  </script>
+  
