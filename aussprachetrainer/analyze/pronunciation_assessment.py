@@ -31,6 +31,7 @@ def pronunciation_assessment_continuous_from_file(filename, reference_text, lang
     recognized_words = []
     fluency_scores = []
     durations = []
+    word_offset_duration = []
 
     def stop_cb(evt: speechsdk.SessionEventArgs):
         """callback that signals to stop continuous recognition upon receiving an event `evt`"""
@@ -45,9 +46,11 @@ def pronunciation_assessment_continuous_from_file(filename, reference_text, lang
         fluency_scores.append(pronunciation_result.fluency_score)
         json_result = evt.result.properties.get(speechsdk.PropertyId.SpeechServiceResponse_JsonResult)
         jo = json.loads(json_result)
-        
+        print(jo)
         nb = jo['NBest'][0]
         durations.append(sum([int(w['Duration']) for w in nb['Words']]))
+        for word in nb['Words']:
+            word_offset_duration.append(tuple(word['Offset']/10000, word['Duration']/10000))
 
 
     # Connect callbacks to the events fired by the speech recognizer
@@ -74,6 +77,7 @@ def pronunciation_assessment_continuous_from_file(filename, reference_text, lang
     # For continuous pronunciation assessment mode, the service won't return the words with `Insertion` or `Omission`
     # even if miscue is enabled.
     # We need to compare with the reference text after received all recognized words to get these error words.
+
     if enable_miscue:
         diff = difflib.SequenceMatcher(None, reference_words, [x.word.lower() for x in recognized_words])
         final_words = []
@@ -118,7 +122,6 @@ def pronunciation_assessment_continuous_from_file(filename, reference_text, lang
     completeness_score = len([w for w in recognized_words if w.error_type == "None"]) / len(reference_words) * 100
     completeness_score = completeness_score if completeness_score <= 100 else 100
 
-    print([x.word.lower() for x in recognized_words])
     results = {
         'Paragraph': {
             'accuracy_score': accuracy_score,
@@ -138,4 +141,4 @@ def pronunciation_assessment_continuous_from_file(filename, reference_text, lang
         }
         results['Words'].append(word_info)
 
-    return results
+    return results, word_offset_duration

@@ -3,7 +3,7 @@ const ctx = canvas.getContext("2d");
 
 const offscreenCanvas = document.createElement('canvas');
 const offscreenCtx = offscreenCanvas.getContext('2d');
-offscreenCanvas.width = 15000;  // more than enough
+offscreenCanvas.width = 30000;  // more than enough
 offscreenCanvas.height = canvas.height;
 
 
@@ -41,10 +41,6 @@ const startRecording = () => {
     });
 };
 
-const recButton = document.getElementById("record-button");
-const recButtonContainer = document.querySelector(".button-container");
-const audioContainer = document.querySelector(".audio-container");
-
 const stopRecording = () => {
   mediaRecorder.stop();
 
@@ -53,7 +49,33 @@ const stopRecording = () => {
     const tracks = stream.getTracks();
     tracks.forEach((track) => track.stop());
   }
+
+  // Combine the chunks to form a Blob
+  const blob = new Blob(chunks, { 'type': 'audio/mp3' });
+
+  // Create a FormData object and append the blob to it
+  let formData = new FormData();
+  formData.append('audio_file', blob, 'audio.mp3');
+  formData.append('text', textarea.val());
+  // Make an AJAX request to send the FormData object to the server
+  fetch('/analyze/', {
+    method: 'POST',
+    body: {"test": "test"},
+  })
+  .then(response => response.json())
+  .then(data => {
+    // The task id is returned here, you can now keep checking for results
+    let taskID = data.task_id;
+    checkStatus(taskID);
+  });
+
 };
+
+
+
+const recButton = document.getElementById("record-button");
+const recButtonContainer = document.querySelector(".button-container");
+const audioContainer = document.querySelector(".audio-container");
 
 let stream;
 let x = canvas.width / 2 - document.getElementById("record-button").offsetWidth / 2;
@@ -79,7 +101,6 @@ const moveRecButtonDown = () => {
   audioContainer.style.height = newHeight + 'px';
   recButtonContainer.style.top = newTop + 'px';
 };
-
 
 recButton.addEventListener("click", () => {
   isRecording = !isRecording;

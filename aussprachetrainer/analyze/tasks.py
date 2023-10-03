@@ -6,7 +6,7 @@ from django.contrib.auth import get_user_model
 @shared_task()
 def async_pronunciation_assessment(filename, reference_text, language, user_id=None):
 
-    result = pronunciation_assessment_continuous_from_file(filename, reference_text, language)
+    result, word_offset_duration = pronunciation_assessment_continuous_from_file(filename, reference_text, language)
 
     if user_id:
         User = get_user_model()
@@ -25,5 +25,5 @@ def async_pronunciation_assessment(filename, reference_text, language, user_id=N
         language=language
     )
 
-    return result
+    return result, word_offset_duration
 

@@ -11,6 +11,7 @@ from django.conf import settings
 
 import uuid
 import os
+import json
 
 def render_into_base(request, title, filepaths, context=None, content_type=None, status=None, using=None, css=None):
     """
@@ -58,6 +59,10 @@ def waiting_page(request, task_id):
 
 def initiate_analysis(request):
     # Extract the form data here
+    print("---")
+    print(request.body)
+    print(request.POST)
+    print(request.FILES)
     text = request.POST["text"]
     audio_file = request.FILES["audio_file"]
 
@@ -72,7 +77,8 @@ def initiate_analysis(request):
     user_id = request.user.id if request.user.is_authenticated else None
 
     task = async_pronunciation_assessment.delay(file_name, text, "de-DE", user_id=user_id) # TODO: replace language with given language from user input
-    return redirect('waiting_page', task_id=task.id)
+    # return redirect('waiting_page', task_id=task.id)
+    return JsonResponse({'task_id': task.id})
 
 
 def check_status(request, task_id):
