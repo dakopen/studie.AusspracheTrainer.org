@@ -42,7 +42,7 @@ def pronunciation_assessment_continuous_from_file(filename, reference_text, lang
     def recognized(evt: speechsdk.SpeechRecognitionEventArgs):
         pronunciation_result = speechsdk.PronunciationAssessmentResult(evt.result)
 
-        nonlocal recognized_words, fluency_scores, durations
+        nonlocal recognized_words, fluency_scores, durations, word_offset_duration
         recognized_words += pronunciation_result.words
         fluency_scores.append(pronunciation_result.fluency_score)
         json_result = evt.result.properties.get(speechsdk.PropertyId.SpeechServiceResponse_JsonResult)
@@ -51,8 +51,7 @@ def pronunciation_assessment_continuous_from_file(filename, reference_text, lang
         nb = jo['NBest'][0]
         durations.append(sum([int(w['Duration']) for w in nb['Words']]))
         for word in nb['Words']:
-            word_offset_duration.append(tuple(word['Offset']/10000, word['Duration']/10000))
-
+            word_offset_duration.append((word['Offset']/10000, word['Duration']/10000, word['PronunciationAssessment']['AccuracyScore'], word['Word']))
 
     # Connect callbacks to the events fired by the speech recognizer
     speech_recognizer.recognized.connect(recognized)

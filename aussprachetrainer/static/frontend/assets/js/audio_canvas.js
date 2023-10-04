@@ -5,6 +5,7 @@ const offscreenCanvas = document.createElement('canvas');
 const offscreenCtx = offscreenCanvas.getContext('2d');
 offscreenCanvas.width = 30000;  // more than enough
 offscreenCanvas.height = canvas.height;
+offscreenCanvas.className = 'offscreen-canvas-class';
 
 
 const audioContext = new AudioContext();
@@ -14,8 +15,6 @@ const bufferLength = analyser.frequencyBinCount;
 const dataArray = new Uint8Array(bufferLength);
 
 let mediaRecorder;
-
-
 let chunks = [];
 
 const startRecording = () => {
@@ -23,9 +22,6 @@ const startRecording = () => {
   navigator.mediaDevices.getUserMedia({ audio: true })
     .then((userStream) => {
       stream = userStream;
-      //const audio = document.createElement("audio");
-      //audio.srcObject = stream;
-      //audio.play();
       const source = audioContext.createMediaStreamSource(stream);
       source.connect(analyser);
       mediaRecorder = new MediaRecorder(stream );
@@ -37,7 +33,7 @@ const startRecording = () => {
       mediaRecorder.addEventListener("dataavailable", (event) => {
         chunks.push(event.data);
       });
-      mediaRecorder.start(100);
+      mediaRecorder.start(50);
 
       // start the animation and stuff
       animationFrameId = requestAnimationFrame(draw);
@@ -48,20 +44,35 @@ const startRecording = () => {
     });
 };
 
-
 const stopRecording = () => {
   mediaRecorder.stop();
-
   // Stop all tracks to release the media stream
   if (stream) {
     const tracks = stream.getTracks();
     tracks.forEach((track) => track.stop());
   }
-  console.log('MediaRecorder stopped:', mediaRecorder);
+
+  /**RESIZE OFFSCREEN CANVAS **/
+  const tempCanvas = document.createElement("canvas");
+  const tempCtx = tempCanvas.getContext("2d");
+
+  // Set the temporary canvas dimensions
+  tempCanvas.width = offscreenCanvas.width;
+  tempCanvas.height = offscreenCanvas.height;
+
+  // Copy current content of offscreenCanvas to temporary canvas
+  tempCtx.drawImage(offscreenCanvas, 0, 0);
+
+  // Resize the offscreenCanvas
+  offscreenCanvas.width = offscreenX;
+
+
+  // Draw back the copied content to resized offscreenCanvas
+  offscreenCtx.drawImage(tempCanvas, 0, 0);
+  /**   **/
+
   // Combine the chunks to form a Blob
-  console.log(chunks)
   var blob = new Blob(chunks, { 'type': 'audio/ogg' });
-  console.log(blob)
 
   const reader = new FileReader();
   reader.onload = () => {
@@ -79,10 +90,7 @@ const stopRecording = () => {
 
   reader.readAsDataURL(blob);
 
-
-
 };
-
 
 
 const recButton = document.getElementById("record-button");
@@ -134,11 +142,8 @@ recButton.addEventListener('click', function(e) {
     moveRecButtonDown();
 
     // replace canvas with offscreen canvas
-    offscreenCanvas.className = 'offscreen-canvas-class';
     canvas.replaceWith(offscreenCanvas);
-
-    void offscreenCanvas.offsetWidth;
-    offscreenCanvas.style.left = "50%";
+    
     
   }
 });
@@ -187,6 +192,53 @@ function draw() {
   animationFrameId = requestAnimationFrame(draw);
 }
 
+function colorCanvas(offsets) {
+  offsets.forEach((offset) => {
+
+    const percentage = offset[2]; // between 0 and 100
+    const red = 255 - Math.round(2.55 * percentage);
+    const green = Math.round(2.55 * percentage);
+  
+    offscreenCtx.fillStyle = `rgba(${red}, ${green}, 0, 0.5)`;
+    offscreenCtx.fillRect(offset[0]/9.65, 0, offset[1]/9.65, canvas.height);
+
+    // offscreenCtx.fillStyle = 'rgba(255, 0, 0, 0.5)'; // red with 50% transparency
+    // offscreenCtx.fillRect(offset[0]/9.7, 0, offset[1]/9.7, canvas.height / 2);
+    
+    const maxWidth = 800;
+
+    // Original dimensions
+    const originalWidth = offscreenCanvas.width;
+    const originalHeight = offscreenCanvas.height;
+
+    // Aspect ratio
+    const aspectRatio = originalWidth / originalHeight;
+
+    // Create a temporary canvas and context
+    const tempCanvas = document.createElement("canvas");
+    const tempCtx = tempCanvas.getContext("2d");
+
+    // Set the temporary canvas dimensions
+    tempCanvas.width = originalWidth;
+    tempCanvas.height = originalHeight;
+
+    // Copy current content of offscreenCanvas to temporary canvas
+    tempCtx.drawImage(offscreenCanvas, 0, 0);
+
+    // Update the dimensions of the offscreenCanvas
+    if (offscreenX > maxWidth) {
+      offscreenCanvas.width = maxWidth;
+      offscreenCanvas.height = maxWidth / aspectRatio;
+    } else {
+      offscreenCanvas.width = offscreenX;
+      offscreenCanvas.height = offscreenX / aspectRatio;
+    }
+
+    // Scale and draw back the copied content to resized offscreenCanvas
+    offscreenCtx.drawImage(tempCanvas, 0, 0, originalWidth, originalHeight, 0, 0, offscreenCanvas.width, offscreenCanvas.height);
+    
+  });
+}
 
 
 $(document).ready(function() {
@@ -207,7 +259,6 @@ $(document).ready(function() {
       success: function(data) {
         var taskID = data.task_id;
         checkStatus(taskID);
-        console.log('Task ID:', taskID);  // Log the task ID to the console
         
       },
       error: function(err) {

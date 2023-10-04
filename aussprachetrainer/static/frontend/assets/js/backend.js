@@ -34,9 +34,10 @@ function checkStatus(taskId) {
 }
 
 function displayResult(result) {
+    console.log(result);
     // Show result in the DOM
-    let paragraph = result['Paragraph'];
-    let words = result['Words'];
+    let paragraph = result[0]['Paragraph'];
+    let words = result[0]['Words'];
 
     // Display paragraph scores
     document.getElementById('resultDiv').innerHTML += `<p>Accuracy Score: ${paragraph.accuracy_score}</p>`;
@@ -51,6 +52,7 @@ function displayResult(result) {
     wordTable += "</table>";
     document.getElementById('resultDiv').innerHTML += wordTable;
 
+    colorCanvas(result[1])
     //document.getElementById("result").innerHTML = result;
 }
 
