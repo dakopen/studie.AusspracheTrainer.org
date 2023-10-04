@@ -10,9 +10,12 @@ from django.http import JsonResponse, HttpResponse
 from django.conf import settings
 
 import uuid
-import os
+from pydub import AudioSegment
+import base64
+import io
 
-def render_into_base(request, title, filepaths, context=None, content_type=None, status=None, using=None):
+
+def render_into_base(request, title, filepaths, context=None, content_type=None, status=None, using=None, css=None):
     """
     Render a template into the base template.
     """
@@ -25,12 +28,18 @@ def render_into_base(request, title, filepaths, context=None, content_type=None,
     context["title"] = title
     context["filepaths"] = filepaths
 
+    if css:
+        if not isinstance(css, list):
+            css = [css]
+    context["css"] = css
+
     return render(request, 'extend_base.html', context, content_type, status, using)
 
 
 def index(request):
 
-    return render_into_base(request, _("AusspracheTrainer"), ["importhtml.html", "upload_audio.html"])
+    return render_into_base(request, _("AusspracheTrainer"), ["importhtml.html", "upload_audio.html", "record_audio.html"],
+                            css=['frontend/assets/css/record_audio.css'])
 
 
 def contact(request):
@@ -51,21 +60,35 @@ def waiting_page(request, task_id):
     return render_into_base(request, _("Warte auf Ergebnis"), "waiting_page.html", {"task_id": task_id})
 
 def initiate_analysis(request):
-    # Extract the form data here
-    text = request.POST["text"]
-    audio_file = request.FILES["audio_file"]
+    audio_data_url = request.POST.get('audio_data')
+    text = request.POST.get('text_data')
 
-    # Generate a random name while preserving the original extension
-    original_name, extension = os.path.splitext(audio_file.name)
-    random_name = str(uuid.uuid4()) + extension
+    audio_data_base64 = audio_data_url.split(',')[1]
+    audio_data = base64.b64decode(audio_data_base64)
+    random_name = str(uuid.uuid4()) + ".wav"
+
+    buffer = io.BytesIO()
+
+    audio_segment = AudioSegment.from_ogg(io.BytesIO(audio_data))
+
+    audio_segment.export(buffer, format="wav")
+
+    buffer.seek(0)
+
+    content_file = ContentFile(buffer.read())
+
     
     # Save audio file to disk
-    file_name = 'audio_files/' + random_name  # Make sure the folder exists
-    default_storage.save(file_name, ContentFile(audio_file.read()))
+    file_name = 'audio_files/' + random_name  
+    default_storage.save(file_name, content_file)
+    print(file_name, text)
     
-    task = async_pronunciation_assessment.delay(file_name, text, "de-DE") # TODO: replace language with given language from user input
-    return redirect('waiting_page', task_id=task.id)
+    user_id = request.user.id if request.user.is_authenticated else None
 
+    task = async_pronunciation_assessment.delay(file_name, text, "de-DE", user_id=user_id) # TODO: replace language with given language from user input
+    return JsonResponse({'task_id': task.id})
+#ICH WEIß NICHT WAS FALSCH IST ABER ES KOMMT IMMER EIN FAILURE
+# DAFÜR KLAPPT DER REST, ALSO DIE AUDIO WIRD AUFGENOMMEN UND ANGEZEIGT UND SO
 
 def check_status(request, task_id):
     task = AsyncResult(task_id)

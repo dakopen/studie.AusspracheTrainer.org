@@ -10,7 +10,7 @@ function checkStatus(taskId) {
             const languagePrefix = currentUrl.split('/')[3];
 
             // Construct the new URL with the same language prefix
-            const defaultUrl = `/${languagePrefix}/`;
+            const defaultUrl = `/${languagePrefix}/result/`;
 
             // Replace the current URL with the default URL
             window.history.pushState(null, null, defaultUrl);
@@ -26,6 +26,7 @@ function checkStatus(taskId) {
                 // If the task is still pending or running, check again in a few seconds
                 setTimeout(() => checkStatus(taskId), 2000);
             } else {
+                console.log(data);
                 // Handle failure here
                 displayError();
             }
@@ -33,9 +34,10 @@ function checkStatus(taskId) {
 }
 
 function displayResult(result) {
+    console.log(result);
     // Show result in the DOM
-    let paragraph = result['Paragraph'];
-    let words = result['Words'];
+    let paragraph = result[0]['Paragraph'];
+    let words = result[0]['Words'];
 
     // Display paragraph scores
     document.getElementById('resultDiv').innerHTML += `<p>Accuracy Score: ${paragraph.accuracy_score}</p>`;
@@ -50,6 +52,7 @@ function displayResult(result) {
     wordTable += "</table>";
     document.getElementById('resultDiv').innerHTML += wordTable;
 
+    colorCanvas(result[1])
     //document.getElementById("result").innerHTML = result;
 }
 

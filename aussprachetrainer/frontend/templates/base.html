@@ -8,9 +8,13 @@
     <link rel="stylesheet" href="{% static 'frontend/assets/css/global-new.css' %}" type="text/css">
     <link rel="stylesheet" href="{% static 'frontend/assets/css/header.css' %}" type="text/css">
     <link rel="stylesheet" href="{% static 'frontend/assets/css/footer.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'fontawesomefree/css/all.min.css' %}" type="text/css">
+    
+    {% block css %}{% endblock %}
 
     <link rel="icon" href="{% static 'frontend/assets/images/favicon.png' %}" type="image/png">
-    <title>{% block title %}Default Title{% endblock %}</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <title>{% block title %}AusspracheTrainer{% endblock %}</title>
     
     <!-- Script that need Django Patterns -->
     <script> 
@@ -31,6 +35,7 @@
 </head>
 
 <body>
+    {% csrf_token %}
     <!-- ***** Header Area Start ***** -->
     {% include "module/header.html" %}
     <!-- ***** Header Area End ***** -->
@@ -42,7 +47,8 @@
     <!-- ***** Footer Area Start ***** -->
     {% include "module/footer.html" %}
     <!-- ***** Footer Area End ***** -->
-    <script src="{% static 'frontend/assets/js/base.js' %}"></script> 
+    <script src="{% static 'frontend/assets/js/base.js' %}"></script>
+    <script src="{% static 'frontend/assets/js/backend.js' %}"></script>
 </body>
 
 </html>

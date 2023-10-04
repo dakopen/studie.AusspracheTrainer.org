@@ -30,3 +30,5 @@ function changeLanguage(language) {
             console.error('Error changing language:', error);
         });
 }
+
+const csrftoken = document.getElementsByName('csrfmiddlewaretoken')[0].value;

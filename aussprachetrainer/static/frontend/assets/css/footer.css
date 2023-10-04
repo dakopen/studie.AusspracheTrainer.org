@@ -1,5 +1,6 @@
 .footer {
-    position: absolute;
+    margin-top: auto; /* Pushes the footer to the bottom */
+    position: fixed;
     bottom: 0;
     width: 100%;
     background-color: var(--white);
@@ -26,7 +27,7 @@
 }
 
 .footer-logo img {
-    max-width: 70px;
+    max-width: 50px;
     vertical-align: middle;
 }
 

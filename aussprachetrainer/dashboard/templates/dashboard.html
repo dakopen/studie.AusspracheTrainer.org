@@ -1,18 +1,62 @@
 {% load i18n %}
 {% load static %}
 
-<!DOCTYPE html>
-<html>
-<head>
-    <title>{% trans "Dashboard" %}</title>
-</head>
-<body>
-    <h1>{% trans "Willkommen zum Dashboard!" %}</h1>
-    <p>{% trans "Wähle eine Übung aus:" %}</p>
-    <ul>
-        <li><a href="#">{% trans "Vokale üben" %}</a></li>
-        <li><a href="#">{% trans "Konsonanten üben" %}</a></li>
-        <li><a href="#">{% trans "Sätze üben" %}</a></li>
-    </ul>
-</body>
-</html>
+<script src="{% static 'frontend/assets/js/jarodeComponent.js' %}"></script> 
+<script>
+    window.onload = function() {
+        jarodeItemsInit();
+    }
+</script>
+
+<div class="circle-container">
+  <div class="jarode-items-percent score-rectangle"
+    data-number="{{ avg_accuracy }}"
+    data-duration="2"
+    data-circle-stroke-width="15"
+    data-box-box-shadow="none"
+    data-box-background="none"
+    data-box-border="none"
+    data-number-color="dodgerblue"
+    data-circle-stroke-color="dodgerblue"
+    data-text-color="dodgerblue"
+    data-text="{% trans "Genauigkeit" %}"
+    data-text-font-size="1.2rem"
+    data-hover-text="{% trans "Dieser Score zeigt an, wie gut Deine Aussprache mit der richtigen Aussprache übereinstimmt." %}">
+  </div>
+
+  <div class="jarode-items-percent score-rectangle"
+    data-number="{{ avg_aussprachetrainer }}"
+    data-duration="2"
+    data-number-color="var(--lila)"
+    data-circle-stroke-color="var(--lila)"
+    data-circle-stroke-width="18"
+    data-box-box-shadow="none"
+    data-box-background="none"
+    data-box-border="none"
+    data-circle-size="100"
+    data-number-size="3rem"
+    data-text={% trans "AusspracheTrainer" %}
+    data-text-color="var(--lila)"
+    data-text-font-size="1.6rem"
+    data-hover-text="{% trans "In diesem Score sind mehrere Faktoren wie die Genauigkeit, der Redefluss und die Schwierigkeit eingerechnet." %}">
+  </div>
+
+  <div class="jarode-items-percent score-rectangle"
+      data-number="{{ avg_fluency }}"
+      data-duration="2"
+      data-number-color="orange"
+      data-circle-stroke-color="orange"
+      data-circle-stroke-width="15"
+      data-box-box-shadow="none"
+      data-box-background="none"
+      data-box-border="none"
+      data-text="{% trans "Redefluss" %}"
+      data-text-color="orange"
+      data-text-font-size="1.2rem"
+      data-hover-text="{% trans "Der Redefluss Score besagt, ..." %}">
+    </div>
+
+</div>
+
+
+<script src="{% static 'frontend/assets/js/dashboard.js' %}"></script>

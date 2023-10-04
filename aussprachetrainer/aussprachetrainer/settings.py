@@ -64,6 +64,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'fontawesomefree',
     'frontend',
     'analyze',
     'user_auth',
@@ -134,7 +135,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Authentication
 
-AUTH_USER_MODEL = 'user_auth.CustomUser'
+#AUTH_USER_MODEL = 'user_auth.User'
 LOGIN_URL = '/auth/login/'
 
 

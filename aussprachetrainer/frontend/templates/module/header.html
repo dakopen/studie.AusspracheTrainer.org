@@ -10,7 +10,7 @@
 
             {% if user.is_authenticated %}
             <li class="nav-item">
-                <p style="margin-bottom: 0rem;">{% trans "Fortschritt" %}</p>
+                <p style="margin-bottom: 0rem;"><a href="{% url 'dashboard' %}">{% trans "Dashboard" %}</a></p>
                 <!-- Also adopt the url style below-->
             </li>
             <li class="nav-item">

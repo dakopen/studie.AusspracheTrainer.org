@@ -1,6 +1,6 @@
 {% load i18n %}
 
-<form action="{% url 'initiate_analysis' %}" method="post" enctype="multipart/form-data">
+<form action="{% url 'initiate_analysis' %}" method="post" enctype="multipart/form-data" id="analysisForm">
     <label for="audioFile">{% trans "Audio hochladen:" %}</label>
     <input type="file" id="audioFile" name="audio_file" accept="audio/*">
     <br>
@@ -10,3 +10,33 @@
     <input type="submit" value={% trans "Absenden" %}>
     {% csrf_token %}
 </form>
+<script>
+    $(document).ready(function() {
+      $('#analysisForm').on('submit', function(e) {
+        e.preventDefault();  // Prevent the form from submitting the traditional way
+  
+        var formData = new FormData(this);  // Create a FormData object from the form
+  
+        $.ajax({
+          url: $(this).attr('action'),  // Get the action URL from the form
+          type: 'POST',
+          data: formData,
+          processData: false,
+          contentType: false,
+          headers: {
+            'X-CSRFToken': $('input[name=csrfmiddlewaretoken]').val()  // Get the CSRF token from the form
+          },
+          success: function(data) {
+            var taskID = data.task_id;
+            console.log('Task ID:', taskID);  // Log the task ID to the console
+            
+            // Save the task ID to a variable, local storage, or wherever you need
+            localStorage.setItem('taskID', taskID);  // Example: Save to local storage
+          },
+          error: function(err) {
+            console.error('Error:', err);
+          }
+        });
+      });
+    });
+  </script>

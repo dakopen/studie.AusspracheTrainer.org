@@ -3,7 +3,7 @@
 <body>
     <div class="container">
         <h1>{% trans "Anmelden" %}</h1>
-        <form method="post">
+        <form method="post" class="auth">
             {% csrf_token %}
             {% if form.non_field_errors %}
                 <p class="error">{% trans "Falscher Benutzername oder Passwort." %}</p>

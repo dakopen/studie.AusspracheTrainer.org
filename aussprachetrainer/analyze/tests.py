@@ -4,7 +4,7 @@ from analyze.pronunciation_assessment import pronunciation_assessment_continuous
 class AnalysisTest(TestCase):
     
     def test_pronunciation_assessment_continuous_from_file(self):
-        result = pronunciation_assessment_continuous_from_file(
+        result, _ = pronunciation_assessment_continuous_from_file(
             'static/frontend/assets/testaudio/ich-habe-etwas-mehr-durst-als-ich-vor-einer-stunde-noch-hatte.wav',                                                   
             'Ich habe etwas mehr Durst, als ich vor einer Stunde noch hatte.',
             'de-DE'

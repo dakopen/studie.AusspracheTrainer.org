@@ -1,0 +1,43 @@
+{% load static %}
+<form action="{% url 'initiate_analysis' %}" method="post" enctype="multipart/form-data" id="recordAudioForm">
+    <div class="center-container">
+        <textarea placeholder="Übungssatz" id="textarea" class="textarea-responsive" maxlength="300" autocapitalize="off"></textarea>
+        <i class="fas fa-trash-alt bin" onclick="clearTextarea()"></i>
+    </div>
+
+    <br>
+    <br>
+    <br>
+    <div class="audio-container">
+        <div class="button-container">
+            <button class="round-button" id="record-button">Click me!</button>
+        </div>
+        <canvas id="visualizer" width="800" height="130"></canvas>
+    </div>
+    <input type="hidden" id="hiddenAudioData" name="audio_data">
+    <input type="hidden" id="hiddenTextData" name="text_data">
+    {% csrf_token %}
+</form>
+<div id="result"></div>
+
+<br>
+<br>
+<br>
+
+<br>
+<br>
+<br>
+<div id="resultDiv"></div>
+IDEE: danach das offscreencanvas wie ein barcode aber seitwärts durchleuchten mit rotem laser,
+und derweil die Audio analysiseren.
+
+Dann geht der Button weg, die beiden Canvas werden ausgetauscht, canvas geht nach ganz rechts schnell 
+ein laser baut sich auf und wird durchgescannt
+
+
+
+
+<script src="{% static 'frontend/assets/js/record_audio.js' %}"></script>
+<script src="{% static 'frontend/assets/js/audio_canvas.js' %}"></script>
+
+  
