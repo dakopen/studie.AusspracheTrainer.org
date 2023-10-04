@@ -98,6 +98,5 @@
 
 .offscreen-canvas-class {
     position: absolute;
-    left: 0%;
-    transition: left 1s ease-in-out; /* Adjust time and easing as desired */
+    transition: left 0.5s ease-in-out, transform 0.5s ease-in-out;
 }

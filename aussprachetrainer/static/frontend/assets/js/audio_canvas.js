@@ -143,9 +143,13 @@ recButton.addEventListener('click', function(e) {
 
     // replace canvas with offscreen canvas
     canvas.replaceWith(offscreenCanvas);
-    
-    
-  }
+
+    // center canvas
+    offscreenCanvas.style.left = '0';
+    void offscreenCanvas.offsetWidth;
+    offscreenCanvas.style.left = '50%';
+    offscreenCanvas.style.transform = 'translateX(-50%)';  }
+
 });
 
 let y, yMirrored;
@@ -201,43 +205,42 @@ function colorCanvas(offsets) {
   
     offscreenCtx.fillStyle = `rgba(${red}, ${green}, 0, 0.5)`;
     offscreenCtx.fillRect(offset[0]/9.65, 0, offset[1]/9.65, canvas.height);
-
-    // offscreenCtx.fillStyle = 'rgba(255, 0, 0, 0.5)'; // red with 50% transparency
-    // offscreenCtx.fillRect(offset[0]/9.7, 0, offset[1]/9.7, canvas.height / 2);
-    
-    const maxWidth = 800;
-
-    // Original dimensions
-    const originalWidth = offscreenCanvas.width;
-    const originalHeight = offscreenCanvas.height;
-
-    // Aspect ratio
-    const aspectRatio = originalWidth / originalHeight;
-
-    // Create a temporary canvas and context
-    const tempCanvas = document.createElement("canvas");
-    const tempCtx = tempCanvas.getContext("2d");
-
-    // Set the temporary canvas dimensions
-    tempCanvas.width = originalWidth;
-    tempCanvas.height = originalHeight;
-
-    // Copy current content of offscreenCanvas to temporary canvas
-    tempCtx.drawImage(offscreenCanvas, 0, 0);
-
-    // Update the dimensions of the offscreenCanvas
-    if (offscreenX > maxWidth) {
-      offscreenCanvas.width = maxWidth;
-      offscreenCanvas.height = maxWidth / aspectRatio;
-    } else {
-      offscreenCanvas.width = offscreenX;
-      offscreenCanvas.height = offscreenX / aspectRatio;
-    }
-
-    // Scale and draw back the copied content to resized offscreenCanvas
-    offscreenCtx.drawImage(tempCanvas, 0, 0, originalWidth, originalHeight, 0, 0, offscreenCanvas.width, offscreenCanvas.height);
-    
   });
+
+  const maxWidth = 800;
+
+  // Original dimensions
+  const originalWidth = offscreenCanvas.width;
+  const originalHeight = offscreenCanvas.height;
+
+  // Aspect ratio
+  const aspectRatio = originalWidth / originalHeight;
+
+  // Create a temporary canvas and context
+  const tempCanvas = document.createElement("canvas");
+  const tempCtx = tempCanvas.getContext("2d");
+
+  // Set the temporary canvas dimensions
+  tempCanvas.width = originalWidth;
+  tempCanvas.height = originalHeight;
+
+  // Copy current content of offscreenCanvas to temporary canvas
+  tempCtx.drawImage(offscreenCanvas, 0, 0);
+
+  // Update the dimensions of the offscreenCanvas
+  if (offscreenX > maxWidth) {
+    offscreenCanvas.width = maxWidth;
+    offscreenCanvas.height = maxWidth / aspectRatio;
+  } else {
+    offscreenCanvas.width = offscreenX;
+    offscreenCanvas.height = offscreenX / aspectRatio;
+  }
+
+  // Scale and draw back the copied content to resized offscreenCanvas
+  offscreenCtx.drawImage(tempCanvas, 0, 0, originalWidth, originalHeight, 0, 0, offscreenCanvas.width, offscreenCanvas.height); 
+
+  // disable audio container mask-image:
+  audioContainer.style.maskImage = 'none';
 }
 
 
