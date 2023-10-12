@@ -151,3 +151,7 @@ blockquote {
     color: var(--red);
     font-style: italic;
 }
+
+.lila {
+    color: var(--lila);
+}

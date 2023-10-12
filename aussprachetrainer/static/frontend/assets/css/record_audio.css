@@ -87,6 +87,7 @@
 #visualizer {
     position: relative;
 }
+
 .audio-container {
     width: 85%;
     position: relative;
@@ -100,3 +101,46 @@
     position: absolute;
     transition: left 0.5s ease-in-out, transform 0.5s ease-in-out;
 }
+
+#responsearea {
+    display: none;
+    padding-left: 0.35em;
+    padding-right: 0.35em;
+    padding-top: 0.2em;
+    padding-bottom: 0.3em;
+    vertical-align: middle;
+    border-radius: 25px;
+    border: solid 4px #aa6bfd;
+    outline: none;
+    height: 2.6em;
+}
+
+.response-word {
+    font-size: max(min(1.5vw, 24px), 18px);
+    font-family: "Montserrat";
+    font-weight: 500;
+}
+
+.flexbox {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Button needs margin left */
+    height: 130px;
+}
+
+#replay-button {
+    display: none;
+    border-radius: 50%;
+    border-color: var(--lila);
+    width: 20px;
+    height: 20px;
+
+    /* Flexbox styles to center content */
+    justify-content: center;
+    align-items: center;
+}
+
+.replay-button-icon {
+    margin-left: 2px;
+}
+

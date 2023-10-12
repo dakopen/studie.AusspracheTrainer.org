@@ -1,3 +1,5 @@
+const responsearea = $("#responsearea");
+
 function checkStatus(taskId) {
     fetch(`/check_status/${taskId}/`)
         .then(response => response.json())
@@ -35,6 +37,11 @@ function checkStatus(taskId) {
 
 function displayResult(result) {
     console.log(result);
+    responsearea.html(); // clear previous responsearea
+    responsearea.css('display', 'inline-flex')
+    responsearea.css('width', textarea.css('width'));
+    let firstWord = true;
+
     // Show result in the DOM
     let paragraph = result[0]['Paragraph'];
     let words = result[0]['Words'];
@@ -48,6 +55,23 @@ function displayResult(result) {
     let wordTable = "<table><tr><th>Index</th><th>Word</th><th>Accuracy Score</th><th>Error Type</th></tr>";
     words.forEach(word => {
         wordTable += `<tr><td>${word.index}</td><td>${word.word}</td><td>${word.accuracy_score}</td><td>${word.error_type}</td></tr>`;
+        
+        const red = 255 - Math.round(2.55 * word.accuracy_score);
+        const green = Math.round(2.55 * word.accuracy_score);
+
+        let wordSpan = document.createElement('span');
+        wordSpan.classList.add('response-word');
+        wordSpan.style.color = `rgba(${red}, ${green}, 0, 0.5)`;
+        if (!firstWord) {
+            wordSpan.innerText = word.word;
+            wordSpan.style.marginLeft = "5px";
+        }
+        else {
+            firstWord = false;
+            wordSpan.innerText = word.word;
+        }
+        
+        responsearea.append(wordSpan);
     });
     wordTable += "</table>";
     document.getElementById('resultDiv').innerHTML += wordTable;

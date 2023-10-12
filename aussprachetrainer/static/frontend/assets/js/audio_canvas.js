@@ -82,6 +82,7 @@ const stopRecording = () => {
     document.getElementById('hiddenTextData').value = textarea.val();
     
     $('#recordAudioForm').submit();
+
   };
 
   reader.onerror = (error) => {
@@ -96,6 +97,7 @@ const stopRecording = () => {
 const recButton = document.getElementById("record-button");
 const recButtonContainer = document.querySelector(".button-container");
 const audioContainer = document.querySelector(".audio-container");
+const replayButton = document.getElementById("replay-button");
 
 let stream;
 let x = canvas.width / 2 - document.getElementById("record-button").offsetWidth / 2;
@@ -120,6 +122,12 @@ const moveRecButtonDown = () => {
 
   audioContainer.style.height = newHeight + 'px';
   recButtonContainer.style.top = newTop + 'px';
+
+  // place the replay button with right margin (+ 10 because the button is 20x20px)
+  replayButton.style.marginRight = (Math.min(offscreenCanvas.width, 800) + 10) + "px";
+  setTimeout(() => {
+    replayButton.style.display = 'inherit';
+  }, 500);
 };
 
 recButton.addEventListener('click', function(e) {
@@ -270,3 +278,11 @@ $(document).ready(function() {
     });
   });
 });
+
+document.getElementById('replay-button').addEventListener('click', function(event) {
+  // Prevent the form submission
+  event.preventDefault();
+
+  // Your code to handle the button click here...
+});
+
