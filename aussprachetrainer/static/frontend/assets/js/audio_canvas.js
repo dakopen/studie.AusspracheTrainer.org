@@ -298,6 +298,7 @@ let isPlaying = false;
 let replayAnimationFrameId;
 let lastTimestamp = 0;
 let justResumed = false;
+const replayButtonIcon = document.getElementById('replay-button-icon');
 
 const moveReplayLine = (timestamp) => {
     if (!lastTimestamp || justResumed) {
@@ -322,6 +323,8 @@ const moveReplayLine = (timestamp) => {
 
 const startReplay = () => {
     recordedAudio.play();
+    replayButtonIcon.classList.remove('fa-play');
+    replayButtonIcon.classList.add('fa-pause');
     justResumed = true;  // Set the flag
     replayAnimationFrameId = requestAnimationFrame(moveReplayLine);
 };
@@ -329,6 +332,8 @@ const startReplay = () => {
 const pauseReplay = () => {
     recordedAudio.pause();
     cancelAnimationFrame(replayAnimationFrameId);
+    replayButtonIcon.classList.remove('fa-pause');
+    replayButtonIcon.classList.add('fa-play');
 };
 
 const stopReplay = () => {
@@ -338,6 +343,8 @@ const stopReplay = () => {
     replayX = 0;
     replayLine.style.marginRight = (Math.min(offscreenCanvas.width, 800) - 13) + "px";
     lastTimestamp = 0;
+    replayButtonIcon.classList.remove('fa-pause');
+    replayButtonIcon.classList.add('fa-play');
 };
 
 document.getElementById('replay-button').addEventListener('click', function(event) {
