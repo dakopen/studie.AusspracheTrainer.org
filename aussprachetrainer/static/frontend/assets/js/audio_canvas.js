@@ -75,6 +75,8 @@ const stopRecording = () => {
   recordedAudio.onloadedmetadata = function() {
     const audioDuration = recordedAudio.duration; // Dauer in Sekunden
     pixelsPerSecond = Math.min(offscreenCanvas.width, 800) / audioDuration;
+    realPixelsPerSecond = offscreenCanvas.width / audioDuration;
+    
   };
   // Stop all tracks to release the media stream
   if (stream) {
@@ -176,6 +178,7 @@ recButton.addEventListener('click', function(e) {
 let y, yMirrored;
 let offscreenX = 0;
 let pixelsPerSecond;
+let realPixelsPerSecond;
 
 function draw() {
   if (!isRecording) return;
@@ -226,7 +229,7 @@ function colorCanvas(offsets) {
     const green = Math.round(2.55 * percentage);
   
     offscreenCtx.fillStyle = `rgba(${red}, ${green}, 0, 0.5)`;
-    offscreenCtx.fillRect(offset[0]/9.65, 0, offset[1]/9.65, canvas.height);
+    offscreenCtx.fillRect(realPixelsPerSecond * offset[0] / 1000 + 6.5, 0, realPixelsPerSecond * offset[1] / 1000, canvas.height);
   });
 
   const maxWidth = 800;

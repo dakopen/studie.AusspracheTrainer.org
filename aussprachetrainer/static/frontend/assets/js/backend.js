@@ -74,13 +74,10 @@ function displayResult(result) {
                 wordSpan.style.color = `rgba(${red}, ${green}, 0, 0.5)`;
                 wordSpan.innerText = word.word;
                 wordSpan.classList.add('waveform-word');
-                console.log(result[1]);
-                console.log(result[1][index][0] / 1000);
-                let timestamp = result[1][index][0] / 1000;
+                let timestamp = result[1][index++][0] / 1000;
                 wordSpan.addEventListener('click', () => {
                     jumpToWaveformTimestamp(timestamp);
                 });
-                index++;
                 break;
 
         }
