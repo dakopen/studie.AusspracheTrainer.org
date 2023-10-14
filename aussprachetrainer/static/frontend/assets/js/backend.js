@@ -53,17 +53,44 @@ function displayResult(result) {
 
     // Display word-by-word analysis
     let wordTable = "<table><tr><th>Index</th><th>Word</th><th>Accuracy Score</th><th>Error Type</th></tr>";
+    let index = 0;
     words.forEach(word => {
         wordTable += `<tr><td>${word.index}</td><td>${word.word}</td><td>${word.accuracy_score}</td><td>${word.error_type}</td></tr>`;
         
         const red = 255 - Math.round(2.55 * word.accuracy_score);
         const green = Math.round(2.55 * word.accuracy_score);
-
         let wordSpan = document.createElement('span');
+
+        switch (word.error_type) {
+            case 'Omission':
+                wordSpan.style.color = "red";
+                wordSpan.innerText = "[" + word.word + "]";
+                wordSpan.classList.add('omission-word');
+                break;
+            case 'Insertion':
+                wordSpan.classList.add('insertion-word');
+                // no break here!!
+            case 'None':
+                wordSpan.style.color = `rgba(${red}, ${green}, 0, 0.5)`;
+                wordSpan.innerText = word.word;
+                wordSpan.classList.add('waveform-word');
+                console.log(result[1]);
+                console.log(result[1][index][0] / 1000);
+                let timestamp = result[1][index][0] / 1000;
+                wordSpan.addEventListener('click', () => {
+                    jumpToWaveformTimestamp(timestamp);
+                });
+                index++;
+                break;
+
+        }
         wordSpan.classList.add('response-word');
-        wordSpan.style.color = `rgba(${red}, ${green}, 0, 0.5)`;
-        wordSpan.innerText = word.word;
         responsearea.append(wordSpan);
+
+        // TODO: 3 different styles for all error types and then
+        // have for all error types another class and for all error types
+        // except the Omission class get matched for highlight Waveform und jump thing
+        // which I will program later
     });
     wordTable += "</table>";
     document.getElementById('resultDiv').innerHTML += wordTable;

@@ -368,3 +368,9 @@ document.getElementById('replay-button').addEventListener('click', function(even
     }
     isPlaying = !isPlaying;
 });
+
+function jumpToWaveformTimestamp(timestamp) {
+    recordedAudio.currentTime = timestamp;
+    replayX = timestamp * pixelsPerSecond * 2;
+    replayLine.style.marginRight = (Math.min(offscreenCanvas.width, 800) - 13 - replayX) + "px";
+}

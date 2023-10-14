@@ -159,3 +159,12 @@
     margin-left: 2px;
 }
 
+.insertion-word {
+    text-decoration: line-through;
+    text-decoration-thickness: 0.15em; 
+}
+
+.waveform-word:hover {
+    filter: brightness(0.7);
+    cursor: pointer;
+}
