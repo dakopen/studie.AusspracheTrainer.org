@@ -293,13 +293,8 @@ $(document).ready(function() {
     });
   });
 });
-
-// Variable to keep track of whether the audio is playing
 let isPlaying = false;
-
-// Request animation frame ID for stopping
 let replayAnimationFrameId;
-
 let lastTimestamp = 0;
 
 const moveReplayLine = (timestamp) => {
@@ -320,38 +315,34 @@ const moveReplayLine = (timestamp) => {
     replayAnimationFrameId = requestAnimationFrame(moveReplayLine);
 };
 
-
 const startReplay = () => {
-  recordedAudio.play();
-  replayAnimationFrameId = requestAnimationFrame(moveReplayLine);
+    recordedAudio.play();
+    replayAnimationFrameId = requestAnimationFrame(moveReplayLine);
 };
 
 const pauseReplay = () => {
-  recordedAudio.pause();
-  cancelAnimationFrame(replayAnimationFrameId);
+    recordedAudio.pause();
+    cancelAnimationFrame(replayAnimationFrameId);
 };
 
 const stopReplay = () => {
-  recordedAudio.pause();
-  recordedAudio.currentTime = 0;
-  cancelAnimationFrame(replayAnimationFrameId);
-  replayX = 0;
-  replayLine.style.marginRight = (Math.min(offscreenCanvas.width, 800) - 13) + "px";
-  lastTimestamp = 0;
+    recordedAudio.pause();
+    recordedAudio.currentTime = 0;
+    cancelAnimationFrame(replayAnimationFrameId);
+    replayX = 0;
+    replayLine.style.marginRight = (Math.min(offscreenCanvas.width, 800) - 13) + "px";
+    lastTimestamp = 0;
 };
 
 document.getElementById('replay-button').addEventListener('click', function(event) {
-  // Prevent the form submission
-  event.preventDefault();
+    event.preventDefault();
 
-      
-  if (isPlaying) {
-    pauseReplay();
-  } else {
-    startReplay();
-  }
-
-  isPlaying = !isPlaying;
-
+    if (isPlaying) {
+        pauseReplay();
+    } else {
+        startReplay();
+    }
+    isPlaying = !isPlaying;
 });
+
 
