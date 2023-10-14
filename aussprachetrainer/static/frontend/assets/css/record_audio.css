@@ -135,6 +135,7 @@
 
 #replay-button {
     display: none;
+    flex-shrink: 0;
     border-radius: 50%;
     border-color: var(--lila);
     width: 20px;
