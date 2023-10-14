@@ -265,6 +265,17 @@ function colorCanvas(offsets) {
 
   // disable audio container mask-image:
   audioContainer.style.maskImage = 'none';
+
+  // add the Event Listener for a click that changes the replay line position
+  offscreenCanvas.addEventListener('click', function(event) {
+    event.preventDefault();
+    const rect = offscreenCanvas.getBoundingClientRect();
+    const x = event.clientX - rect.left;
+    replayX = x * 2;
+    replayLine.style.marginRight = (Math.min(offscreenCanvas.width, 800) - replayX) + "px";
+    recordedAudio.currentTime = x / pixelsPerSecond;
+  });
+
 }
 
 
@@ -357,5 +368,3 @@ document.getElementById('replay-button').addEventListener('click', function(even
     }
     isPlaying = !isPlaying;
 });
-
-
