@@ -36,7 +36,7 @@ const startRecording = () => {
       mediaRecorder.addEventListener("dataavailable", (event) => {
         chunks.push(event.data);
       });
-      mediaRecorder.start(50);
+      mediaRecorder.start(100);
 
       // start the animation and stuff
       animationFrameId = requestAnimationFrame(draw);
@@ -49,11 +49,6 @@ const startRecording = () => {
 
 const stopRecording = () => {
   mediaRecorder.stop();
-  // Stop all tracks to release the media stream
-  if (stream) {
-    const tracks = stream.getTracks();
-    tracks.forEach((track) => track.stop());
-  }
 
   /**RESIZE OFFSCREEN CANVAS **/
   const tempCanvas = document.createElement("canvas");
@@ -72,7 +67,6 @@ const stopRecording = () => {
 
   // Draw back the copied content to resized offscreenCanvas
   offscreenCtx.drawImage(tempCanvas, 0, 0);
-  /**   **/
 
   // Combine the chunks to form a Blob
   var blob = new Blob(chunks, { 'type': 'audio/ogg' });
@@ -81,7 +75,12 @@ const stopRecording = () => {
   recordedAudio.onloadedmetadata = function() {
     const audioDuration = recordedAudio.duration; // Dauer in Sekunden
     pixelsPerSecond = Math.min(offscreenCanvas.width, 800) / audioDuration;
-};
+  };
+  // Stop all tracks to release the media stream
+  if (stream) {
+    const tracks = stream.getTracks();
+    tracks.forEach((track) => track.stop());
+  }
 
   const reader = new FileReader();
   reader.onload = () => {
@@ -149,26 +148,28 @@ recButton.addEventListener('click', function(e) {
   if (isRecording) {
     startRecording();
   } else {
-    stopRecording();
-    cancelAnimationFrame(animationFrameId);
-    recButton.innerText = 'Record';
+    setTimeout(() => {
+      stopRecording();
+      cancelAnimationFrame(animationFrameId);
+       // Capture entire offscreen canvas content and display it as an image
+      const canvasImage = offscreenCanvas.toDataURL();
+      const imgElement = document.createElement("img");
+      imgElement.src = canvasImage;
+      document.body.appendChild(imgElement);
 
-    // Capture entire offscreen canvas content and display it as an image
-    const canvasImage = offscreenCanvas.toDataURL();
-    const imgElement = document.createElement("img");
-    imgElement.src = canvasImage;
-    document.body.appendChild(imgElement);
+      moveRecButtonDown();
 
-    moveRecButtonDown();
+      // replace canvas with offscreen canvas
+      canvas.replaceWith(offscreenCanvas);
 
-    // replace canvas with offscreen canvas
-    canvas.replaceWith(offscreenCanvas);
-
-    // center canvas
-    offscreenCanvas.style.left = '0';
-    void offscreenCanvas.offsetWidth;
-    offscreenCanvas.style.left = '50%';
-    offscreenCanvas.style.transform = 'translateX(-50%)';  }
+      // center canvas
+      offscreenCanvas.style.left = '0';
+      void offscreenCanvas.offsetWidth;
+      offscreenCanvas.style.left = '50%';
+      offscreenCanvas.style.transform = 'translateX(-50%)';
+    }, 150); // record a bit longer than before
+    recButton.innerText = 'Record';   
+  }
 
 });
 
@@ -258,7 +259,7 @@ function colorCanvas(offsets) {
     offscreenCanvas.height = offscreenX / aspectRatio;
   }
 
-  replayLine.height = offscreenCanvas.height;
+  replayLine.style.height = offscreenCanvas.height + "px";
   // Scale and draw back the copied content to resized offscreenCanvas
   offscreenCtx.drawImage(tempCanvas, 0, 0, originalWidth, originalHeight, 0, 0, offscreenCanvas.width, offscreenCanvas.height); 
 
@@ -296,9 +297,13 @@ $(document).ready(function() {
 let isPlaying = false;
 let replayAnimationFrameId;
 let lastTimestamp = 0;
+let justResumed = false;
 
 const moveReplayLine = (timestamp) => {
-    if (!lastTimestamp) lastTimestamp = timestamp;
+    if (!lastTimestamp || justResumed) {
+      lastTimestamp = timestamp;
+      justResumed = false;  // Reset the flag
+    }
 
     const deltaTime = (timestamp - lastTimestamp) / 1000;
     lastTimestamp = timestamp;
@@ -317,6 +322,7 @@ const moveReplayLine = (timestamp) => {
 
 const startReplay = () => {
     recordedAudio.play();
+    justResumed = true;  // Set the flag
     replayAnimationFrameId = requestAnimationFrame(moveReplayLine);
 };
 
