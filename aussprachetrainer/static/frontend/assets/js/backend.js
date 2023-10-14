@@ -38,7 +38,7 @@ function checkStatus(taskId) {
 function displayResult(result) {
     console.log(result);
     responsearea.html(); // clear previous responsearea
-    responsearea.css('display', 'inline-flex')
+    responsearea.css('display', 'inline-block')
     responsearea.css('width', textarea.css('width'));
     let firstWord = true;
 
@@ -62,15 +62,7 @@ function displayResult(result) {
         let wordSpan = document.createElement('span');
         wordSpan.classList.add('response-word');
         wordSpan.style.color = `rgba(${red}, ${green}, 0, 0.5)`;
-        if (!firstWord) {
-            wordSpan.innerText = word.word;
-            wordSpan.style.marginLeft = "5px";
-        }
-        else {
-            firstWord = false;
-            wordSpan.innerText = word.word;
-        }
-        
+        wordSpan.innerText = word.word;
         responsearea.append(wordSpan);
     });
     wordTable += "</table>";

@@ -16,6 +16,9 @@ const dataArray = new Uint8Array(bufferLength);
 
 let mediaRecorder;
 let chunks = [];
+let recordedAudio = new Audio();
+let replayX;
+
 
 const startRecording = () => {
   chunks = [];
@@ -24,7 +27,7 @@ const startRecording = () => {
       stream = userStream;
       const source = audioContext.createMediaStreamSource(stream);
       source.connect(analyser);
-      mediaRecorder = new MediaRecorder(stream );
+      mediaRecorder = new MediaRecorder(stream);
       
       mediaRecorder.onerror = (event) => {
         console.error('MediaRecorder error:', event.error);
@@ -73,6 +76,12 @@ const stopRecording = () => {
 
   // Combine the chunks to form a Blob
   var blob = new Blob(chunks, { 'type': 'audio/ogg' });
+  recordedAudio.src = URL.createObjectURL(blob);
+  replayX = 0;
+  recordedAudio.onloadedmetadata = function() {
+    const audioDuration = recordedAudio.duration; // Dauer in Sekunden
+    pixelsPerSecond = Math.min(offscreenCanvas.width, 800) / audioDuration;
+};
 
   const reader = new FileReader();
   reader.onload = () => {
@@ -98,6 +107,7 @@ const recButton = document.getElementById("record-button");
 const recButtonContainer = document.querySelector(".button-container");
 const audioContainer = document.querySelector(".audio-container");
 const replayButton = document.getElementById("replay-button");
+const replayLine = document.getElementById("replay-line");
 
 let stream;
 let x = canvas.width / 2 - document.getElementById("record-button").offsetWidth / 2;
@@ -125,8 +135,10 @@ const moveRecButtonDown = () => {
 
   // place the replay button with right margin (+ 10 because the button is 20x20px)
   replayButton.style.marginRight = (Math.min(offscreenCanvas.width, 800) + 10) + "px";
+  replayLine.style.marginRight = (Math.min(offscreenCanvas.width, 800) - 13) + "px";
   setTimeout(() => {
-    replayButton.style.display = 'inherit';
+    replayButton.style.display = 'flex';
+    replayLine.style.display = 'inherit'
   }, 500);
 };
 
@@ -162,6 +174,7 @@ recButton.addEventListener('click', function(e) {
 
 let y, yMirrored;
 let offscreenX = 0;
+let pixelsPerSecond;
 
 function draw() {
   if (!isRecording) return;
@@ -239,11 +252,13 @@ function colorCanvas(offsets) {
   if (offscreenX > maxWidth) {
     offscreenCanvas.width = maxWidth;
     offscreenCanvas.height = maxWidth / aspectRatio;
+
   } else {
     offscreenCanvas.width = offscreenX;
     offscreenCanvas.height = offscreenX / aspectRatio;
   }
 
+  replayLine.height = offscreenCanvas.height;
   // Scale and draw back the copied content to resized offscreenCanvas
   offscreenCtx.drawImage(tempCanvas, 0, 0, originalWidth, originalHeight, 0, 0, offscreenCanvas.width, offscreenCanvas.height); 
 
@@ -279,10 +294,64 @@ $(document).ready(function() {
   });
 });
 
+// Variable to keep track of whether the audio is playing
+let isPlaying = false;
+
+// Request animation frame ID for stopping
+let replayAnimationFrameId;
+
+let lastTimestamp = 0;
+
+const moveReplayLine = (timestamp) => {
+    if (!lastTimestamp) lastTimestamp = timestamp;
+
+    const deltaTime = (timestamp - lastTimestamp) / 1000;
+    lastTimestamp = timestamp;
+
+    replayX += pixelsPerSecond * deltaTime * 2; 
+
+    if (replayX * 1/2 >= (Math.min(offscreenCanvas.width, 800) - 13)) {
+        stopReplay();
+        isPlaying = !isPlaying;
+        return;
+    }
+
+    replayLine.style.marginRight = (Math.min(offscreenCanvas.width, 800) - 13 - replayX) + "px";
+    replayAnimationFrameId = requestAnimationFrame(moveReplayLine);
+};
+
+
+const startReplay = () => {
+  recordedAudio.play();
+  replayAnimationFrameId = requestAnimationFrame(moveReplayLine);
+};
+
+const pauseReplay = () => {
+  recordedAudio.pause();
+  cancelAnimationFrame(replayAnimationFrameId);
+};
+
+const stopReplay = () => {
+  recordedAudio.pause();
+  recordedAudio.currentTime = 0;
+  cancelAnimationFrame(replayAnimationFrameId);
+  replayX = 0;
+  replayLine.style.marginRight = (Math.min(offscreenCanvas.width, 800) - 13) + "px";
+  lastTimestamp = 0;
+};
+
 document.getElementById('replay-button').addEventListener('click', function(event) {
   // Prevent the form submission
   event.preventDefault();
 
-  // Your code to handle the button click here...
+      
+  if (isPlaying) {
+    pauseReplay();
+  } else {
+    startReplay();
+  }
+
+  isPlaying = !isPlaying;
+
 });
 
