@@ -70,6 +70,8 @@ function displayResult(result) {
             case 'Insertion':
                 wordSpan.classList.add('insertion-word');
                 // no break here!!
+            case 'Mispronunciation':
+                // no break here!!
             case 'None':
                 wordSpan.style.color = `rgba(${red}, ${green}, 0, 0.5)`;
                 wordSpan.innerText = word.word;
