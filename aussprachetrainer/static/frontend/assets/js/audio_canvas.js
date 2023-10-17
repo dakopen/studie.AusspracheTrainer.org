@@ -1,11 +1,36 @@
-/*** Variable declarations for the canvas ***/
+/**# START: initializing canvas and offscreen canvas #**/
 const canvas = document.getElementById("visualizer");
 const ctx = canvas.getContext("2d");
-const offscreenCanvas = document.createElement('canvas');
-const offscreenCtx = offscreenCanvas.getContext('2d');
-offscreenCanvas.width = 30000;  // more than enough
-offscreenCanvas.height = canvas.height;
-offscreenCanvas.className = 'offscreen-canvas-class';
+let offscreenCanvas;
+let offscreenCtx;
+let y, yMirrored;
+let offscreenX;
+let pixelsPerSecond;
+let realPixelsPerSecond;
+const cancelRecordingButton = document.getElementById("cancel-button");
+
+
+function initializeCanvasAndOffscreen() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  // Remove previous OffscreenCanvas if it exists
+  const previousOffscreenCanvas = document.querySelector('.offscreen-canvas-class');
+  if (previousOffscreenCanvas) {
+    previousOffscreenCanvas.remove();
+  }
+
+  // Initialize new OffscreenCanvas
+  offscreenCanvas = document.createElement('canvas');
+  offscreenCtx = offscreenCanvas.getContext('2d');
+  offscreenCanvas.width = 30000;  // more than enough
+  offscreenCanvas.height = canvas.height;
+  offscreenCanvas.className = 'offscreen-canvas-class';
+
+  offscreenX = 0;
+}
+
+window.addEventListener('load', initializeCanvasAndOffscreen);
+/*## END: initializing canvas and offscreen canvas ##*/
 
 /*** Variable declarations for the audio ***/
 const audioContext = new AudioContext();
@@ -21,6 +46,8 @@ let replayX;
 
 /**# START: start and stop recording functions which also triggers the drawing of the waveform #**/
 const startRecording = () => {
+  cancelRecordingButton.style.opacity = '1';
+
   chunks = [];
   navigator.mediaDevices.getUserMedia({ audio: true })
     .then((userStream) => {
@@ -100,6 +127,26 @@ const stopRecording = () => {
 
   reader.readAsDataURL(blob);
 };
+
+cancelRecordingButton.addEventListener("click", function(e) {
+  e.preventDefault();
+  cancelRecording();
+  cancelAnimationFrame(animationFrameId);
+  isRecording = false;
+});
+
+const cancelRecording = () => {
+  mediaRecorder.stop();
+
+  // Stop all tracks to release the media stream
+  if (stream) {
+    const tracks = stream.getTracks();
+    tracks.forEach((track) => track.stop());
+  }
+
+  initializeCanvasAndOffscreen();
+  cancelRecordingButton.style.opacity = '0';
+}
 /*## END: start and stop recording functions which also triggers the drawing of the waveform ##*/
 
 
@@ -155,6 +202,7 @@ recButton.addEventListener('click', function(e) {
   } else {
     setTimeout(() => {
       stopRecording();
+      cancelRecordingButton.style.opacity = '0';
       cancelAnimationFrame(animationFrameId);
 
       moveRecButtonDown();
@@ -175,11 +223,6 @@ recButton.addEventListener('click', function(e) {
 
 
 /**# START: draw the waveform from microphone amplitude #**/
-let y, yMirrored;
-let offscreenX = 0;
-let pixelsPerSecond;
-let realPixelsPerSecond;
-
 function draw() {
   if (!isRecording) return;
   
