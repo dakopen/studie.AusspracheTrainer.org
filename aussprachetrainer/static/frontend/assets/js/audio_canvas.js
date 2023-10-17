@@ -1,13 +1,13 @@
+/*** Variable declarations for the canvas ***/
 const canvas = document.getElementById("visualizer");
 const ctx = canvas.getContext("2d");
-
 const offscreenCanvas = document.createElement('canvas');
 const offscreenCtx = offscreenCanvas.getContext('2d');
 offscreenCanvas.width = 30000;  // more than enough
 offscreenCanvas.height = canvas.height;
 offscreenCanvas.className = 'offscreen-canvas-class';
 
-
+/*** Variable declarations for the audio ***/
 const audioContext = new AudioContext();
 const analyser = audioContext.createAnalyser();
 analyser.fftSize = 2048;
@@ -19,7 +19,7 @@ let chunks = [];
 let recordedAudio = new Audio();
 let replayX;
 
-
+/**# START: start and stop recording functions which also triggers the drawing of the waveform #**/
 const startRecording = () => {
   chunks = [];
   navigator.mediaDevices.getUserMedia({ audio: true })
@@ -50,7 +50,7 @@ const startRecording = () => {
 const stopRecording = () => {
   mediaRecorder.stop();
 
-  /**RESIZE OFFSCREEN CANVAS **/
+  /** RESIZE OFFSCREEN CANVAS **/
   const tempCanvas = document.createElement("canvas");
   const tempCtx = tempCanvas.getContext("2d");
 
@@ -73,11 +73,11 @@ const stopRecording = () => {
   recordedAudio.src = URL.createObjectURL(blob);
   replayX = 0;
   recordedAudio.onloadedmetadata = function() {
-    const audioDuration = recordedAudio.duration; // Dauer in Sekunden
+    const audioDuration = recordedAudio.duration; // duration in seconds
     pixelsPerSecond = Math.min(offscreenCanvas.width, 800) / audioDuration;
-    realPixelsPerSecond = offscreenCanvas.width / audioDuration;
-    
+    realPixelsPerSecond = offscreenCanvas.width / audioDuration; // use later when drawing the colored boxes (words)
   };
+
   // Stop all tracks to release the media stream
   if (stream) {
     const tracks = stream.getTracks();
@@ -92,7 +92,6 @@ const stopRecording = () => {
     document.getElementById('hiddenTextData').value = textarea.val();
     
     $('#recordAudioForm').submit();
-
   };
 
   reader.onerror = (error) => {
@@ -100,10 +99,11 @@ const stopRecording = () => {
   };
 
   reader.readAsDataURL(blob);
-
 };
+/*## END: start and stop recording functions which also triggers the drawing of the waveform ##*/
 
 
+/*** Declarations for the visual functions below that happen right after the recording stopped***/
 const recButton = document.getElementById("record-button");
 const recButtonContainer = document.querySelector(".button-container");
 const audioContainer = document.querySelector(".audio-container");
@@ -119,6 +119,7 @@ let counter = 0;
 
 let isRecording = false;
 
+/**# START: move the waveform down in order to make space for the waveform #**/
 const moveRecButtonDown = () => {
   const recButtonContainer = document.querySelector(".button-container");
   const audioContainer = document.querySelector(".audio-container");
@@ -142,7 +143,9 @@ const moveRecButtonDown = () => {
     replayLine.style.display = 'inherit'
   }, 500);
 };
+/*## END: move the waveform down in order to make space for the waveform ##*/
 
+/**# START: start recording on first click and submit form on second click #**/
 recButton.addEventListener('click', function(e) {
   e.preventDefault();
   
@@ -153,11 +156,6 @@ recButton.addEventListener('click', function(e) {
     setTimeout(() => {
       stopRecording();
       cancelAnimationFrame(animationFrameId);
-       // Capture entire offscreen canvas content and display it as an image
-      const canvasImage = offscreenCanvas.toDataURL();
-      const imgElement = document.createElement("img");
-      imgElement.src = canvasImage;
-      document.body.appendChild(imgElement);
 
       moveRecButtonDown();
 
@@ -172,9 +170,11 @@ recButton.addEventListener('click', function(e) {
     }, 150); // record a bit longer than before
     recButton.innerText = 'Record';   
   }
-
 });
+/*## END: start recording on first click and submit form on second click ##*/
 
+
+/**# START: draw the waveform from microphone amplitude #**/
 let y, yMirrored;
 let offscreenX = 0;
 let pixelsPerSecond;
@@ -220,7 +220,10 @@ function draw() {
   lastMeanFrequency = meanFrequency;
   animationFrameId = requestAnimationFrame(draw);
 }
+/*## END: draw the waveform from microphone amplitude ##*/
 
+
+/**# START: add colored boxes to the canvas for each recognized word #**/
 function colorCanvas(offsets) {
   offsets.forEach((offset) => {
 
@@ -278,10 +281,11 @@ function colorCanvas(offsets) {
     replayLine.style.marginRight = (Math.min(offscreenCanvas.width, 800) - replayX) + "px";
     recordedAudio.currentTime = x / pixelsPerSecond;
   });
-
 }
+/*## END: add colored boxes to the canvas for each recognized word ##*/
 
 
+/**# START: submit the whole form including FormData #**/
 $(document).ready(function() {
   $('#recordAudioForm').on('submit', function(e) {
     e.preventDefault();  // Prevent the form from submitting the traditional way
@@ -308,6 +312,10 @@ $(document).ready(function() {
     });
   });
 });
+/*## END: submit the whole form including FormData ##*/
+
+
+/**# START: audio replay (including visual replay) #**/
 let isPlaying = false;
 let replayAnimationFrameId;
 let lastTimestamp = 0;
@@ -377,3 +385,4 @@ function jumpToWaveformTimestamp(timestamp) {
     replayX = timestamp * pixelsPerSecond * 2;
     replayLine.style.marginRight = (Math.min(offscreenCanvas.width, 800) - 13 - replayX) + "px";
 }
+/*## END: audio replay (including visual replay) ##*/
