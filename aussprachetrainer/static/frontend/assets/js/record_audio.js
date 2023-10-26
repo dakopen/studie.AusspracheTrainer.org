@@ -52,41 +52,6 @@ recordButton.on('click', function() {
     }
 });
 // START: Dropdown menu //
-/*
-function toggleDropdown() {
-    const dropdown = document.getElementById("languageDropdown");
-    const dropbtn = document.querySelector('.dropbtn');
-    const currentLang = document.querySelector('.dropbtn img').getAttribute('data-lang');
-    
-    // Hide the current flag from dropdown
-    document.querySelectorAll('#languageDropdown img').forEach(img => {
-        img.style.display = img.getAttribute('data-lang') === currentLang ? 'none' : 'block';
-    });
-
-    if (dropdown.style.display === 'block') {
-        dropdown.style.display = 'none';
-        dropbtn.classList.remove('active');
-    } else {
-        dropdown.style.display = 'block';
-        dropbtn.classList.add('active');
-
-    }
-}
-
-// Update the button to display the selected flag
-document.getElementById("languageDropdown").addEventListener('click', function(e) {
-    e.preventDefault();
-    const btnImg = document.querySelector('.dropbtn img');
-    if (e.target.tagName === 'IMG') {
-        btnImg.src = e.target.src;
-        btnImg.alt = e.target.alt;
-        btnImg.width = e.target.width;  // Preserve width
-        btnImg.height = e.target.height;  // Preserve height
-        btnImg.setAttribute('data-lang', e.target.getAttribute('data-lang'));  // Update data-lang
-        toggleDropdown();
-    }
-});
-*/
 /*Dropdown Menu*/
 let selectedLiId = 'dropdown-lang-english';
 $('#' + selectedLiId).hide();
@@ -97,7 +62,9 @@ $('.dropdown').click(function () {
     $(this).find('.dropdown-menu').slideToggle(300);
 
     // Do not show the already selected flag
-    $('#' + selectedLiId).hide();
+    setTimeout(() => {
+        $('#' + selectedLiId).hide();
+    }, 300);
 });
 $('.dropdown').focusout(function () {
     $(this).removeClass('active');
@@ -108,7 +75,7 @@ $('.dropdown .dropdown-menu li').click(function () {
     let tmpSelection = selectedLiId;
     setTimeout(() => {
         $('#' + tmpSelection).show();
-    }, 301);
+    }, 300);
     
     // set the id to the new selected flag
     selectedLiId = $(this).attr('id');
@@ -121,12 +88,7 @@ $('.dropdown .dropdown-menu li').click(function () {
     $(this).parents('.dropdown').find('input').attr('value', $(this).attr('id'));
 
 });
-/*
-$('.dropdown .dropdown-menu li').click(function () {
-    $(this).parents('.dropdown').find('span').text($(this).text());
-    $(this).parents('.dropdown').find('input').attr('value', $(this).attr('id'));
-});
-*/
+
 /*End Dropdown Menu*/
 
 // END: Dropdown menu //
