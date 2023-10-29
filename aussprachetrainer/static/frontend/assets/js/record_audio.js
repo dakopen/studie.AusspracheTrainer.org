@@ -53,7 +53,7 @@ recordButton.on('click', function() {
 });
 // START: Dropdown menu //
 /*Dropdown Menu*/
-let selectedLiId = 'dropdown-lang-english';
+let selectedLiId = 'dropdown-lang-germany';
 $('#' + selectedLiId).hide();
 
 $('.dropdown').click(function () {
@@ -79,6 +79,7 @@ $('.dropdown .dropdown-menu li').click(function () {
     
     // set the id to the new selected flag
     selectedLiId = $(this).attr('id');
+    $('#hiddenSelectedLanguage').val(selectedLiId);
 
     var selectedText = $(this).clone().children().remove().end().text(); // Entfernt die Flagge und holt nur den Text
     var selectedFlag = $(this).find('.dropdown-flag').clone(); // Klont das Flaggenbild

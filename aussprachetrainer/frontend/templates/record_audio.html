@@ -8,22 +8,22 @@
           
             <div class="dropdown">
                 <div class="dropdown-select">
-                    <span>{% trans "englisch" %}
-                        <img class="dropdown-flag" src={% static 'frontend/assets/images/Flag_of_the_United_Kingdom.svg' %} alt={% trans "englisch" %} height=20 width=30>
+                    <span>{% trans "deutsch" %}
+                        <img class="dropdown-flag" src={% static 'frontend/assets/images/Flag_of_Germany.svg' %} alt={% trans "deutsch" %} height=20 width=30>
                     </span>
                     <i class="fa fa-chevron-down"></i>
                 </div>
                 <input type="hidden" name="language">
                 <ul class="dropdown-menu">
-                    <li id="dropdown-lang-english">
+                    <li id="dropdown-lang-uk">
                         {% trans "englisch" %}
                         <img class="dropdown-flag" src={% static 'frontend/assets/images/Flag_of_the_United_Kingdom.svg' %} alt={% trans "englisch" %} height=24 width=36>
                     </li>
-                    <li id="dropdown-lang-german">
+                    <li id="dropdown-lang-germany">
                         {% trans "deutsch" %}
                         <img class="dropdown-flag" src={% static 'frontend/assets/images/Flag_of_Germany.svg' %} alt={% trans "deutsch" %} height=24 width=36>
                     </li>
-                    <li id="dropdown-lang-french">
+                    <li id="dropdown-lang-france">
                         {% trans "französisch" %}
                         <img class="dropdown-flag" src={% static 'frontend/assets/images/Flag_of_France.svg' %} alt={% trans "französisch" %} height=24 width=36>
                     </li>
@@ -59,6 +59,7 @@
     </div>
     <input type="hidden" id="hiddenAudioData" name="audio_data">
     <input type="hidden" id="hiddenTextData" name="text_data">
+    <input type="hidden" id="hiddenSelectedLanguage" name="selected_language" value="dropdown-lang-germany">
     {% csrf_token %}
 </form>
 <div id="result"></div>
