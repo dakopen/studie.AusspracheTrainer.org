@@ -11,7 +11,8 @@ let pixelsPerSecond;
 let realPixelsPerSecond;
 const rightRecordingButton = document.getElementById("right-button");
 let isShowingResults = false;
-
+const stopRecordingIcon = document.getElementById("stop-recording-icon");
+const startRecordingIcon = document.getElementById("start-recording-icon");
 
 function initializeCanvasAndOffscreen() {
   canvas = document.createElement('canvas');
@@ -79,6 +80,9 @@ const startRecording = () => {
   rightRecordingButton.style.opacity = '1';
   rightRecordingButton.innerHTML = 'cancel';
 
+  startRecordingIcon.style.display = "none";
+  stopRecordingIcon.style.display = "inherit";
+
   // initialize the canvas and offscreen canvas
   initializeCanvasAndOffscreen();
 
@@ -101,7 +105,6 @@ const startRecording = () => {
 
       // start the animation and stuff
       animationFrameId = requestAnimationFrame(draw);
-      recButton.innerText = 'Stop';
     })
     .catch((error) => {
       console.error(error);
@@ -111,6 +114,8 @@ const startRecording = () => {
 const stopRecording = () => {
   mediaRecorder.stop();
   isRecording = false;
+  startRecordingIcon.style.display = "inherit";
+  stopRecordingIcon.style.display = "none";
 
   /** RESIZE OFFSCREEN CANVAS **/
   const tempCanvas = document.createElement("canvas");
@@ -168,8 +173,6 @@ rightRecordingButton.addEventListener("click", function(e) {
   if (isRecording && !isShowingResults) {
     cancelRecording();
     cancelAnimationFrame(animationFrameId);
-    recButton.innerText = 'Record';   
-
   }
   else if (isShowingResults) {
     resetFormReturnTextarea(); // reset everything, that includes the textarea
@@ -194,6 +197,8 @@ const resetFormReturnTextarea = () => {
 const cancelRecording = () => {
   mediaRecorder.stop();
   isRecording = false;
+  startRecordingIcon.style.display = "inherit";
+  stopRecordingIcon.style.display = "none";
 
   // Stop all tracks to release the media stream
   if (stream) {
@@ -272,6 +277,7 @@ recButton.addEventListener('click', function(e) {
   else {
     setTimeout(() => {
       stopRecording();
+
       // rightRecordingButton.style.opacity = '0';
       rightRecordingButton.innerHTML = 'reset';
 
@@ -288,7 +294,6 @@ recButton.addEventListener('click', function(e) {
       offscreenCanvas.style.left = '50%';
       offscreenCanvas.style.transform = 'translateX(-50%)';
     }, 150); // record a bit longer than before
-    recButton.innerText = 'Record';   
   }
 });
 /*## END: start recording on first click and submit form on second click ##*/
@@ -448,13 +453,13 @@ const moveReplayLine = (timestamp) => {
 
     replayX += pixelsPerSecond * deltaTime * 2; 
 
-    if (replayX * 1/2 >= (Math.min(offscreenCanvas.width, 800) - 13)) {
+    if (replayX * 1/2 >= (Math.min(offscreenCanvas.width, 800) - 2)) {
         stopReplay();
         isPlaying = !isPlaying;
         return;
     }
 
-    replayLine.style.marginRight = (Math.min(offscreenCanvas.width, 800) - 13 - replayX) + "px";
+    replayLine.style.marginRight = (Math.min(offscreenCanvas.width, 800) - 2 - replayX) + "px";
     replayAnimationFrameId = requestAnimationFrame(moveReplayLine);
 };
 
@@ -478,7 +483,7 @@ const stopReplay = () => {
     recordedAudio.currentTime = 0;
     cancelAnimationFrame(replayAnimationFrameId);
     replayX = 0;
-    replayLine.style.marginRight = (Math.min(offscreenCanvas.width, 800) - 13) + "px";
+    replayLine.style.marginRight = (Math.min(offscreenCanvas.width, 800) - 2) + "px";
     lastTimestamp = 0;
     replayButtonIcon.classList.remove('fa-pause');
     replayButtonIcon.classList.add('fa-play');
@@ -498,6 +503,6 @@ document.getElementById('replay-button').addEventListener('click', function(even
 function jumpToWaveformTimestamp(timestamp) {
     recordedAudio.currentTime = timestamp;
     replayX = timestamp * pixelsPerSecond * 2;
-    replayLine.style.marginRight = (Math.min(offscreenCanvas.width, 800) - 13 - replayX) + "px";
+    replayLine.style.marginRight = (Math.min(offscreenCanvas.width, 800) - 2 - replayX) + "px";
 }
 /*## END: audio replay (including visual replay) ##*/

@@ -263,5 +263,14 @@ text-align: left
     vertical-align: middle;
     padding-left: 3px;
     padding-bottom: 3px;
-} 
+}
+
+.inverted-svg {
+    filter: invert(100%);
+}
+
+#stop-recording-icon {
+    display: none;
+}
+
 /* END language dropdown */

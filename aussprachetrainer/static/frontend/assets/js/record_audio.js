@@ -44,14 +44,6 @@ function clearTextarea() {
     resizeTextarea();
 }
 
-recordButton.on('click', function() {
-    if (recordButton.text() === "Record") {
-        recordButton.text("Stop");
-    } else {
-        recordButton.text("Record");
-    }
-});
-
 /*Dropdown Menu*/
 let selectedLiId = 'dropdown-lang-germany';
 $('#' + selectedLiId).hide();
