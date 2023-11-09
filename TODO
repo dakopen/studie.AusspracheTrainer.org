@@ -7,3 +7,4 @@
 - add random sentence generator icon and backend functionality
 - test language selelection
 - error when no textarea input is given
+- when the language is switched, "Übungssatz" placeholder should switch as well

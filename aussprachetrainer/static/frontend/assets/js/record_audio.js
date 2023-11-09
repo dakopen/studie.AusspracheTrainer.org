@@ -88,6 +88,21 @@ $('.dropdown .dropdown-menu li').click(function () {
     $(this).parents('.dropdown').find('.dropdown-select > span').text(selectedText).append(selectedFlag); // Fügt zuerst das Bild und dann den Text hinzu
     $(this).parents('.dropdown').find('input').attr('value', $(this).attr('id'));
 
+    // update the placeholder of the textarea
+    var selectedLanguage = selectedLiId.split('-')[2];
+    let placeholderTextarea;
+    switch(selectedLanguage) {
+        case "uk":
+            placeholderTextarea = "Practice sentence";
+            break;
+        case "germany":
+            placeholderTextarea = "Übungssatz";
+            break;
+        case "france":
+            placeholderTextarea = "Phrase d'exercice";
+            break;
+    }
+    textarea.attr('placeholder', placeholderTextarea);
 });
 
 /*End Dropdown Menu*/

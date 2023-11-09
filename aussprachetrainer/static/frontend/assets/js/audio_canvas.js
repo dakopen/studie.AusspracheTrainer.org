@@ -172,11 +172,10 @@ rightRecordingButton.addEventListener("click", function(e) {
 
   }
   else if (isShowingResults) {
-    textarea.val(resetFormReturnTextarea());
-    startRecording();
+    resetFormReturnTextarea(); // reset everything, that includes the textarea
   }
   else {
-    console.log("debug");
+    // should not happen
   }
 });
 
@@ -263,13 +262,18 @@ const moveRecButton = (down) => {
 recButton.addEventListener('click', function(e) {
   e.preventDefault();
   
-  if (!isRecording) {
+  if (!isRecording && !isShowingResults) {
     startRecording();
-  } else {
+  } 
+  else if (!isRecording && isShowingResults) {
+    textarea.val(resetFormReturnTextarea());
+    startRecording();
+  }
+  else {
     setTimeout(() => {
       stopRecording();
       // rightRecordingButton.style.opacity = '0';
-      rightRecordingButton.innerHTML = 'try again';
+      rightRecordingButton.innerHTML = 'reset';
 
       cancelAnimationFrame(animationFrameId);
 
