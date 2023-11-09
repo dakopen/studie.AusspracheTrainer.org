@@ -1,16 +1,44 @@
 /**# START: initializing canvas and offscreen canvas #**/
-const canvas = document.getElementById("visualizer");
-const ctx = canvas.getContext("2d");
+
+let canvas = document.getElementById('visualizer');
+let ctx;
+
 let offscreenCanvas;
 let offscreenCtx;
 let y, yMirrored;
 let offscreenX;
 let pixelsPerSecond;
 let realPixelsPerSecond;
-const cancelRecordingButton = document.getElementById("cancel-button");
+const rightRecordingButton = document.getElementById("right-button");
+let isShowingResults = false;
 
 
 function initializeCanvasAndOffscreen() {
+  canvas = document.createElement('canvas');
+  // Set its dimensions
+  canvas.width = 800;
+  canvas.height = 130;
+  canvas.classList.add('canvas-visualizer');
+
+  // Find the parent element where the canvas should be attached
+  const canvasParent = document.getElementById('canvas-parent-container');
+  canvas.style.order = '-1'; // first position
+
+  const oldCanvases = canvasParent.querySelectorAll('.canvas-visualizer');
+  oldCanvases.forEach((oldCanvas) => {
+    canvasParent.removeChild(oldCanvas);
+  });
+
+  // Append the new canvas element
+  canvasParent.appendChild(canvas);
+  
+
+  // Re-initialize any necessary variables or event listeners for the new canvas
+  ctx = canvas.getContext('2d');
+
+
+
+
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
   // Remove previous OffscreenCanvas if it exists
@@ -46,7 +74,13 @@ let replayX;
 
 /**# START: start and stop recording functions which also triggers the drawing of the waveform #**/
 const startRecording = () => {
-  cancelRecordingButton.style.opacity = '1';
+  isRecording = true;
+  isShowingResults = false;
+  rightRecordingButton.style.opacity = '1';
+  rightRecordingButton.innerHTML = 'cancel';
+
+  // initialize the canvas and offscreen canvas
+  initializeCanvasAndOffscreen();
 
   chunks = [];
   navigator.mediaDevices.getUserMedia({ audio: true })
@@ -76,6 +110,7 @@ const startRecording = () => {
 
 const stopRecording = () => {
   mediaRecorder.stop();
+  isRecording = false;
 
   /** RESIZE OFFSCREEN CANVAS **/
   const tempCanvas = document.createElement("canvas");
@@ -128,15 +163,38 @@ const stopRecording = () => {
   reader.readAsDataURL(blob);
 };
 
-cancelRecordingButton.addEventListener("click", function(e) {
+rightRecordingButton.addEventListener("click", function(e) {
   e.preventDefault();
-  cancelRecording();
-  cancelAnimationFrame(animationFrameId);
-  isRecording = false;
+  if (isRecording && !isShowingResults) {
+    cancelRecording();
+    cancelAnimationFrame(animationFrameId);
+    recButton.innerText = 'Record';   
+
+  }
+  else if (isShowingResults) {
+    textarea.val(resetFormReturnTextarea());
+    startRecording();
+  }
+  else {
+    console.log("debug");
+  }
 });
+
+const resetFormReturnTextarea = () => {
+  let trainingstext = textarea.val();
+  document.getElementById('recordAudioForm').reset();
+  isShowingResults = false;
+  initializeCanvasAndOffscreen();
+  replayButton.style.display = 'none';
+  replayLine.style.display = 'none';
+  responsearea.css('display', 'none')
+  moveRecButton(false);
+  return trainingstext;
+}
 
 const cancelRecording = () => {
   mediaRecorder.stop();
+  isRecording = false;
 
   // Stop all tracks to release the media stream
   if (stream) {
@@ -145,7 +203,7 @@ const cancelRecording = () => {
   }
 
   initializeCanvasAndOffscreen();
-  cancelRecordingButton.style.opacity = '0';
+  rightRecordingButton.style.opacity = '0';
 }
 /*## END: start and stop recording functions which also triggers the drawing of the waveform ##*/
 
@@ -167,28 +225,37 @@ let counter = 0;
 let isRecording = false;
 
 /**# START: move the waveform down in order to make space for the waveform #**/
-const moveRecButtonDown = () => {
+const moveRecButton = (down) => {
   const recButtonContainer = document.querySelector(".button-container");
-  const audioContainer = document.querySelector(".audio-container");
 
   let currentTop = parseInt(window.getComputedStyle(recButtonContainer).getPropertyValue('top'), 10);
   let currentHeight = parseInt(window.getComputedStyle(audioContainer).getPropertyValue('height'), 10);
-
-  let newTop = currentTop + 150;
-  let newHeight = currentHeight + 150;
+  let newTop, newHeight;
+  if (down) {
+    newTop = currentTop + 150;
+    newHeight = currentHeight + 150;
+  }
+  else {
+    newTop = currentTop - 150;
+    newHeight = currentHeight - 150;
+  }
+  
   recButtonContainer.style.transition = 'top 0.5s ease-in-out';
   audioContainer.style.transition = 'height 0.5s ease-in-out';
 
   audioContainer.style.height = newHeight + 'px';
   recButtonContainer.style.top = newTop + 'px';
 
-  // place the replay button with right margin (+ 10 because the button is 20x20px)
-  replayButton.style.marginRight = (Math.min(offscreenCanvas.width, 800) + 10) + "px";
-  replayLine.style.marginRight = (Math.min(offscreenCanvas.width, 800) - 13) + "px";
-  setTimeout(() => {
-    replayButton.style.display = 'flex';
-    replayLine.style.display = 'inherit'
-  }, 500);
+  // place the replay button with right margin
+  replayButton.style.marginRight = (Math.min(offscreenCanvas.width, 800) + 22) + "px";
+  replayLine.style.marginRight = (Math.min(offscreenCanvas.width, 800) - 2) + "px";
+  
+  if (down) {
+    setTimeout(() => {
+      replayButton.style.display = 'flex';
+      replayLine.style.display = 'inherit'
+    }, 500);
+  }
 };
 /*## END: move the waveform down in order to make space for the waveform ##*/
 
@@ -196,16 +263,17 @@ const moveRecButtonDown = () => {
 recButton.addEventListener('click', function(e) {
   e.preventDefault();
   
-  isRecording = !isRecording;
-  if (isRecording) {
+  if (!isRecording) {
     startRecording();
   } else {
     setTimeout(() => {
       stopRecording();
-      cancelRecordingButton.style.opacity = '0';
+      // rightRecordingButton.style.opacity = '0';
+      rightRecordingButton.innerHTML = 'try again';
+
       cancelAnimationFrame(animationFrameId);
 
-      moveRecButtonDown();
+      moveRecButton(true);
 
       // replace canvas with offscreen canvas
       canvas.replaceWith(offscreenCanvas);
@@ -347,7 +415,7 @@ $(document).ready(function() {
       success: function(data) {
         var taskID = data.task_id;
         checkStatus(taskID);
-        
+        isShowingResults = true;
       },
       error: function(err) {
         console.error('Error:', err);

@@ -45,13 +45,13 @@ function clearTextarea() {
 }
 
 recordButton.on('click', function() {
-    if (recordButton.text() === "Click me!") {
-        recordButton.text("Started");
+    if (recordButton.text() === "Record") {
+        recordButton.text("Stop");
     } else {
-        recordButton.text("Click me!");
+        recordButton.text("Record");
     }
 });
-// START: Dropdown menu //
+
 /*Dropdown Menu*/
 let selectedLiId = 'dropdown-lang-germany';
 $('#' + selectedLiId).hide();
@@ -91,6 +91,4 @@ $('.dropdown .dropdown-menu li').click(function () {
 });
 
 /*End Dropdown Menu*/
-
-// END: Dropdown menu //
 

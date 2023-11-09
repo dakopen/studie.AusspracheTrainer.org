@@ -5,3 +5,5 @@
 
 - Make it possible to re-record the audio
 - add random sentence generator icon and backend functionality
+- test language selelection
+- error when no textarea input is given

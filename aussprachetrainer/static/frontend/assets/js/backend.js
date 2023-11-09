@@ -15,7 +15,7 @@ function checkStatus(taskId) {
             const defaultUrl = `/${languagePrefix}/result/`;
 
             // Replace the current URL with the default URL
-            window.history.pushState(null, null, defaultUrl);
+            //window.history.pushState(null, null, defaultUrl); disabled for now
 
             // Change the browser title
             document.title = "AusspracheTrainer";
@@ -37,7 +37,7 @@ function checkStatus(taskId) {
 
 function displayResult(result) {
     console.log(result);
-    responsearea.html(); // clear previous responsearea
+    responsearea.empty(); // clear previous responsearea
     responsearea.css('display', 'inline-block')
     responsearea.css('width', textarea.css('width'));
     let firstWord = true;

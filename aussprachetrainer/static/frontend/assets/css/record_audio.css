@@ -84,7 +84,7 @@
     top: 5px;
 }
 
-#visualizer {
+.canvas-visualizer {
     position: relative;
 }
 
@@ -169,14 +169,15 @@
     cursor: pointer;
 }
 
-#cancel-button {
+#right-button {
     position: fixed;
     transform: translateY(-50%);
     top: 50%;
-    margin-left: 30px;
+    right: calc(50% - 135px);
     opacity: 0;
     transition: opacity 0.5s;
 }
+
 
 /* Language Dropdown */
 .container {
