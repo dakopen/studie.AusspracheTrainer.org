@@ -13,6 +13,7 @@ import uuid
 from pydub import AudioSegment
 import base64
 import io
+from frontend.languages import country_class_to_locale
 
 
 def render_into_base(request, title, filepaths, context=None, content_type=None, status=None, using=None, css=None):
@@ -38,7 +39,7 @@ def render_into_base(request, title, filepaths, context=None, content_type=None,
 
 def index(request):
 
-    return render_into_base(request, _("AusspracheTrainer"), ["importhtml.html", "upload_audio.html", "record_audio.html"],
+    return render_into_base(request, _("AusspracheTrainer"), ["record_audio.html"],
                             css=['frontend/assets/css/record_audio.css'])
 
 
@@ -56,12 +57,15 @@ def privacy_policy(request):
 
     return render_into_base(request, _("Datenschutzerklärung"), "privacy_policy.html")
 
+
 def waiting_page(request, task_id):
     return render_into_base(request, _("Warte auf Ergebnis"), "waiting_page.html", {"task_id": task_id})
+
 
 def initiate_analysis(request):
     audio_data_url = request.POST.get('audio_data')
     text = request.POST.get('text_data')
+    selected_language = request.POST.get('selected_language')
 
     audio_data_base64 = audio_data_url.split(',')[1]
     audio_data = base64.b64decode(audio_data_base64)
@@ -85,10 +89,9 @@ def initiate_analysis(request):
     
     user_id = request.user.id if request.user.is_authenticated else None
 
-    task = async_pronunciation_assessment.delay(file_name, text, "de-DE", user_id=user_id) # TODO: replace language with given language from user input
+    task = async_pronunciation_assessment.delay(file_name, text, country_class_to_locale(selected_language), user_id=user_id)
     return JsonResponse({'task_id': task.id})
-#ICH WEIß NICHT WAS FALSCH IST ABER ES KOMMT IMMER EIN FAILURE
-# DAFÜR KLAPPT DER REST, ALSO DIE AUDIO WIRD AUFGENOMMEN UND ANGEZEIGT UND SO
+
 
 def check_status(request, task_id):
     task = AsyncResult(task_id)

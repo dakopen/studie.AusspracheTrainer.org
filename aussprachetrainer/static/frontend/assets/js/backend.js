@@ -1,3 +1,5 @@
+const responsearea = $("#responsearea");
+
 function checkStatus(taskId) {
     fetch(`/check_status/${taskId}/`)
         .then(response => response.json())
@@ -13,7 +15,7 @@ function checkStatus(taskId) {
             const defaultUrl = `/${languagePrefix}/result/`;
 
             // Replace the current URL with the default URL
-            window.history.pushState(null, null, defaultUrl);
+            //window.history.pushState(null, null, defaultUrl); disabled for now
 
             // Change the browser title
             document.title = "AusspracheTrainer";
@@ -35,6 +37,11 @@ function checkStatus(taskId) {
 
 function displayResult(result) {
     console.log(result);
+    responsearea.empty(); // clear previous responsearea
+    responsearea.css('display', 'inline-block')
+    responsearea.css('width', textarea.css('width'));
+    let firstWord = true;
+
     // Show result in the DOM
     let paragraph = result[0]['Paragraph'];
     let words = result[0]['Words'];
@@ -46,8 +53,43 @@ function displayResult(result) {
 
     // Display word-by-word analysis
     let wordTable = "<table><tr><th>Index</th><th>Word</th><th>Accuracy Score</th><th>Error Type</th></tr>";
+    let index = 0;
     words.forEach(word => {
         wordTable += `<tr><td>${word.index}</td><td>${word.word}</td><td>${word.accuracy_score}</td><td>${word.error_type}</td></tr>`;
+        
+        const red = 255 - Math.round(2.55 * word.accuracy_score);
+        const green = Math.round(2.55 * word.accuracy_score);
+        let wordSpan = document.createElement('span');
+
+        switch (word.error_type) {
+            case 'Omission':
+                wordSpan.style.color = "red";
+                wordSpan.innerText = "[" + word.word + "]";
+                wordSpan.classList.add('omission-word');
+                break;
+            case 'Insertion':
+                wordSpan.classList.add('insertion-word');
+                // no break here!!
+            case 'Mispronunciation':
+                // no break here!!
+            case 'None':
+                wordSpan.style.color = `rgba(${red}, ${green}, 0, 0.5)`;
+                wordSpan.innerText = word.word;
+                wordSpan.classList.add('waveform-word');
+                let timestamp = result[1][index++][0] / 1000;
+                wordSpan.addEventListener('click', () => {
+                    jumpToWaveformTimestamp(timestamp);
+                });
+                break;
+
+        }
+        wordSpan.classList.add('response-word');
+        responsearea.append(wordSpan);
+
+        // TODO: 3 different styles for all error types and then
+        // have for all error types another class and for all error types
+        // except the Omission class get matched for highlight Waveform und jump thing
+        // which I will program later
     });
     wordTable += "</table>";
     document.getElementById('resultDiv').innerHTML += wordTable;

@@ -44,13 +44,58 @@ function clearTextarea() {
     resizeTextarea();
 }
 
-recordButton.on('click', function() {
-    if (recordButton.text() === "Click me!") {
-        recordButton.text("Started");
-    } else {
-        recordButton.text("Click me!");
+/*Dropdown Menu*/
+let selectedLiId = 'dropdown-lang-germany';
+$('#' + selectedLiId).hide();
+
+$('.dropdown').click(function () {
+    $(this).attr('tabindex', 1).focus();
+    $(this).toggleClass('active');
+    $(this).find('.dropdown-menu').slideToggle(300);
+
+    // Do not show the already selected flag
+    setTimeout(() => {
+        $('#' + selectedLiId).hide();
+    }, 300);
+});
+$('.dropdown').focusout(function () {
+    $(this).removeClass('active');
+    $(this).find('.dropdown-menu').slideUp(300);
+});
+$('.dropdown .dropdown-menu li').click(function () {
+    // show the old selected flag again
+    let tmpSelection = selectedLiId;
+    setTimeout(() => {
+        $('#' + tmpSelection).show();
+    }, 300);
+    
+    // set the id to the new selected flag
+    selectedLiId = $(this).attr('id');
+    $('#hiddenSelectedLanguage').val(selectedLiId);
+
+    var selectedText = $(this).clone().children().remove().end().text(); // Entfernt die Flagge und holt nur den Text
+    var selectedFlag = $(this).find('.dropdown-flag').clone(); // Klont das Flaggenbild
+    selectedFlag.height(20).width(30);
+
+    $(this).parents('.dropdown').find('.dropdown-select > span').text(selectedText).append(selectedFlag); // Fügt zuerst das Bild und dann den Text hinzu
+    $(this).parents('.dropdown').find('input').attr('value', $(this).attr('id'));
+
+    // update the placeholder of the textarea
+    var selectedLanguage = selectedLiId.split('-')[2];
+    let placeholderTextarea;
+    switch(selectedLanguage) {
+        case "uk":
+            placeholderTextarea = "Practice sentence";
+            break;
+        case "germany":
+            placeholderTextarea = "Übungssatz";
+            break;
+        case "france":
+            placeholderTextarea = "Phrase d'exercice";
+            break;
     }
+    textarea.attr('placeholder', placeholderTextarea);
 });
 
+/*End Dropdown Menu*/
 
-//

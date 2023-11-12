@@ -3,3 +3,8 @@
     (way) longer than the reference text; maybe also use Google 
     and when it is longer than the reference text it uses a different approach
 
+- Make it possible to re-record the audio
+- add random sentence generator icon and backend functionality
+- test language selelection
+- error when no textarea input is given
+- when the language is switched, "Übungssatz" placeholder should switch as well
