@@ -179,6 +179,7 @@ rightRecordingButton.addEventListener("click", function(e) {
   }
   else if (isShowingResults) {
     resetFormReturnTextarea(); // reset everything, that includes the textarea
+    resizeTextarea();
   }
   else {
     // should not happen
