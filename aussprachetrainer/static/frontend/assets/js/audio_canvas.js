@@ -357,7 +357,7 @@ function colorCanvas(offsets) {
     const green = Math.round(2.55 * percentage);
   
     offscreenCtx.fillStyle = `rgba(${red}, ${green}, 0, 0.5)`;
-    offscreenCtx.fillRect(realPixelsPerSecond * offset[0] / 1000 + 6.5, 0, realPixelsPerSecond * offset[1] / 1000, canvas.height);
+    offscreenCtx.fillRect(offset[0] / 1000 * pixelsPerSecond, 0, offset[1] / 1000 * pixelsPerSecond, canvas.height)
   });
 
   const maxWidth = 800;

@@ -39,7 +39,7 @@ def render_into_base(request, title, filepaths, context=None, content_type=None,
 
 def index(request):
 
-    return render_into_base(request, _("AusspracheTrainer"), ["importhtml.html", "upload_audio.html", "record_audio.html"],
+    return render_into_base(request, _("AusspracheTrainer"), ["record_audio.html"],
                             css=['frontend/assets/css/record_audio.css'])
 
 

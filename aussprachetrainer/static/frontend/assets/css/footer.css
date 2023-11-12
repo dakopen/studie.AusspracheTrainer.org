@@ -1,29 +1,33 @@
 .footer {
-    margin-top: auto; /* Pushes the footer to the bottom */
     position: fixed;
     bottom: 0;
     width: 100%;
     background-color: var(--white);
-    padding: 15px 0;
+    padding-bottom: 15px;
 }
 
-.container {
-    width: 80%;
-    margin: 0 auto;
+.footer-container {
+    margin-top: 10px;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: space-evenly; /* Adjust the spacing between items */
     align-items: center;
 }
 
-.footer-logo {
-    display: flex;
-    justify-content: center;
+.footer-logo, .footer-menu, .footer-copyright {
+    text-align: center; /* Centers the content of each flex item */
 }
 
-.footer-menu {
+.footer-menu ul {
     display: flex;
-    align-items: center;
+    justify-content: center; /* Centers the menu items */
+    padding: 0;
+    margin: 0;
+    width: 100%; /* Ensures the ul takes up the full width of its parent */
+}
+
+.footer-menu li {
+    margin: 0 10px; /* Adjust the spacing between menu items */
 }
 
 .footer-logo img {
