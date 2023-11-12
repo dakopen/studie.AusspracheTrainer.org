@@ -14,11 +14,14 @@ let isShowingResults = false;
 const stopRecordingIcon = document.getElementById("stop-recording-icon");
 const startRecordingIcon = document.getElementById("start-recording-icon");
 
+
+
 function initializeCanvasAndOffscreen() {
   canvas = document.createElement('canvas');
   // Set its dimensions
   canvas.width = 800;
   canvas.height = 130;
+  canvas.style.marginTop = '36px';
   canvas.classList.add('canvas-visualizer');
 
   // Find the parent element where the canvas should be attached
@@ -81,7 +84,7 @@ const startRecording = () => {
   rightRecordingButton.innerHTML = 'cancel';
 
   startRecordingIcon.style.display = "none";
-  stopRecordingIcon.style.display = "inherit";
+  stopRecordingIcon.style.display = "block";
 
   // initialize the canvas and offscreen canvas
   initializeCanvasAndOffscreen();
@@ -197,7 +200,7 @@ const resetFormReturnTextarea = () => {
 const cancelRecording = () => {
   mediaRecorder.stop();
   isRecording = false;
-  startRecordingIcon.style.display = "inherit";
+  startRecordingIcon.style.display = "block";
   stopRecordingIcon.style.display = "none";
 
   // Stop all tracks to release the media stream
@@ -314,8 +317,10 @@ function draw() {
 
   if (counter <= 1) {
     const yHeight = Math.max((smoothFrequency / 64) * canvas.height / 2, 1);
-    y = canvas.height / 2 - yHeight;
-    yMirrored = canvas.height / 2 + yHeight;
+    //y = (canvas.height / 2 + 20) - yHeight;
+    //yMirrored = (canvas.height / 2 + 20) + yHeight;
+    y = (canvas.height / 2) - yHeight;
+    yMirrored = (canvas.height / 2) + yHeight;
 
     ctx.beginPath();
     ctx.moveTo(x, y);
