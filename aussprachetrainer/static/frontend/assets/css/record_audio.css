@@ -282,6 +282,11 @@ text-align: left
 #stop-recording-icon {
     display: none;
 }
+
+#wait-recording-icon {
+    display: none;
+}
+
 /* END language dropdown */
 
 /* START glow on hover */

@@ -13,6 +13,7 @@ const rightRecordingButton = document.getElementById("right-button");
 let isShowingResults = false;
 const stopRecordingIcon = document.getElementById("stop-recording-icon");
 const startRecordingIcon = document.getElementById("start-recording-icon");
+const waitRecordingIcon = document.getElementById("wait-recording-icon");
 const textareaEmptyError = document.getElementById('textarea-error');
 
 
@@ -98,6 +99,7 @@ const startRecording = () => {
   rightRecordingButton.innerHTML = 'cancel';
 
   startRecordingIcon.style.display = "none";
+  waitRecordingIcon.style.display = "none";
   stopRecordingIcon.style.display = "block";
 
   // initialize the canvas and offscreen canvas
@@ -131,7 +133,8 @@ const startRecording = () => {
 const stopRecording = () => {
   mediaRecorder.stop();
   isRecording = false;
-  startRecordingIcon.style.display = "inherit";
+  startRecordingIcon.style.display = "none";
+  waitRecordingIcon.style.display = "inherit";
   stopRecordingIcon.style.display = "none";
 
   /** RESIZE OFFSCREEN CANVAS **/
@@ -216,6 +219,7 @@ const cancelRecording = () => {
   mediaRecorder.stop();
   isRecording = false;
   startRecordingIcon.style.display = "block";
+  waitRecordingIcon.style.display = "none";
   stopRecordingIcon.style.display = "none";
 
   // Stop all tracks to release the media stream
@@ -421,6 +425,10 @@ function colorCanvas(offsets) {
     replayLine.style.marginRight = (Math.min(offscreenCanvas.width, 800) - replayX) + "px";
     recordedAudio.currentTime = x / pixelsPerSecond;
   });
+
+  startRecordingIcon.style.display = "inherit";
+  waitRecordingIcon.style.display = "none";
+  stopRecordingIcon.style.display = "none";
 }
 /*## END: add colored boxes to the canvas for each recognized word ##*/
 
