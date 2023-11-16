@@ -13,6 +13,7 @@ const rightRecordingButton = document.getElementById("right-button");
 let isShowingResults = false;
 const stopRecordingIcon = document.getElementById("stop-recording-icon");
 const startRecordingIcon = document.getElementById("start-recording-icon");
+const textareaEmptyError = document.getElementById('textarea-error');
 
 
 
@@ -76,8 +77,21 @@ let chunks = [];
 let recordedAudio = new Audio();
 let replayX;
 
+/* Error if the textarea is empty */
+const checkTextareaError = () => {
+  if (textarea.val() === '') {
+    textareaEmptyError.style.display = 'block';
+    return false;
+  }
+  else {
+    textareaEmptyError.style.display = 'none';
+    return true;
+  }
+}
+
 /**# START: start and stop recording functions which also triggers the drawing of the waveform #**/
 const startRecording = () => {
+  if (!checkTextareaError()) return;
   isRecording = true;
   isShowingResults = false;
   rightRecordingButton.style.opacity = '1';
