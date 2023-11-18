@@ -194,10 +194,7 @@ rightRecordingButton.addEventListener("click", function(e) {
     cancelRecording();
     cancelAnimationFrame(animationFrameId);
   }
-  else if (isShowingResults) {
-    resetFormReturnTextarea(); // reset everything, that includes the textarea
-    resizeTextarea();
-  }
+  
   else {
     // should not happen
   }
@@ -300,8 +297,7 @@ recButton.addEventListener('click', function(e) {
     setTimeout(() => {
       stopRecording();
 
-      // rightRecordingButton.style.opacity = '0';
-      rightRecordingButton.innerHTML = 'reset';
+      rightRecordingButton.style.opacity = '0';
 
       cancelAnimationFrame(animationFrameId);
 
