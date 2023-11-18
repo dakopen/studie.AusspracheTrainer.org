@@ -96,7 +96,6 @@ const startRecording = () => {
   isRecording = true;
   isShowingResults = false;
   rightRecordingButton.style.opacity = '1';
-  rightRecordingButton.innerHTML = 'cancel';
 
   startRecordingIcon.style.display = "none";
   waitRecordingIcon.style.display = "none";

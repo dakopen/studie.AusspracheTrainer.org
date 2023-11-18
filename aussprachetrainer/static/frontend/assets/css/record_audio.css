@@ -180,9 +180,16 @@
     position: fixed;
     transform: translateY(-50%);
     top: 50%;
-    right: calc(50% - 135px);
+    right: calc(50% - 155px);
     opacity: 0;
+    
     transition: opacity 0.5s;
+    border-radius: 10px;
+    border: none;
+    
+    outline: solid 3px var(--rosa);
+    background-color: transparent;
+    padding: 3px 6px 3px 6px;
 }
 
 

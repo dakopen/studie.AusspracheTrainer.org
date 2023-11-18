@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-26 12:16+0000\n"
+"POT-Creation-Date: 2023-11-18 12:54+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Daniel Busch <dakopen185@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,7 +18,35 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: frontend/templates/importhtml.html:3
+#: dashboard/templates/dashboard.html:22
+msgid "Genauigkeit"
+msgstr "Accuracy"
+
+#: dashboard/templates/dashboard.html:24
+msgid ""
+"Dieser Score zeigt an, wie gut Deine Aussprache mit der richtigen Aussprache "
+"übereinstimmt."
+msgstr "This scores shows how well your pronunciation matches the correct one."
+
+#: dashboard/templates/dashboard.html:38 frontend/views.py:42
+msgid "AusspracheTrainer"
+msgstr "AusspracheTrainer"
+
+#: dashboard/templates/dashboard.html:41
+msgid ""
+"In diesem Score sind mehrere Faktoren wie die Genauigkeit, der Redefluss und "
+"die Schwierigkeit eingerechnet."
+msgstr "This score is calculated from several factors like accuracy, fluency and difficulty."
+
+#: dashboard/templates/dashboard.html:53
+msgid "Redefluss"
+msgstr "Fluency"
+
+#: dashboard/templates/dashboard.html:56
+msgid "Der Redefluss Score besagt, ..."
+msgstr "..."
+
+#: frontend/templates/importhtml.html:3 frontend/tests.py:29
 msgid "Willkommen"
 msgstr "Welcome"
 
@@ -34,21 +62,68 @@ msgstr "this site supports multiple languages"
 msgid "diese Seite ist cool"
 msgstr "This site is cool"
 
-#: frontend/templates/module/footer.html:11 frontend/views.py:36
+#: frontend/templates/module/footer.html:11 frontend/views.py:48
 msgid "Kontakt"
 msgstr "Contact"
 
-#: frontend/templates/module/footer.html:12 frontend/views.py:41
+#: frontend/templates/module/footer.html:12 frontend/views.py:53
 msgid "Impressum"
-msgstr "Legal notice"
+msgstr "legal notice"
 
 #: frontend/templates/module/footer.html:13
 msgid "Datenschutz"
-msgstr "Privacy policy"
+msgstr "privacy policy"
 
-#: frontend/templates/module/header.html:11
-msgid "Deutsch123"
-msgstr "Englisch456"
+#: frontend/templates/module/header.html:13
+msgid "Dashboard"
+msgstr "dashboard"
+
+#: frontend/templates/module/header.html:17
+msgid "Lernen"
+msgstr "learn"
+
+#: frontend/templates/module/header.html:22
+msgid "Logout"
+msgstr "logout"
+
+#: frontend/templates/module/header.html:27
+msgid "Login"
+msgstr "login"
+
+#: frontend/templates/module/header.html:30
+#: user_auth/templates/user_auth/register.html:5
+#: user_auth/templates/user_auth/register.html:19 user_auth/views.py:26
+msgid "Registrieren"
+msgstr "register"
+
+#: frontend/templates/record_audio.html:7
+msgid "Sprache ändern"
+msgstr "change language"
+
+#: frontend/templates/record_audio.html:11
+#: frontend/templates/record_audio.html:12
+#: frontend/templates/record_audio.html:23
+#: frontend/templates/record_audio.html:24
+msgid "deutsch"
+msgstr "german"
+
+#: frontend/templates/record_audio.html:19
+#: frontend/templates/record_audio.html:20
+msgid "englisch"
+msgstr "english"
+
+#: frontend/templates/record_audio.html:27
+#: frontend/templates/record_audio.html:28
+msgid "französisch"
+msgstr "french"
+
+#: frontend/templates/record_audio.html:42
+msgid "Bitte erst einen Übungssatz eingeben!"
+msgstr "Please enter a practice sentence first!"
+
+#: frontend/templates/record_audio.html:56
+msgid "abbrechen"
+msgstr "cancel"
 
 #: frontend/templates/result_error.html:2
 msgid "Ein Fehler beim Analysieren ist aufgetreten."
@@ -70,17 +145,26 @@ msgstr "enter"
 msgid "Warte kurz"
 msgstr "please wait"
 
-#: frontend/views.py:31
-msgid "AusspracheTrainer"
-msgstr "AusspracheTrainer"
-
-#: frontend/views.py:46
+#: frontend/views.py:58
 msgid "Datenschutzerklärung"
 msgstr "privacy policy"
 
-#: frontend/views.py:49
+#: frontend/views.py:62
 msgid "Warte auf Ergebnis"
 msgstr "wait for result"
+
+#: user_auth/forms.py:7
+msgid "E-Mail"
+msgstr "email"
+
+#: user_auth/templates/user_auth/login.html:5
+#: user_auth/templates/user_auth/login.html:22
+msgid "Anmelden"
+msgstr "login"
+
+#: user_auth/templates/user_auth/login.html:9
+msgid "Falscher Benutzername oder Passwort."
+msgstr "Wrong username or password."
 
 #~ msgid "Meine mehrsprachige Seite"
 #~ msgstr "My multilanguage page"
