@@ -21,7 +21,7 @@ class UserAuthTest(TestCase):
     def test_login_unsuccessful(self):
         response = self.client.post(self.login_url, {'username': 'testuser', 'password': 'wrongpass'})
         self.assertEqual(response.status_code, 200)  # Stays on the same page
-        self.assertContains(response, 'Falscher Benutzername oder Passwort.')
+        self.assertContains(response, 'Wrong username or password.')
 
     def test_logout(self):
         self.client.login(username='testuser', password='testpass')
