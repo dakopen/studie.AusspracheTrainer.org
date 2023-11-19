@@ -2,35 +2,42 @@ from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from frontend.views import render_into_base
 from analyze.models import PronunciationAssessmentResult
-from django.db.models import Avg
-
+from django.db.models import Avg, Count
 
 @login_required
 def dashboard_view(request):
     user = request.user
-    averages = PronunciationAssessmentResult.objects.filter(user=user).aggregate(
+    selected_language = request.GET.get('language')
+
+    # Fetch PronunciationAssessmentResults for the user
+    results = PronunciationAssessmentResult.objects.filter(user=user)
+
+    # Get the most common language if none is selected
+    if not selected_language:
+        most_common_language = results.values('language').annotate(
+            count=Count('language')).order_by('-count').first()
+        selected_language = most_common_language['language'] if most_common_language else None
+
+    # Filter results by the selected language
+    if selected_language:
+        results = results.filter(language=selected_language)
+
+    averages = results.aggregate(
         avg_accuracy=Avg('accuracy'),
-        avg_fluency=Avg('fluency'), 
+        avg_fluency=Avg('fluency'),
     )
-    # TODO: Create a second database with "AusspracheTrainer Scores" that are updated
-    #       every time a new PronunciationAssessmentResult is created.
-    #       The latest scores are weighted more, and some also ommission are taken into
-    #       account and other stuff. 
-    if averages['avg_accuracy'] is None:
-        averages['avg_accuracy'] = "?"
-    else:
-        averages['avg_accuracy'] = round(averages['avg_accuracy'])
-    if averages['avg_fluency'] is None:
-        averages['avg_fluency'] = "?"
-    else:
-        averages['avg_fluency'] = round(averages['avg_fluency'])
+
+    # Handling None values
+    averages['avg_accuracy'] = round(averages['avg_accuracy']) if averages['avg_accuracy'] is not None else "?"
+    averages['avg_fluency'] = round(averages['avg_fluency']) if averages['avg_fluency'] is not None else "?"
 
     context = {
         'avg_accuracy': averages['avg_accuracy'],
         'avg_fluency': averages['avg_fluency'],
-        'avg_aussprachetrainer': round(90.34), # TODO: see above (mock data here)
+        'avg_aussprachetrainer': round(90.34),  # Mock data
+        'selected_language': selected_language,
+        # Add other context data as needed
     }
-
 
     return render_into_base(request, 'Dashboard', 'dashboard.html', context,
                             css='frontend/assets/css/dashboard.css')

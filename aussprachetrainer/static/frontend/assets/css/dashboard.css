@@ -55,20 +55,12 @@
     border-right: 10px solid transparent;
 }
 
-/*
-@keyframes friendlyHover {
-    0% { transform: translateY(0) rotate(0); }
-    30% { transform: translateY(-2px) rotate(-0.5deg);}
-    60% { transform: translateY(1px) rotate(2deg); }
-    100% { transform: translateY(0) rotate(0); }
-  }
-  
+.dropdown-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
-@keyframes shakeNotClickable {
-    0% { transform: translateX(0); }
-    25% { transform: translateX(-5px); }
-    50% { transform: translateX(5px); }
-    75% { transform: translateX(-5px); }
-    100% { transform: translateX(0); }
-  }
-*/
+.choose {
+    margin: 0 30px;
+}

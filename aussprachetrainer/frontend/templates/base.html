@@ -15,21 +15,7 @@
     <link rel="icon" href="{% static 'frontend/assets/images/favicon.png' %}" type="image/png">
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <title>{% block title %}AusspracheTrainer{% endblock %}</title>
-    
-    <!-- Script that need Django Patterns -->
-    <script> 
-    function changeLanguage(language) {
-        // Make an AJAX call to change the language
-        fetch("{% url 'change_language' %}?lang=" + language)
-            .then(response => response.json())
-            .then(data => {
-                console.log(data.message);  // DEBUG:  Display a message in the console
-            })
-            .catch(error => {
-                console.error('Error changing language:', error);
-            });
-    }
-    </script>
+      
     <!-- other meta tags -->
     {% block extra_head %}{% endblock %}
 </head>
