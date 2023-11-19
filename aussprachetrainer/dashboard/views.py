@@ -12,11 +12,10 @@ def dashboard_view(request):
     # Fetch PronunciationAssessmentResults for the user
     results = PronunciationAssessmentResult.objects.filter(user=user)
 
-    # Get the most common language if none is selected
+    # Get the latest used language if none is selected
     if not selected_language:
-        most_common_language = results.values('language').annotate(
-            count=Count('language')).order_by('-count').first()
-        selected_language = most_common_language['language'] if most_common_language else None
+        latest_result = results.order_by('-created_at').first()
+        selected_language = latest_result.language if latest_result else "de-DE"
 
     # Filter results by the selected language
     if selected_language:
