@@ -13,6 +13,8 @@ const rightRecordingButton = document.getElementById("right-button");
 let isShowingResults = false;
 const stopRecordingIcon = document.getElementById("stop-recording-icon");
 const startRecordingIcon = document.getElementById("start-recording-icon");
+const waitRecordingIcon = document.getElementById("wait-recording-icon");
+const textareaEmptyError = document.getElementById('textarea-error');
 
 
 
@@ -76,14 +78,27 @@ let chunks = [];
 let recordedAudio = new Audio();
 let replayX;
 
+/* Error if the textarea is empty */
+const checkTextareaError = () => {
+  if (textarea.val() === '') {
+    textareaEmptyError.style.display = 'block';
+    return false;
+  }
+  else {
+    textareaEmptyError.style.display = 'none';
+    return true;
+  }
+}
+
 /**# START: start and stop recording functions which also triggers the drawing of the waveform #**/
 const startRecording = () => {
+  if (!checkTextareaError()) return;
   isRecording = true;
   isShowingResults = false;
   rightRecordingButton.style.opacity = '1';
-  rightRecordingButton.innerHTML = 'cancel';
 
   startRecordingIcon.style.display = "none";
+  waitRecordingIcon.style.display = "none";
   stopRecordingIcon.style.display = "block";
 
   // initialize the canvas and offscreen canvas
@@ -117,7 +132,8 @@ const startRecording = () => {
 const stopRecording = () => {
   mediaRecorder.stop();
   isRecording = false;
-  startRecordingIcon.style.display = "inherit";
+  startRecordingIcon.style.display = "none";
+  waitRecordingIcon.style.display = "inherit";
   stopRecordingIcon.style.display = "none";
 
   /** RESIZE OFFSCREEN CANVAS **/
@@ -177,10 +193,7 @@ rightRecordingButton.addEventListener("click", function(e) {
     cancelRecording();
     cancelAnimationFrame(animationFrameId);
   }
-  else if (isShowingResults) {
-    resetFormReturnTextarea(); // reset everything, that includes the textarea
-    resizeTextarea();
-  }
+  
   else {
     // should not happen
   }
@@ -202,6 +215,7 @@ const cancelRecording = () => {
   mediaRecorder.stop();
   isRecording = false;
   startRecordingIcon.style.display = "block";
+  waitRecordingIcon.style.display = "none";
   stopRecordingIcon.style.display = "none";
 
   // Stop all tracks to release the media stream
@@ -282,8 +296,7 @@ recButton.addEventListener('click', function(e) {
     setTimeout(() => {
       stopRecording();
 
-      // rightRecordingButton.style.opacity = '0';
-      rightRecordingButton.innerHTML = 'reset';
+      rightRecordingButton.style.opacity = '0';
 
       cancelAnimationFrame(animationFrameId);
 
@@ -407,6 +420,10 @@ function colorCanvas(offsets) {
     replayLine.style.marginRight = (Math.min(offscreenCanvas.width, 800) - replayX) + "px";
     recordedAudio.currentTime = x / pixelsPerSecond;
   });
+
+  startRecordingIcon.style.display = "inherit";
+  waitRecordingIcon.style.display = "none";
+  stopRecordingIcon.style.display = "none";
 }
 /*## END: add colored boxes to the canvas for each recognized word ##*/
 

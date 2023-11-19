@@ -40,8 +40,9 @@ function getTextWidth(text, font) { // important
 // END: Text area auto size
 
 function clearTextarea() {
-    textarea.val("");
-    resizeTextarea();
+    resetFormReturnTextarea();
+    // textarea.val("");
+    // resizeTextarea();
 }
 
 /*Dropdown Menu*/
