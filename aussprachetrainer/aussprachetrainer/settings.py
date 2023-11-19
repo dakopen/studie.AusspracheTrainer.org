@@ -69,6 +69,7 @@ INSTALLED_APPS = [
     'analyze',
     'user_auth',
     'dashboard',
+    'learn',
 ]
 
 MIDDLEWARE = [
