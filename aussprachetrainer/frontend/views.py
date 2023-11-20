@@ -41,7 +41,6 @@ def render_into_base(request, title, filepaths, context=None, content_type=None,
 def index(request):
     context = {}
     user = request.user
-
     
     language = request.GET.get("language")
     if language:
@@ -60,7 +59,6 @@ def index(request):
     else:
         context["text"] = ""
 
-
     if context["language"] == "en-UK":
         placeholder = "Practice sentence"
     elif context["language"] == "fr-FR":
@@ -68,7 +66,6 @@ def index(request):
     elif context["language"] == "de-DE":
         placeholder = "Übungssatz"
     context["placeholder"] = placeholder
-
 
     return render_into_base(request, _("AusspracheTrainer"), ["record_audio.html"], context,
                             css=['frontend/assets/css/record_audio.css'])

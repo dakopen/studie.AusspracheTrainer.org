@@ -37,5 +37,38 @@
   </div>
 </div>
 <br>
+<div id="sentences-container">
+    <table>
+        <thead>
+            <tr>
+                <th>{% trans "Score" %}</th>
+                <th>{% trans "Übungssatz" %}</th>
+                <th>{% trans "Schwierigkeit" %}</th>
+                <th>{% trans "Aktion" %}</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for sentence in sentences %}
+                <tr>
+                    <td class="learntable-score">{{ sentence.score }}</td>
+                    <td class="learntable-sentence">{{ sentence.text }}</td>
+                    <td class="learntable-difficulty">
+                        {% for i in sentence.difficulty %}
+                            <span class="star">&#9733;</span>
+                        {% endfor %}
+                    </td>
+                    <td class="learntable-action">
+                        <a href="{% url 'index' %}?text={{ sentence.text|urlencode }}&language={{ selected_language|urlencode }}" class="learntable-action-button">
+                            <i class="fas fa-microphone"></i>
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+
+
 
 <script src="{% static 'frontend/assets/js/learn.js' %}"></script>

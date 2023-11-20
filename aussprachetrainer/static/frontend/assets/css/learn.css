@@ -1,0 +1,66 @@
+.dropdown-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.choose {
+    margin: 0 30px;
+}
+
+#sentences-container {
+    width: 90%;
+    margin: 0 auto;
+}
+
+#sentences-container table {
+    width: 100%; /* Full width of the container */
+    border-collapse: collapse; /* Removes default table cell spacing */
+}
+
+#sentences-container th, #sentences-container td {
+    text-align: left;
+    padding: 8px; /* Adds padding inside each cell */
+}
+
+#sentences-container td {
+    border-bottom: 1px solid #ddd; /* Adds a light border to each row */
+}
+
+/* Styling for the score */
+#sentences-container .learntable-score {
+    font-weight: bold; /* Makes the text bold */
+    color: var(--lila); /* Sets the text color to blue */
+    text-align: center; /* Aligns text to the center of the cell */
+}
+
+/* Styling for the sentence */
+#sentences-container .learntable-sentence {
+    text-align: justify; /* Justifies the text */
+}
+
+/* Styling for the difficulty stars */
+#sentences-container .learntable-difficulty {
+    margin-right: 5px; /* Adds space between the stars */
+    color: gold; /* Sets the star color to gold */
+}
+
+.learntable-action-button {
+    display: inline-flex; /* Use flexbox for better alignment */
+    align-items: center; /* Align items vertically in the center */
+    justify-content: center; /* Center content horizontally */
+    padding: 8px;
+    background-color: var(--rosa); /* Example blue background */
+    color: white; /* White icon color */
+    border-radius: 50%; /* Circular shape */
+    text-align: center;
+    text-decoration: none;
+    width: 40px; /* Fixed width */
+    height: 40px; /* Fixed height */
+    line-height: 40px; /* Vertically center the icon */
+}
+
+.learntable-action-button i {
+    font-size: 16px; /* Larger icon size */
+    vertical-align: middle;
+}
