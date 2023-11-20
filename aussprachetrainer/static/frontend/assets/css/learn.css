@@ -64,3 +64,9 @@
     font-size: 16px; /* Larger icon size */
     vertical-align: middle;
 }
+
+.learntable-action {
+    text-align: center; /* Center the button horizontally */
+    display: flex; /* Use flexbox for alignment */
+    justify-content: center; /* Center content horizontally in the flex container */
+}
