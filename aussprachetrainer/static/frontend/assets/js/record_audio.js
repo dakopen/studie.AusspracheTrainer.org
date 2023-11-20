@@ -46,7 +46,7 @@ function clearTextarea() {
 }
 
 /*Dropdown Menu*/
-let selectedLiId = 'dropdown-lang-germany';
+let selectedLiId = $('.dropdown-select span img').attr('value')
 $('#' + selectedLiId).hide();
 
 $('.dropdown').click(function () {

@@ -80,7 +80,7 @@ $('.dropdown .dropdown-menu li').click(function () {
     var selectedLanguage = selectedLiId.split('-')[2];
     switch (selectedLanguage) {
         case "uk":
-            updateLanguageParameter("en-GB");
+            updateLanguageParameter("en-UK");
             break;
         case "germany":
             updateLanguageParameter("de-DE");

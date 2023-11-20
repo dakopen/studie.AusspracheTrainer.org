@@ -30,7 +30,7 @@ def learn_view(request):
         for row in reader:
             sentence, difficulty = row
             best_result = results.filter(sentence=sentence).order_by('-accuracy').first()
-            score = str(best_result.accuracy) if best_result else "?"
+            score = str(round(best_result.accuracy, 1)) if best_result else "?"
 
             difficulty_stars = range(int(difficulty))
             sentences.append({'text': sentence, 'difficulty': difficulty_stars, 'score': score})

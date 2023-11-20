@@ -30,7 +30,7 @@
 /* Styling for the score */
 #sentences-container .learntable-score {
     font-weight: bold; /* Makes the text bold */
-    color: var(--lila); /* Sets the text color to blue */
+    color: var(--rosa); /* Sets the text color to blue */
     text-align: center; /* Aligns text to the center of the cell */
 }
 
