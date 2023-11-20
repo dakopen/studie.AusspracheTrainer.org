@@ -13,6 +13,7 @@ import uuid
 from pydub import AudioSegment
 import base64
 import io
+from analyze.models import PronunciationAssessmentResult
 from frontend.languages import country_class_to_locale
 
 
@@ -38,8 +39,38 @@ def render_into_base(request, title, filepaths, context=None, content_type=None,
 
 
 def index(request):
+    context = {}
+    user = request.user
 
-    return render_into_base(request, _("AusspracheTrainer"), ["record_audio.html"],
+    
+    language = request.GET.get("language")
+    if language:
+        context["language"] = language
+    else:
+        if user.is_authenticated:
+            results = PronunciationAssessmentResult.objects.filter(user=user)
+            latest_result = results.order_by('-created_at').first()
+            context["language"] = latest_result.language if latest_result else "de-DE"
+        else:
+            context["language"] = "de-DE"
+
+    text = request.GET.get("text")
+    if text:
+        context["text"] = text
+    else:
+        context["text"] = ""
+
+
+    if context["language"] == "en-UK":
+        placeholder = "Practice sentence"
+    elif context["language"] == "fr-FR":
+        placeholder = "Phrase d'exercice"
+    elif context["language"] == "de-DE":
+        placeholder = "Übungssatz"
+    context["placeholder"] = placeholder
+
+
+    return render_into_base(request, _("AusspracheTrainer"), ["record_audio.html"], context,
                             css=['frontend/assets/css/record_audio.css'])
 
 
