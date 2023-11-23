@@ -6,8 +6,12 @@ import string
 import os
 from aussprachetrainer.settings import MS_SPEECH_SERVICES_API_KEY as speech_key
 from aussprachetrainer.settings import MS_SPEECH_SERVICES_REGION as service_region
+from aussprachetrainer.settings import DELETE_AUDIO_FILE_AFTER_ANALYSIS
 
 speech_config = speechsdk.SpeechConfig(subscription=speech_key, region=service_region)
+
+def delete_audio_file(filename):
+    os.remove(filename)
 
 def pronunciation_assessment_continuous_from_file(filename, reference_text, language):
     """Performs continuous pronunciation assessment asynchronously with input from an audio file.
@@ -140,5 +144,8 @@ def pronunciation_assessment_continuous_from_file(filename, reference_text, lang
             'error_type': word.error_type
         }
         results['Words'].append(word_info)
+
+    if DELETE_AUDIO_FILE_AFTER_ANALYSIS:
+        delete_audio_file(filename)
 
     return results, word_offset_duration

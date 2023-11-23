@@ -1,0 +1,74 @@
+.auth-container {
+    width: 100%;
+    max-width: 400px;
+    margin: auto;
+    padding: 20px;
+    background-color: var(--white-rosa); /* Slightly tinted background for the container */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+    border-radius: 8px;
+}
+
+.auth-h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Form and Input Styles */
+.auth {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.auth input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #ddd; /* Subtle border */
+    font-size: 16px;
+}
+
+.auth input:focus {
+    border-color: var(--rosa); /* Highlight focus with Rosa */
+    box-shadow: 0 0 3px var(--rosa);
+}
+
+.auth button {
+    width: 100%;
+    padding: 10px 20px;
+    background-color: var(--lila); /* Lila background for the button */
+    color: var(--white);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: background-color 0.3s;
+}
+
+.auth button:hover {
+    background-color: var(--rosa); /* Change to Rosa on hover */
+}
+
+/* Error Message Styles */
+.auth-error {
+    color: var(--red);
+    font-size: 14px;
+    margin-top: -10px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.required {
+    color: var(--red);
+}
+
+/* Utility Classes */
+span.required {
+    margin-left: 5px;
+}
+
+/* Styles for the Create Account link */
+.register-link, .login-link {
+    text-align: center;
+    margin-top: 20px; /* Spacing above the link */
+}

@@ -1,22 +1,36 @@
+{% load static %}
 {% load i18n %}
 
-<body>
-    <div class="container">
-        <h1>{% trans "Registrieren" %}</h1>
-        <form method="post" class="auth">
-            {% csrf_token %}
-            {% for field in form %}
-                <p>
-                    <label for="{{ field.id_for_label }}">
-                        {{ field.label }}{% if field.field.required %}<span class="required">*</span>{% endif %}
-                    </label>
-                    {{ field }}
-                    {% if field.errors %}
-                        <span class="error text-lila">{{ field.errors.0 }}</span>
-                    {% endif %}
+<html>
+    <head>
+        <title>{% trans "Login" %}</title>
+        <link href={% static 'frontend/assets/css/auth.css' %} rel="stylesheet">
+        <link href={% static 'frontend/assets/css/global-new.css' %} rel="stylesheet">
+        <link href={% static 'frontend/assets/css/header.css' %} rel="stylesheet">
+        <link href={% static 'frontend/assets/css/footer.css' %} rel="stylesheet">
+    </head>
+    <body>
+        <div class="auth-container">
+            <h1 class="auth-h1">{% trans "Registrieren" %}</h1>
+            <form method="post" class="auth">
+                {% csrf_token %}
+                {% for field in form %}
+                    <p>
+                        <label for="{{ field.id_for_label }}">
+                            {{ field.label }}{% if field.field.required %}<span class="required">*</span>{% endif %}
+                        </label>
+                        {{ field }}
+                        {% if field.errors %}
+                            <span class="error text-lila">{{ field.errors.0 }}</span>
+                        {% endif %}
+                    </p>
+                {% endfor %}
+                <button type="submit">{% trans "Registrieren" %}</button>
+                <p class="login-link">
+                    {% trans "Bereits ein Konto?" %}
+                    <a href="{% url 'login' %}">{% trans "Anmelden" %}</a>
                 </p>
-            {% endfor %}
-            <button type="submit">{% trans "Registrieren" %}</button>
-        </form>
-    </div>
-</body>
+            </form>
+        </div>
+    </body>
+</html>

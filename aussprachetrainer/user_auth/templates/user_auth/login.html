@@ -1,25 +1,44 @@
+{% load static %}
 {% load i18n %}
 
-<body>
-    <div class="container">
-        <h1>{% trans "Anmelden" %}</h1>
-        <form method="post" class="auth">
-            {% csrf_token %}
-            {% if form.non_field_errors %}
-                <p class="error">{% trans "Falscher Benutzername oder Passwort." %}</p>
-            {% endif %}
-            {% for field in form %}
-                <p>
-                    <label for="{{ field.id_for_label }}">
-                        {{ field.label }}{% if field.field.required %}<span class="required">*</span>{% endif %}
-                    </label>
-                    {{ field }}
-                    {% if field.errors %}
-                        <span class="error">{{ field.errors.0 }}</span>
-                    {% endif %}
+<html>
+    <head>
+        <title>{% trans "Login" %}</title>
+        <link href={% static 'frontend/assets/css/auth.css' %} rel="stylesheet">
+        <link href={% static 'frontend/assets/css/global-new.css' %} rel="stylesheet">
+        <link href={% static 'frontend/assets/css/header.css' %} rel="stylesheet">
+        <link href={% static 'frontend/assets/css/footer.css' %} rel="stylesheet">
+    </head>
+    <body>
+        {% include 'module/header.html' %}
+
+        <div class="auth-container margin-top-100px">
+            <h1 class="auth-h1">{% trans "Anmelden" %}</h1>
+            <form method="post" class="auth">
+                {% csrf_token %}
+                {% if form.non_field_errors %}
+                    <p class="auth-error">{% trans "Falscher Benutzername oder Passwort." %}</p>
+                {% endif %}
+                {% for field in form %}
+                    <p>
+                        <label for="{{ field.id_for_label }}">
+                            {{ field.label }}{% if field.field.required %}<span class="required">*</span>{% endif %}
+                        </label>
+                        {{ field }}
+                        {% if field.errors %}
+                            <span class="error">{{ field.errors.0 }}</span>
+                        {% endif %}
+                    </p>
+                {% endfor %}
+                <button type="submit">{% trans "Anmelden" %}</button>
+
+                <p class="register-link">
+                    {% trans "Noch kein Konto?" %}
+                    <a href="{% url 'register' %}">{% trans "Konto erstellen" %}</a>
                 </p>
-            {% endfor %}
-            <button type="submit">{% trans "Anmelden" %}</button>
-        </form>
-    </div>
-</body>
+            </form>
+        </div>
+
+        {% include 'module/footer.html' %}
+    </body>
+</html>
