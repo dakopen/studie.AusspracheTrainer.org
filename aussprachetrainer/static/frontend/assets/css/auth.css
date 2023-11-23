@@ -52,7 +52,7 @@
 /* Error Message Styles */
 .auth-error {
     color: var(--red);
-    font-size: 14px;
+    font-size: 12px;
     margin-top: -10px;
     margin-bottom: 10px;
     text-align: center;
@@ -72,3 +72,42 @@ span.required {
     text-align: center;
     margin-top: 20px; /* Spacing above the link */
 }
+
+.input-group {
+    position: relative;
+    display: flex;
+    align-items: left;
+}
+
+#username_status_icon {
+    position: absolute;
+    right: 10px; /* Adjust as necessary */
+    font-size: 20px; /* Adjust as necessary */
+}
+
+#username_status_icon.available {
+    color: green;
+}
+
+#username_status_icon.taken {
+    color: var(--red);
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px; /* Spacing between each input group */
+}
+
+.input-group label {
+    margin-bottom: 5px; /* Space between label and input field */
+}
+
+#username_status_icon {
+    align-self: flex-end; 
+    margin-top: 30px; 
+    margin-right: 10px;
+    font-size: 20px;
+}
+
+

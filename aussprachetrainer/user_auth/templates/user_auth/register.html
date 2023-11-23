@@ -15,15 +15,18 @@
             <form method="post" class="auth">
                 {% csrf_token %}
                 {% for field in form %}
-                    <p>
+                    <div class="input-group">
                         <label for="{{ field.id_for_label }}">
                             {{ field.label }}{% if field.field.required %}<span class="required">*</span>{% endif %}
                         </label>
                         {{ field }}
+                        {% if field.name == 'username' %}
+                            <span id="username_status_icon"></span>
+                        {% endif %}
                         {% if field.errors %}
                             <span class="error text-lila">{{ field.errors.0 }}</span>
                         {% endif %}
-                    </p>
+                    </div>
                 {% endfor %}
                 <button type="submit">{% trans "Registrieren" %}</button>
                 <p class="login-link">
@@ -32,5 +35,8 @@
                 </p>
             </form>
         </div>
+        <script src="{% static 'frontend/assets/js/auth.js' %}"></script>
     </body>
+    
+    
 </html>
