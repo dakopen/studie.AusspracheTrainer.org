@@ -58,18 +58,18 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'user_auth',
+    'frontend',
+    'analyze',
+    'dashboard',
+    'learn',
+    'fontawesomefree',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'fontawesomefree',
-    'frontend',
-    'analyze',
-    'user_auth',
-    'dashboard',
-    'learn',
 ]
 
 MIDDLEWARE = [
@@ -88,7 +88,7 @@ ROOT_URLCONF = 'aussprachetrainer.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'frontend/templates')],
+        'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -198,4 +198,4 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'kontakt@aussprachetrainer.org'
 EMAIL_HOST_PASSWORD = get_secret("django-backend-email-host-password")
-DEFAULT_FROM_EMAIL = 'kontakt@aussprachetrainer.org'
+DEFAULT_FROM_EMAIL = 'AusspracheTrainer <kontakt@aussprachetrainer.org>'
