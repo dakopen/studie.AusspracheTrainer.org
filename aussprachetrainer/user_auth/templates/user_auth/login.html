@@ -11,7 +11,7 @@
     </head>
     <body>
         {% include 'module/header.html' %}
-
+    
         <div class="auth-container margin-top-100px">
             <h1 class="auth-h1">{% trans "Anmelden" %}</h1>
             <form method="post" class="auth">
@@ -29,16 +29,22 @@
                             <span class="error">{{ field.errors.0 }}</span>
                         {% endif %}
                     </p>
+                    {% if field.name == 'password' %}
+                        <p class="password-reset-link">
+                            <a href="{% url 'password_reset' %}">{% trans "Passwort vergessen?" %}</a>
+                        </p>
+                    {% endif %}
                 {% endfor %}
                 <button type="submit">{% trans "Anmelden" %}</button>
-
+    
                 <p class="register-link">
                     {% trans "Noch kein Konto?" %}
                     <a href="{% url 'register' %}">{% trans "Konto erstellen" %}</a>
                 </p>
             </form>
         </div>
-
+    
         {% include 'module/footer.html' %}
     </body>
+    
 </html>

@@ -1,8 +1,8 @@
-from django.contrib.auth.models import User
 from django.db import models
+from django.conf import settings
 
 class PronunciationAssessmentResult(models.Model):
-    user = models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, blank=True, on_delete=models.CASCADE)
     accuracy = models.FloatField()
     completeness = models.FloatField()
     fluency = models.FloatField()
@@ -13,4 +13,4 @@ class PronunciationAssessmentResult(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"{self.user} -  {self.sentence} - {self.created_at}"
+        return f"{self.user} -  {self.sentence} - {self.created_at} - {self.language}"

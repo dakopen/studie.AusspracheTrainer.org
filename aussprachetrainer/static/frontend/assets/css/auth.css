@@ -67,6 +67,13 @@ span.required {
     margin-left: 5px;
 }
 
+
+.password-reset-link {
+    text-align: left;
+    margin-top: -20px; /* No spacing above the link */
+    font-size: smaller;
+}
+
 /* Styles for the Create Account link */
 .register-link, .login-link {
     text-align: center;

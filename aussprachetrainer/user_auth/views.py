@@ -1,13 +1,15 @@
 from django.contrib.auth.views import LoginView, LogoutView
-from django.contrib.auth import login
-from django.shortcuts import render, redirect
-from .forms import RegisterForm
+from django.contrib.auth import login, get_user_model
+from django.shortcuts import redirect
+from .forms import RegisterForm, CustomAuthForm
 from frontend.views import render_into_base
 from django.utils.translation import gettext as _
 from django.http import JsonResponse
-from django.contrib.auth.models import User
+
+User = get_user_model()
 
 class UserLoginView(LoginView):
+    form_class = CustomAuthForm
     template_name = 'user_auth/login.html'
     next_page = 'dashboard'
 
@@ -19,7 +21,7 @@ def register_view(request):
         form = RegisterForm(request.POST)
         if form.is_valid():
             user = form.save()
-            login(request, user)
+            login(request, user, backend='user_auth.backends.EmailOrUsernameModelBackend')
             return redirect('dashboard')
     else:
         form = RegisterForm()

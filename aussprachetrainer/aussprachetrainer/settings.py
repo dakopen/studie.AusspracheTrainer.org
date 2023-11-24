@@ -115,6 +115,12 @@ DATABASES = {
     }
 }
 
+AUTHENTICATION_BACKENDS = [
+    'user_auth.backends.EmailOrUsernameModelBackend',
+    'user_auth.backends.CaseInsensitiveModelBackend',
+    'django.contrib.auth.backends.ModelBackend',
+]
+
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -136,7 +142,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Authentication
 
-#AUTH_USER_MODEL = 'user_auth.User'
+AUTH_USER_MODEL = 'user_auth.CustomUser'
 LOGIN_URL = '/auth/login/'
 
 
@@ -184,3 +190,12 @@ MS_SPEECH_SERVICES_API_KEY = get_secret("AzureSpeechKey1")
 MS_SPEECH_SERVICES_REGION = "germanywestcentral"
 
 DELETE_AUDIO_FILE_AFTER_ANALYSIS = True
+
+# EMAIL SETTINGS:
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.strato.de'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'kontakt@aussprachetrainer.org'
+EMAIL_HOST_PASSWORD = get_secret("django-backend-email-host-password")
+DEFAULT_FROM_EMAIL = 'kontakt@aussprachetrainer.org'
