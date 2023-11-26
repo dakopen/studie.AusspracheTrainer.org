@@ -33,7 +33,7 @@ def dashboard_view(request):
     context = {
         'avg_accuracy': averages['avg_accuracy'],
         'avg_fluency': averages['avg_fluency'],
-        'avg_aussprachetrainer': round(90.34),  # Mock data
+        'avg_aussprachetrainer': 'Coming soon', #round(90.34),  # Mock data
         'selected_language': selected_language,
         # Add other context data as needed
     }

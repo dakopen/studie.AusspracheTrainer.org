@@ -70,12 +70,13 @@
     data-box-background="none"
     data-box-border="none"
     data-circle-size="100"
-    data-number-size="3rem"
+    data-number-size="1.5rem"
     data-text={% trans "AusspracheTrainer" %}
     data-text-color="var(--lila)"
-    data-text-font-size="1.6rem"
-    data-hover-text="{% trans "In diesem Score sind mehrere Faktoren wie die Genauigkeit, der Redefluss und die Schwierigkeit eingerechnet." %}">
+    data-text-font-size="1.6rem" 
+    data-hover-text="{% trans "In diesem Score sind mehrere Faktoren wie die Genauigkeit, der Redefluss und die Schwierigkeit eingerechnet. [Coming soon]" %}">
   </div>
+  <!--data-number-size="1.5rem" was 3rem, before 'Coming soon'-->
 
   <div class="jarode-items-percent score-rectangle"
       data-number="{{ avg_fluency }}"
@@ -89,7 +90,7 @@
       data-text="{% trans "Redefluss" %}"
       data-text-color="orange"
       data-text-font-size="1.2rem"
-      data-hover-text="{% trans "Der Redefluss Score besagt, ..." %}">
+      data-hover-text="{% trans "Der Redefluss Score besagt, wie flüssig du vorliest." %}">
     </div>
 
 </div>
