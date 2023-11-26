@@ -202,6 +202,8 @@ rightRecordingButton.addEventListener("click", function(e) {
 const resetFormReturnTextarea = () => {
   let trainingstext = textarea.val();
   document.getElementById('recordAudioForm').reset();
+  textarea.val('');  // reset the textarea since otherwise django will autofill it
+
   isShowingResults = false;
   initializeCanvasAndOffscreen();
   let replayAreaShown = (window.getComputedStyle(replayButton).display != 'none');
@@ -272,6 +274,7 @@ const moveRecButton = (down) => {
   audioContainer.style.height = newHeight + 'px';
   recButtonContainer.style.top = newTop + 'px';
 
+  
   // place the replay button with right margin
   replayButton.style.marginRight = (Math.min(offscreenCanvas.width, 800) + 22) + "px";
   replayLine.style.marginRight = (Math.min(offscreenCanvas.width, 800) - 2) + "px";
@@ -294,17 +297,17 @@ recButton.addEventListener('click', function(e) {
   } 
   else if (!isRecording && isShowingResults) {
     textarea.val(resetFormReturnTextarea());
+    resizeTextarea();
     startRecording();
   }
   else {
     setTimeout(() => {
+      rightRecordingButton.style.opacity = '0';
       stopRecording();
 
-      rightRecordingButton.style.opacity = '0';
-
-      cancelAnimationFrame(animationFrameId);
-
       moveRecButton(true);
+      cancelAnimationFrame(animationFrameId);
+    
 
       // replace canvas with offscreen canvas
       canvas.replaceWith(offscreenCanvas);
@@ -314,7 +317,7 @@ recButton.addEventListener('click', function(e) {
       void offscreenCanvas.offsetWidth;
       offscreenCanvas.style.left = '50%';
       offscreenCanvas.style.transform = 'translateX(-50%)';
-    }, 150); // record a bit longer than before
+    }, 350); // record a bit longer than before
   }
 });
 /*## END: start recording on first click and submit form on second click ##*/

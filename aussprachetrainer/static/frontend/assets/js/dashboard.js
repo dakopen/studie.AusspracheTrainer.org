@@ -79,7 +79,7 @@ $('.dropdown .dropdown-menu li').click(function () {
     // update the placeholder of the textarea
     var selectedLanguage = selectedLiId.split('-')[2];
     switch (selectedLanguage) {
-        case "GB":
+        case "gb":
             updateLanguageParameter("en-GB");
             break;
         case "germany":

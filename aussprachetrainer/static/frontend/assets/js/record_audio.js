@@ -41,8 +41,6 @@ function getTextWidth(text, font) { // important
 
 function clearTextarea() {
     resetFormReturnTextarea();
-    // textarea.val("");
-    // resizeTextarea();
 }
 
 /*Dropdown Menu*/
