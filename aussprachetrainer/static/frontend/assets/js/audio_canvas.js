@@ -204,10 +204,13 @@ const resetFormReturnTextarea = () => {
   document.getElementById('recordAudioForm').reset();
   isShowingResults = false;
   initializeCanvasAndOffscreen();
+  let replayAreaShown = (window.getComputedStyle(replayButton).display != 'none');
   replayButton.style.display = 'none';
   replayLine.style.display = 'none';
-  responsearea.css('display', 'none')
-  moveRecButton(false);
+  responsearea.css('display', 'none');
+  if (replayAreaShown) {
+    moveRecButton(false);
+  }
   return trainingstext;
 }
 
