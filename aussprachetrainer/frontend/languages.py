@@ -1,6 +1,6 @@
 country_class_to_locale_dict = {
     'dropdown-lang-germany': 'de-DE',
-    'dropdown-lang-uk' : 'en-UK',
+    'dropdown-lang-gb' : 'en-GB',
     'dropdown-lang-france': 'fr-FR',
 }
 

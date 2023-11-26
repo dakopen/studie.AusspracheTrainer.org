@@ -85,7 +85,7 @@ $('.dropdown .dropdown-menu li').click(function () {
     var selectedLanguage = selectedLiId.split('-')[2];
     let placeholderTextarea;
     switch(selectedLanguage) {
-        case "uk":
+        case "gb":
             placeholderTextarea = "Practice sentence";
             break;
         case "germany":

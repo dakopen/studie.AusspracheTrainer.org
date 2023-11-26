@@ -12,9 +12,9 @@
                         {% if language == 'de-DE' %}
                             {% trans "deutsch" %}
                             <img class="dropdown-flag" src={% static 'frontend/assets/images/Flag_of_Germany.svg' %} alt={% trans "deutsch" %} height=20 width=30 value="dropdown-lang-germany">
-                        {% elif language == 'en-UK' %}
+                        {% elif language == 'en-GB' %}
                             {% trans "englisch" %}
-                            <img class="dropdown-flag" src={% static 'frontend/assets/images/Flag_of_the_United_Kingdom.svg' %} alt={% trans "englisch" %} height=20 width=30 value="dropdown-lang-uk">
+                            <img class="dropdown-flag" src={% static 'frontend/assets/images/Flag_of_the_United_Kingdom.svg' %} alt={% trans "englisch" %} height=20 width=30 value="dropdown-lang-gb">
                         {% elif language == 'fr-FR' %}
                             {% trans "französisch" %}
                             <img class="dropdown-flag" src={% static 'frontend/assets/images/Flag_of_France.svg' %} alt={% trans "französisch" %} height=20 width=30 value="dropdown-lang-france">
@@ -24,7 +24,7 @@
                 </div>
                 <input type="hidden" name="language">
                 <ul class="dropdown-menu">
-                    <li id="dropdown-lang-uk">
+                    <li id="dropdown-lang-gb">
                         {% trans "englisch" %}
                         <img class="dropdown-flag" src={% static 'frontend/assets/images/Flag_of_the_United_Kingdom.svg' %} alt={% trans "englisch" %} height=24 width=36>
                     </li>
@@ -60,7 +60,7 @@
             <button class="round-button glow-on-hover" id="record-button">
                 <img src="{% static 'frontend/assets/images/microphone.svg' %}" alt="microphone icon" height="55" width="55" class="inverted-svg" id="start-recording-icon">
                 <i class="fa-solid fa-square fa-2x" id="stop-recording-icon"></i>
-                <img src="{% static 'frontend/assets/images/bars.svg' %}" alt="waiting icon" height="45" width="45" id="wait-recording-icon">
+                <img src="{% static 'frontend/assets/images/tail-spin.svg' %}" alt="waiting icon" height="45" width="45" id="wait-recording-icon">
             </button>
             <button class="round-button" id="right-button">{% trans "abbrechen" %}</button>
         </div>
@@ -72,7 +72,7 @@
     </div>
     <input type="hidden" id="hiddenAudioData" name="audio_data">
     <input type="hidden" id="hiddenTextData" name="text_data">
-    <input type="hidden" id="hiddenSelectedLanguage" name="selected_language" value={% if language == 'de-DE' %}"dropdown-lang-germany"{% elif language == 'en-UK' %}"dropdown-lang-uk"{% elif language == 'fr-FR' %}"dropdown-lang-france"{% endif %}>
+    <input type="hidden" id="hiddenSelectedLanguage" name="selected_language" value={% if language == 'de-DE' %}"dropdown-lang-germany"{% elif language == 'en-GB' %}"dropdown-lang-gb"{% elif language == 'fr-FR' %}"dropdown-lang-france"{% endif %}>
     {% csrf_token %}
 </form>
 <div id="result"></div>

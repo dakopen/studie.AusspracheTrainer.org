@@ -59,7 +59,7 @@ def index(request):
     else:
         context["text"] = ""
 
-    if context["language"] == "en-UK":
+    if context["language"] == "en-GB":
         placeholder = "Practice&nbsp;sentence"
     elif context["language"] == "fr-FR":
         placeholder = "Phrase&nbsp;d'exercice"
