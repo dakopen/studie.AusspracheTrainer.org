@@ -211,6 +211,7 @@ const resetFormReturnTextarea = () => {
   if (replayAreaShown) {
     moveRecButton(false);
   }
+  resizeTextarea();
   return trainingstext;
 }
 
