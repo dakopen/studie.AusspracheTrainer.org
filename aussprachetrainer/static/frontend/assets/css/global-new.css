@@ -179,6 +179,16 @@ blockquote {
     text-align: left
 }
 
+/* Adjustments for mobile screens */
+@media screen and (max-width: 768px) {
+    .dropdown {
+        width: 160px;
+    }
+
+    /* Additional mobile-specific styles here */
+    /* ... */
+}
+
 .dropdown .dropdown-select {
     cursor: pointer;
     display: block;

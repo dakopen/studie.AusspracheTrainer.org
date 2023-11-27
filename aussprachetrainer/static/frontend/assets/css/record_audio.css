@@ -195,13 +195,27 @@
 
 /* Language Dropdown */
 .dropdown-container {
-    width: 480px;
+    max-width: 480px; /* Use max-width for flexibility */
+    width: 100%; /* Full width on smaller screens */
     margin: 50px auto 0;
     text-align: center;
     display: flex;
     justify-content: space-between;
     align-items: center;
-  }
+}
+
+/* Adjustments for mobile screens */
+@media screen and (max-width: 768px) {
+    .dropdown-container {
+        flex-direction: row; /* Stack elements vertically */
+        margin-top: 0px; /* Reduce margin */
+        justify-content: space-evenly;
+        
+    }
+
+    /* Additional mobile-specific styles here */
+    /* ... */
+}
 
 
 .inverted-svg {
