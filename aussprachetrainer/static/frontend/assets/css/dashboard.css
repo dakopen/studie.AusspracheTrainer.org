@@ -24,8 +24,6 @@
     transition: all 0.3s ease-in-out;  /* Smooth transition for all changes */
 }
 
-
-
 .score-rectangle:hover {
     transform: translateY(-5px);  /* Moves the box up when hovered
     animation: friendlyHover 0.3s ease-in-out;  /* Applies the shake animation */
@@ -65,13 +63,16 @@
     align-items: center;
 }
 
+.choose {
+    margin: 0 30px;
+}
+
 /* Adjustments for mobile screens */
 @media screen and (max-width: 768px) {
     .dropdown-container {
         flex-direction: row; /* Stack elements vertically */
         margin-top: 0px; /* Reduce margin */
-        justify-content: space-evenly;
-        
+        justify-content: space-evenly; 
     }
 
     .circle-container {
@@ -99,7 +100,8 @@
     }
 
     .choose {
-        margin-bottom: 10px; /* Add space below the language choice */
+        margin: 0 10px;
+        font-size: normal;
     }
 
     .score-rectangle {
@@ -132,8 +134,4 @@
     }
     /* Additional mobile-specific styles here */
     /* ... */
-}
-
-.choose {
-    margin: 0 30px;
 }

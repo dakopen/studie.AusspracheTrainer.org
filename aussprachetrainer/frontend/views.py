@@ -102,7 +102,9 @@ def initiate_analysis(request):
     buffer = io.BytesIO()
 
     audio_segment = AudioSegment.from_ogg(io.BytesIO(audio_data))
-
+    
+    if len(audio_segment) > 59000:
+        audio_segment = audio_segment[:59000]  # max. 59 seconds
     audio_segment.export(buffer, format="wav")
 
     buffer.seek(0)

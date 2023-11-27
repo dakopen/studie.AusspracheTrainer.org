@@ -37,20 +37,21 @@
   </div>
 </div>
 <br>
+<p class="mobile-hint">Durch das Tippen auf den Score kannst du einen Satz üben.</p>
 <div id="sentences-container">
     <table>
         <thead>
             <tr>
-                <th class="learntable-action">{% trans "Score" %}</th>
-                <th>{% trans "Übungssatz" %}</th>
-                <th>{% trans "Schwierigkeit" %}</th>
+                <th class="learntable-header-score">{% trans "Score" %}</th>
+                <th class="learntable-sentence">{% trans "Übungssatz" %}</th>
+                <th class="learntable-header-difficulty">{% trans "Schwierigkeit" %}</th>
                 <th class="learntable-action">{% trans "Aktion" %}</th>
             </tr>
         </thead>
         <tbody>
             {% for sentence in sentences %}
                 <tr>
-                    <td class="learntable-score">{{ sentence.score }}</td>
+                    <td class="learntable-score"><a href="{% url 'index' %}?text={{ sentence.text|urlencode }}&language={{ selected_language|urlencode }}" class="score-link">{{ sentence.score }}</a></td>
                     <td class="learntable-sentence">{{ sentence.text }}</td>
                     <td class="learntable-difficulty">
                         {% for i in sentence.difficulty %}
