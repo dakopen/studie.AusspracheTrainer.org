@@ -8,13 +8,19 @@ from analyze.tasks import async_pronunciation_assessment
 from celery.result import AsyncResult
 from django.http import JsonResponse, HttpResponse
 from django.conf import settings
-
+import random
 import uuid
 from pydub import AudioSegment
 import base64
 import io
+import os
 from analyze.models import PronunciationAssessmentResult
 from frontend.languages import country_class_to_locale
+from django.views.decorators.http import require_http_methods
+from django.conf import settings
+
+languages = ['en-GB', 'de-DE', 'fr-FR']
+random_sentences = {lang: open(os.path.join(settings.BASE_DIR, f'frontend/random_sentences/{lang.split("-")[0]}_validated.txt')).read().splitlines() for lang in languages}  # 5000 per language
 
 
 def render_into_base(request, title, filepaths, context=None, content_type=None, status=None, using=None, css=None):
@@ -146,3 +152,12 @@ def change_language(request):
     response = HttpResponse(lang)
     response.set_cookie(settings.LANGUAGE_COOKIE_NAME, lang)
     return response
+
+
+def generate_random_sentence(request):
+    language = request.GET.get('language')
+    if not language:
+        language = "de-DE" # default language
+
+    sentence = random.choice(random_sentences[language])
+    return JsonResponse({'sentence': sentence})

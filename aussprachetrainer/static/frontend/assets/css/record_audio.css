@@ -332,4 +332,17 @@
     color: var(--red);
 }
 
+.generate-text-p {
+    font-size: smaller;
+    text-align: center;
+}
 
+.generate-text-link {
+    color: var(--lila);
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.generate-text-link:hover {
+    color: var(--rosa);
+}

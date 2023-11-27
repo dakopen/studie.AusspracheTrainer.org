@@ -97,4 +97,31 @@ $('.dropdown .dropdown-menu li').click(function () {
 });
 
 /*End Dropdown Menu*/
+function generateRandomSentence() {
+    let language = $('#hiddenSelectedLanguage').val();
+    var selectedLanguage = language.split('-')[2];
+    switch(selectedLanguage) {
+        case "gb":
+            language = "en-GB";
+            break;
+        case "germany":
+            language = "de-DE";
+            break;
+        case "france":
+            language = "fr-FR";
+            break;
+    }
 
+    $.ajax({
+        url: '/generate_random_sentence/?language=' + language,
+        type: 'POST',
+        success: function (data) {
+            textarea.val(data.sentence);
+            resizeTextarea();
+        },
+        error: function (xhr, status, error) {
+            // Handle error
+            console.error("Error: " + error);
+        }
+    });
+}
