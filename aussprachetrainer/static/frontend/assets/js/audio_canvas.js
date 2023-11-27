@@ -16,12 +16,15 @@ const startRecordingIcon = document.getElementById("start-recording-icon");
 const waitRecordingIcon = document.getElementById("wait-recording-icon");
 const textareaEmptyError = document.getElementById('textarea-error');
 
-
+function getResponsiveCanvasWidth() {
+  // Use the lesser of the window's innerWidth or a max width (e.g., 800)
+  return Math.min(window.innerWidth, 800);
+}
 
 function initializeCanvasAndOffscreen() {
   canvas = document.createElement('canvas');
   // Set its dimensions
-  canvas.width = 800;
+  canvas.width = getResponsiveCanvasWidth();
   canvas.height = 130;
   canvas.style.marginTop = '36px';
   canvas.classList.add('canvas-visualizer');
@@ -160,7 +163,7 @@ const stopRecording = () => {
   replayX = 0;
   recordedAudio.onloadedmetadata = function() {
     const audioDuration = recordedAudio.duration; // duration in seconds
-    pixelsPerSecond = Math.min(offscreenCanvas.width, 800) / audioDuration;
+    pixelsPerSecond = Math.min(offscreenCanvas.width, getResponsiveCanvasWidth()) / audioDuration;
     realPixelsPerSecond = offscreenCanvas.width / audioDuration; // use later when drawing the colored boxes (words)
   };
 
@@ -244,7 +247,7 @@ const replayButton = document.getElementById("replay-button");
 const replayLine = document.getElementById("replay-line");
 
 let stream;
-let x = canvas.width / 2 - document.getElementById("record-button").offsetWidth / 2;
+let x = getResponsiveCanvasWidth() / 2 - document.getElementById("record-button").offsetWidth / 2;
 
 let lastMeanFrequency = 0;
 let animationFrameId;
@@ -276,8 +279,8 @@ const moveRecButton = (down) => {
 
   
   // place the replay button with right margin
-  replayButton.style.marginRight = (Math.min(offscreenCanvas.width, 800) + 22) + "px";
-  replayLine.style.marginRight = (Math.min(offscreenCanvas.width, 800) - 2) + "px";
+  replayButton.style.marginRight = (Math.min(offscreenCanvas.width, getResponsiveCanvasWidth()) + 22) + "px";
+  replayLine.style.marginRight = (Math.min(offscreenCanvas.width, getResponsiveCanvasWidth()) - 2) + "px";
   
   if (down) {
     setTimeout(() => {
@@ -326,9 +329,9 @@ recButton.addEventListener('click', function(e) {
 /**# START: draw the waveform from microphone amplitude #**/
 function draw() {
   if (!isRecording) return;
-  
-  const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  let width = getResponsiveCanvasWidth();
+  const imageData = ctx.getImageData(0, 0, width, canvas.height);
+  ctx.clearRect(0, 0, width, canvas.height);
   ctx.putImageData(imageData, -1, 0);
   
   analyser.getByteFrequencyData(dataArray);
@@ -381,7 +384,7 @@ function colorCanvas(offsets) {
     offscreenCtx.fillRect(offset[0] / 1000 * pixelsPerSecond, 0, offset[1] / 1000 * pixelsPerSecond, canvas.height)
   });
 
-  const maxWidth = 800;
+  const maxWidth = getResponsiveCanvasWidth();
 
   // Original dimensions
   const originalWidth = offscreenCanvas.width;
@@ -424,7 +427,7 @@ function colorCanvas(offsets) {
     const rect = offscreenCanvas.getBoundingClientRect();
     const x = event.clientX - rect.left;
     replayX = x * 2;
-    replayLine.style.marginRight = (Math.min(offscreenCanvas.width, 800) - replayX) + "px";
+    replayLine.style.marginRight = (Math.min(offscreenCanvas.width, getResponsiveCanvasWidth()) - replayX) + "px";
     recordedAudio.currentTime = x / pixelsPerSecond;
   });
 
@@ -483,13 +486,13 @@ const moveReplayLine = (timestamp) => {
 
     replayX += pixelsPerSecond * deltaTime * 2; 
 
-    if (replayX * 1/2 >= (Math.min(offscreenCanvas.width, 800) - 2)) {
+    if (replayX * 1/2 >= (Math.min(offscreenCanvas.width, getResponsiveCanvasWidth()) - 2)) {
         stopReplay();
         isPlaying = !isPlaying;
         return;
     }
 
-    replayLine.style.marginRight = (Math.min(offscreenCanvas.width, 800) - 2 - replayX) + "px";
+    replayLine.style.marginRight = (Math.min(offscreenCanvas.width, getResponsiveCanvasWidth()) - 2 - replayX) + "px";
     replayAnimationFrameId = requestAnimationFrame(moveReplayLine);
 };
 
@@ -513,7 +516,7 @@ const stopReplay = () => {
     recordedAudio.currentTime = 0;
     cancelAnimationFrame(replayAnimationFrameId);
     replayX = 0;
-    replayLine.style.marginRight = (Math.min(offscreenCanvas.width, 800) - 2) + "px";
+    replayLine.style.marginRight = (Math.min(offscreenCanvas.width, getResponsiveCanvasWidth()) - 2) + "px";
     lastTimestamp = 0;
     replayButtonIcon.classList.remove('fa-pause');
     replayButtonIcon.classList.add('fa-play');
@@ -533,6 +536,6 @@ document.getElementById('replay-button').addEventListener('click', function(even
 function jumpToWaveformTimestamp(timestamp) {
     recordedAudio.currentTime = timestamp;
     replayX = timestamp * pixelsPerSecond * 2;
-    replayLine.style.marginRight = (Math.min(offscreenCanvas.width, 800) - 2 - replayX) + "px";
+    replayLine.style.marginRight = (Math.min(offscreenCanvas.width, getResponsiveCanvasWidth()) - 2 - replayX) + "px";
 }
 /*## END: audio replay (including visual replay) ##*/
