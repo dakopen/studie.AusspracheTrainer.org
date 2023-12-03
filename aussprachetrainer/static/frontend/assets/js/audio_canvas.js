@@ -5,7 +5,7 @@ let ctx;
 
 let offscreenCanvas;
 let offscreenCtx;
-let y, yMirrored;
+let x, y, yMirrored;
 let offscreenX;
 let pixelsPerSecond;
 let realPixelsPerSecond;
@@ -18,7 +18,7 @@ const textareaEmptyError = document.getElementById('textarea-error');
 
 function getResponsiveCanvasWidth() {
   // Use the lesser of the window's innerWidth or a max width (e.g., 800)
-  return Math.min(window.innerWidth, 800);
+  return Math.min(window.innerWidth - 50, 800);
 }
 
 function initializeCanvasAndOffscreen() {
@@ -64,6 +64,7 @@ function initializeCanvasAndOffscreen() {
   offscreenCanvas.className = 'offscreen-canvas-class';
 
   offscreenX = 0;
+  x = getResponsiveCanvasWidth() / 2 - document.getElementById("record-button").offsetWidth / 2;
 }
 
 window.addEventListener('load', initializeCanvasAndOffscreen);
@@ -247,7 +248,6 @@ const replayButton = document.getElementById("replay-button");
 const replayLine = document.getElementById("replay-line");
 
 let stream;
-let x = getResponsiveCanvasWidth() / 2 - document.getElementById("record-button").offsetWidth / 2;
 
 let lastMeanFrequency = 0;
 let animationFrameId;
@@ -373,6 +373,7 @@ function draw() {
 
 
 /**# START: add colored boxes to the canvas for each recognized word #**/
+
 function colorCanvas(offsets) {
   offsets.forEach((offset) => {
 
@@ -408,7 +409,6 @@ function colorCanvas(offsets) {
   if (offscreenX > maxWidth) {
     offscreenCanvas.width = maxWidth;
     offscreenCanvas.height = maxWidth / aspectRatio;
-
   } else {
     offscreenCanvas.width = offscreenX;
     offscreenCanvas.height = offscreenX / aspectRatio;

@@ -88,8 +88,9 @@ span.required {
 
 #username_status_icon {
     position: absolute;
-    right: 10px; /* Adjust as necessary */
-    font-size: 20px; /* Adjust as necessary */
+    right: 10px;
+    font-size: 20px;
+    
 }
 
 #username_status_icon.available {
@@ -112,9 +113,20 @@ span.required {
 
 #username_status_icon {
     align-self: flex-end; 
-    margin-top: 30px; 
+    margin-top: 35px; 
     margin-right: 10px;
     font-size: 20px;
 }
 
+.dsgvo-checkbox {
+    display: flex;
+    font-size: small;
+    align-items: center;
+    padding-bottom: 1em;
+}
 
+.dsgvo-checkbox input[type="checkbox"] {
+    width: auto;
+    margin-right: 8px; /* Space between checkbox and label */
+
+}

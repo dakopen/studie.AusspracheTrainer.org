@@ -185,6 +185,9 @@ blockquote {
         width: 160px;
     }
 
+    .dont-show-on-mobile {
+        display: none;
+    }
     /* Additional mobile-specific styles here */
     /* ... */
 }

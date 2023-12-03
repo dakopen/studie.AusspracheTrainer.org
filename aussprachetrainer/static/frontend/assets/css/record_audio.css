@@ -346,3 +346,12 @@
 .generate-text-link:hover {
     color: var(--rosa);
 }
+
+.data-privacy-disclaimer {
+    text-align: center;
+    font-size: x-small;
+    width: 90%;
+    max-width: 500px;
+    margin: auto;
+    margin-top: -140px;
+}

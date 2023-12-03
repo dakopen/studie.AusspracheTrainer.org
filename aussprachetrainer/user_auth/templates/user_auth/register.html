@@ -4,13 +4,13 @@
 <html>
     <head>
         <title>{% trans "Login" %}</title>
-        <link href={% static 'frontend/assets/css/auth.css' %} rel="stylesheet">
-        <link href={% static 'frontend/assets/css/global-new.css' %} rel="stylesheet">
+        <link href="{% static 'frontend/assets/css/auth.css' %}" rel="stylesheet">
+        <link href="{% static 'frontend/assets/css/global-new.css' %}" rel="stylesheet">
     </head>
     <body>
         <div class="auth-container">
             <h1 class="auth-h1">{% trans "Registrieren" %}</h1>
-            <form method="post" class="auth">
+            <form method="post" class="auth" id="registrationForm">
                 {% csrf_token %}
                 {% for field in form %}
                     <div class="input-group">
@@ -26,6 +26,14 @@
                         {% endif %}
                     </div>
                 {% endfor %}
+                <!-- DSGVO Checkbox -->
+                <div class="dsgvo-checkbox">
+                    <input type="checkbox" id="dsgvoCheckbox" name="dsgvo" required>
+                    <label for="dsgvoCheckbox">
+                        {% trans "Ich stimme der" %} <a href="{% url 'privacy_policy' %}" target="_blank">{% trans "Datenschutzerklärung" %}</a> {% trans "zu." %}
+                        <span class="required">*</span>
+                    </label>
+                </div>
                 <button type="submit">{% trans "Registrieren" %}</button>
                 <p class="login-link">
                     {% trans "Bereits ein Konto?" %}
@@ -34,7 +42,7 @@
             </form>
         </div>
         <script src="{% static 'frontend/assets/js/auth.js' %}"></script>
+        
     </body>
-    
-    
 </html>
+

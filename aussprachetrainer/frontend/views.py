@@ -88,12 +88,7 @@ def legal_notice(request):
 
 
 def privacy_policy(request):
-
     return render_into_base(request, _("Datenschutzerklärung"), "privacy_policy.html")
-
-
-def waiting_page(request, task_id):
-    return render_into_base(request, _("Warte auf Ergebnis"), "waiting_page.html", {"task_id": task_id})
 
 
 def initiate_analysis(request):
