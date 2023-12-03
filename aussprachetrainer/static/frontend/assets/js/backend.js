@@ -1,5 +1,3 @@
-const responsearea = $("#responsearea");
-
 function checkStatus(taskId) {
     fetch(`/check_status/${taskId}/`)
         .then(response => response.json())
