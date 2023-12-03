@@ -21,6 +21,7 @@ function resizeTextarea() {
 
     textarea.css("height", "1.6em");
     textarea.css("height", textarea.prop("scrollHeight") + "px");
+    responsearea.css('width', textarea.css('width'));
 }
 
 function windowResize() {

@@ -375,16 +375,6 @@ function draw() {
 /**# START: add colored boxes to the canvas for each recognized word #**/
 
 function colorCanvas(offsets) {
-  offsets.forEach((offset) => {
-
-    const percentage = offset[2]; // between 0 and 100
-    const red = 255 - Math.round(2.55 * percentage);
-    const green = Math.round(2.55 * percentage);
-  
-    offscreenCtx.fillStyle = `rgba(${red}, ${green}, 0, 0.5)`;
-    offscreenCtx.fillRect(offset[0] / 1000 * pixelsPerSecond, 0, offset[1] / 1000 * pixelsPerSecond, canvas.height)
-  });
-
   const maxWidth = getResponsiveCanvasWidth();
 
   // Original dimensions
@@ -420,6 +410,16 @@ function colorCanvas(offsets) {
 
   // disable audio container mask-image:
   audioContainer.style.maskImage = 'none';
+
+  offsets.forEach((offset) => {
+
+    const percentage = offset[2]; // between 0 and 100
+    const red = 255 - Math.round(2.55 * percentage);
+    const green = Math.round(2.55 * percentage);
+
+    offscreenCtx.fillStyle = `rgba(${red}, ${green}, 0, 0.5)`;
+    offscreenCtx.fillRect(offset[0] / 1000 * pixelsPerSecond, 0, offset[1] / 1000 * pixelsPerSecond, canvas.height)
+  });
 
   // add the Event Listener for a click that changes the replay line position
   offscreenCanvas.addEventListener('click', function(event) {
