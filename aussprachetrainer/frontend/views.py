@@ -77,18 +77,13 @@ def index(request):
                             css=['frontend/assets/css/record_audio.css'])
 
 
-def contact(request):
-
-    return render_into_base(request, _("Kontakt"), "contact.html")
-
-
 def legal_notice(request):
 
-    return render_into_base(request, _("Impressum"), "legal_notice.html")
+    return render_into_base(request, _("Impressum"), "legal_notice.html", css=['frontend/assets/css/legal.css'])
 
 
 def privacy_policy(request):
-    return render_into_base(request, _("Datenschutzerklärung"), "privacy_policy.html")
+    return render_into_base(request, _("Datenschutzerklärung"), "privacy_policy.html", css=['frontend/assets/css/legal.css'])
 
 
 def initiate_analysis(request):
