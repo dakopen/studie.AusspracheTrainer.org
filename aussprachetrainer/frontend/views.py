@@ -73,8 +73,8 @@ def index(request):
         placeholder = "Übungssatz"
     context["placeholder"] = placeholder
 
-    return render_into_base(request, _("AusspracheTrainer"), ["record_audio.html"], context,
-                            css=['frontend/assets/css/record_audio.css'])
+    return render_into_base(request, _("AusspracheTrainer"), ["index.html"], context,
+                            css=['frontend/assets/css/index.css'])
 
 
 def legal_notice(request):
