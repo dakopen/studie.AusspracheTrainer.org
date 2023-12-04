@@ -34,13 +34,11 @@ function checkStatus(taskId) {
 }
 
 function displayResult(result) {
-    console.log(result);
     responsearea.empty(); // clear previous responsearea
+    responseareaScores.empty(); // clear previous responseareaScores
     responsearea.css('display', 'inline-block')
     responsearea.css('width', textarea.css('width'));
 
-    // Show result in the DOM
-    let paragraph = result[0]['Paragraph'];
     let words = result[0]['Words'];
 
 
@@ -78,6 +76,18 @@ function displayResult(result) {
     });
 
     colorCanvas(result[1])
+
+
+    // Show result in the DOM
+    let paragraph = result[0]['Paragraph'];
+    let responseScoreSpan = document.createElement('span');
+    const accuracy = Math.round(paragraph.accuracy_score);
+    const completeness = Math.round(paragraph.completeness_score);
+    const fluency = Math.round(paragraph.fluency_score);
+
+    // Füge die formatierten Scores zum Span-Element hinzu
+    responseScoreSpan.innerHTML = `${djangoTranslations.accuracy}: <b>${accuracy}</b> | ${djangoTranslations.completeness}: <b>${completeness}</b> | ${djangoTranslations.fluency}: <b>${fluency}</b>`;    responseareaScores.append(responseScoreSpan);
+    responseareaScores.css('display', 'inline-block');
 }
 
 function displayError() {

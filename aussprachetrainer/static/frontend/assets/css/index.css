@@ -109,6 +109,20 @@
     transition: left 0.5s ease-in-out, transform 0.5s ease-in-out;
 }
 
+#responsearea-scores {
+    display: none;
+    height: auto;
+    white-space: normal;
+    text-align: center;
+    vertical-align: top;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+    padding-top: 0.2em;
+    padding-bottom: 0.2em;
+    background-color: var(--light-rosa);
+    font-size: smaller;
+}
+
 #responsearea {
     display: none;
     padding-left: 0.5em;

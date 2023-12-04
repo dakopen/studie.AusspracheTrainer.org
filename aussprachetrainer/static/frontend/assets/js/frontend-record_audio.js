@@ -1,4 +1,5 @@
 const responsearea = $("#responsearea");
+const responseareaScores = $("#responsearea-scores");
 const textarea = $("#textarea");
 const binIcon = $("#bin-icon");
 const recordButton = $("#record-button");

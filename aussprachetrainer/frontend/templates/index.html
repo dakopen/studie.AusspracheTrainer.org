@@ -55,6 +55,9 @@
     <div class="center-container">
         <div id="responsearea"></div>
     </div>
+    <div class="center-container">
+        <div id="responsearea-scores"></div>
+    </div>
     <br class="dont-show-on-mobile">
     <div class="audio-container">
         <div class="button-container">
@@ -79,19 +82,15 @@
     <input type="hidden" id="hiddenSelectedLanguage" name="selected_language" value={% if language == 'de-DE' %}"dropdown-lang-germany"{% elif language == 'en-GB' %}"dropdown-lang-gb"{% elif language == 'fr-FR' %}"dropdown-lang-france"{% endif %}>
     {% csrf_token %}
 </form>
-<div id="result"></div>
-
-<br>
-<br>
-<br>
-
-<br>
-<br>
-<br>
-<div id="resultDiv"></div>
 
 <script src="{% static 'frontend/assets/js/frontend-record_audio.js' %}"></script>
 <script src="{% static 'frontend/assets/js/frontend-audio_canvas.js' %}"></script>
 <script src="{% static 'frontend/assets/js/frontend-backend.js' %}"></script>
 
-  
+<script type="text/javascript">
+    var djangoTranslations = {
+        accuracy: "{% trans 'Genauigkeit' %}",
+        completeness: "{% trans 'Vollständigkeit' %}",
+        fluency: "{% trans 'Redefluss' %}"
+    };
+</script>

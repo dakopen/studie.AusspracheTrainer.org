@@ -214,6 +214,8 @@ const resetFormReturnTextarea = () => {
   replayButton.style.display = 'none';
   replayLine.style.display = 'none';
   responsearea.css('display', 'none');
+  responseareaScores.css('display', 'none');
+
   if (replayAreaShown) {
     moveRecButton(false);
   }
