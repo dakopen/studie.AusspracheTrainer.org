@@ -20,7 +20,8 @@ function checkStatus(taskId) {
 
             if (data.status === 'SUCCESS') {
                 // Handle the result here
-                displayResult(data.result);                
+                displayResult(data.result);
+                enableRecordButtonAfterLoading();
 
             } else if (data.status !== 'FAILURE') {
                 // If the task is still pending or running, check again in a few seconds
@@ -29,6 +30,7 @@ function checkStatus(taskId) {
                 console.log(data);
                 // Handle failure here
                 displayError();
+                enableRecordButtonAfterLoading();
             }
         });
 }

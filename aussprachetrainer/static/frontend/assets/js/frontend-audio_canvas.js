@@ -327,6 +327,13 @@ recButton.addEventListener('click', function(e) {
 });
 /*## END: start recording on first click and submit form on second click ##*/
 
+function disableRecordButtonWhileLoading() {
+  recButton.disabled = true;
+}
+
+function enableRecordButtonAfterLoading() {
+  recButton.disabled = false;
+}
 
 /**# START: draw the waveform from microphone amplitude #**/
 function draw() {
@@ -457,11 +464,13 @@ $(document).ready(function() {
         'X-CSRFToken': $('input[name=csrfmiddlewaretoken]').val()  // Get the CSRF token from the form
       },
       success: function(data) {
+        disableRecordButtonWhileLoading();
         var taskID = data.task_id;
         checkStatus(taskID);
         isShowingResults = true;
       },
       error: function(err) {
+        enableRecordButtonAfterLoading();
         console.error('Error:', err);
       }
     });
