@@ -46,7 +46,7 @@
 
 .button-container {
     position: absolute; /* Absolute positioning on button container */
-    top: 25%;
+    top: 40%;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 2;
@@ -77,11 +77,6 @@
     align-items: center; /* Centers children vertically */
 }
 
-.center-container {
-    position: relative;
-    text-align: center;
-}
-
 
 .bin {
     color: grey;
@@ -98,7 +93,7 @@
     width: 85%;
     position: relative;
     max-width: 800px;
-    height: 325px;
+    height: 200px;
     margin: auto;
     overflow: visible;
     mask-image: linear-gradient(to right, transparent, white 10%, white 90%, transparent);
@@ -227,10 +222,36 @@
         
     }
 
+    .return-link {
+        font-size: small;
+    }
     /* Additional mobile-specific styles here */
     /* ... */
 }
 
+
+.return-link {
+    display: inline-block; /* Allows box-like properties */
+    padding: 10px 20px; /* Padding inside the box */
+    background-color: var(--rosa); /* Background color */
+    color: var(--white); /* Text color */
+    text-align: center; /* Center text inside the box */
+    text-decoration: none;
+    border-radius: 5px; /* Rounded corners */
+}
+
+.return-link:hover {
+    color: var(--white); /* Overwrite default behavior */
+    filter: brightness(1.1); /* Add a bit of brightness */
+
+}
+
+.center-return-link {
+    margin-top: 50px;
+    display: flex; /* Use flexbox for centering */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+}
 
 .inverted-svg {
     filter: invert(100%);
@@ -367,5 +388,5 @@
     width: 90%;
     max-width: 500px;
     margin: auto;
-    margin-top: -140px;
+    margin-top: -30px;
 }

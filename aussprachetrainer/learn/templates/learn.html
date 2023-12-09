@@ -63,7 +63,7 @@
                         {% endfor %}
                     </td>
                     <td class="learntable-action">
-                        <a href="{% url 'index' %}?text={{ sentence.text|urlencode }}&language={{ selected_language|urlencode }}" class="learntable-action-button">
+                        <a href="{% url 'index' %}?text={{ sentence.text|urlencode }}&language={{ selected_language|urlencode }}&return_to=learn" class="learntable-action-button">
                             <i class="fas fa-microphone"></i>
                         </a>
                     </td>

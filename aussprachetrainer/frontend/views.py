@@ -16,8 +16,8 @@ import io
 import os
 from analyze.models import PronunciationAssessmentResult
 from frontend.languages import country_class_to_locale
-from django.views.decorators.http import require_http_methods
 from django.conf import settings
+from django.urls import reverse
 
 languages = ['en-GB', 'de-DE', 'fr-FR']
 random_sentences = {lang: open(os.path.join(settings.BASE_DIR, f'frontend/random_sentences/{lang.split("-")[0]}_validated.txt')).read().splitlines() for lang in languages}  # 5000 per language
@@ -58,6 +58,16 @@ def index(request):
             context["language"] = latest_result.language if latest_result else "de-DE"
         else:
             context["language"] = "de-DE"
+
+    return_to = request.GET.get("return_to")
+    if return_to:
+        if return_to == "learn":
+            context["return_to"] = reverse("learn")
+            context["return_to_text"] = _("Zurück zum Lernbereich")
+        elif return_to == "dashboard":
+            context["return_to"] = reverse("dashboard")
+            context["return_to_text"] = _("Zurück zum Dashboard")
+
 
     text = request.GET.get("text")
     if text:

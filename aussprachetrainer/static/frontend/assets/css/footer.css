@@ -51,3 +51,12 @@
 .footer-copyright {
     text-align: center;
 }
+
+@media screen and (max-width: 768px) {
+    .footer {
+        font-size: smaller;
+    }
+    .footer-logo img {
+        max-width: 35px;
+    }
+}
