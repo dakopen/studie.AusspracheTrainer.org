@@ -7,6 +7,7 @@ import os
 from aussprachetrainer.settings import MS_SPEECH_SERVICES_API_KEY as speech_key
 from aussprachetrainer.settings import MS_SPEECH_SERVICES_REGION as service_region
 from aussprachetrainer.settings import DELETE_AUDIO_FILE_AFTER_ANALYSIS
+from analyze.phoneme_analysis import get_phoneme_index
 
 speech_config = speechsdk.SpeechConfig(subscription=speech_key, region=service_region)
 
@@ -37,6 +38,7 @@ def pronunciation_assessment_continuous_from_file(filename, reference_text, lang
     fluency_scores = []
     durations = []
     word_offset_duration = []
+    phoneme_dicts = [] # contains {"phoneme_id": X, "score": Y}, ...
 
     def stop_cb(evt: speechsdk.SessionEventArgs):
         """callback that signals to stop continuous recognition upon receiving an event `evt`"""
@@ -46,7 +48,7 @@ def pronunciation_assessment_continuous_from_file(filename, reference_text, lang
     def recognized(evt: speechsdk.SpeechRecognitionEventArgs):
         pronunciation_result = speechsdk.PronunciationAssessmentResult(evt.result)
 
-        nonlocal recognized_words, fluency_scores, durations, word_offset_duration
+        nonlocal recognized_words, fluency_scores, durations, word_offset_duration, phoneme_dicts
         recognized_words += pronunciation_result.words
         fluency_scores.append(pronunciation_result.fluency_score)
         json_result = evt.result.properties.get(speechsdk.PropertyId.SpeechServiceResponse_JsonResult)
@@ -56,6 +58,15 @@ def pronunciation_assessment_continuous_from_file(filename, reference_text, lang
         durations.append(sum([int(w['Duration']) for w in nb['Words']]))
         for word in nb['Words']:
             word_offset_duration.append((word['Offset']/10000, word['Duration']/10000, word['PronunciationAssessment']['AccuracyScore'], word['Word']))
+
+
+            # Store all phoneme scores:
+            for phoneme in word["Phonemes"]:
+                if phoneme["Phoneme"] != "":
+                    phoneme_dicts.append({"phoneme_id": get_phoneme_index(phoneme["Phoneme"], language), "score": phoneme['PronunciationAssessment']['AccuracyScore']})
+    
+            
+
 
     # Connect callbacks to the events fired by the speech recognizer
     speech_recognizer.recognized.connect(recognized)
@@ -148,4 +159,4 @@ def pronunciation_assessment_continuous_from_file(filename, reference_text, lang
     if DELETE_AUDIO_FILE_AFTER_ANALYSIS:
         delete_audio_file(filename)
 
-    return results, word_offset_duration
+    return results, word_offset_duration, phoneme_dicts

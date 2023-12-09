@@ -199,3 +199,21 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'kontakt@aussprachetrainer.org'
 EMAIL_HOST_PASSWORD = get_secret("django-backend-email-host-password")
 DEFAULT_FROM_EMAIL = 'AusspracheTrainer <kontakt@aussprachetrainer.org>'
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'loggers': {
+        '': {
+            'handlers': ['console'],
+            'level': 'INFO',
+            'propagate': True,
+        },
+    },
+}
+

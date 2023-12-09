@@ -1,12 +1,12 @@
+import logging
 
-
-
-
+logger = logging.getLogger(__name__)
 
 
 phonemes = {
-    "de-DE": {},
-    "en-US": { # https://learn.microsoft.com/de-de/azure/ai-services/speech-service/speech-ssml-phonetic-sets#section
+    "de-DE": {"": 0,},
+    "en-GB": {  # https://learn.microsoft.com/de-de/azure/ai-services/speech-service/speech-ssml-phonetic-sets#en-gben-ieen-au
+        "": 0,
         "iy": 1, 
         "ih": 2,
         "ey": 3,
@@ -29,7 +29,7 @@ phonemes = {
         "p": 20,
         "b": 21,
         "t": 22,
-        "T": 23,
+        "d": 23,
         "k": 24,
         "g": 25,
         "m": 26,
@@ -50,6 +50,7 @@ phonemes = {
         "r": 41,
     },
     "fr-FR": { # https://learn.microsoft.com/de-de/azure/ai-services/speech-service/speech-ssml-phonetic-sets#fr-frfr-cafr-ch
+        "": 0,
         "ae": 1,
         "af": 2,
         "ein": 3,
@@ -67,7 +68,7 @@ phonemes = {
         "uw": 15,
         "uy": 16,
         "b": 17,
-        "T": 18,
+        "d": 18,
         "f": 19,
         "g": 20,
         "gn": 21,
@@ -87,54 +88,17 @@ phonemes = {
         "j": 35,
         "z": 36,
     },
-    "en-GB": { # https://learn.microsoft.com/de-de/azure/ai-services/speech-service/speech-ssml-phonetic-sets#en-gben-ieen-au
-    "ɑː": 1,
-    "æ": 2,
-    "ʌ": 3,
-    "ɛə": 4,
-    "aʊ": 5,
-    "ə": 6,
-    "aɪ": 7,
-    "ɛ": 8,
-    "ɜː": 9,
-    "eɪ": 10,
-    "ɪ": 11,
-    "ɪə": 12,
-    "iː": 13,
-    "ɒ": 14,
-    "ɔː": 15,
-    "əʊ": 16,
-    "ɔɪ": 17,
-    "ʊ": 18,
-    "ʊə": 19,
-    "uː": 20,
-    "b": 21,
-    "tʃ": 22,
-    "d": 23,
-    "ð": 24,
-    "f": 25,
-    "g": 26,
-    "h": 27,
-    "j": 28,
-    "dʒ": 29,
-    "k": 30,
-    "l": 31,
-    "m": 32,
-    "n": 33,
-    "ŋ": 34,
-    "p": 35,
-    "ɹ": 36,
-    "s": 37,
-    "ʃ": 38,
-    "t": 39,
-    "θ": 40,
-    "v": 41,
-    "w": 42,
-    "z": 43,
-    "ʒ": 44,
-    },
 }
 
 
+def get_phoneme_index(phoneme, language):
+    if phoneme in phonemes[language]:
+        return phonemes[language][phoneme]
+    else:
+        return None
 
-
+def get_phoneme(phoneme_index, language):
+    for phoneme, index in phonemes[language].items():
+        if index == phoneme_index:
+            return phoneme
+    return None
