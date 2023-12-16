@@ -1,8 +1,3 @@
 # TODO: Multiple Things
-- PronunciationAssessment does not work correctly when the Audiofile is
-    (way) longer than the reference text; maybe also use Google 
-    and when it is longer than the reference text it uses a different approach
-
-- add random sentence generator icon and backend functionality
 - test language selelection
 - teachers can upload a set of sentences for a specific language that the students have to learn
