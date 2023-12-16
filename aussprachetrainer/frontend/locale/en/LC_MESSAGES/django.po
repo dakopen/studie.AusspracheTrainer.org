@@ -91,16 +91,12 @@ msgid "AusspracheTrainer"
 msgstr "AusspracheTrainer"
 
 #: aussprachetrainer/dashboard/templates/dashboard.html:80
-#, fuzzy
-#| msgid ""
-#| "In diesem Score sind mehrere Faktoren wie die Genauigkeit, der Redefluss "
-#| "und die Schwierigkeit eingerechnet."
 msgid ""
 "In diesem Score sind mehrere Faktoren wie die Genauigkeit, der Redefluss und "
 "die Schwierigkeit eingerechnet. [Coming soon]"
 msgstr ""
 "This score is calculated from several factors like accuracy, fluency and "
-"difficulty."
+"difficulty. [Coming soon]"
 
 #: aussprachetrainer/dashboard/templates/dashboard.html:93
 #: aussprachetrainer/frontend/templates/index.html:101
@@ -108,8 +104,6 @@ msgid "Redefluss"
 msgstr "Fluency"
 
 #: aussprachetrainer/dashboard/templates/dashboard.html:96
-#, fuzzy
-#| msgid "Der Redefluss Score besagt, ..."
 msgid "Der Redefluss Score besagt, wie flüssig du vorliest."
 msgstr "The fluency score indicates how fluently you read aloud."
 
@@ -118,8 +112,6 @@ msgid "Bitte erst einen Übungssatz eingeben!"
 msgstr "Please enter a practice sentence first!"
 
 #: aussprachetrainer/frontend/templates/index.html:52
-#, fuzzy
-#| msgid "Text eingeben:"
 msgid "Satz eingeben oder"
 msgstr "enter text or"
 
@@ -151,8 +143,6 @@ msgstr "legal notice"
 
 #: aussprachetrainer/frontend/templates/legal_notice.html:6
 #: aussprachetrainer/frontend/templates/privacy_policy.html:99
-#, fuzzy
-#| msgid "AusspracheTrainer"
 msgid "AusspracheTrainer g.e.V."
 msgstr "AusspracheTrainer g.e.V."
 
@@ -498,10 +488,8 @@ msgid "(englisch)"
 msgstr "(english)"
 
 #: aussprachetrainer/frontend/templates/privacy_policy.html:43
-#, fuzzy
-#| msgid "Datenschutzerklärung"
 msgid "Datenschutzerklärung von Cloudflare: "
-msgstr "privacy policy"
+msgstr "Privacy policy from Cloudflare:"
 
 #: aussprachetrainer/frontend/templates/privacy_policy.html:45
 msgid "Nutzung der Audioaufnahmefunktion"
@@ -614,8 +602,6 @@ msgstr ""
 
 #: aussprachetrainer/frontend/templates/privacy_policy.html:60
 #: aussprachetrainer/frontend/templates/privacy_policy.html:87
-#, fuzzy
-#| msgid "Datenschutz"
 msgid "Datensicherheit"
 msgstr "privacy policy"
 
@@ -2306,10 +2292,8 @@ msgid "nov"
 msgstr ""
 
 #: venv/lib/python3.8/site-packages/django/utils/dates.py:50
-#, fuzzy
-#| msgid "deutsch"
 msgid "dec"
-msgstr "german"
+msgstr ""
 
 #: venv/lib/python3.8/site-packages/django/utils/dates.py:53
 msgctxt "abbrev. month"
