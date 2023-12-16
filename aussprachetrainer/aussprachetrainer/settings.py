@@ -66,7 +66,7 @@ SECRET_KEY = get_random_secret_key()
 if DEBUG:
     ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
 else:
-    ALLOWED_HOSTS = [".aussprachetrainer.org", "localhost", "*.dakopen.de"]
+    ALLOWED_HOSTS = [".aussprachetrainer.org", "localhost", ".dakopen.de"]
 
 ADMINS = [("Daniel Busch", "dakopen185@gmail.com")]
 
