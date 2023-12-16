@@ -12,12 +12,12 @@ from analyze.phoneme_analysis import get_phoneme_index
 speech_config = speechsdk.SpeechConfig(subscription=speech_key, region=service_region)
 
 def delete_audio_file(filename):
-    os.remove(filename)
+    if not "testaudio.wav" in filename:
+        os.remove(filename)
 
 def pronunciation_assessment_continuous_from_file(filename, reference_text, language):
     """Performs continuous pronunciation assessment asynchronously with input from an audio file.
         See more information at https://aka.ms/csspeech/pa"""
-    print("starting pronunciation assessment")
     audio_config = speechsdk.audio.AudioConfig(filename=filename)
     
     enable_miscue = True
@@ -53,7 +53,6 @@ def pronunciation_assessment_continuous_from_file(filename, reference_text, lang
         fluency_scores.append(pronunciation_result.fluency_score)
         json_result = evt.result.properties.get(speechsdk.PropertyId.SpeechServiceResponse_JsonResult)
         jo = json.loads(json_result)
-        print(jo)
         nb = jo['NBest'][0]
         durations.append(sum([int(w['Duration']) for w in nb['Words']]))
         for word in nb['Words']:

@@ -186,3 +186,5 @@ openssl-1.1.1v/
 
 staticfiles/
 fontawesomefree/
+
+!testaudio.wav

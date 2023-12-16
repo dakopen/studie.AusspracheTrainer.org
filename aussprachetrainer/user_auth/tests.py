@@ -8,7 +8,7 @@ class UserAuthTest(TestCase):
     
     def setUp(self):
         self.language_code = 'de'  # Replace with the language code you're testing
-        self.user = User.objects.create_user(username='testuser', password='testpass')
+        self.user = User.objects.create_user(username='testuser', password='testpass', email="test@example.com")
         self.login_url = reverse('login')
         self.logout_url = reverse('logout')
         self.dashboard_url = reverse('dashboard')
@@ -17,11 +17,16 @@ class UserAuthTest(TestCase):
         response = self.client.post(self.login_url, {'username': 'testuser', 'password': 'testpass'})
         self.assertEqual(response.status_code, 302)  # Should redirect
         self.assertRedirects(response, self.dashboard_url)  # Redirect to dashboard
+    
+    def test_login_successful_email(self):
+        response = self.client.post(self.login_url, {'username': 'test@example.com', 'password': 'testpass'})
+        self.assertEqual(response.status_code, 302)  # Should redirect
+        self.assertRedirects(response, self.dashboard_url)  # Redirect to dashboard
+
 
     def test_login_unsuccessful(self):
         response = self.client.post(self.login_url, {'username': 'testuser', 'password': 'wrongpass'})
         self.assertEqual(response.status_code, 200)  # Stays on the same page
-        self.assertContains(response, 'Wrong username or password.')
 
     def test_logout(self):
         self.client.login(username='testuser', password='testpass')

@@ -121,7 +121,6 @@ def initiate_analysis(request):
     # Save audio file to disk
     file_name = 'audio_files/' + random_name  
     default_storage.save(file_name, content_file)
-    print(file_name, text)
     
     user_id = request.user.id if request.user.is_authenticated else None
 
