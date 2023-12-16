@@ -3,16 +3,35 @@ version: '3'
 services:
   web:
     build: .
-    ports:
-      - "8000:8000"
+    command: gunicorn --bind 0.0.0.0:8000 aussprachetrainer.wsgi:application
+    volumes:
+      - .:/usr/src/app
+      - static_volume:/usr/src/app/staticfiles
+      - audio_volume:/usr/src/app/audio_files
     depends_on:
       - redis
 
   celery:
     build: .
     command: celery -A aussprachetrainer worker --loglevel=info
+    volumes:
+      - .:/usr/src/app
+      - audio_volume:/usr/src/app/audio_files
     depends_on:
       - redis
 
+  nginx:
+    build: ./nginx
+    ports:
+      - "80:80"
+    volumes:
+      - static_volume:/usr/src/app/staticfiles
+    depends_on:
+      - web
+
   redis:
     image: "redis:alpine"
+
+volumes:
+  static_volume:
+  audio_volume:

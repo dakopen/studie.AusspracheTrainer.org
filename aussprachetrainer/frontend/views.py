@@ -18,9 +18,12 @@ from analyze.models import PronunciationAssessmentResult
 from frontend.languages import country_class_to_locale
 from django.conf import settings
 from django.urls import reverse
+import logging
 
 languages = ['en-GB', 'de-DE', 'fr-FR']
-random_sentences = {lang: open(os.path.join(settings.BASE_DIR, f'frontend/random_sentences/{lang.split("-")[0]}_validated.txt')).read().splitlines() for lang in languages}  # 5000 per language
+random_sentences = {lang: open(os.path.join(settings.BASE_DIR, f'frontend/random_sentences/{lang.split("-")[0]}_validated.txt'), encoding="utf-8-sig").read().splitlines() for lang in languages}  # 5000 per language
+
+logger = logging.getLogger(__name__)
 
 
 def render_into_base(request, title, filepaths, context=None, content_type=None, status=None, using=None, css=None):
@@ -99,7 +102,7 @@ def privacy_policy(request):
 def initiate_analysis(request):
     audio_data_url = request.POST.get('audio_data')
     text = request.POST.get('text_data')
-    selected_language = request.POST.get('selected_language')
+    selected_language = request.POST.get('selected_language')   
 
     audio_data_base64 = audio_data_url.split(',')[1]
     audio_data = base64.b64decode(audio_data_base64)

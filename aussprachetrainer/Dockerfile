@@ -8,7 +8,8 @@ WORKDIR /usr/src/app
 COPY . .
 
 # Install any needed packages specified in requirements.txt
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install -r requirements.txt
+#RUN pip install --no-cache-dir -r requirements.txt
 
 # Install FFmpeg
 RUN apt-get update && \
@@ -17,6 +18,14 @@ RUN apt-get update && \
 
 # Expose port for Gunicorn
 EXPOSE 8000
+
+# Create a group and user
+RUN addgroup --gid 1000 myusergroup && \
+    adduser --uid 1000 --disabled-password --gecos '' --ingroup myusergroup myuser
+
+# Change ownership of the working directory
+RUN chown -R myuser:myusergroup /usr/src/app
+USER myuser
 
 # Start Gunicorn
 CMD ["gunicorn", "--bind", "0.0.0.0:8000", "aussprachetrainer.wsgi:application"]
