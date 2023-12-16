@@ -22,6 +22,7 @@ def before_send(event, hint):
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DJANGO_DEBUG', 'False') == 'True'
+GITHUB_TEST = os.environ.get('DJANGO_GITHUB_TEST', 'False') == 'True'
 
 if DEBUG:
     sentry_sdk.init(
