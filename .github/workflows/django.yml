@@ -14,6 +14,7 @@ jobs:
     runs-on: ubuntu-20.04
     environment: GITHUB_TEST
     env:
+      DJANGO_GITHUB_TEST: ${{ vars.DJANGO_GITHUB_TEST }}
       AZURE_KEYVAULT_URL: ${{ secrets.AZURE_KEYVAULT_URL }}
 
     steps:
