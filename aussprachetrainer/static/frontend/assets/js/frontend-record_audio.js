@@ -1,3 +1,5 @@
+const responsearea = $("#responsearea");
+const responseareaScores = $("#responsearea-scores");
 const textarea = $("#textarea");
 const binIcon = $("#bin-icon");
 const recordButton = $("#record-button");
@@ -21,6 +23,7 @@ function resizeTextarea() {
 
     textarea.css("height", "1.6em");
     textarea.css("height", textarea.prop("scrollHeight") + "px");
+    responsearea.css('width', textarea.css('width'));
 }
 
 function windowResize() {
@@ -41,12 +44,10 @@ function getTextWidth(text, font) { // important
 
 function clearTextarea() {
     resetFormReturnTextarea();
-    // textarea.val("");
-    // resizeTextarea();
 }
 
 /*Dropdown Menu*/
-let selectedLiId = 'dropdown-lang-germany';
+let selectedLiId = $('.dropdown-select span img').attr('value')
 $('#' + selectedLiId).hide();
 
 $('.dropdown').click(function () {
@@ -85,7 +86,7 @@ $('.dropdown .dropdown-menu li').click(function () {
     var selectedLanguage = selectedLiId.split('-')[2];
     let placeholderTextarea;
     switch(selectedLanguage) {
-        case "uk":
+        case "gb":
             placeholderTextarea = "Practice sentence";
             break;
         case "germany":
@@ -99,4 +100,31 @@ $('.dropdown .dropdown-menu li').click(function () {
 });
 
 /*End Dropdown Menu*/
+function generateRandomSentence() {
+    let language = $('#hiddenSelectedLanguage').val();
+    var selectedLanguage = language.split('-')[2];
+    switch(selectedLanguage) {
+        case "gb":
+            language = "en-GB";
+            break;
+        case "germany":
+            language = "de-DE";
+            break;
+        case "france":
+            language = "fr-FR";
+            break;
+    }
 
+    $.ajax({
+        url: '/generate_random_sentence/?language=' + language,
+        type: 'POST',
+        success: function (data) {
+            textarea.val(data.sentence);
+            resizeTextarea();
+        },
+        error: function (xhr, status, error) {
+            // Handle error
+            console.error("Error: " + error);
+        }
+    });
+}

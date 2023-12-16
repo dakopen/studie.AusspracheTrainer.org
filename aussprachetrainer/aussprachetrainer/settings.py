@@ -14,31 +14,43 @@ from pathlib import Path
 import os
 from aussprachetrainer.keyvault_manager import get_secret
 from django.core.management.utils import get_random_secret_key  
+import sentry_sdk
+from sentry_sdk.integrations.django import DjangoIntegration
 
 def before_send(event, hint):
     return None  # Discarding all events
 
+# SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = os.environ.get('DJANGO_DEBUG', 'False') == 'True'
+GITHUB_TEST = os.environ.get('DJANGO_GITHUB_TEST', 'False') == 'True'
 
-import sentry_sdk
-from sentry_sdk.integrations.django import DjangoIntegration
-sentry_sdk.init(
-    dsn= "https://8c306e7425f34fd94efa6d6a29331df4@o4505771582750720.ingest.sentry.io/4505771586420736",
-    integrations=[DjangoIntegration()],
-    # If you wish to associate users to errors (assuming you are using
-    # django.contrib.auth) you may enable sending PII data.
-    send_default_pii=True,
-    # Set traces_sample_rate to 1.0 to capture 100%
-    # of transactions for performance monitoring.
-    # We recommend adjusting this value in production.
-    traces_sample_rate=1.0,
-    # To set a uniform sample rate
-    # Set profiles_sample_rate to 1.0 to profile 100%
-    # of sampled transactions.
-    # We recommend adjusting this value in production,
-    profiles_sample_rate=1.0,
-    before_send=before_send # Wegmachen, wenn Errors getrackt werden sollen
-)
+if DEBUG:
+    sentry_sdk.init(
+        dsn= "https://8c306e7425f34fd94efa6d6a29331df4@o4505771582750720.ingest.sentry.io/4505771586420736",
+        integrations=[DjangoIntegration()],
+        # If you wish to associate users to errors (assuming you are using
+        # django.contrib.auth) you may enable sending PII data.
+        send_default_pii=True,
+        # Set traces_sample_rate to 1.0 to capture 100%
+        # of transactions for performance monitoring.
+        # We recommend adjusting this value in production.
+        traces_sample_rate=1.0,
+        # To set a uniform sample rate
+        # Set profiles_sample_rate to 1.0 to profile 100%
+        # of sampled transactions.
+        # We recommend adjusting this value in production,
+        profiles_sample_rate=1.0,
+        before_send=before_send # Wegmachen, wenn Errors getrackt werden sollen
+    )
 
+else:
+    sentry_sdk.init(
+        dsn= "https://8c306e7425f34fd94efa6d6a29331df4@o4505771582750720.ingest.sentry.io/4505771586420736",
+        integrations=[DjangoIntegration()],
+        send_default_pii=True,
+        traces_sample_rate=1.0,
+        profiles_sample_rate=0.5,
+    )
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -49,26 +61,30 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = get_random_secret_key()
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
 
-ALLOWED_HOSTS = []
 
+if DEBUG:
+    ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
+else:
+    ALLOWED_HOSTS = [".aussprachetrainer.org", "localhost", "*.dakopen.de"]
+
+ADMINS = [("Daniel Busch", "dakopen185@gmail.com")]
 
 # Application definition
 
 INSTALLED_APPS = [
+    'user_auth',
+    'frontend',
+    'analyze',
+    'dashboard',
+    'learn',
+    'fontawesomefree',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'fontawesomefree',
-    'frontend',
-    'analyze',
-    'user_auth',
-    'dashboard',
 ]
 
 MIDDLEWARE = [
@@ -87,7 +103,7 @@ ROOT_URLCONF = 'aussprachetrainer.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'frontend/templates')],
+        'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -114,6 +130,12 @@ DATABASES = {
     }
 }
 
+AUTHENTICATION_BACKENDS = [
+    'user_auth.backends.EmailOrUsernameModelBackend',
+    'user_auth.backends.CaseInsensitiveModelBackend',
+    'django.contrib.auth.backends.ModelBackend',
+]
+
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -135,7 +157,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Authentication
 
-#AUTH_USER_MODEL = 'user_auth.User'
+AUTH_USER_MODEL = 'user_auth.CustomUser'
 LOGIN_URL = '/auth/login/'
 
 
@@ -144,7 +166,7 @@ LOGIN_URL = '/auth/login/'
 
 LANGUAGE_CODE = 'de'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Berlin'
 
 USE_I18N = True
 
@@ -181,4 +203,32 @@ CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
 
 MS_SPEECH_SERVICES_API_KEY = get_secret("AzureSpeechKey1")
 MS_SPEECH_SERVICES_REGION = "germanywestcentral"
+
+DELETE_AUDIO_FILE_AFTER_ANALYSIS = True
+
+# EMAIL SETTINGS:
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.strato.de'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'kontakt@aussprachetrainer.org'
+EMAIL_HOST_PASSWORD = get_secret("django-backend-email-host-password")
+DEFAULT_FROM_EMAIL = 'AusspracheTrainer <kontakt@aussprachetrainer.org>'
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'loggers': {
+        '': {
+            'handlers': ['console'],
+            'level': 'INFO',
+            'propagate': True,
+        },
+    },
+}
 

@@ -1,0 +1,103 @@
+{% load static %}
+{% load i18n %}
+<form action="{% url 'initiate_analysis' %}" method="post" enctype="multipart/form-data" id="recordAudioForm">
+    <div class="center-container">
+        <!--Language Dropdown-->
+        <div class="dropdown-container">
+            <span class="choose">{% trans "Sprache ändern" %}</span>
+          
+            <div class="dropdown">
+                <div class="dropdown-select">
+                    <span>
+                        {% if language == 'de-DE' %}
+                            {% trans "deutsch" %}
+                            <img class="dropdown-flag" src={% static 'frontend/assets/images/Flag_of_Germany.svg' %} alt={% trans "deutsch" %} height=20 width=30 value="dropdown-lang-germany">
+                        {% elif language == 'en-GB' %}
+                            {% trans "englisch" %}
+                            <img class="dropdown-flag" src={% static 'frontend/assets/images/Flag_of_the_United_Kingdom.svg' %} alt={% trans "englisch" %} height=20 width=30 value="dropdown-lang-gb">
+                        {% elif language == 'fr-FR' %}
+                            {% trans "französisch" %}
+                            <img class="dropdown-flag" src={% static 'frontend/assets/images/Flag_of_France.svg' %} alt={% trans "französisch" %} height=20 width=30 value="dropdown-lang-france">
+                        {% endif %}  
+                        </span>
+                    <i class="fa fa-chevron-down"></i>
+                </div>
+                <input type="hidden" name="language">
+                <ul class="dropdown-menu">
+                    <li id="dropdown-lang-gb">
+                        {% trans "englisch" %}
+                        <img class="dropdown-flag" src={% static 'frontend/assets/images/Flag_of_the_United_Kingdom.svg' %} alt={% trans "englisch" %} height=24 width=36>
+                    </li>
+                    <li id="dropdown-lang-germany">
+                        {% trans "deutsch" %}
+                        <img class="dropdown-flag" src={% static 'frontend/assets/images/Flag_of_Germany.svg' %} alt={% trans "deutsch" %} height=24 width=36>
+                    </li>
+                    <li id="dropdown-lang-france">
+                        {% trans "französisch" %}
+                        <img class="dropdown-flag" src={% static 'frontend/assets/images/Flag_of_France.svg' %} alt={% trans "französisch" %} height=24 width=36>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+        <br>
+
+    </div>
+    
+    <div class="center-container">
+        <textarea placeholder={{ placeholder|safe }} id="textarea" class="textarea-responsive" maxlength="300" autocapitalize="off">{{ text }}</textarea>
+        <i class="fas fa-trash-alt bin" onclick="clearTextarea()"></i>
+    </div>
+    <div class="textarea-error-div"><p id="textarea-error" class="textarea-empty-error">{% trans "Bitte erst einen Übungssatz eingeben!" %}</p></div>
+    <p class="generate-text-p">{% trans "Satz eingeben oder" %} <a class="generate-text-link" onclick="generateRandomSentence()">{% trans "generieren lassen" %}</a></p>
+    <br class="dont-show-on-mobile">
+
+    <div class="center-container">
+        <div id="responsearea"></div>
+    </div>
+    <div class="center-container">
+        <div id="responsearea-scores"></div>
+    </div>
+    <br class="dont-show-on-mobile">
+    <div class="audio-container">
+        <div class="button-container">
+            <button class="round-button glow-on-hover" id="record-button">
+                <img src="{% static 'frontend/assets/images/microphone.svg' %}" alt="microphone icon" height="55" width="55" class="inverted-svg" id="start-recording-icon">
+                <i class="fa-solid fa-square fa-2x" id="stop-recording-icon"></i>
+                <img src="{% static 'frontend/assets/images/tail-spin.svg' %}" alt="waiting icon" height="45" width="45" id="wait-recording-icon">
+            </button>
+            <button class="round-button" id="right-button">{% trans "abbrechen" %}</button>
+        </div>
+        <div class="flexbox" id="canvas-parent-container">
+            <canvas id="visualizer" class="canvas-visualizer" width="800" max-width="100%" height="130"></canvas>
+            <button id="replay-button"><i class="fa-solid fa-play" id="replay-button-icon"></i></button>
+            <div id="replay-line"></div>
+        </div>
+    </div>
+    <div class="data-privacy-disclaimer">
+        <p>{% trans "Mit der Benutzung der App stimmen Sie der Datenschutzerklärung zu, einschließlich der Übermittlung der Audioaufnahme an Microsoft." %}
+    </div>
+    <input type="hidden" id="hiddenAudioData" name="audio_data">
+    <input type="hidden" id="hiddenTextData" name="text_data">
+    <input type="hidden" id="hiddenSelectedLanguage" name="selected_language" value={% if language == 'de-DE' %}"dropdown-lang-germany"{% elif language == 'en-GB' %}"dropdown-lang-gb"{% elif language == 'fr-FR' %}"dropdown-lang-france"{% endif %}>
+    {% csrf_token %}
+</form>
+
+{% if return_to %}
+<div class="center-return-link">
+    <a href={{ return_to }} class="return-link">{{ return_to_text }}</a>
+</div>
+{% endif %}
+
+
+<script src="{% static 'frontend/assets/js/frontend-record_audio.js' %}"></script>
+<script src="{% static 'frontend/assets/js/frontend-audio_canvas.js' %}"></script>
+<script src="{% static 'frontend/assets/js/frontend-backend.js' %}"></script>
+
+<script type="text/javascript">
+    var djangoTranslations = {
+        accuracy: "{% trans 'Genauigkeit' %}",
+        completeness: "{% trans 'Vollständigkeit' %}",
+        fluency: "{% trans 'Redefluss' %}"
+    };
+</script>

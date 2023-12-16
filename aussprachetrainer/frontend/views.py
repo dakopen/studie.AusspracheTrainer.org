@@ -8,12 +8,19 @@ from analyze.tasks import async_pronunciation_assessment
 from celery.result import AsyncResult
 from django.http import JsonResponse, HttpResponse
 from django.conf import settings
-
+import random
 import uuid
 from pydub import AudioSegment
 import base64
 import io
+import os
+from analyze.models import PronunciationAssessmentResult
 from frontend.languages import country_class_to_locale
+from django.conf import settings
+from django.urls import reverse
+
+languages = ['en-GB', 'de-DE', 'fr-FR']
+random_sentences = {lang: open(os.path.join(settings.BASE_DIR, f'frontend/random_sentences/{lang.split("-")[0]}_validated.txt')).read().splitlines() for lang in languages}  # 5000 per language
 
 
 def render_into_base(request, title, filepaths, context=None, content_type=None, status=None, using=None, css=None):
@@ -38,28 +45,55 @@ def render_into_base(request, title, filepaths, context=None, content_type=None,
 
 
 def index(request):
+    context = {}
+    user = request.user
+    
+    language = request.GET.get("language")
+    if language:
+        context["language"] = language
+    else:
+        if user.is_authenticated:
+            results = PronunciationAssessmentResult.objects.filter(user=user)
+            latest_result = results.order_by('-created_at').first()
+            context["language"] = latest_result.language if latest_result else "de-DE"
+        else:
+            context["language"] = "de-DE"
 
-    return render_into_base(request, _("AusspracheTrainer"), ["record_audio.html"],
-                            css=['frontend/assets/css/record_audio.css'])
+    return_to = request.GET.get("return_to")
+    if return_to:
+        if return_to == "learn":
+            context["return_to"] = reverse("learn")
+            context["return_to_text"] = _("Zurück zum Lernbereich")
+        elif return_to == "dashboard":
+            context["return_to"] = reverse("dashboard")
+            context["return_to_text"] = _("Zurück zum Dashboard")
 
 
-def contact(request):
+    text = request.GET.get("text")
+    if text:
+        context["text"] = text
+    else:
+        context["text"] = ""
 
-    return render_into_base(request, _("Kontakt"), "contact.html")
+    if context["language"] == "en-GB":
+        placeholder = "Practice&nbsp;sentence"
+    elif context["language"] == "fr-FR":
+        placeholder = "Phrase&nbsp;d'exercice"
+    elif context["language"] == "de-DE":
+        placeholder = "Übungssatz"
+    context["placeholder"] = placeholder
+
+    return render_into_base(request, _("AusspracheTrainer"), ["index.html"], context,
+                            css=['frontend/assets/css/index.css'])
 
 
 def legal_notice(request):
 
-    return render_into_base(request, _("Impressum"), "legal_notice.html")
+    return render_into_base(request, _("Impressum"), "legal_notice.html", css=['frontend/assets/css/legal.css'])
 
 
 def privacy_policy(request):
-
-    return render_into_base(request, _("Datenschutzerklärung"), "privacy_policy.html")
-
-
-def waiting_page(request, task_id):
-    return render_into_base(request, _("Warte auf Ergebnis"), "waiting_page.html", {"task_id": task_id})
+    return render_into_base(request, _("Datenschutzerklärung"), "privacy_policy.html", css=['frontend/assets/css/legal.css'])
 
 
 def initiate_analysis(request):
@@ -74,7 +108,9 @@ def initiate_analysis(request):
     buffer = io.BytesIO()
 
     audio_segment = AudioSegment.from_ogg(io.BytesIO(audio_data))
-
+    
+    if len(audio_segment) > 59000:
+        audio_segment = audio_segment[:59000]  # max. 59 seconds
     audio_segment.export(buffer, format="wav")
 
     buffer.seek(0)
@@ -85,7 +121,6 @@ def initiate_analysis(request):
     # Save audio file to disk
     file_name = 'audio_files/' + random_name  
     default_storage.save(file_name, content_file)
-    print(file_name, text)
     
     user_id = request.user.id if request.user.is_authenticated else None
 
@@ -116,3 +151,12 @@ def change_language(request):
     response = HttpResponse(lang)
     response.set_cookie(settings.LANGUAGE_COOKIE_NAME, lang)
     return response
+
+
+def generate_random_sentence(request):
+    language = request.GET.get('language')
+    if not language:
+        language = "de-DE" # default language
+
+    sentence = random.choice(random_sentences[language])
+    return JsonResponse({'sentence': sentence})

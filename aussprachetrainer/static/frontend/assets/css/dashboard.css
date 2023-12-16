@@ -24,8 +24,6 @@
     transition: all 0.3s ease-in-out;  /* Smooth transition for all changes */
 }
 
-
-
 .score-rectangle:hover {
     transform: translateY(-5px);  /* Moves the box up when hovered
     animation: friendlyHover 0.3s ease-in-out;  /* Applies the shake animation */
@@ -56,11 +54,115 @@
 }
 
 .dropdown-container {
+    max-width: 480px; /* Use max-width for flexibility */
+    width: 100%; /* Full width on smaller screens */
+    margin: 30px auto 0;
+    text-align: center;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
 }
 
 .choose {
     margin: 0 30px;
+}
+
+/* Adjustments for mobile screens */
+@media screen and (max-width: 768px) {
+    .dropdown-container {
+        flex-direction: row; /* Stack elements vertically */
+        margin-top: 0px; /* Reduce margin */
+        justify-content: space-evenly; 
+    }
+
+    .circle-container {
+        flex-direction: column; /* Stack circles vertically */
+        align-items: center; /* Center circles horizontally */
+        justify-content: center; /* Center circles vertically if container has a specific height */
+        margin: 0 auto; /* Center the container horizontally */
+        padding: 20px 0; /* Add padding at top and bottom for spacing */
+    }
+
+    .jarode-items-percent {
+        width: 100%; /* Full width for each circle */
+        margin: 10px 0; /* Adjust margin for vertical layout */
+    }
+
+    .score-rectangle {
+        margin-bottom: 20px; /* Space between rectangles */
+    }
+
+    .tooltip {
+        width: 80%; /* Reduce the width of tooltips */
+        bottom: 50%; /* Adjust the position to be within the viewport */
+        left: 50%;
+        transform: translate(-50%, 50%); /* Center tooltip */
+    }
+
+    .choose {
+        margin: 0 10px;
+        font-size: normal;
+    }
+
+    .score-rectangle {
+        /* ... existing styles ... */
+        display: flex; /* Enable Flexbox */
+        justify-content: center; /* Center children horizontally */
+        align-items: center; /* Center children vertically */
+        position: relative; /* This is required for absolute positioning of the tooltip */
+    
+    }
+
+    .tooltip {
+        position: absolute;
+        bottom: 50%; /* Anchor the tooltip to the bottom of the score-rectangle */
+        left: 50%; /* Center tooltip horizontally */
+        transform: translate(-50%, 20%); /* Shift the tooltip up a bit */
+        width: auto; /* Allow the tooltip width to adjust based on content */
+        max-width: 90%; /* Prevent the tooltip from being too wide */
+        padding: 10px;
+        border-radius: 5px;
+        box-shadow: 0px 0px 30px rgba(255, 255, 255, 0.7);
+        z-index: 100; /* Ensure the tooltip is above other elements */
+        background-color: var(--rosa);
+        text-align: center;
+    }   
+
+
+    .jarode-items-percent {
+        position: relative;
+    }
+
+    .center-home-link {
+        margin-bottom: 1em;
+    }
+
+    .home-link {
+        font-size: small;
+    }
+
+    /* Additional mobile-specific styles here */
+    /* ... */
+}
+
+.home-link {
+    display: inline-block; /* Allows box-like properties */
+    padding: 10px 20px; /* Padding inside the box */
+    background-color: var(--rosa); /* Background color */
+    color: var(--white); /* Text color */
+    text-align: center; /* Center text inside the box */
+    text-decoration: none;
+    border-radius: 5px; /* Rounded corners */
+}
+
+.home-link:hover {
+    color: var(--white); /* Overwrite default behavior */
+    filter: brightness(1.1); /* Add a bit of brightness */
+
+}
+
+.center-home-link {
+    display: flex; /* Use flexbox for centering */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
 }

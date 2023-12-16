@@ -1,0 +1,132 @@
+.auth-container {
+    width: 100%;
+    max-width: 400px;
+    margin: auto;
+    padding: 20px;
+    background-color: var(--white-rosa); /* Slightly tinted background for the container */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+    border-radius: 8px;
+}
+
+.auth-h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Form and Input Styles */
+.auth {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.auth input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #ddd; /* Subtle border */
+    font-size: 16px;
+}
+
+.auth input:focus {
+    border-color: var(--rosa); /* Highlight focus with Rosa */
+    box-shadow: 0 0 3px var(--rosa);
+}
+
+.auth button {
+    width: 100%;
+    padding: 10px 20px;
+    background-color: var(--lila); /* Lila background for the button */
+    color: var(--white);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: background-color 0.3s;
+}
+
+.auth button:hover {
+    background-color: var(--rosa); /* Change to Rosa on hover */
+}
+
+/* Error Message Styles */
+.auth-error {
+    color: var(--red);
+    font-size: 12px;
+    margin-top: -10px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.required {
+    color: var(--red);
+}
+
+/* Utility Classes */
+span.required {
+    margin-left: 5px;
+}
+
+
+.password-reset-link {
+    text-align: left;
+    margin-top: -20px; /* No spacing above the link */
+    font-size: smaller;
+}
+
+/* Styles for the Create Account link */
+.register-link, .login-link {
+    text-align: center;
+    margin-top: 20px; /* Spacing above the link */
+}
+
+.input-group {
+    position: relative;
+    display: flex;
+    align-items: left;
+}
+
+#username_status_icon {
+    position: absolute;
+    right: 10px;
+    font-size: 20px;
+    
+}
+
+#username_status_icon.available {
+    color: green;
+}
+
+#username_status_icon.taken {
+    color: var(--red);
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px; /* Spacing between each input group */
+}
+
+.input-group label {
+    margin-bottom: 5px; /* Space between label and input field */
+}
+
+#username_status_icon {
+    align-self: flex-end; 
+    margin-top: 35px; 
+    margin-right: 10px;
+    font-size: 20px;
+}
+
+.dsgvo-checkbox {
+    display: flex;
+    font-size: small;
+    align-items: center;
+    padding-bottom: 1em;
+}
+
+.dsgvo-checkbox input[type="checkbox"] {
+    width: auto;
+    margin-right: 8px; /* Space between checkbox and label */
+
+}

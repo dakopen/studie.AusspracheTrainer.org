@@ -1,0 +1,57 @@
+.legal-container {
+    color: var(--black);
+    background-color: var(--white-rosa);
+    padding: 20px;
+    border-radius: 10px;
+    margin: 20px;
+}
+
+.legal-container h1 {
+    color: var(--lila);
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.legal-container h2 {
+    margin-top: 1.5em;
+    color: var(--black);
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.legal-container p {
+    color: var(--black);
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.no-newline-after {
+    display: inline;
+}
+
+.legal-container ol {
+    color: var(--black); /* Text color */
+    background-color: var(--light-rosa); /* Background color */
+    padding: 15px; /* Padding inside the list */
+    border-radius: 5px; /* Rounded corners */
+    margin: 10px 0; /* Margin around the list */
+    list-style-position: inside !important; /* Adjust as needed, can be 'outside' */
+    padding-left: 40px !important; /* Adjust left padding to make room for numbers */
+    counter-reset: list-counter; /* Resets the counter if used */
+}
+
+.legal-container li {
+    counter-increment: list-counter;
+    font-size: 16px; /* Font size for list items */
+    line-height: 1.5; /* Line height for list items */
+    margin-bottom: 5px; /* Space between list items */
+    display: list-item; /* Ensures that the list item behaves as expected */
+}
+
+.legal-container ol li::before {
+    content: counters(list-counter, ".") ". "; /* Adjust content for custom numbering */
+    margin-right: 10px; /* Space between number and text */
+
+}
+
+

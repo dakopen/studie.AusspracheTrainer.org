@@ -4,6 +4,7 @@
     width: 100%;
     background-color: var(--white);
     padding-bottom: 15px;
+    z-index: 100;
 }
 
 .footer-container {
@@ -49,4 +50,13 @@
 
 .footer-copyright {
     text-align: center;
+}
+
+@media screen and (max-width: 768px) {
+    .footer {
+        font-size: smaller;
+    }
+    .footer-logo img {
+        max-width: 35px;
+    }
 }

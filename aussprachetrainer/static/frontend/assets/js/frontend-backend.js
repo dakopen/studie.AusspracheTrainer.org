@@ -1,5 +1,3 @@
-const responsearea = $("#responsearea");
-
 function checkStatus(taskId) {
     fetch(`/check_status/${taskId}/`)
         .then(response => response.json())
@@ -22,7 +20,8 @@ function checkStatus(taskId) {
 
             if (data.status === 'SUCCESS') {
                 // Handle the result here
-                displayResult(data.result);                
+                displayResult(data.result);
+                enableRecordButtonAfterLoading();
 
             } else if (data.status !== 'FAILURE') {
                 // If the task is still pending or running, check again in a few seconds
@@ -31,32 +30,23 @@ function checkStatus(taskId) {
                 console.log(data);
                 // Handle failure here
                 displayError();
+                enableRecordButtonAfterLoading();
             }
         });
 }
 
 function displayResult(result) {
-    console.log(result);
     responsearea.empty(); // clear previous responsearea
+    responseareaScores.empty(); // clear previous responseareaScores
     responsearea.css('display', 'inline-block')
     responsearea.css('width', textarea.css('width'));
-    let firstWord = true;
 
-    // Show result in the DOM
-    let paragraph = result[0]['Paragraph'];
     let words = result[0]['Words'];
 
-    // Display paragraph scores
-    document.getElementById('resultDiv').innerHTML += `<p>Accuracy Score: ${paragraph.accuracy_score}</p>`;
-    document.getElementById('resultDiv').innerHTML += `<p>Completeness Score: ${paragraph.completeness_score}</p>`;
-    document.getElementById('resultDiv').innerHTML += `<p>Fluency Score: ${paragraph.fluency_score}</p>`;
 
-    // Display word-by-word analysis
-    let wordTable = "<table><tr><th>Index</th><th>Word</th><th>Accuracy Score</th><th>Error Type</th></tr>";
     let index = 0;
     words.forEach(word => {
-        wordTable += `<tr><td>${word.index}</td><td>${word.word}</td><td>${word.accuracy_score}</td><td>${word.error_type}</td></tr>`;
-        
+     
         const red = 255 - Math.round(2.55 * word.accuracy_score);
         const green = Math.round(2.55 * word.accuracy_score);
         let wordSpan = document.createElement('span');
@@ -85,17 +75,21 @@ function displayResult(result) {
         }
         wordSpan.classList.add('response-word');
         responsearea.append(wordSpan);
-
-        // TODO: 3 different styles for all error types and then
-        // have for all error types another class and for all error types
-        // except the Omission class get matched for highlight Waveform und jump thing
-        // which I will program later
     });
-    wordTable += "</table>";
-    document.getElementById('resultDiv').innerHTML += wordTable;
 
     colorCanvas(result[1])
-    //document.getElementById("result").innerHTML = result;
+
+
+    // Show result in the DOM
+    let paragraph = result[0]['Paragraph'];
+    let responseScoreSpan = document.createElement('span');
+    const accuracy = Math.round(paragraph.accuracy_score);
+    const completeness = Math.round(paragraph.completeness_score);
+    const fluency = Math.round(paragraph.fluency_score);
+
+    // Füge die formatierten Scores zum Span-Element hinzu
+    responseScoreSpan.innerHTML = `${djangoTranslations.accuracy}: <b>${accuracy}</b> | ${djangoTranslations.completeness}: <b>${completeness}</b> | ${djangoTranslations.fluency}: <b>${fluency}</b>`;    responseareaScores.append(responseScoreSpan);
+    responseareaScores.css('display', 'inline-block');
 }
 
 function displayError() {

@@ -1,71 +1,272 @@
+/* styles.css */
 :root {
     --lila: #7E20FC;
     --rosa: #AA6BFD;
     --white: #FFFFFF;
     --red: Red;
+    --darkred: #990000;
     --black: Black;
     --white-rosa: #FBF9FE;
     --light-rosa: #ECDFFE;
 }
 
-html,
+@font-face {
+    font-family: "Montserrat";
+    src: url("/static/frontend/assets/fonts/Montserrat-Regular.ttf") format('truetype');
+}
+
+/* General Styles */
 body {
+    font-family: "Montserrat";
+    margin: 0;
     max-width: 100%;
     overflow-x: hidden;
     padding-bottom: 100px;
+    padding-top: 0;
+    padding-left: 0;
+    padding-right: 0;
+    font-size: 20px;
 }
 
-html * {
-    font-family: "Open Sans", sans-serif;
-    font-weight: 400;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: var(--black);
 }
 
-::selection {
-    background: var(--lila);
-    color: var(--white) !important;
+/* Form Styles */
+form .auth {
+    width: 100%;
+    max-width: 1000px;
 }
 
-/*
----------------------------------------------
-element styles
----------------------------------------------
-*/
+form p .auth {
+    margin-bottom: 1rem;
+}
 
-button {
-    border-radius: 20px;
-    background-color: transparent;
-    width: fit-content;
-    padding: 0px 4px 0px 4px;
-    transform: scale(1.2);
-    border: solid 3px var(--rosa);
-    font-size: min(18px, 4.5vw);
-    font-weight: 400;
+form label .auth {
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+form input[type="text"] .auth,
+form input[type="email"] .auth,
+form input[type="password"] .auth,
+form input[type="number"] .auth,
+form select .auth {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 1rem;
+    border: 1px solid var(--lila);
+    border-radius: 5px;
+}
+
+form button .auth {
+    background-color: var(--rosa);
+    color: var(--white);
+    border: none;
+    padding: 10px 20px;
     cursor: pointer;
+    width: 100%;
+    border-radius: 5px;
 }
 
-form {
-    text-align: center;
-    border: 1px solid #ccc;
-    padding: 20px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-}
-  
-input[type="file"],
-input[type="text"],
-input[type="submit"] {
-margin: 10px 0;
+form button:hover .auth {
+    background-color: var(--lila);
 }
 
+/* Table Styles */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 2rem;
+}
 
-audio {
-    margin: auto;
-    width: 90%;
-    margin-top: 1em;
-    margin-bottom: 0;
-    display: block;  
+th,
+td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid var(--lila);
+}
+
+th {
+    background-color: var(--rosa);
+    color: var(--white);
+}
+
+/* Link Styles */
+a {
+    transition: color 0.3s ease;
+    text-decoration: none;
+}
+
+a:hover {
+    color: var(--rosa);
+}
+
+/* Button Styles */
+.button {
+    background-color: var(--rosa);
+    color: var(--white);
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.button:hover {
+    background-color: var(--lila);
+}
+
+/* Paragraphs and Blockquotes */
+p,
+blockquote {
+    margin-bottom: 1rem;
 }
 
 blockquote {
-    word-break: break-all;
-    padding-left: 1em;
+    border-left: 4px solid var(--rosa);
+    padding-left: 1rem;
+    font-style: italic;
+}
+
+/* Utility Classes */
+.text-center {
+    text-align: center;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.text-rosa {
+    color: var(--rosa);
+}
+
+.text-lila {
+    color: var(--lila);
+}
+
+.required {
+    color: var(--darkred);
+}
+
+.error {
+    color: var(--red);
+    font-style: italic;
+}
+
+.lila {
+    color: var(--lila);
+}
+
+/*Styling Selectbox*/
+.dropdown {
+    width: 200px;
+    display: inline-block;
+    background-color: #fff;
+    border-radius: 2px;
+    box-shadow: 0 0 2px rgb(204, 204, 204);
+    transition: all .5s ease;
+    position: relative;
+    font-size: 14px;
+    color: #474747;
+    height: 100%;
+    text-align: left
+}
+
+/* Adjustments for mobile screens */
+@media screen and (max-width: 768px) {
+    .dropdown {
+        width: 160px;
+    }
+
+    .dont-show-on-mobile {
+        display: none;
+    }
+    /* Additional mobile-specific styles here */
+    /* ... */
+}
+
+.dropdown .dropdown-select {
+    cursor: pointer;
+    display: block;
+    padding: 10px
+}
+
+.dropdown .dropdown-select>i {
+    font-size: 13px;
+    color: #888;
+    cursor: pointer;
+    transition: all .3s ease-in-out;
+    float: right;
+    line-height: 20px
+}
+
+.dropdown:hover {
+    box-shadow: 0 0 4px rgb(204, 204, 204)
+}
+
+.dropdown:active {
+    background-color: var(--light-rosa)
+}
+
+.dropdown.active:hover,
+.dropdown.active {
+    box-shadow: 0 0 4px rgb(204, 204, 204);
+    border-radius: 2px 2px 0 0;
+    background-color: #f8f8f8
+}
+
+.dropdown.active .dropdown-select>i {
+    transform: rotate(90deg)
+}
+
+.dropdown .dropdown-menu {
+    position: absolute;
+    background-color: #fff;
+    width: 100%;
+    left: 0;
+    margin-top: 1px;
+    box-shadow: 0 1px 2px rgb(204, 204, 204);
+    border-radius: 0 1px 2px 2px;
+    overflow: hidden;
+    display: none;
+    max-height: 144px;
+    overflow-y: auto;
+    z-index: 9
+}
+
+.dropdown .dropdown-menu li {
+    padding: 10px;
+    transition: all .2s ease-in-out;
+    cursor: pointer
+}
+
+.dropdown .dropdown-menu {
+    padding: 0;
+    list-style: none
+}
+
+.dropdown .dropdown-menu li:hover {
+    background-color: var(--light-rosa)
+}
+
+.dropdown .dropdown-menu li:active {
+    background-color: #e2e2e2
+}
+
+.dropdown-flag {
+    display: inline-block;
+    vertical-align: middle;
+    padding-left: 3px;
+    padding-bottom: 3px;
+}
+
+.margin-top-100px {
+    margin-top: 100px;
 }

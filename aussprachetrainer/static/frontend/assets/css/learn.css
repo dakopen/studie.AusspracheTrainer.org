@@ -1,0 +1,168 @@
+
+#sentences-container {
+    width: 90%;
+    margin: 0 auto;
+}
+
+#sentences-container table {
+    width: 100%; /* Full width of the container */
+    border-collapse: collapse; /* Removes default table cell spacing */
+}
+
+#sentences-container th, #sentences-container td {
+    text-align: left;
+    padding: 8px; /* Adds padding inside each cell */
+}
+
+#sentences-container td {
+    border-bottom: 1px solid #ddd; /* Adds a light border to each row */
+}
+
+/* Styling for the score */
+#sentences-container .learntable-score, .score-link{
+    font-weight: bold; /* Makes the text bold */
+    color: var(--rosa); /* Sets the text color to blue */
+    text-align: center; /* Aligns text to the center of the cell */
+}
+
+#sentences-container .learntable-header-score {
+    text-align: center; /* Aligns text to the center of the cell */
+}
+
+/* Styling for the sentence */
+#sentences-container .learntable-sentence {
+    text-align: justify; /* Justifies the text */
+}
+
+/* Styling for the difficulty stars */
+#sentences-container .learntable-difficulty {
+    margin-right: 5px; /* Adds space between the stars */
+    color: gold; /* Sets the star color to gold */
+}
+
+.learntable-action-button {
+    display: inline-flex; /* Use flexbox for better alignment */
+    align-items: center; /* Align items vertically in the center */
+    justify-content: center; /* Center content horizontally */
+    padding: 8px;
+    background-color: var(--rosa); /* Example blue background */
+    color: white; /* White icon color */
+    border-radius: 50%; /* Circular shape */
+    text-align: center;
+    text-decoration: none;
+    width: 40px; /* Fixed width */
+    height: 40px; /* Fixed height */
+    line-height: 40px; /* Vertically center the icon */
+}
+
+.learntable-action-button i {
+    font-size: 16px; /* Larger icon size */
+    vertical-align: middle;
+}
+
+.learntable-action {
+    text-align: center; /* Center the button horizontally */
+    display: flex; /* Use flexbox for alignment */
+    justify-content: center; /* Center content horizontally in the flex container */
+}
+
+.dropdown-container {
+    max-width: 480px; /* Use max-width for flexibility */
+    width: 100%; /* Full width on smaller screens */
+    margin: 30px auto 0;
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.choose {
+    margin: 0 30px;
+}
+
+.mobile-hint {
+    display: none;
+}
+
+
+.home-link {
+    display: inline-block; /* Allows box-like properties */
+    padding: 10px 20px; /* Padding inside the box */
+    background-color: var(--rosa); /* Background color */
+    color: var(--white); /* Text color */
+    text-align: center; /* Center text inside the box */
+    text-decoration: none;
+    border-radius: 5px; /* Rounded corners */
+}
+
+.home-link:hover {
+    color: var(--white); /* Overwrite default behavior */
+    filter: brightness(1.1); /* Add a bit of brightness */
+
+}
+
+.center-home-link {
+    display: flex; /* Use flexbox for centering */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+}
+
+/* Adjustments for mobile screens */
+@media screen and (max-width: 768px) {
+    #sentences-container {
+        width: 100%;
+    }
+
+    .dropdown-container {
+        flex-direction: row; /* Stack elements vertically */
+        margin-top: 0px; /* Reduce margin */
+        justify-content: space-evenly;
+    }
+    
+    .choose {
+        margin: 0 10px;
+        font-size: normal;
+    }
+
+
+    /* Hide difficulty and action columns on mobile */
+    #sentences-container .learntable-header-difficulty, .learntable-difficulty, .learntable-action {
+        display: none;
+    }
+
+    /* Adjust the table layout */
+    #sentences-container table {
+        width: 100%; /* Allow the table to expand to the full width of its container */
+    }
+
+    #sentences-container th, #sentences-container td {
+        padding: 12px; /* Larger padding for easier reading */
+    }
+
+    /* Ensure the score column is centered and takes up the appropriate amount of space */
+    #sentences-container .learntable-score {
+        width: 25%; /* Allocate width for the score */
+        text-align: center;
+    }
+
+    /* Ensure the sentence column uses the remaining space */
+    #sentences-container .learntable-sentence {
+        width: 75%; /* Allocate remaining width for the sentence */
+        text-align: left;
+    }
+
+    .mobile-hint {
+        display: block;
+        font-size: small;
+        text-align: center;
+    }
+
+    .center-home-link {
+        margin-bottom: 1em;
+        margin-top: 0;
+    }
+
+    .home-link {
+        font-size: small;
+    }
+}

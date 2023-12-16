@@ -25,7 +25,34 @@ function addInfoToolboxesToIcons(){
           //tooltip.remove();
         }
       });
-    });
+
+      icon.addEventListener("click", function(event) {
+        const parentDiv = event.target.closest(".jarode-items-percent");
+        let tooltip = parentDiv.querySelector(".tooltip");
+  
+        // If tooltip already exists, remove it. This toggles the display on and off.
+        if (tooltip) {
+          parentDiv.removeChild(tooltip);
+        } else {
+          // No tooltip exists, create a new one.
+          tooltip = document.createElement("div");
+          tooltip.className = "tooltip";
+          tooltip.innerText = parentDiv.dataset.hoverText;
+          tooltip.style.backgroundColor = parentDiv.dataset.textColor;
+          parentDiv.appendChild(tooltip);
+        }
+      });
+
+    // Optional: Close tooltips when clicking anywhere else on the page
+    document.addEventListener('click', function(event) {
+        if (!event.target.matches('.fas.fa-info-circle')) {
+        const tooltips = document.querySelectorAll(".tooltip");
+        tooltips.forEach((tooltip) => {
+            tooltip.parentElement.removeChild(tooltip);
+        });
+        }
+    }, true); // Use capture to ensure the document-level click is handled first
+        });
   }
   
 
@@ -79,7 +106,7 @@ $('.dropdown .dropdown-menu li').click(function () {
     // update the placeholder of the textarea
     var selectedLanguage = selectedLiId.split('-')[2];
     switch (selectedLanguage) {
-        case "uk":
+        case "gb":
             updateLanguageParameter("en-GB");
             break;
         case "germany":
