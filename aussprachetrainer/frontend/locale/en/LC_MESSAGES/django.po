@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-11-18 12:54+0000\n"
+"POT-Creation-Date: 2023-12-16 17:10+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Daniel Busch <dakopen185@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,153 +18,2686 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: dashboard/templates/dashboard.html:22
+#: aussprachetrainer/dashboard/templates/dashboard.html:11
+#: aussprachetrainer/learn/templates/learn.html:5
+msgid "Zurück zur Startseite"
+msgstr ""
+
+#: aussprachetrainer/dashboard/templates/dashboard.html:14
+#: aussprachetrainer/frontend/templates/index.html:7
+#: aussprachetrainer/learn/templates/learn.html:9
+msgid "Sprache ändern"
+msgstr "change language"
+
+#: aussprachetrainer/dashboard/templates/dashboard.html:19
+#: aussprachetrainer/dashboard/templates/dashboard.html:20
+#: aussprachetrainer/dashboard/templates/dashboard.html:38
+#: aussprachetrainer/dashboard/templates/dashboard.html:39
+#: aussprachetrainer/frontend/templates/index.html:13
+#: aussprachetrainer/frontend/templates/index.html:14
+#: aussprachetrainer/frontend/templates/index.html:32
+#: aussprachetrainer/frontend/templates/index.html:33
+#: aussprachetrainer/learn/templates/learn.html:14
+#: aussprachetrainer/learn/templates/learn.html:15
+#: aussprachetrainer/learn/templates/learn.html:33
+#: aussprachetrainer/learn/templates/learn.html:34
+msgid "deutsch"
+msgstr "german"
+
+#: aussprachetrainer/dashboard/templates/dashboard.html:22
+#: aussprachetrainer/dashboard/templates/dashboard.html:23
+#: aussprachetrainer/dashboard/templates/dashboard.html:34
+#: aussprachetrainer/dashboard/templates/dashboard.html:35
+#: aussprachetrainer/frontend/templates/index.html:16
+#: aussprachetrainer/frontend/templates/index.html:17
+#: aussprachetrainer/frontend/templates/index.html:28
+#: aussprachetrainer/frontend/templates/index.html:29
+#: aussprachetrainer/learn/templates/learn.html:17
+#: aussprachetrainer/learn/templates/learn.html:18
+#: aussprachetrainer/learn/templates/learn.html:29
+#: aussprachetrainer/learn/templates/learn.html:30
+msgid "englisch"
+msgstr "english"
+
+#: aussprachetrainer/dashboard/templates/dashboard.html:25
+#: aussprachetrainer/dashboard/templates/dashboard.html:26
+#: aussprachetrainer/dashboard/templates/dashboard.html:42
+#: aussprachetrainer/dashboard/templates/dashboard.html:43
+#: aussprachetrainer/frontend/templates/index.html:19
+#: aussprachetrainer/frontend/templates/index.html:20
+#: aussprachetrainer/frontend/templates/index.html:36
+#: aussprachetrainer/frontend/templates/index.html:37
+#: aussprachetrainer/learn/templates/learn.html:20
+#: aussprachetrainer/learn/templates/learn.html:21
+#: aussprachetrainer/learn/templates/learn.html:37
+#: aussprachetrainer/learn/templates/learn.html:38
+msgid "französisch"
+msgstr "french"
+
+#: aussprachetrainer/dashboard/templates/dashboard.html:61
+#: aussprachetrainer/frontend/templates/index.html:99
 msgid "Genauigkeit"
 msgstr "Accuracy"
 
-#: dashboard/templates/dashboard.html:24
+#: aussprachetrainer/dashboard/templates/dashboard.html:63
 msgid ""
 "Dieser Score zeigt an, wie gut Deine Aussprache mit der richtigen Aussprache "
 "übereinstimmt."
 msgstr "This scores shows how well your pronunciation matches the correct one."
 
-#: dashboard/templates/dashboard.html:38 frontend/views.py:42
+#: aussprachetrainer/dashboard/templates/dashboard.html:77
+#: aussprachetrainer/frontend/views.py:86
 msgid "AusspracheTrainer"
 msgstr "AusspracheTrainer"
 
-#: dashboard/templates/dashboard.html:41
+#: aussprachetrainer/dashboard/templates/dashboard.html:80
+#, fuzzy
+#| msgid ""
+#| "In diesem Score sind mehrere Faktoren wie die Genauigkeit, der Redefluss "
+#| "und die Schwierigkeit eingerechnet."
 msgid ""
 "In diesem Score sind mehrere Faktoren wie die Genauigkeit, der Redefluss und "
-"die Schwierigkeit eingerechnet."
-msgstr "This score is calculated from several factors like accuracy, fluency and difficulty."
+"die Schwierigkeit eingerechnet. [Coming soon]"
+msgstr ""
+"This score is calculated from several factors like accuracy, fluency and "
+"difficulty."
 
-#: dashboard/templates/dashboard.html:53
+#: aussprachetrainer/dashboard/templates/dashboard.html:93
+#: aussprachetrainer/frontend/templates/index.html:101
 msgid "Redefluss"
 msgstr "Fluency"
 
-#: dashboard/templates/dashboard.html:56
-msgid "Der Redefluss Score besagt, ..."
-msgstr "..."
+#: aussprachetrainer/dashboard/templates/dashboard.html:96
+#, fuzzy
+#| msgid "Der Redefluss Score besagt, ..."
+msgid "Der Redefluss Score besagt, wie flüssig du vorliest."
+msgstr "The fluency score indicates how fluently you read aloud."
 
-#: frontend/templates/importhtml.html:3 frontend/tests.py:29
-msgid "Willkommen"
-msgstr "Welcome"
-
-#: frontend/templates/importhtml.html:7
-msgid "Wähle Sprache aus"
-msgstr "Select language"
-
-#: frontend/templates/importhtml.html:20
-msgid "diese seite unterstützt mehrere Sprachen."
-msgstr "this site supports multiple languages"
-
-#: frontend/templates/importhtml.html:21
-msgid "diese Seite ist cool"
-msgstr "This site is cool"
-
-#: frontend/templates/module/footer.html:11 frontend/views.py:48
-msgid "Kontakt"
-msgstr "Contact"
-
-#: frontend/templates/module/footer.html:12 frontend/views.py:53
-msgid "Impressum"
-msgstr "legal notice"
-
-#: frontend/templates/module/footer.html:13
-msgid "Datenschutz"
-msgstr "privacy policy"
-
-#: frontend/templates/module/header.html:13
-msgid "Dashboard"
-msgstr "dashboard"
-
-#: frontend/templates/module/header.html:17
-msgid "Lernen"
-msgstr "learn"
-
-#: frontend/templates/module/header.html:22
-msgid "Logout"
-msgstr "logout"
-
-#: frontend/templates/module/header.html:27
-msgid "Login"
-msgstr "login"
-
-#: frontend/templates/module/header.html:30
-#: user_auth/templates/user_auth/register.html:5
-#: user_auth/templates/user_auth/register.html:19 user_auth/views.py:26
-msgid "Registrieren"
-msgstr "register"
-
-#: frontend/templates/record_audio.html:7
-msgid "Sprache ändern"
-msgstr "change language"
-
-#: frontend/templates/record_audio.html:11
-#: frontend/templates/record_audio.html:12
-#: frontend/templates/record_audio.html:23
-#: frontend/templates/record_audio.html:24
-msgid "deutsch"
-msgstr "german"
-
-#: frontend/templates/record_audio.html:19
-#: frontend/templates/record_audio.html:20
-msgid "englisch"
-msgstr "english"
-
-#: frontend/templates/record_audio.html:27
-#: frontend/templates/record_audio.html:28
-msgid "französisch"
-msgstr "french"
-
-#: frontend/templates/record_audio.html:42
+#: aussprachetrainer/frontend/templates/index.html:51
 msgid "Bitte erst einen Übungssatz eingeben!"
 msgstr "Please enter a practice sentence first!"
 
-#: frontend/templates/record_audio.html:56
+#: aussprachetrainer/frontend/templates/index.html:52
+#, fuzzy
+#| msgid "Text eingeben:"
+msgid "Satz eingeben oder"
+msgstr "enter text or"
+
+#: aussprachetrainer/frontend/templates/index.html:52
+msgid "generieren lassen"
+msgstr "generate"
+
+#: aussprachetrainer/frontend/templates/index.html:69
 msgid "abbrechen"
 msgstr "cancel"
 
-#: frontend/templates/result_error.html:2
-msgid "Ein Fehler beim Analysieren ist aufgetreten."
-msgstr "An error occurred while analyzing."
+#: aussprachetrainer/frontend/templates/index.html:78
+msgid ""
+"Mit der Benutzung der App stimmen Sie der Datenschutzerklärung zu, "
+"einschließlich der Übermittlung der Audioaufnahme an Microsoft."
+msgstr ""
+"By using the app, you agree to the privacy policy, "
+"including the transmission of the audio recording to Microsoft."
 
-#: frontend/templates/upload_audio.html:4
-msgid "Audio hochladen:"
-msgstr "upload audio:"
+#: aussprachetrainer/frontend/templates/index.html:100
+msgid "Vollständigkeit"
+msgstr "Completeness"
 
-#: frontend/templates/upload_audio.html:7
-msgid "Text eingeben:"
-msgstr "enter text:"
+#: aussprachetrainer/frontend/templates/legal_notice.html:5
+#: aussprachetrainer/frontend/templates/module/footer.html:11
+#: aussprachetrainer/frontend/views.py:92
+msgid "Impressum"
+msgstr "legal notice"
 
-#: frontend/templates/upload_audio.html:10
-msgid "Absenden"
-msgstr "enter"
+#: aussprachetrainer/frontend/templates/legal_notice.html:6
+#: aussprachetrainer/frontend/templates/privacy_policy.html:99
+#, fuzzy
+#| msgid "AusspracheTrainer"
+msgid "AusspracheTrainer g.e.V."
+msgstr "AusspracheTrainer g.e.V."
 
-#: frontend/templates/waiting_page.html:4
-msgid "Warte kurz"
-msgstr "please wait"
+#: aussprachetrainer/frontend/templates/legal_notice.html:7
+#: aussprachetrainer/frontend/templates/privacy_policy.html:102
+msgid "c/o Dr. Oliver Busch"
+msgstr "c/o Dr. Oliver Busch"
 
-#: frontend/views.py:58
+#: aussprachetrainer/frontend/templates/legal_notice.html:8
+#: aussprachetrainer/frontend/templates/privacy_policy.html:103
+msgid "Mühlgasse 8,"
+msgstr "Mühlgasse 8,"
+
+#: aussprachetrainer/frontend/templates/legal_notice.html:9
+#: aussprachetrainer/frontend/templates/privacy_policy.html:104
+msgid "60486 Frankfurt am Main"
+msgstr "60486 Frankfurt am Main"
+
+#: aussprachetrainer/frontend/templates/legal_notice.html:11
+msgid "E-Mail: kontakt@aussprachetrainer.org"
+msgstr "E-Mail: kontakt@aussprachetrainer.org"
+
+#: aussprachetrainer/frontend/templates/legal_notice.html:13
+msgid "Ansprechpartner: Daniel Busch"
+msgstr "Contact person: Daniel Busch"
+
+#: aussprachetrainer/frontend/templates/legal_notice.html:16
+msgid "Registergericht: Amtsgericht Frankfurt am Main"
+msgstr "Register court: Local court Frankfurt am Main"
+
+#: aussprachetrainer/frontend/templates/legal_notice.html:17
+msgid "Registernummer: VR 17083"
+msgstr "Register number: VR 17083"
+
+#: aussprachetrainer/frontend/templates/module/footer.html:12
+msgid "Datenschutz"
+msgstr "privacy policy"
+
+#: aussprachetrainer/frontend/templates/module/header.html:13
+msgid "Dashboard"
+msgstr "dashboard"
+
+#: aussprachetrainer/frontend/templates/module/header.html:17
+#: aussprachetrainer/learn/views.py:45
+msgid "Lernen"
+msgstr "learn"
+
+#: aussprachetrainer/frontend/templates/module/header.html:22
+msgid "Logout"
+msgstr "logout"
+
+#: aussprachetrainer/frontend/templates/module/header.html:27
+#: aussprachetrainer/user_auth/templates/user_auth/login.html:8
+#: aussprachetrainer/user_auth/templates/user_auth/register.html:6
+msgid "Login"
+msgstr "login"
+
+#: aussprachetrainer/frontend/templates/module/header.html:30
+#: aussprachetrainer/user_auth/templates/user_auth/register.html:12
+#: aussprachetrainer/user_auth/templates/user_auth/register.html:37
+#: aussprachetrainer/user_auth/views.py:29
+msgid "Registrieren"
+msgstr "register"
+
+#: aussprachetrainer/frontend/templates/privacy_policy.html:5
+#: aussprachetrainer/frontend/views.py:96
+#: aussprachetrainer/user_auth/templates/user_auth/register.html:33
 msgid "Datenschutzerklärung"
 msgstr "privacy policy"
 
-#: frontend/views.py:62
-msgid "Warte auf Ergebnis"
-msgstr "wait for result"
+#: aussprachetrainer/frontend/templates/privacy_policy.html:6
+msgid ""
+"Letzte Änderung: 04.12.2023. Bitte beachten Sie, dass ausschließlich die"
+msgstr ""
+"Last change: 04.12.2023. Please note that only the"
 
-#: user_auth/forms.py:7
+#: aussprachetrainer/frontend/templates/privacy_policy.html:6
+msgid "deutsche Fassung"
+msgstr "German version"
+
+#: aussprachetrainer/frontend/templates/privacy_policy.html:6
+msgid "Gültigkeit besitzt."
+msgstr "has validity."
+
+#: aussprachetrainer/frontend/templates/privacy_policy.html:8
+msgid "Einleitung"
+msgstr "Introduction"
+
+#: aussprachetrainer/frontend/templates/privacy_policy.html:9
+msgid ""
+"Willkommen auf unserer Webseite AusspracheTrainer.org. Der Schutz Ihrer "
+"persönlichen Daten ist uns ein wichtiges Anliegen. In dieser "
+"Datenschutzerklärung erklären wir, wie wir Ihre personenbezogenen Daten "
+"erfassen und verarbeiten, wenn Sie unsere Dienste nutzen."
+msgstr ""
+"Welcome to our website AusspracheTrainer.org. The protection of your "
+"personal data is very important to us. In this "
+"privacy policy, we explain how we collect and process your personal data "
+"we collect and process when you use our services."
+
+#: aussprachetrainer/frontend/templates/privacy_policy.html:10
+msgid ""
+"Für bestimmte Dienste unserer Seite, wie die Audioaufnahmefunktion und die "
+"Erstellung eines Nutzerkontos, ist die Verarbeitung personenbezogener Daten "
+"erforderlich. Wir verarbeiten Ihre Daten nur in Übereinstimmung mit den "
+"gesetzlichen Datenschutzvorschriften."
+msgstr ""
+"For certain services on our website, such as the audio recording function and the "
+"creation of a user account, the processing of personal data "
+"is required. We only process your data in accordance with the "
+"statutory data protection regulations."
+
+#: aussprachetrainer/frontend/templates/privacy_policy.html:11
+msgid ""
+"Bei der Benutzung der Audioaufnahmefunktion unserer Webseite wird Ihre "
+"aufgenommene Audio an Microsoft mit Standort in Deutschland übermittelt. "
+"Ebenfalls speichern wir Daten im Zusammenhang mit der Erstellung und "
+"Verwaltung von Nutzerkonten, einschließlich Ihrer E-Mail-Adresse."
+msgstr ""
+"When you use the audio recording function on our website, your "
+"recorded audio is transmitted to Microsoft with a location in Germany. "
+"We also store data in connection with the creation and "
+"management of user accounts, including your e-mail address."
+
+#: aussprachetrainer/frontend/templates/privacy_policy.html:12
+msgid ""
+"Zudem läuft der Datenverkehr unserer Webseite über Cloudflare, um eine "
+"sichere und effiziente Bereitstellung unserer Dienste zu gewährleisten."
+msgstr ""
+"In addition, the data traffic of our website runs via Cloudflare in order to "
+"secure and efficient provision of our services."
+
+#: aussprachetrainer/frontend/templates/privacy_policy.html:13
+msgid ""
+"Diese Datenschutzerklärung gilt für AusspracheTrainer.org (nachfolgend "
+"„wir“, „uns“, „unser“). Bitte lesen Sie diese Erklärung sorgfältig durch, um "
+"zu verstehen, wie wir Ihre personenbezogenen Daten behandeln."
+msgstr ""
+"This Privacy Policy applies to AusspracheTrainer.org (hereinafter "
+"'we', 'us', 'our'). Please read this statement carefully to "
+"understand how we will treat your personal data."
+
+#: aussprachetrainer/frontend/templates/privacy_policy.html:15
+msgid "Datenerfassung auf unserer Webseite"
+msgstr "Data collection on our website"
+
+#: aussprachetrainer/frontend/templates/privacy_policy.html:16
+msgid "Art der erfassten Daten"
+msgstr "Type of data collected"
+
+#: aussprachetrainer/frontend/templates/privacy_policy.html:17
+msgid ""
+"Bei der Benutzung unserer Webseite erheben wir verschiedene Arten von Daten, "
+"die für die Bereitstellung unserer Dienste notwendig sind. Diese Daten "
+"umfassen:"
+msgstr ""
+"When you use our website, we collect various types of data "
+"that are necessary for the provision of our services. This data "
+"include:"
+
+#: aussprachetrainer/frontend/templates/privacy_policy.html:19
+#: aussprachetrainer/frontend/templates/privacy_policy.html:26
+#: aussprachetrainer/frontend/templates/privacy_policy.html:33
+msgid "Audioaufnahmen:"
+msgstr "Audio recordings:"
+
+#: aussprachetrainer/frontend/templates/privacy_policy.html:19
+msgid ""
+"Wenn Nutzer den Rekorder-Button auf unserer Webseite betätigen und etwas "
+"aufnehmen, werden diese Audioaufnahmen erfasst. Die Aufnahme wird nach der "
+"Analyse sowohl von unserem Server, als auch von Microsoft gelöscht."
+msgstr ""
+"When users press the recorder button on our website and record something, "
+"these audio recordings are captured. The recording is deleted after the "
+"analysis by both our server and Microsoft."
+
+#: aussprachetrainer/frontend/templates/privacy_policy.html:20
+#: aussprachetrainer/frontend/templates/privacy_policy.html:27
+#: aussprachetrainer/frontend/templates/privacy_policy.html:34
+msgid "Ausspracheauswertungen:"
+msgstr "Pronunciation evaluations:"
+
+#: aussprachetrainer/frontend/templates/privacy_policy.html:20
+msgid ""
+"Nach der Analyse einer Audioaufnahme wird die Auswertung von Microsoft "
+"gespeichert - sowohl wenn Benutzer:innen mit Account eingeloggt sind, als "
+"auch wenn nicht. Aufgrund der Anonymisierung der Daten im letzeren Fall, ist "
+"es nicht mehr möglich, die Daten der Auswertung zu löschen."
+msgstr ""
+"After analyzing an audio recording, the evaluation is saved by Microsoft "
+"- both when users are logged in with an account and "
+"even if not. Due to the anonymization of the data in the latter case, "
+"it is no longer possible to delete the analysis data."
+
+#: aussprachetrainer/frontend/templates/privacy_policy.html:21
+#: aussprachetrainer/frontend/templates/privacy_policy.html:28
+#: aussprachetrainer/frontend/templates/privacy_policy.html:35
+msgid "Nutzerkontodaten:"
+msgstr "User account data:"
+
+#: aussprachetrainer/frontend/templates/privacy_policy.html:21
+msgid ""
+"Zur Erstellung eines Nutzerkontos auf unserer Webseite werden E-Mail-"
+"Adressen sowie weitere, vom Nutzer bereitgestellte Informationen gespeichert."
+msgstr ""
+"To create a user account on our website, e-mail"
+"addresses and other information provided by the user are stored."
+
+#: aussprachetrainer/frontend/templates/privacy_policy.html:22
+#: aussprachetrainer/frontend/templates/privacy_policy.html:29
+#: aussprachetrainer/frontend/templates/privacy_policy.html:36
+msgid "Verbindungsdaten:"
+msgstr "Connection data:"
+
+#: aussprachetrainer/frontend/templates/privacy_policy.html:22
+msgid ""
+"Durch die Nutzung unserer Webseite werden technische Informationen wie IP-"
+"Adresse, Besuchszeitpunkt, ungefährer Standort, Browser-Typ und "
+"Betriebssystem erfasst, die durch Cloudflare verarbeitet werden."
+msgstr ""
+"By using our website, technical information such as IP "
+"address, time of visit, approximate location, browser type and "
+"operating system, which are processed by Cloudflare."
+
+#: aussprachetrainer/frontend/templates/privacy_policy.html:24
+msgid "Wie wir Daten erfassen"
+msgstr "How we collect data"
+
+#: aussprachetrainer/frontend/templates/privacy_policy.html:26
+msgid ""
+"Die Aufnahmen werden aktiv durch Nutzerinteraktion initiiert, indem sie den "
+"Rekorder-Button drücken und ihre Stimme aufzeichnen. Diese Aufnahmen werden "
+"dann an Microsoft-Server in Deutschland übermittelt."
+msgstr ""
+"The recordings are actively initiated through user interaction by pressing the "
+"recorder button and recording their voice. These recordings are "
+"then transmitted to Microsoft servers in Germany."
+
+#: aussprachetrainer/frontend/templates/privacy_policy.html:27
+msgid ""
+"Die Aufnahmen werden anschließend von Microsoft verarbeitet und analysiert. "
+"Dabei wird eine detaillierte Auswertung zurückgegeben, die ein "
+"sekundengenaues Transkript mit verstandenen Lauten und Phonemen sowie "
+"Alternativen als auch verschiedene Scores zurückgibt."
+msgstr ""
+"The recordings are then processed and analyzed by Microsoft. "
+"A detailed evaluation is returned, which includes a "
+"second-by-second transcript with understood sounds and phonemes as well as "
+"alternatives as well as various scores."
+
+#: aussprachetrainer/frontend/templates/privacy_policy.html:28
+msgid ""
+"Nutzerkontodaten werden erfasst, wenn sich Nutzer auf unserer Webseite "
+"registrieren und ein Konto erstellen. Diese Daten umfassen E-Mail-Adressen "
+"und alle weiteren Angaben, die während des Registrierungsprozesses gemacht "
+"werden."
+msgstr ""
+"User account data is collected when users register on our website "
+" and create an account. This data includes email addresses "
+"and any other information provided during the registration process "
+"are provided."
+
+#: aussprachetrainer/frontend/templates/privacy_policy.html:29
+msgid ""
+"Cloudflare erfasst Daten wie IP-Adresse, ungefährer Standort und Browsertyp "
+"automatisch, wenn Nutzer auf unsere Webseite zugreifen. Diese Erfassung "
+"dient der Gewährleistung von Sicherheit und Leistung unserer Webdienste."
+msgstr ""
+"Cloudflare collects data such as IP address, approximate location and browser type "
+" automatically when users access our website. This collection "
+"serves to ensure the security and performance of our web services."
+
+#: aussprachetrainer/frontend/templates/privacy_policy.html:31
+msgid "Zweck der Datenerfassung"
+msgstr "Purpose of data collection"
+
+#: aussprachetrainer/frontend/templates/privacy_policy.html:33
+msgid ""
+"Die Aufnahmen werden zur Bereitstellung spezifischer Funktionen unserer "
+"Webseite verwendet, beispielsweise zur Spracherkennung oder -verarbeitung."
+msgstr ""
+"The recordings are used to provide specific functions of our "
+"website, for example for speech recognition or processing."
+
+#: aussprachetrainer/frontend/templates/privacy_policy.html:34
+msgid ""
+"Die Auswertung wird einerseits dem Nutzer angezeigt, als auch gespeichert um "
+"für eingeloggte Nutzer einen Fortschritt anzuzeigen. Die gespeicherte "
+"Auswertung kann von uns eingesehen und (in anonymisierter Form) verwendet "
+"werden, um das Tool weiter zu entwickeln."
+msgstr ""
+"The evaluation is both displayed to the user and saved in order to "
+"display progress for logged-in users. The saved "
+"evaluation can be viewed by us and used (in anonymized form) "
+"to further develop the tool."
+
+#: aussprachetrainer/frontend/templates/privacy_policy.html:35
+msgid ""
+"Diese Daten werden verwendet, um Nutzerkonten zu verwalten, Dienste "
+"bereitzustellen und mit den Nutzern in Kontakt zu treten."
+msgstr ""
+"This data is used to manage user accounts, provide services "
+"and to get in contact with the users."
+
+#: aussprachetrainer/frontend/templates/privacy_policy.html:36
+msgid ""
+"Die durch Cloudflare erfassten Daten dienen der Verbesserung der Sicherheit "
+"und Performance der Webseite."
+msgstr ""
+"The data collected by Cloudflare is used to improve the security "
+"and performance of the website."
+
+#: aussprachetrainer/frontend/templates/privacy_policy.html:38
+msgid "Rechtsgrundlage"
+msgstr "Legal basis"
+
+#: aussprachetrainer/frontend/templates/privacy_policy.html:39
+msgid ""
+"Die Verarbeitung dieser Daten basiert auf verschiedenen Rechtsgrundlagen, "
+"abhängig von der Art der Daten und dem Zweck ihrer Verarbeitung. In der "
+"Regel stützt sich die Datenerfassung auf das berechtigte Interesse des "
+"Webseitenbetreibers (Art. 6 Abs. 1 lit. f DSGVO), die Erfüllung eines "
+"Vertrags oder vorvertraglicher Maßnahmen (Art. 6 Abs. 1 lit. b DSGVO) oder "
+"die Einwilligung des Nutzers (Art. 6 Abs. 1 lit. a DSGVO)."
+msgstr ""
+"The processing of this data is based on various legal bases, "
+"depending on the type of data and the purpose of its processing. As a "
+"rule, data collection is based on the legitimate interest of the "
+"website operator (Art. 6 para. 1 lit. f GDPR), the fulfillment of a "
+"contract or pre-contractual measures (Art. 6 para. 1 lit. b GDPR) or "
+"the consent of the user (Art. 6 para. 1 lit. a GDPR)."
+
+#: aussprachetrainer/frontend/templates/privacy_policy.html:40
+msgid "Weiterführende Informationen"
+msgstr "Further information"
+
+#: aussprachetrainer/frontend/templates/privacy_policy.html:42
+msgid "Datenschutzerklärung von Microsoft: "
+msgstr "Privacy policy from Microsoft:"
+
+#: aussprachetrainer/frontend/templates/privacy_policy.html:42
+msgid "(englisch)"
+msgstr "(english)"
+
+#: aussprachetrainer/frontend/templates/privacy_policy.html:43
+#, fuzzy
+#| msgid "Datenschutzerklärung"
+msgid "Datenschutzerklärung von Cloudflare: "
+msgstr "privacy policy"
+
+#: aussprachetrainer/frontend/templates/privacy_policy.html:45
+msgid "Nutzung der Audioaufnahmefunktion"
+msgstr "Using the audio recording function"
+
+#: aussprachetrainer/frontend/templates/privacy_policy.html:46
+msgid "Funktionsweise der Audioaufnahme"
+msgstr "How the audio recording works"
+
+#: aussprachetrainer/frontend/templates/privacy_policy.html:47
+msgid ""
+"Unsere Webseite bietet eine Funktion, mit der Nutzer Audioaufnahmen starten "
+"und beenden können. Diese Funktion ist sowohl für Nutzer mit Benutzerkonto "
+"als auch anonym verfügbar."
+msgstr ""
+"Our website offers a function that allows users to start "
+"and end them. This function is available both for users with a user account "
+"as well as anonymous users."
+
+#: aussprachetrainer/frontend/templates/privacy_policy.html:48
+msgid "Speicherung und Verarbeitung der Audioaufnahme"
+msgstr "Storage and processing of the audio recording"
+
+#: aussprachetrainer/frontend/templates/privacy_policy.html:49
+msgid ""
+"Die aufgezeichnete Audioaufnahme wird zunächst auf unserem Server "
+"gespeichert. Dort werden sie bearbeitet, um sicherzustellen, dass sie eine "
+"maximale Länge von 59 Sekunden nicht überschreiten. Unmittelbar nach der "
+"Analyse werden die Aufnahmen von unserem Server gelöscht."
+msgstr ""
+"The recorded audio is first saved on our server "
+"server. There they are edited to ensure that they do not exceed a "
+"maximum length of 59 seconds. Immediately after the "
+"analysis, the recordings are deleted from our server."
+
+#: aussprachetrainer/frontend/templates/privacy_policy.html:50
+msgid "Datenübermittlung an Microsoft"
+msgstr "Data transfer to Microsoft"
+
+#: aussprachetrainer/frontend/templates/privacy_policy.html:51
+msgid ""
+"Zur Durchführung der Sprachanalyse werden die Audioaufnahmen an Microsoft "
+"(Standort Deutschland) übermittelt. Microsoft ist verantwortlich für die "
+"Transkription der Aufnahmen. Es ist wichtig zu erwähnen, dass Microsoft die "
+"Aufnahmen nicht speichert."
+msgstr ""
+"To carry out the speech analysis, the audio recordings are transmitted to Microsoft "
+"(located in Germany). Microsoft is responsible for the "
+" transcription of the recordings. It is important to note that Microsoft does not store the "
+"recordings are not stored."
+
+#: aussprachetrainer/frontend/templates/privacy_policy.html:52
+msgid "Einwilligung der Nutzer"
+msgstr "Consent of the user"
+
+#: aussprachetrainer/frontend/templates/privacy_policy.html:53
+msgid ""
+"Direkt unter dem Aufnahme-Button auf unserer Webseite befindet sich ein "
+"Hinweis zur Datenverarbeitung. Nutzer, die ein Benutzerkonto erstellen, "
+"müssen bestätigen, dass sie unsere Datenschutzerklärung gelesen haben. "
+"Obwohl die Nutzung der Audioaufnahmefunktion optional ist, ist sie ein "
+"wesentlicher Bestandteil der von uns angebotenen Dienste."
+msgstr ""
+"Directly below the record button on our website is a "
+"note on data processing. Users who create a user account "
+"must confirm that they have read our privacy policy. "
+"Although the use of the audio recording function is optional, it is an "
+"essential component of the services we offer."
+
+#: aussprachetrainer/frontend/templates/privacy_policy.html:55
+msgid "Nutzerkonten und Speicherung von E-Mail-Adressen"
+msgstr "User accounts and storage of e-mail addresses"
+
+#: aussprachetrainer/frontend/templates/privacy_policy.html:56
+#: aussprachetrainer/frontend/templates/privacy_policy.html:64
+msgid "Erstellung und Verwendung von Nutzerkonten"
+msgstr "Creation and use of user accounts"
+
+#: aussprachetrainer/frontend/templates/privacy_policy.html:57
+msgid ""
+"Bei der Erstellung eines Nutzerkontos auf unserer Webseite bitten wir um die "
+"Angabe von Benutzername, E-Mail-Adresse und Passwort. Diese Informationen "
+"ermöglichen den Zugang zu personalisierten Bereichen unserer Webseite, wie "
+"dem Dashboard und dem Lernbereich, in dem Nutzer ihre Fortschritte und "
+"Scores einsehen können."
+msgstr ""
+"When creating a user account on our website, we ask you to "
+"user name, e-mail address and password. This information "
+"enables access to personalized areas of our website, such as "
+"the dashboard and the learning area, where users can view their progress and "
+"scores can be viewed."
+
+#: aussprachetrainer/frontend/templates/privacy_policy.html:58
+msgid "Speicherung und Verwendung von E-Mail-Adressen"
+msgstr "Storage and use of e-mail addresses"
+
+#: aussprachetrainer/frontend/templates/privacy_policy.html:59
+msgid ""
+"E-Mail-Adressen werden ausschließlich für die Kontowiederherstellung genutzt "
+"und nicht an Dritte weitergegeben. Im Rahmen des Kontenerstellungsprozesses "
+"ist es erforderlich, dass jede E-Mail-Adresse einmalig ist, um die "
+"Funktionalität des Logins sowohl über den Benutzernamen als auch die E-Mail-"
+"Adresse zu gewährleisten."
+msgstr ""
+"E-mail addresses are used exclusively for account recovery "
+"and will not be passed on to third parties. As part of the account creation process "
+"it is necessary that each e-mail address is unique in order to ensure the "
+"functionality of the login via both the user name and the e-mail "
+"address."
+
+#: aussprachetrainer/frontend/templates/privacy_policy.html:60
+#: aussprachetrainer/frontend/templates/privacy_policy.html:87
+#, fuzzy
+#| msgid "Datenschutz"
+msgid "Datensicherheit"
+msgstr "privacy policy"
+
+#: aussprachetrainer/frontend/templates/privacy_policy.html:61
+msgid ""
+"Die Sicherheit Ihrer Daten ist uns wichtig. Daher wird das Passwort gehasht "
+"gespeichert. Aufgrund technischer Notwendigkeiten ist es möglich, dass ein "
+"Angreifer durch Brute-Force-Methoden herausfinden könnte, welche E-Mail-"
+"Adressen bereits für ein Konto verwendet wurden. Wir speichern Daten "
+"ausschließlich auf unserem eigenen Server, der nur für unseren Entwickler "
+"zugänglich ist."
+msgstr ""
+"The security of your data is important to us. Therefore, the password is hashed "
+"is stored. Due to technical necessities, it is possible that an "
+"attacker could use brute force methods to find out which e-mail"
+"addresses have already been used for an account. We store data "
+"exclusively on our own server, which is only accessible to our developer "
+"accessible only to our developer."
+
+#: aussprachetrainer/frontend/templates/privacy_policy.html:62
+msgid "Datenspeicherung und -löschung"
+msgstr "Data storage and deletion"
+
+#: aussprachetrainer/frontend/templates/privacy_policy.html:63
+msgid ""
+"Ihre Daten werden solange gespeichert, bis sie von Ihnen oder von uns "
+"gelöscht werden. Bei längerer Inaktivität eines Nutzerkontos behalten wir "
+"uns das Recht vor, dieses Konto und die damit verbundenen Daten zu löschen. "
+"Über eine bevorstehende Löschung werden wir gegebenenfalls informieren. "
+"Ferner behalten wir uns das Recht vor, Nutzerkonten ohne Angabe von Gründen "
+"und ohne Vorwarnung zu löschen, insbesondere bei Verdacht auf nicht-"
+"sinngemäße Nutzung oder bei anstößigen Accountnamen."
+msgstr ""
+"Your data will be stored until they are deleted by you or by us "
+"are deleted. In the event of prolonged inactivity of a user account, we "
+"reserve the right to delete this account and the associated data. "
+"We will inform you of any impending deletion. "
+"Furthermore, we reserve the right to delete user accounts without giving reasons "
+"and without prior warning, in particular in the event of suspected non-"
+"inappropriate use or in the case of offensive account names."
+
+#: aussprachetrainer/frontend/templates/privacy_policy.html:65
+msgid ""
+"Bei der Erstellung eines Nutzerkontos müssen Sie bestätigen, dass Sie unsere "
+"Datenschutzerklärung gelesen haben und damit einverstanden sind. Wenn Sie "
+"Ihren Account löschen möchten, senden Sie bitte eine E-Mail an "
+"kontakt@aussprachetrainer.org."
+msgstr ""
+"When creating a user account, you must confirm that you have read our "
+"privacy policy and that you agree with it. If you "
+"wish to delete your account, please send an e-mail to "
+"kontakt@aussprachetrainer.org."
+
+#: aussprachetrainer/frontend/templates/privacy_policy.html:67
+msgid "Verwendung von Cloudflare"
+msgstr "Use of Cloudflare"
+
+#: aussprachetrainer/frontend/templates/privacy_policy.html:68
+msgid ""
+"In unserer Webseite nutzen wir Dienste von Cloudflare, Inc. (\"Cloudflare"
+"\"). Cloudflare bietet verschiedene Dienste an, die darauf abzielen, unsere "
+"Webseite schneller und sicherer zu machen. Dies schließt DNS-Weiterleitung "
+"und Proxy-Dienste ein."
+msgstr ""
+"On our website, we use services provided by Cloudflare, Inc. ('Cloudflare')."
+"Cloudflare offers various services aimed at making our "
+" website faster and more secure. This includes DNS forwarding "
+"and proxy services."
+
+#: aussprachetrainer/frontend/templates/privacy_policy.html:69
+msgid "DNS-Weiterleitung: "
+msgstr "DNS forwarding: "
+
+#: aussprachetrainer/frontend/templates/privacy_policy.html:69
+msgid ""
+"Cloudflare verwaltet die DNS-Einstellungen unserer Webseite. Dies sorgt für "
+"eine effizientere und sichere Abwicklung der Internetanfragen, indem die "
+"Anfragen über Cloudflares Netzwerk geroutet werden."
+msgstr ""
+"Cloudflare manages the DNS settings of our website. This ensures "
+"more efficient and secure handling of internet requests by routing the "
+"requests are routed via Cloudflare's network."
+
+#: aussprachetrainer/frontend/templates/privacy_policy.html:70
+msgid "Proxy-Dienste: "
+msgstr "Proxy services: "
+
+#: aussprachetrainer/frontend/templates/privacy_policy.html:70
+msgid ""
+"Durch die Nutzung der Proxy-Dienste von Cloudflare wird der Datenverkehr "
+"zwischen den Besuchern unserer Webseite und unserem Server über Cloudflares "
+"Netzwerk geleitet. Dies hilft, unsere Webseite gegen DDoS-Angriffe zu "
+"schützen und die Ladezeiten zu verbessern."
+msgstr ""
+"By using the proxy services of Cloudflare, the data traffic "
+" between visitors to our website and our server via Cloudflare's "
+"network. This helps to protect our website against DDoS attacks "
+"and improve loading times."
+
+#: aussprachetrainer/frontend/templates/privacy_policy.html:71
+msgid ""
+"Cloudflare kann dabei bestimmte Informationen über die Besucher unserer "
+"Webseite erfassen, um diese Dienste bereitzustellen. Dazu gehören "
+"beispielsweise IP-Adressen, Systemkonfigurationsinformationen und andere "
+"Informationen über den Datenverkehr zu und von unserer Webseite."
+msgstr ""
+"Cloudflare may collect certain information about visitors to our "
+"website in order to provide these services. This includes "
+"for example, IP addresses, system configuration information and other "
+"information about traffic to and from our website."
+
+#: aussprachetrainer/frontend/templates/privacy_policy.html:72
+msgid ""
+"Weitere Informationen zu den von Cloudflare verarbeiteten Daten und deren "
+"Datenschutzpraktiken finden Sie in der Datenschutzrichtlinie von Cloudflare."
+msgstr ""
+"For more information about the data processed by Cloudflare and its "
+"privacy practices can be found in Cloudflare's privacy policy."
+
+#: aussprachetrainer/frontend/templates/privacy_policy.html:73
+msgid ""
+"Bitte beachten Sie, dass wir keinen Einfluss auf die Art und Weise haben, "
+"wie Cloudflare die erfassten Daten verwendet und verarbeitet. Unsere Nutzung "
+"von Cloudflare basiert auf unserem berechtigten Interesse, unsere Webseite "
+"effizient und sicher zu betreiben."
+msgstr ""
+"Please note that we have no influence on the way "
+"how Cloudflare uses and processes the data it collects. Our use "
+"of Cloudflare is based on our legitimate interest in operating our website "
+"efficiently and securely."
+
+#: aussprachetrainer/frontend/templates/privacy_policy.html:75
+msgid "Ihre Rechte als Nutzer"
+msgstr "Your rights as a user"
+
+#: aussprachetrainer/frontend/templates/privacy_policy.html:76
+msgid ""
+"Als Nutzer unserer Webseite haben Sie verschiedene Rechte bezüglich Ihrer "
+"personenbezogenen Daten. Diese Rechte sind durch die Datenschutz-"
+"Grundverordnung (DSGVO) und andere relevante Datenschutzgesetze "
+"gewährleistet. Sie umfassen:"
+msgstr ""
+"As a user of our website, you have various rights regarding your "
+"personal data. These rights are governed by the "
+"Basic Regulation (GDPR) and other relevant data protection laws "
+"guaranteed. They include:"
+
+#: aussprachetrainer/frontend/templates/privacy_policy.html:78
+msgid "Recht auf Auskunft:"
+msgstr "Right to information:"
+
+#: aussprachetrainer/frontend/templates/privacy_policy.html:78
+msgid ""
+"Sie haben das Recht, von uns eine Bestätigung darüber zu verlangen, ob "
+"personenbezogene Daten, die Sie betreffen, verarbeitet werden. Ist dies der "
+"Fall, so haben Sie ein Recht auf Auskunft über diese personenbezogenen Daten "
+"und auf weitere Informationen, wie beispielsweise die Verarbeitungszwecke, "
+"die Kategorien personenbezogener Daten, die betroffen sind, und die "
+"Empfänger oder Kategorien von Empfängern, gegenüber denen die "
+"personenbezogenen Daten offengelegt worden sind. Bitte beachten Sie, dass "
+"wir Ihnen keine anonymisierten Daten zuordnen können."
+msgstr ""
+"You have the right to request confirmation from us as to whether "
+"personal data concerning you is being processed. If this is the "
+"is the case, you have a right to information about this personal data "
+"and to further information, such as the purposes of the processing, "
+"the categories of personal data concerned and the "
+"recipients or categories of recipients to whom the "
+"personal data have been disclosed. Please note that "
+"we cannot attribute anonymized data to you."
+
+#: aussprachetrainer/frontend/templates/privacy_policy.html:79
+msgid "Recht auf Berichtigung:"
+msgstr "Right to rectification:"
+
+#: aussprachetrainer/frontend/templates/privacy_policy.html:79
+msgid ""
+"Sie haben das Recht, die Berichtigung Sie betreffender unrichtiger "
+"personenbezogener Daten zu verlangen. Unter Berücksichtigung der Zwecke der "
+"Verarbeitung haben Sie auch das Recht, die Vervollständigung unvollständiger "
+"personenbezogener Daten zu verlangen."
+msgstr ""
+"You have the right to obtain the rectification of inaccurate "
+"personal data concerning you. Taking into account the purposes of the "
+"processing, you also have the right to request the completion of incomplete "
+"personal data to be completed."
+
+#: aussprachetrainer/frontend/templates/privacy_policy.html:80
+msgid "Recht auf Löschung („Recht auf Vergessenwerden“):"
+msgstr "Right to erasure ('right to be forgotten'):"
+
+#: aussprachetrainer/frontend/templates/privacy_policy.html:80
+msgid ""
+"In bestimmten Fällen können Sie die Löschung Ihrer personenbezogenen Daten "
+"verlangen, beispielsweise wenn die Daten für die Zwecke, für die sie erhoben "
+"wurden, nicht mehr notwendig sind oder wenn die Daten unrechtmäßig "
+"verarbeitet wurden. Bitte beachten Sie, dass wir keine anonymisierten Daten "
+"Ihnen zuordnen können und sie deshalb nicht löschen können."
+msgstr ""
+"In certain cases, you can request the deletion of your personal data, "
+"for example if the data is no longer necessary for the purposes for which it was collected "
+"are no longer necessary or if the data have been unlawfully "
+"has been processed unlawfully. Please note that we cannot assign anonymized data "
+"to you and therefore cannot delete it."
+
+#: aussprachetrainer/frontend/templates/privacy_policy.html:81
+msgid "Recht auf Einschränkung der Verarbeitung:"
+msgstr "Right to restriction of processing:"
+
+#: aussprachetrainer/frontend/templates/privacy_policy.html:81
+msgid ""
+"In bestimmten Fällen haben Sie das Recht, von uns die Einschränkung der "
+"Verarbeitung Ihrer personenbezogenen Daten zu verlangen. Dies ist "
+"beispielsweise der Fall, wenn die Richtigkeit der Daten von Ihnen bestritten "
+"wird oder die Verarbeitung unrechtmäßig ist."
+msgstr ""
+"In certain cases, you have the right to request that we restrict the "
+"processing of your personal data. This is "
+"for example, if the accuracy of the data is disputed by you "
+"or the processing is unlawful."
+
+#: aussprachetrainer/frontend/templates/privacy_policy.html:82
+msgid "Recht auf Datenübertragbarkeit:"
+msgstr "Right to data portability:"
+
+#: aussprachetrainer/frontend/templates/privacy_policy.html:82
+msgid ""
+"Sie haben das Recht, die Sie betreffenden personenbezogenen Daten, die Sie "
+"uns bereitgestellt haben, in einem strukturierten, gängigen und "
+"maschinenlesbaren Format zu erhalten, und Sie haben das Recht, diese Daten "
+"einem anderen Verantwortlichen ohne Behinderung durch uns zu übermitteln."
+msgstr ""
+"You have the right to receive the personal data concerning you, which you "
+"you have provided to us in a structured, commonly used and "
+"machine-readable format, and you have the right to transmit this data "
+"to another controller without hindrance from us."
+
+#: aussprachetrainer/frontend/templates/privacy_policy.html:83
+msgid "Widerspruchsrecht:"
+msgstr "Right of objection:"
+
+#: aussprachetrainer/frontend/templates/privacy_policy.html:83
+msgid ""
+"Sie haben das Recht, aus Gründen, die sich aus Ihrer besonderen Situation "
+"ergeben, jederzeit gegen die Verarbeitung Sie betreffender personenbezogener "
+"Daten, die aufgrund von Art. 6 Abs. 1 lit. e oder f DSGVO erfolgt, "
+"Widerspruch einzulegen."
+msgstr ""
+"You have the right to object, on grounds relating to your particular situation "
+"arise from your particular situation, to object at any time to the processing of personal "
+"data which is processed on the basis of Art. 6 para. 1 lit. e or f GDPR "
+"to lodge an objection."
+
+#: aussprachetrainer/frontend/templates/privacy_policy.html:85
+msgid ""
+"Bitte beachten Sie, dass diese Rechte unter bestimmten Bedingungen gelten "
+"und Ausnahmen unterliegen können. Wenn Sie eines dieser Rechte ausüben "
+"möchten, kontaktieren Sie uns bitte über die in dieser Datenschutzerklärung "
+"angegebenen Kontaktdaten. Wir werden Ihre Anfrage gemäß den geltenden "
+"Datenschutzgesetzen bearbeiten."
+msgstr ""
+"Please note that these rights apply under certain conditions "
+"and may be subject to exceptions. If you wish to exercise any of these rights, "
+"please contact us using the contact details provided in this Privacy Policy "
+"contact details provided in this Privacy Policy. We will process your request in accordance with applicable "
+"data protection laws."
+
+#: aussprachetrainer/frontend/templates/privacy_policy.html:88
+msgid ""
+"Wir nehmen den Schutz Ihrer persönlichen Daten sehr ernst und behandeln Ihre "
+"personenbezogenen Daten vertraulich und entsprechend der gesetzlichen "
+"Datenschutzvorschriften sowie dieser Datenschutzerklärung. Unsere Webseite "
+"verwendet SSL- bzw. TLS-Verschlüsselung, um die Sicherheit Ihrer Daten "
+"während der Übertragung zu gewährleisten. Dies erkennen Sie an dem Schloss-"
+"Symbol in der Adresszeile Ihres Browsers und daran, dass die Adresszeile von "
+"\"http://\" auf \"https://\" wechselt."
+msgstr ""
+"We take the protection of your personal data very seriously and treat your "
+" personal data confidentially and in accordance with the statutory "
+"data protection regulations and this privacy policy. Our website "
+"uses SSL or TLS encryption to ensure the security of your data "
+"during transmission. You can recognize this by the lock "
+"symbol in the address line of your browser and the fact that the address line of "
+"\"http://\" changes to \"https://\"."
+
+#: aussprachetrainer/frontend/templates/privacy_policy.html:89
+msgid ""
+"Zusätzlich setzen wir verschiedene Sicherheitsmaßnahmen ein, um Ihre Daten "
+"vor unbefugtem Zugriff, Verlust, Missbrauch oder Zerstörung zu schützen. "
+"Dazu gehören unter anderem regelmäßige Software-Updates, Firewalls und "
+"Sicherheitssysteme, die dem aktuellen Stand der Technik entsprechen."
+msgstr ""
+"In addition, we use various security measures to protect your data "
+" from unauthorized access, loss, misuse or destruction. "
+"These include regular software updates, firewalls and "
+"security systems that correspond to the current state of the art."
+
+#: aussprachetrainer/frontend/templates/privacy_policy.html:90
+msgid ""
+"Bitte beachten Sie jedoch, dass die Datenübertragung im Internet "
+"grundsätzlich Sicherheitslücken aufweisen kann. Ein lückenloser Schutz der "
+"Daten vor dem Zugriff durch Dritte ist nicht möglich."
+msgstr ""
+"Please note, however, that data transmission over the Internet "
+"can generally have security gaps. Complete protection of "
+"data from access by third parties is not possible."
+
+#: aussprachetrainer/frontend/templates/privacy_policy.html:91
+msgid ""
+"Bei Fragen zur Sicherheit Ihrer persönlichen Daten können Sie sich jederzeit "
+"an uns wenden. Unsere Kontaktinformationen finden Sie im Abschnitt "
+"\"Kontaktinformationen\" dieser Datenschutzerklärung."
+msgstr ""
+"If you have any questions about the security of your personal data, you can contact us at any time "
+" to us at any time. You can find our contact information in the section "
+"\"Contact information\" of this privacy policy."
+
+#: aussprachetrainer/frontend/templates/privacy_policy.html:93
+msgid "Änderungen der Datenschutzerklärung"
+msgstr "Changes to the privacy policy"
+
+#: aussprachetrainer/frontend/templates/privacy_policy.html:94
+msgid ""
+"Wir behalten uns das Recht vor, diese Datenschutzerklärung zu ändern, um sie "
+"an veränderte rechtliche Rahmenbedingungen oder Änderungen unserer Dienste "
+"sowie der Datenverarbeitung anzupassen. Dies gilt jedoch nur hinsichtlich "
+"Erklärungen zur Datenverarbeitung. Sofern Einwilligungen des Nutzers "
+"erforderlich sind oder Bestandteile der Datenschutzerklärung Regelungen des "
+"Vertragsverhältnisses mit den Nutzern enthalten, erfolgen Änderungen nur mit "
+"Zustimmung des Nutzers."
+msgstr ""
+"We reserve the right to amend this Privacy Policy in order to "
+"to changes in the legal framework or changes to our services "
+"and data processing. However, this only applies to "
+"declarations on data processing. If the consent of the user "
+"are required or components of the privacy policy contain provisions of the "
+"contractual relationship with the users, changes will only be made with the "
+"consent of the user."
+
+#: aussprachetrainer/frontend/templates/privacy_policy.html:95
+msgid ""
+"Die Nutzer werden gebeten, sich regelmäßig über den Inhalt der "
+"Datenschutzerklärung zu informieren."
+msgstr ""
+"Users are requested to regularly inform themselves about the content of the "
+"data protection declaration."
+#: aussprachetrainer/frontend/templates/privacy_policy.html:97
+msgid "Kontaktinformationen"
+msgstr "Contact information"
+
+#: aussprachetrainer/frontend/templates/privacy_policy.html:98
+msgid ""
+"Bei Fragen zur Verarbeitung Ihrer persönlichen Daten oder zum Thema "
+"Datenschutz im Allgemeinen stehen wir Ihnen gerne zur Verfügung. Sie können "
+"uns wie folgt erreichen:"
+msgstr ""
+"If you have any questions about the processing of your personal data or about "
+"data protection in general, we will be happy to help you. You can "
+"reach us as follows:"
+
+#: aussprachetrainer/frontend/templates/privacy_policy.html:100
+msgid "Anschrift:"
+msgstr "Address"
+
+#: aussprachetrainer/frontend/templates/privacy_policy.html:106
+msgid "E-Mail:"
+msgstr "email"
+
+#: aussprachetrainer/frontend/templates/privacy_policy.html:107
+msgid "kontakt@aussprachetrainer.org"
+msgstr "kontakt@aussprachetrainer.org"
+
+#: aussprachetrainer/frontend/templates/privacy_policy.html:109
+msgid ""
+"An dieser Mailadresse erreichen Sie auch unseren Datenschutzbeauftragen "
+"Daniel Busch."
+msgstr ""
+"You can also reach our data protection officer at this e-mail address "
+"Daniel Busch."
+#: aussprachetrainer/frontend/templates/result_error.html:2
+msgid "Ein Fehler beim Analysieren ist aufgetreten."
+msgstr "An error occurred while analyzing."
+
+#: aussprachetrainer/frontend/tests.py:29
+msgid "Willkommen"
+msgstr "Welcome"
+
+#: aussprachetrainer/frontend/views.py:66
+msgid "Zurück zum Lernbereich"
+msgstr "Back to the learning area"
+
+#: aussprachetrainer/frontend/views.py:69
+msgid "Zurück zum Dashboard"
+msgstr "Back to the dashboard"
+
+#: aussprachetrainer/learn/templates/learn.html:44
+msgid "Durch das Tippen auf den Score kannst du einen Satz üben."
+msgstr "You can practise a sentence by tapping on the score."
+
+#: aussprachetrainer/learn/templates/learn.html:49
+msgid "Score"
+msgstr "Score"
+
+#: aussprachetrainer/learn/templates/learn.html:50
+msgid "Übungssatz"
+msgstr "Practice sentence"
+
+#: aussprachetrainer/learn/templates/learn.html:51
+msgid "Schwierigkeit"
+msgstr "Difficulty"
+
+#: aussprachetrainer/learn/templates/learn.html:52
+msgid "Aktion"
+msgstr "Action"
+
+#: aussprachetrainer/user_auth/forms.py:10
 msgid "E-Mail"
 msgstr "email"
 
-#: user_auth/templates/user_auth/login.html:5
-#: user_auth/templates/user_auth/login.html:22
+#: aussprachetrainer/user_auth/forms.py:18
+msgid "Ein Benutzer mit dieser E-Mail-Adresse existiert bereits."
+msgstr "A user with this e-mail address already exists."
+
+#: aussprachetrainer/user_auth/forms.py:24
+msgid "Ein Benutzer mit diesem Benutzernamen existiert bereits."
+msgstr "A user with this user name already exists."
+
+#: aussprachetrainer/user_auth/forms.py:30
+msgid "Benutzername oder E-Mail"
+msgstr "Username or e-mail"
+
+#: aussprachetrainer/user_auth/models.py:8
+msgid "Users must have an email address"
+msgstr ""
+
+#: aussprachetrainer/user_auth/models.py:10
+msgid "Users must have a username"
+msgstr ""
+
+#: aussprachetrainer/user_auth/models.py:32
+msgid "Email"
+msgstr "email"
+
+#: aussprachetrainer/user_auth/models.py:33
+msgid "Benutzername"
+msgstr "username"
+
+#: aussprachetrainer/user_auth/templates/registration/password_reset_complete.html:8
+msgid "Passwort erfolgreich geändert"
+msgstr "Password changed successfully"
+
+#: aussprachetrainer/user_auth/templates/registration/password_reset_complete.html:21
+msgid "Passwort erfolgreich geändert."
+msgstr "Password changed successfully."
+
+#: aussprachetrainer/user_auth/templates/registration/password_reset_complete.html:22
+msgid ""
+"Dein Passwort wurde erfolgreich geändert. Du kannst dich jetzt mit deinem "
+"neuen Passwort "
+msgstr ""
+"Your password has been successfully changed. You can now use your "
+"new password to"
+#: aussprachetrainer/user_auth/templates/registration/password_reset_complete.html:22
+msgid "einloggen"
+msgstr "log in"
+
+#: aussprachetrainer/user_auth/templates/registration/password_reset_confirm.html:8
+#: aussprachetrainer/user_auth/templates/registration/password_reset_confirm.html:21
+msgid "Neues Passwort wählen"
+msgstr "Choose new password"
+
+#: aussprachetrainer/user_auth/templates/registration/password_reset_confirm.html:35
+msgid "Passwort ändern"
+msgstr "Change password"
+
+#: aussprachetrainer/user_auth/templates/registration/password_reset_done.html:8
+msgid "Zurücksetzungslink versendet"
+msgstr "Reset link sent"
+
+#: aussprachetrainer/user_auth/templates/registration/password_reset_done.html:21
+msgid "Zurücksetzungslink gesendet"
+msgstr "Reset link sent"
+
+#: aussprachetrainer/user_auth/templates/registration/password_reset_done.html:22
+msgid "Es wurde eine Email zum Zurücksetzen des Passworts an dich versendet."
+msgstr "An email has been sent to you to reset your password."
+
+#: aussprachetrainer/user_auth/templates/registration/password_reset_done.html:23
+msgid ""
+"Wenn du keine E-Mail erhalten hast, vergewissere dich bitte, dass du die "
+"korrekte Emailadresse eingegeben haben, mit der du dich registriert hast, "
+"und überprüfe deinen Spam-Ordner."
+msgstr ""
+"If you have not received an email, please make sure that you have entered the "
+"correct email address you registered with, "
+"and check your spam folder."
+
+#: aussprachetrainer/user_auth/templates/registration/password_reset_email.html:3
+msgid "Hallo,"
+msgstr "Hello,"
+
+#: aussprachetrainer/user_auth/templates/registration/password_reset_email.html:5
+msgid "Bitte klicke auf den Link unten, um dein Passwort zurückzusetzen:"
+msgstr "Please click on the link below to reset your password:"
+
+#: aussprachetrainer/user_auth/templates/registration/password_reset_email.html:9
+msgid ""
+"Falls du diese Anfrage nicht gestellt hast, ignoriere bitte diese E-Mail."
+msgstr ""
+"If you have not made this request, please ignore this email."
+
+#: aussprachetrainer/user_auth/templates/registration/password_reset_email.html:11
+msgid "Mit freundlichen Grüßen"
+msgstr "With kind regards"
+
+#: aussprachetrainer/user_auth/templates/registration/password_reset_form.html:8
+#: aussprachetrainer/user_auth/templates/registration/password_reset_form.html:21
+#: aussprachetrainer/user_auth/templates/registration/password_reset_form.html:35
+msgid "Passwort zurücksetzen"
+msgstr "Reset password"
+
+#: aussprachetrainer/user_auth/templates/registration/password_reset_subject.txt:2
+msgid "AusspracheTrainer.org Passwort zurücksetzen"
+msgstr "AusspracheTrainer.org Password reset"
+
+#: aussprachetrainer/user_auth/templates/user_auth/login.html:21
+#: aussprachetrainer/user_auth/templates/user_auth/login.html:43
+#: aussprachetrainer/user_auth/templates/user_auth/register.html:40
 msgid "Anmelden"
 msgstr "login"
 
-#: user_auth/templates/user_auth/login.html:9
+#: aussprachetrainer/user_auth/templates/user_auth/login.html:25
 msgid "Falscher Benutzername oder Passwort."
 msgstr "Wrong username or password."
+
+#: aussprachetrainer/user_auth/templates/user_auth/login.html:39
+msgid "Passwort vergessen?"
+msgstr "Forgotten your password?"
+
+#: aussprachetrainer/user_auth/templates/user_auth/login.html:46
+msgid "Noch kein Konto?"
+msgstr "Don't have an account yet?"
+
+#: aussprachetrainer/user_auth/templates/user_auth/login.html:47
+msgid "Konto erstellen"
+msgstr "Create account"
+
+#: aussprachetrainer/user_auth/templates/user_auth/register.html:33
+msgid "Ich stimme der"
+msgstr "I agree with the"
+
+#: aussprachetrainer/user_auth/templates/user_auth/register.html:33
+msgid "zu."
+msgstr "."
+
+#: aussprachetrainer/user_auth/templates/user_auth/register.html:39
+msgid "Bereits ein Konto?"
+msgstr "Already have an account?"
+
+#: venv/lib/python3.8/site-packages/click/_termui_impl.py:518
+#, python-brace-format
+msgid "{editor}: Editing failed"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/click/_termui_impl.py:522
+#, python-brace-format
+msgid "{editor}: Editing failed: {e}"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/click/core.py:1120
+msgid "Aborted!"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/click/core.py:1309
+#: venv/lib/python3.8/site-packages/click/decorators.py:559
+msgid "Show this message and exit."
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/click/core.py:1340
+#: venv/lib/python3.8/site-packages/click/core.py:1370
+#, python-brace-format
+msgid "(Deprecated) {text}"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/click/core.py:1387
+msgid "Options"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/click/core.py:1413
+#, python-brace-format
+msgid "Got unexpected extra argument ({args})"
+msgid_plural "Got unexpected extra arguments ({args})"
+msgstr[0] ""
+msgstr[1] ""
+
+#: venv/lib/python3.8/site-packages/click/core.py:1429
+msgid "DeprecationWarning: The command {name!r} is deprecated."
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/click/core.py:1636
+msgid "Commands"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/click/core.py:1668
+msgid "Missing command."
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/click/core.py:1746
+msgid "No such command {name!r}."
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/click/core.py:2310
+msgid "Value must be an iterable."
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/click/core.py:2331
+#, python-brace-format
+msgid "Takes {nargs} values but 1 was given."
+msgid_plural "Takes {nargs} values but {len} were given."
+msgstr[0] ""
+msgstr[1] ""
+
+#: venv/lib/python3.8/site-packages/click/core.py:2778
+#, python-brace-format
+msgid "env var: {var}"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/click/core.py:2808
+msgid "(dynamic)"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/click/core.py:2821
+#, python-brace-format
+msgid "default: {default}"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/click/core.py:2834
+msgid "required"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/click/decorators.py:465
+#, python-format
+msgid "%(prog)s, version %(version)s"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/click/decorators.py:528
+msgid "Show the version and exit."
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/click/exceptions.py:44
+#: venv/lib/python3.8/site-packages/click/exceptions.py:80
+#, python-brace-format
+msgid "Error: {message}"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/click/exceptions.py:72
+#, python-brace-format
+msgid "Try '{command} {option}' for help."
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/click/exceptions.py:121
+#, python-brace-format
+msgid "Invalid value: {message}"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/click/exceptions.py:123
+#, python-brace-format
+msgid "Invalid value for {param_hint}: {message}"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/click/exceptions.py:179
+msgid "Missing argument"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/click/exceptions.py:181
+msgid "Missing option"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/click/exceptions.py:183
+msgid "Missing parameter"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/click/exceptions.py:185
+#, python-brace-format
+msgid "Missing {param_type}"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/click/exceptions.py:192
+#, python-brace-format
+msgid "Missing parameter: {param_name}"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/click/exceptions.py:212
+#, python-brace-format
+msgid "No such option: {name}"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/click/exceptions.py:224
+#, python-brace-format
+msgid "Did you mean {possibility}?"
+msgid_plural "(Possible options: {possibilities})"
+msgstr[0] ""
+msgstr[1] ""
+
+#: venv/lib/python3.8/site-packages/click/exceptions.py:262
+msgid "unknown error"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/click/exceptions.py:269
+msgid "Could not open file {filename!r}: {message}"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/click/parser.py:231
+msgid "Argument {name!r} takes {nargs} values."
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/click/parser.py:413
+msgid "Option {name!r} does not take a value."
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/click/parser.py:474
+msgid "Option {name!r} requires an argument."
+msgid_plural "Option {name!r} requires {nargs} arguments."
+msgstr[0] ""
+msgstr[1] ""
+
+#: venv/lib/python3.8/site-packages/click/shell_completion.py:319
+msgid "Shell completion is not supported for Bash versions older than 4.4."
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/click/shell_completion.py:326
+msgid "Couldn't detect Bash version, shell completion is not supported."
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/click/termui.py:158
+msgid "Repeat for confirmation"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/click/termui.py:174
+msgid "Error: The value you entered was invalid."
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/click/termui.py:176
+#, python-brace-format
+msgid "Error: {e.message}"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/click/termui.py:187
+msgid "Error: The two entered values do not match."
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/click/termui.py:243
+msgid "Error: invalid input"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/click/termui.py:773
+msgid "Press any key to continue..."
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/click/types.py:266
+#, python-brace-format
+msgid ""
+"Choose from:\n"
+"\t{choices}"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/click/types.py:298
+msgid "{value!r} is not {choice}."
+msgid_plural "{value!r} is not one of {choices}."
+msgstr[0] ""
+msgstr[1] ""
+
+#: venv/lib/python3.8/site-packages/click/types.py:392
+msgid "{value!r} does not match the format {format}."
+msgid_plural "{value!r} does not match the formats {formats}."
+msgstr[0] ""
+msgstr[1] ""
+
+#: venv/lib/python3.8/site-packages/click/types.py:414
+msgid "{value!r} is not a valid {number_type}."
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/click/types.py:470
+#, python-brace-format
+msgid "{value} is not in the range {range}."
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/click/types.py:611
+msgid "{value!r} is not a valid boolean."
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/click/types.py:635
+msgid "{value!r} is not a valid UUID."
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/click/types.py:822
+msgid "file"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/click/types.py:824
+msgid "directory"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/click/types.py:826
+msgid "path"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/click/types.py:877
+msgid "{name} {filename!r} does not exist."
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/click/types.py:886
+msgid "{name} {filename!r} is a file."
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/click/types.py:894
+#, python-brace-format
+msgid "{name} '{filename}' is a directory."
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/click/types.py:903
+msgid "{name} {filename!r} is not readable."
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/click/types.py:912
+msgid "{name} {filename!r} is not writable."
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/click/types.py:921
+msgid "{name} {filename!r} is not executable."
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/click/types.py:988
+#, python-brace-format
+msgid "{len_type} values are required, but {len_value} was given."
+msgid_plural "{len_type} values are required, but {len_value} were given."
+msgstr[0] ""
+msgstr[1] ""
+
+#: venv/lib/python3.8/site-packages/django/contrib/messages/apps.py:15
+msgid "Messages"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/contrib/sitemaps/apps.py:8
+msgid "Site Maps"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/contrib/staticfiles/apps.py:9
+msgid "Static Files"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/contrib/syndication/apps.py:7
+msgid "Syndication"
+msgstr ""
+
+#. Translators: String used to replace omitted page numbers in elided page
+#. range generated by paginators, e.g. [1, 2, '…', 5, 6, 7, '…', 9, 10].
+#: venv/lib/python3.8/site-packages/django/core/paginator.py:30
+msgid "…"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/core/paginator.py:50
+msgid "That page number is not an integer"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/core/paginator.py:52
+msgid "That page number is less than 1"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/core/paginator.py:57
+msgid "That page contains no results"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/core/validators.py:22
+msgid "Enter a valid value."
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/core/validators.py:104
+#: venv/lib/python3.8/site-packages/django/forms/fields.py:754
+msgid "Enter a valid URL."
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/core/validators.py:165
+msgid "Enter a valid integer."
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/core/validators.py:176
+msgid "Enter a valid email address."
+msgstr ""
+
+#. Translators: "letters" means latin letters: a-z and A-Z.
+#: venv/lib/python3.8/site-packages/django/core/validators.py:259
+msgid ""
+"Enter a valid “slug” consisting of letters, numbers, underscores or hyphens."
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/core/validators.py:267
+msgid ""
+"Enter a valid “slug” consisting of Unicode letters, numbers, underscores, or "
+"hyphens."
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/core/validators.py:279
+#: venv/lib/python3.8/site-packages/django/core/validators.py:287
+#: venv/lib/python3.8/site-packages/django/core/validators.py:316
+msgid "Enter a valid IPv4 address."
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/core/validators.py:296
+#: venv/lib/python3.8/site-packages/django/core/validators.py:317
+msgid "Enter a valid IPv6 address."
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/core/validators.py:308
+#: venv/lib/python3.8/site-packages/django/core/validators.py:315
+msgid "Enter a valid IPv4 or IPv6 address."
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/core/validators.py:351
+msgid "Enter only digits separated by commas."
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/core/validators.py:357
+#, python-format
+msgid "Ensure this value is %(limit_value)s (it is %(show_value)s)."
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/core/validators.py:392
+#, python-format
+msgid "Ensure this value is less than or equal to %(limit_value)s."
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/core/validators.py:401
+#, python-format
+msgid "Ensure this value is greater than or equal to %(limit_value)s."
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/core/validators.py:410
+#, python-format
+msgid "Ensure this value is a multiple of step size %(limit_value)s."
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/core/validators.py:420
+#, python-format
+msgid ""
+"Ensure this value has at least %(limit_value)d character (it has "
+"%(show_value)d)."
+msgid_plural ""
+"Ensure this value has at least %(limit_value)d characters (it has "
+"%(show_value)d)."
+msgstr[0] ""
+msgstr[1] ""
+
+#: venv/lib/python3.8/site-packages/django/core/validators.py:438
+#, python-format
+msgid ""
+"Ensure this value has at most %(limit_value)d character (it has "
+"%(show_value)d)."
+msgid_plural ""
+"Ensure this value has at most %(limit_value)d characters (it has "
+"%(show_value)d)."
+msgstr[0] ""
+msgstr[1] ""
+
+#: venv/lib/python3.8/site-packages/django/core/validators.py:461
+#: venv/lib/python3.8/site-packages/django/forms/fields.py:347
+#: venv/lib/python3.8/site-packages/django/forms/fields.py:386
+msgid "Enter a number."
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/core/validators.py:463
+#, python-format
+msgid "Ensure that there are no more than %(max)s digit in total."
+msgid_plural "Ensure that there are no more than %(max)s digits in total."
+msgstr[0] ""
+msgstr[1] ""
+
+#: venv/lib/python3.8/site-packages/django/core/validators.py:468
+#, python-format
+msgid "Ensure that there are no more than %(max)s decimal place."
+msgid_plural "Ensure that there are no more than %(max)s decimal places."
+msgstr[0] ""
+msgstr[1] ""
+
+#: venv/lib/python3.8/site-packages/django/core/validators.py:473
+#, python-format
+msgid ""
+"Ensure that there are no more than %(max)s digit before the decimal point."
+msgid_plural ""
+"Ensure that there are no more than %(max)s digits before the decimal point."
+msgstr[0] ""
+msgstr[1] ""
+
+#: venv/lib/python3.8/site-packages/django/core/validators.py:542
+#, python-format
+msgid ""
+"File extension “%(extension)s” is not allowed. Allowed extensions are: "
+"%(allowed_extensions)s."
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/core/validators.py:603
+msgid "Null characters are not allowed."
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/db/models/base.py:1401
+#: venv/lib/python3.8/site-packages/django/forms/models.py:899
+msgid "and"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/db/models/base.py:1403
+#, python-format
+msgid "%(model_name)s with this %(field_labels)s already exists."
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/db/models/constraints.py:17
+#, python-format
+msgid "Constraint “%(name)s” is violated."
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/db/models/fields/__init__.py:129
+#, python-format
+msgid "Value %(value)r is not a valid choice."
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/db/models/fields/__init__.py:130
+msgid "This field cannot be null."
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/db/models/fields/__init__.py:131
+msgid "This field cannot be blank."
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/db/models/fields/__init__.py:132
+#, python-format
+msgid "%(model_name)s with this %(field_label)s already exists."
+msgstr ""
+
+#. Translators: The 'lookup_type' is one of 'date', 'year' or
+#. 'month'. Eg: "Title must be unique for pub_date year"
+#: venv/lib/python3.8/site-packages/django/db/models/fields/__init__.py:136
+#, python-format
+msgid ""
+"%(field_label)s must be unique for %(date_field_label)s %(lookup_type)s."
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/db/models/fields/__init__.py:174
+#, python-format
+msgid "Field of type: %(field_type)s"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/db/models/fields/__init__.py:1065
+#, python-format
+msgid "“%(value)s” value must be either True or False."
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/db/models/fields/__init__.py:1066
+#, python-format
+msgid "“%(value)s” value must be either True, False, or None."
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/db/models/fields/__init__.py:1068
+msgid "Boolean (Either True or False)"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/db/models/fields/__init__.py:1118
+#, python-format
+msgid "String (up to %(max_length)s)"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/db/models/fields/__init__.py:1222
+msgid "Comma-separated integers"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/db/models/fields/__init__.py:1323
+#, python-format
+msgid ""
+"“%(value)s” value has an invalid date format. It must be in YYYY-MM-DD "
+"format."
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/db/models/fields/__init__.py:1327
+#: venv/lib/python3.8/site-packages/django/db/models/fields/__init__.py:1462
+#, python-format
+msgid ""
+"“%(value)s” value has the correct format (YYYY-MM-DD) but it is an invalid "
+"date."
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/db/models/fields/__init__.py:1331
+msgid "Date (without time)"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/db/models/fields/__init__.py:1458
+#, python-format
+msgid ""
+"“%(value)s” value has an invalid format. It must be in YYYY-MM-DD HH:MM[:ss[."
+"uuuuuu]][TZ] format."
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/db/models/fields/__init__.py:1466
+#, python-format
+msgid ""
+"“%(value)s” value has the correct format (YYYY-MM-DD HH:MM[:ss[.uuuuuu]]"
+"[TZ]) but it is an invalid date/time."
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/db/models/fields/__init__.py:1471
+msgid "Date (with time)"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/db/models/fields/__init__.py:1595
+#, python-format
+msgid "“%(value)s” value must be a decimal number."
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/db/models/fields/__init__.py:1597
+msgid "Decimal number"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/db/models/fields/__init__.py:1754
+#, python-format
+msgid ""
+"“%(value)s” value has an invalid format. It must be in [DD] [[HH:]MM:]ss[."
+"uuuuuu] format."
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/db/models/fields/__init__.py:1758
+msgid "Duration"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/db/models/fields/__init__.py:1810
+msgid "Email address"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/db/models/fields/__init__.py:1835
+msgid "File path"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/db/models/fields/__init__.py:1913
+#, python-format
+msgid "“%(value)s” value must be a float."
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/db/models/fields/__init__.py:1915
+msgid "Floating point number"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/db/models/fields/__init__.py:1955
+#, python-format
+msgid "“%(value)s” value must be an integer."
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/db/models/fields/__init__.py:1957
+msgid "Integer"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/db/models/fields/__init__.py:2049
+msgid "Big (8 byte) integer"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/db/models/fields/__init__.py:2066
+msgid "Small integer"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/db/models/fields/__init__.py:2074
+msgid "IPv4 address"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/db/models/fields/__init__.py:2105
+msgid "IP address"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/db/models/fields/__init__.py:2198
+#: venv/lib/python3.8/site-packages/django/db/models/fields/__init__.py:2199
+#, python-format
+msgid "“%(value)s” value must be either None, True or False."
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/db/models/fields/__init__.py:2201
+msgid "Boolean (Either True, False or None)"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/db/models/fields/__init__.py:2252
+msgid "Positive big integer"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/db/models/fields/__init__.py:2267
+msgid "Positive integer"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/db/models/fields/__init__.py:2282
+msgid "Positive small integer"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/db/models/fields/__init__.py:2298
+#, python-format
+msgid "Slug (up to %(max_length)s)"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/db/models/fields/__init__.py:2334
+msgid "Text"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/db/models/fields/__init__.py:2409
+#, python-format
+msgid ""
+"“%(value)s” value has an invalid format. It must be in HH:MM[:ss[.uuuuuu]] "
+"format."
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/db/models/fields/__init__.py:2413
+#, python-format
+msgid ""
+"“%(value)s” value has the correct format (HH:MM[:ss[.uuuuuu]]) but it is an "
+"invalid time."
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/db/models/fields/__init__.py:2417
+msgid "Time"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/db/models/fields/__init__.py:2525
+msgid "URL"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/db/models/fields/__init__.py:2549
+msgid "Raw binary data"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/db/models/fields/__init__.py:2614
+#, python-format
+msgid "“%(value)s” is not a valid UUID."
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/db/models/fields/__init__.py:2616
+msgid "Universally unique identifier"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/db/models/fields/files.py:231
+msgid "File"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/db/models/fields/files.py:391
+msgid "Image"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/db/models/fields/json.py:18
+msgid "A JSON object"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/db/models/fields/json.py:20
+msgid "Value must be valid JSON."
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/db/models/fields/related.py:918
+#, python-format
+msgid "%(model)s instance with %(field)s %(value)r does not exist."
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/db/models/fields/related.py:920
+msgid "Foreign Key (type determined by related field)"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/db/models/fields/related.py:1227
+msgid "One-to-one relationship"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/db/models/fields/related.py:1284
+#, python-format
+msgid "%(from)s-%(to)s relationship"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/db/models/fields/related.py:1286
+#, python-format
+msgid "%(from)s-%(to)s relationships"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/db/models/fields/related.py:1334
+msgid "Many-to-many relationship"
+msgstr ""
+
+#. Translators: If found as last label character, these punctuation
+#. characters will prevent the default label_suffix to be appended to the label
+#: venv/lib/python3.8/site-packages/django/forms/boundfield.py:176
+msgid ":?.!"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/forms/fields.py:91
+msgid "This field is required."
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/forms/fields.py:298
+msgid "Enter a whole number."
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/forms/fields.py:467
+#: venv/lib/python3.8/site-packages/django/forms/fields.py:1243
+msgid "Enter a valid date."
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/forms/fields.py:490
+#: venv/lib/python3.8/site-packages/django/forms/fields.py:1244
+msgid "Enter a valid time."
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/forms/fields.py:517
+msgid "Enter a valid date/time."
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/forms/fields.py:551
+msgid "Enter a valid duration."
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/forms/fields.py:552
+#, python-brace-format
+msgid "The number of days must be between {min_days} and {max_days}."
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/forms/fields.py:621
+msgid "No file was submitted. Check the encoding type on the form."
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/forms/fields.py:622
+msgid "No file was submitted."
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/forms/fields.py:623
+msgid "The submitted file is empty."
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/forms/fields.py:625
+#, python-format
+msgid "Ensure this filename has at most %(max)d character (it has %(length)d)."
+msgid_plural ""
+"Ensure this filename has at most %(max)d characters (it has %(length)d)."
+msgstr[0] ""
+msgstr[1] ""
+
+#: venv/lib/python3.8/site-packages/django/forms/fields.py:630
+msgid "Please either submit a file or check the clear checkbox, not both."
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/forms/fields.py:696
+msgid ""
+"Upload a valid image. The file you uploaded was either not an image or a "
+"corrupted image."
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/forms/fields.py:859
+#: venv/lib/python3.8/site-packages/django/forms/fields.py:951
+#: venv/lib/python3.8/site-packages/django/forms/models.py:1572
+#, python-format
+msgid "Select a valid choice. %(value)s is not one of the available choices."
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/forms/fields.py:953
+#: venv/lib/python3.8/site-packages/django/forms/fields.py:1072
+#: venv/lib/python3.8/site-packages/django/forms/models.py:1570
+msgid "Enter a list of values."
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/forms/fields.py:1073
+msgid "Enter a complete value."
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/forms/fields.py:1312
+msgid "Enter a valid UUID."
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/forms/fields.py:1342
+msgid "Enter a valid JSON."
+msgstr ""
+
+#. Translators: This is the default suffix added to form field labels
+#: venv/lib/python3.8/site-packages/django/forms/forms.py:98
+msgid ":"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/forms/forms.py:248
+#: venv/lib/python3.8/site-packages/django/forms/forms.py:332
+#, python-format
+msgid "(Hidden field %(name)s) %(error)s"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/forms/formsets.py:63
+#, python-format
+msgid ""
+"ManagementForm data is missing or has been tampered with. Missing fields: "
+"%(field_names)s. You may need to file a bug report if the issue persists."
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/forms/formsets.py:67
+#, python-format
+msgid "Please submit at most %(num)d form."
+msgid_plural "Please submit at most %(num)d forms."
+msgstr[0] ""
+msgstr[1] ""
+
+#: venv/lib/python3.8/site-packages/django/forms/formsets.py:72
+#, python-format
+msgid "Please submit at least %(num)d form."
+msgid_plural "Please submit at least %(num)d forms."
+msgstr[0] ""
+msgstr[1] ""
+
+#: venv/lib/python3.8/site-packages/django/forms/formsets.py:483
+#: venv/lib/python3.8/site-packages/django/forms/formsets.py:490
+msgid "Order"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/forms/formsets.py:496
+msgid "Delete"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/forms/models.py:892
+#, python-format
+msgid "Please correct the duplicate data for %(field)s."
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/forms/models.py:897
+#, python-format
+msgid "Please correct the duplicate data for %(field)s, which must be unique."
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/forms/models.py:904
+#, python-format
+msgid ""
+"Please correct the duplicate data for %(field_name)s which must be unique "
+"for the %(lookup)s in %(date_field)s."
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/forms/models.py:913
+msgid "Please correct the duplicate values below."
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/forms/models.py:1344
+msgid "The inline value did not match the parent instance."
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/forms/models.py:1435
+msgid "Select a valid choice. That choice is not one of the available choices."
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/forms/models.py:1574
+#, python-format
+msgid "“%(pk)s” is not a valid value."
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/forms/utils.py:226
+#, python-format
+msgid ""
+"%(datetime)s couldn’t be interpreted in time zone %(current_timezone)s; it "
+"may be ambiguous or it may not exist."
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/forms/widgets.py:463
+msgid "Clear"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/forms/widgets.py:464
+msgid "Currently"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/forms/widgets.py:465
+msgid "Change"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/forms/widgets.py:793
+msgid "Unknown"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/forms/widgets.py:794
+msgid "Yes"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/forms/widgets.py:795
+msgid "No"
+msgstr ""
+
+#. Translators: Please do not add spaces around commas.
+#: venv/lib/python3.8/site-packages/django/template/defaultfilters.py:853
+msgid "yes,no,maybe"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/template/defaultfilters.py:883
+#: venv/lib/python3.8/site-packages/django/template/defaultfilters.py:900
+#, python-format
+msgid "%(size)d byte"
+msgid_plural "%(size)d bytes"
+msgstr[0] ""
+msgstr[1] ""
+
+#: venv/lib/python3.8/site-packages/django/template/defaultfilters.py:902
+#, python-format
+msgid "%s KB"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/template/defaultfilters.py:904
+#, python-format
+msgid "%s MB"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/template/defaultfilters.py:906
+#, python-format
+msgid "%s GB"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/template/defaultfilters.py:908
+#, python-format
+msgid "%s TB"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/template/defaultfilters.py:910
+#, python-format
+msgid "%s PB"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/utils/dateformat.py:77
+msgid "p.m."
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/utils/dateformat.py:78
+msgid "a.m."
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/utils/dateformat.py:83
+msgid "PM"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/utils/dateformat.py:84
+msgid "AM"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/utils/dateformat.py:155
+msgid "midnight"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/utils/dateformat.py:157
+msgid "noon"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/utils/dates.py:7
+msgid "Monday"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/utils/dates.py:8
+msgid "Tuesday"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/utils/dates.py:9
+msgid "Wednesday"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/utils/dates.py:10
+msgid "Thursday"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/utils/dates.py:11
+msgid "Friday"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/utils/dates.py:12
+msgid "Saturday"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/utils/dates.py:13
+msgid "Sunday"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/utils/dates.py:16
+msgid "Mon"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/utils/dates.py:17
+msgid "Tue"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/utils/dates.py:18
+msgid "Wed"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/utils/dates.py:19
+msgid "Thu"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/utils/dates.py:20
+msgid "Fri"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/utils/dates.py:21
+msgid "Sat"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/utils/dates.py:22
+msgid "Sun"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/utils/dates.py:25
+msgid "January"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/utils/dates.py:26
+msgid "February"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/utils/dates.py:27
+msgid "March"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/utils/dates.py:28
+msgid "April"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/utils/dates.py:29
+msgid "May"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/utils/dates.py:30
+msgid "June"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/utils/dates.py:31
+msgid "July"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/utils/dates.py:32
+msgid "August"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/utils/dates.py:33
+msgid "September"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/utils/dates.py:34
+msgid "October"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/utils/dates.py:35
+msgid "November"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/utils/dates.py:36
+msgid "December"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/utils/dates.py:39
+msgid "jan"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/utils/dates.py:40
+msgid "feb"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/utils/dates.py:41
+msgid "mar"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/utils/dates.py:42
+msgid "apr"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/utils/dates.py:43
+msgid "may"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/utils/dates.py:44
+msgid "jun"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/utils/dates.py:45
+msgid "jul"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/utils/dates.py:46
+msgid "aug"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/utils/dates.py:47
+msgid "sep"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/utils/dates.py:48
+msgid "oct"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/utils/dates.py:49
+msgid "nov"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/utils/dates.py:50
+#, fuzzy
+#| msgid "deutsch"
+msgid "dec"
+msgstr "german"
+
+#: venv/lib/python3.8/site-packages/django/utils/dates.py:53
+msgctxt "abbrev. month"
+msgid "Jan."
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/utils/dates.py:54
+msgctxt "abbrev. month"
+msgid "Feb."
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/utils/dates.py:55
+msgctxt "abbrev. month"
+msgid "March"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/utils/dates.py:56
+msgctxt "abbrev. month"
+msgid "April"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/utils/dates.py:57
+msgctxt "abbrev. month"
+msgid "May"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/utils/dates.py:58
+msgctxt "abbrev. month"
+msgid "June"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/utils/dates.py:59
+msgctxt "abbrev. month"
+msgid "July"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/utils/dates.py:60
+msgctxt "abbrev. month"
+msgid "Aug."
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/utils/dates.py:61
+msgctxt "abbrev. month"
+msgid "Sept."
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/utils/dates.py:62
+msgctxt "abbrev. month"
+msgid "Oct."
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/utils/dates.py:63
+msgctxt "abbrev. month"
+msgid "Nov."
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/utils/dates.py:64
+msgctxt "abbrev. month"
+msgid "Dec."
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/utils/dates.py:67
+msgctxt "alt. month"
+msgid "January"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/utils/dates.py:68
+msgctxt "alt. month"
+msgid "February"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/utils/dates.py:69
+msgctxt "alt. month"
+msgid "March"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/utils/dates.py:70
+msgctxt "alt. month"
+msgid "April"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/utils/dates.py:71
+msgctxt "alt. month"
+msgid "May"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/utils/dates.py:72
+msgctxt "alt. month"
+msgid "June"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/utils/dates.py:73
+msgctxt "alt. month"
+msgid "July"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/utils/dates.py:74
+msgctxt "alt. month"
+msgid "August"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/utils/dates.py:75
+msgctxt "alt. month"
+msgid "September"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/utils/dates.py:76
+msgctxt "alt. month"
+msgid "October"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/utils/dates.py:77
+msgctxt "alt. month"
+msgid "November"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/utils/dates.py:78
+msgctxt "alt. month"
+msgid "December"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/utils/ipv6.py:8
+msgid "This is not a valid IPv6 address."
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/utils/text.py:76
+#, python-format
+msgctxt "String to return when truncating text"
+msgid "%(truncated_text)s…"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/utils/text.py:252
+msgid "or"
+msgstr ""
+
+#. Translators: This string is used as a separator between list elements
+#: venv/lib/python3.8/site-packages/django/utils/text.py:271
+#: venv/lib/python3.8/site-packages/django/utils/timesince.py:94
+msgid ", "
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/utils/timesince.py:9
+#, python-format
+msgid "%(num)d year"
+msgid_plural "%(num)d years"
+msgstr[0] ""
+msgstr[1] ""
+
+#: venv/lib/python3.8/site-packages/django/utils/timesince.py:10
+#, python-format
+msgid "%(num)d month"
+msgid_plural "%(num)d months"
+msgstr[0] ""
+msgstr[1] ""
+
+#: venv/lib/python3.8/site-packages/django/utils/timesince.py:11
+#, python-format
+msgid "%(num)d week"
+msgid_plural "%(num)d weeks"
+msgstr[0] ""
+msgstr[1] ""
+
+#: venv/lib/python3.8/site-packages/django/utils/timesince.py:12
+#, python-format
+msgid "%(num)d day"
+msgid_plural "%(num)d days"
+msgstr[0] ""
+msgstr[1] ""
+
+#: venv/lib/python3.8/site-packages/django/utils/timesince.py:13
+#, python-format
+msgid "%(num)d hour"
+msgid_plural "%(num)d hours"
+msgstr[0] ""
+msgstr[1] ""
+
+#: venv/lib/python3.8/site-packages/django/utils/timesince.py:14
+#, python-format
+msgid "%(num)d minute"
+msgid_plural "%(num)d minutes"
+msgstr[0] ""
+msgstr[1] ""
+
+#: venv/lib/python3.8/site-packages/django/views/csrf.py:111
+msgid "Forbidden"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/views/csrf.py:112
+msgid "CSRF verification failed. Request aborted."
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/views/csrf.py:116
+msgid ""
+"You are seeing this message because this HTTPS site requires a “Referer "
+"header” to be sent by your web browser, but none was sent. This header is "
+"required for security reasons, to ensure that your browser is not being "
+"hijacked by third parties."
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/views/csrf.py:122
+msgid ""
+"If you have configured your browser to disable “Referer” headers, please re-"
+"enable them, at least for this site, or for HTTPS connections, or for “same-"
+"origin” requests."
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/views/csrf.py:127
+msgid ""
+"If you are using the <meta name=\"referrer\" content=\"no-referrer\"> tag or "
+"including the “Referrer-Policy: no-referrer” header, please remove them. The "
+"CSRF protection requires the “Referer” header to do strict referer checking. "
+"If you’re concerned about privacy, use alternatives like <a rel=\"noreferrer"
+"\" …> for links to third-party sites."
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/views/csrf.py:136
+msgid ""
+"You are seeing this message because this site requires a CSRF cookie when "
+"submitting forms. This cookie is required for security reasons, to ensure "
+"that your browser is not being hijacked by third parties."
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/views/csrf.py:142
+msgid ""
+"If you have configured your browser to disable cookies, please re-enable "
+"them, at least for this site, or for “same-origin” requests."
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/views/csrf.py:148
+msgid "More information is available with DEBUG=True."
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/views/generic/dates.py:44
+msgid "No year specified"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/views/generic/dates.py:64
+#: venv/lib/python3.8/site-packages/django/views/generic/dates.py:115
+#: venv/lib/python3.8/site-packages/django/views/generic/dates.py:214
+msgid "Date out of range"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/views/generic/dates.py:94
+msgid "No month specified"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/views/generic/dates.py:147
+msgid "No day specified"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/views/generic/dates.py:194
+msgid "No week specified"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/views/generic/dates.py:349
+#: venv/lib/python3.8/site-packages/django/views/generic/dates.py:380
+#, python-format
+msgid "No %(verbose_name_plural)s available"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/views/generic/dates.py:652
+#, python-format
+msgid ""
+"Future %(verbose_name_plural)s not available because %(class_name)s."
+"allow_future is False."
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/views/generic/dates.py:692
+#, python-format
+msgid "Invalid date string “%(datestr)s” given format “%(format)s”"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/views/generic/detail.py:56
+#, python-format
+msgid "No %(verbose_name)s found matching the query"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/views/generic/list.py:70
+msgid "Page is not “last”, nor can it be converted to an int."
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/views/generic/list.py:77
+#, python-format
+msgid "Invalid page (%(page_number)s): %(message)s"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/views/generic/list.py:169
+#, python-format
+msgid "Empty list and “%(class_name)s.allow_empty” is False."
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/views/static.py:38
+msgid "Directory indexes are not allowed here."
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/views/static.py:40
+#, python-format
+msgid "“%(path)s” does not exist"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/views/static.py:79
+#, python-format
+msgid "Index of %(directory)s"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/views/templates/default_urlconf.html:7
+#: venv/lib/python3.8/site-packages/django/views/templates/default_urlconf.html:221
+msgid "The install worked successfully! Congratulations!"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/views/templates/default_urlconf.html:207
+#, python-format
+msgid ""
+"View <a href=\"https://docs.djangoproject.com/en/%(version)s/releases/\" "
+"target=\"_blank\" rel=\"noopener\">release notes</a> for Django %(version)s"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/views/templates/default_urlconf.html:222
+#, python-format
+msgid ""
+"You are seeing this page because <a href=\"https://docs.djangoproject.com/en/"
+"%(version)s/ref/settings/#debug\" target=\"_blank\" rel=\"noopener"
+"\">DEBUG=True</a> is in your settings file and you have not configured any "
+"URLs."
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/views/templates/default_urlconf.html:230
+msgid "Django Documentation"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/views/templates/default_urlconf.html:231
+msgid "Topics, references, &amp; how-to’s"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/views/templates/default_urlconf.html:239
+msgid "Tutorial: A Polling App"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/views/templates/default_urlconf.html:240
+msgid "Get started with Django"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/views/templates/default_urlconf.html:248
+msgid "Django Community"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/views/templates/default_urlconf.html:249
+msgid "Connect, get help, or contribute"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/kombu/transport/qpid.py:1311
+#, python-format
+msgid "Attempting to connect to qpid with SASL mechanism %s"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/kombu/transport/qpid.py:1316
+#, python-format
+msgid "Connected to qpid with SASL mechanism %s"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/kombu/transport/qpid.py:1334
+#, python-format
+msgid "Unable to connect to qpid with SASL mechanism %s"
+msgstr ""
+
+#~ msgid "Wähle Sprache aus"
+#~ msgstr "Select language"
+
+#~ msgid "diese seite unterstützt mehrere Sprachen."
+#~ msgstr "this site supports multiple languages"
+
+#~ msgid "diese Seite ist cool"
+#~ msgstr "This site is cool"
+
+#~ msgid "Kontakt"
+#~ msgstr "Contact"
+
+#~ msgid "Audio hochladen:"
+#~ msgstr "upload audio:"
+
+#~ msgid "Absenden"
+#~ msgstr "enter"
+
+#~ msgid "Warte kurz"
+#~ msgstr "please wait"
+
+#~ msgid "Warte auf Ergebnis"
+#~ msgstr "wait for result"
 
 #~ msgid "Meine mehrsprachige Seite"
 #~ msgstr "My multilanguage page"
