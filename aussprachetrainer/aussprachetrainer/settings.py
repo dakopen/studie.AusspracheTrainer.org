@@ -76,6 +76,8 @@ CORS_ALLOWED_ORIGINS = [
     # Add any other origins you want to allow
 ]
 
+CSRF_TRUSTED_ORIGINS = ['https://*.dakopen.de','https://*.aussprachetrainer.org', 'https://dakopen.de', 'https://aussprachetrainer.org']
+
 # Application definition
 
 INSTALLED_APPS = [
