@@ -61,3 +61,4 @@ virtualenv==20.24.3
 wcwidth==0.2.6
 sentry_sdk
 gunicorn
+django-cors-headers
