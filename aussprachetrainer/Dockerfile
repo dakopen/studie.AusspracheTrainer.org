@@ -1,5 +1,17 @@
-# Use an official Python runtime as a parent image
-FROM python:3.9-slim
+# Start from Ubuntu 20.04 LTS as the base image
+FROM ubuntu:20.04
+
+# Avoid prompts from apt
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Install Python 3.8 and other necessary packages
+RUN apt-get update && \
+    apt-get install -y python3.8 python3-pip ffmpeg gettext && \
+    rm -rf /var/lib/apt/lists/*
+
+# Update Python commands to Python3.8 and Pip3
+RUN ln -s /usr/bin/python3.8 /usr/local/bin/python && \
+    ln -s /usr/bin/pip3 /usr/local/bin/pip
 
 # Set the working directory in the container
 WORKDIR /usr/src/app
@@ -9,23 +21,10 @@ COPY . .
 
 # Install any needed packages specified in requirements.txt
 RUN pip install -r requirements.txt
-#RUN pip install --no-cache-dir -r requirements.txt
 
-# Install FFmpeg
-RUN apt-get update && \
-    apt-get install -y ffmpeg && \
-    rm -rf /var/lib/apt/lists/*
-
+RUN python manage.py compilemessages
 # Expose port for Gunicorn
 EXPOSE 8000
-
-# Create a group and user
-RUN addgroup --gid 1000 myusergroup && \
-    adduser --uid 1000 --disabled-password --gecos '' --ingroup myusergroup myuser
-
-# Change ownership of the working directory
-RUN chown -R myuser:myusergroup /usr/src/app
-USER myuser
 
 # Start Gunicorn
 CMD ["gunicorn", "--bind", "0.0.0.0:8000", "aussprachetrainer.wsgi:application"]

@@ -7,7 +7,6 @@ services:
     volumes:
       - .:/usr/src/app
       - static_volume:/usr/src/app/staticfiles
-      - audio_volume:/usr/src/app/audio_files
     depends_on:
       - redis
 
@@ -16,7 +15,6 @@ services:
     command: celery -A aussprachetrainer worker --loglevel=info
     volumes:
       - .:/usr/src/app
-      - audio_volume:/usr/src/app/audio_files
     depends_on:
       - redis
 
@@ -34,4 +32,3 @@ services:
 
 volumes:
   static_volume:
-  audio_volume:

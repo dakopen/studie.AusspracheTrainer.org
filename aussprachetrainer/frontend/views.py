@@ -119,7 +119,6 @@ def initiate_analysis(request):
     buffer.seek(0)
 
     content_file = ContentFile(buffer.read())
-
     
     # Save audio file to disk
     file_name = 'audio_files/' + random_name  
