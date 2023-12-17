@@ -22,7 +22,14 @@ COPY . .
 # Install any needed packages specified in requirements.txt
 RUN pip install -r requirements.txt
 
+RUN python manage.py makemigrations && \
+    python manage.py migrate
+
 RUN python manage.py compilemessages
+
+# Collect static files
+RUN python manage.py collectstatic --noinput
+
 # Expose port for Gunicorn
 EXPOSE 8000
 

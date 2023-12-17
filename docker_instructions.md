@@ -1,3 +1,7 @@
-1. `cd aussprachetrainer`
-2. `python manage.py compilemessages`
-3. `docker-compose up --build` (maybe install docker first)
+- `cd aussprachetrainer`
+- add `fontawesomefree` folder to `static` folder (maybe not)
+- add images 
+- `python manage.py migrate`  (maybe not)
+- `python manage.py collectstatic` (maybe not)
+- `python manage.py compilemessages` (maybe not)
+- `docker-compose up --build` (maybe install docker first)
