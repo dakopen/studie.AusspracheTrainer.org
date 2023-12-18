@@ -133,12 +133,29 @@ WSGI_APPLICATION = 'aussprachetrainer.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+if DEBUG:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'defaultdb',
+            'USER': 'doadmin',
+            'PASSWORD': get_secret("DO-DATABASE-PASSWORD"),
+            'HOST': 'db-postgresql-fra-docker-do-user-10555764-0.c.db.ondigitalocean.com',  # This should match the service name in docker-compose
+            'PORT': '25060',
+            'OPTIONS': {
+                'sslmode': 'require',
+                'sslrootcert': os.path.join(BASE_DIR, 'certificates/ca-certificate.crt'),
+            }
+        }
+    }
+
 
 AUTHENTICATION_BACKENDS = [
     'user_auth.backends.EmailOrUsernameModelBackend',
