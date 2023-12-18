@@ -162,3 +162,11 @@ def generate_random_sentence(request):
 
     sentence = random.choice(random_sentences[language])
     return JsonResponse({'sentence': sentence})
+
+def robots_txt(request):
+    lines = [
+        "User-Agent: *",
+        "Disallow: /admin/",
+        # Add other rules here
+    ]
+    return HttpResponse("\n".join(lines), content_type="text/plain")
