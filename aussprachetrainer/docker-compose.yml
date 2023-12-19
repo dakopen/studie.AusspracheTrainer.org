@@ -30,5 +30,5 @@ services:
   redis:
     image: "redis:alpine"
 
-volumes:
-  static_volume:
+#volumes:
+#  static_volume:
