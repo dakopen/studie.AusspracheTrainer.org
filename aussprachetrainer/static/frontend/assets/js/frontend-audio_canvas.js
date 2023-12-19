@@ -18,7 +18,7 @@ const textareaEmptyError = document.getElementById('textarea-error');
 
 function getResponsiveCanvasWidth() {
   // Use the lesser of the window's innerWidth or a max width (e.g., 800)
-  return Math.min(window.innerWidth - 50, 800);
+  return Math.min(window.outerWidth - 50, 800);
 }
 
 function initializeCanvasAndOffscreen() {
