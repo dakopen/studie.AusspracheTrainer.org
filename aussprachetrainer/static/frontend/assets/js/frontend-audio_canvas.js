@@ -71,11 +71,18 @@ window.addEventListener('load', initializeCanvasAndOffscreen);
 /*## END: initializing canvas and offscreen canvas ##*/
 
 /*** Variable declarations for the audio ***/
-const audioContext = new AudioContext();
-const analyser = audioContext.createAnalyser();
-analyser.fftSize = 2048;
-const bufferLength = analyser.frequencyBinCount;
-const dataArray = new Uint8Array(bufferLength);
+let audioContext, analyser, bufferLength, dataArray;
+
+function ensureAudioContext() {
+  if (!audioContext) {
+    audioContext = new AudioContext();
+    analyser = audioContext.createAnalyser();
+    analyser.fftSize = 2048;
+    bufferLength = analyser.frequencyBinCount;
+    dataArray = new Uint8Array(bufferLength);
+  }
+}
+
 
 let mediaRecorder;
 let chunks = [];
@@ -97,6 +104,7 @@ const checkTextareaError = () => {
 /**# START: start and stop recording functions which also triggers the drawing of the waveform #**/
 const startRecording = () => {
   if (!checkTextareaError()) return;
+  ensureAudioContext();
   isRecording = true;
   isShowingResults = false;
   rightRecordingButton.style.opacity = '1';
