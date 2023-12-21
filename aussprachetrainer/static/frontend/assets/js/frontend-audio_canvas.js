@@ -63,7 +63,7 @@ function initializeCanvasAndOffscreen() {
   
 
   // Re-initialize any necessary variables or event listeners for the new canvas
-  ctx = canvas.getContext('2d');
+  ctx = canvas.getContext('2d', { willReadFrequently: true });
 
 
 
@@ -78,7 +78,7 @@ function initializeCanvasAndOffscreen() {
 
   // Initialize new OffscreenCanvas
   offscreenCanvas = document.createElement('canvas');
-  offscreenCtx = offscreenCanvas.getContext('2d');
+  offscreenCtx = offscreenCanvas.getContext('2d', { willReadFrequently: true });
   offscreenCanvas.width = 30000;  // more than enough
   offscreenCanvas.height = canvas.height;
   offscreenCanvas.className = 'offscreen-canvas-class';
@@ -170,7 +170,7 @@ const stopRecording = () => {
 
   /** RESIZE OFFSCREEN CANVAS **/
   const tempCanvas = document.createElement("canvas");
-  const tempCtx = tempCanvas.getContext("2d");
+  const tempCtx = tempCanvas.getContext("2d", { willReadFrequently: true });
 
   // Set the temporary canvas dimensions
   tempCanvas.width = offscreenCanvas.width;
@@ -423,7 +423,7 @@ function colorCanvas(offsets) {
 
   // Create a temporary canvas and context
   const tempCanvas = document.createElement("canvas");
-  const tempCtx = tempCanvas.getContext("2d");
+  const tempCtx = tempCanvas.getContext("2d", { willReadFrequently: true });
 
   // Set the temporary canvas dimensions
   tempCanvas.width = originalWidth;
