@@ -14,6 +14,8 @@ const stopRecordingIcon = document.getElementById("stop-recording-icon");
 const startRecordingIcon = document.getElementById("start-recording-icon");
 const waitRecordingIcon = document.getElementById("wait-recording-icon");
 const textareaEmptyError = document.getElementById('textarea-error');
+let starttimeRecording;
+let endtimeRecording;
 
 var audioOptions;
 if (MediaRecorder.isTypeSupported('audio/ogg')) {
@@ -125,6 +127,7 @@ const checkTextareaError = () => {
 const startRecording = () => {
   if (!checkTextareaError()) return;
   ensureAudioContext();
+  starttimeRecording = Date.now();
   isRecording = true;
   isShowingResults = false;
   rightRecordingButton.style.opacity = '1';
@@ -163,6 +166,9 @@ const startRecording = () => {
 
 const stopRecording = () => {
   mediaRecorder.stop();
+  endtimeRecording = Date.now();
+
+
   isRecording = false;
   startRecordingIcon.style.display = "none";
   waitRecordingIcon.style.display = "inherit";
@@ -191,7 +197,7 @@ const stopRecording = () => {
   recordedAudio.src = URL.createObjectURL(blob);
   replayX = 0;
   recordedAudio.onloadedmetadata = function() {
-    const audioDuration = recordedAudio.duration; // duration in seconds
+    const audioDuration = (endtimeRecording - starttimeRecording) / 1000; // duration in seconds
     pixelsPerSecond = Math.min(offscreenCanvas.width, getResponsiveCanvasWidth()) / audioDuration;
     realPixelsPerSecond = offscreenCanvas.width / audioDuration; // use later when drawing the colored boxes (words)
   };
