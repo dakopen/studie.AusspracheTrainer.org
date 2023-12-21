@@ -80,6 +80,7 @@
     <input type="hidden" id="hiddenAudioData" name="audio_data">
     <input type="hidden" id="hiddenTextData" name="text_data">
     <input type="hidden" id="hiddenSelectedLanguage" name="selected_language" value={% if language == 'de-DE' %}"dropdown-lang-germany"{% elif language == 'en-GB' %}"dropdown-lang-gb"{% elif language == 'fr-FR' %}"dropdown-lang-france"{% endif %}>
+    <input type="hidden" id="hiddenAudioMIMEtype" name="audio_mimetype">
     {% csrf_token %}
 </form>
 
@@ -90,7 +91,7 @@
 {% endif %}
 
 
-<script src="{% static 'frontend/assets/js/frontend-record_audio.js' %}"></script>
+<script src="{% static 'frontend/assets/js/frontend-textarea.js' %}"></script>
 <script src="{% static 'frontend/assets/js/frontend-audio_canvas.js' %}"></script>
 <script src="{% static 'frontend/assets/js/frontend-backend.js' %}"></script>
 

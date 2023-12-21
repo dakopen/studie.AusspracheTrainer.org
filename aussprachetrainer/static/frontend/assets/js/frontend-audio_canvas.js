@@ -1,4 +1,9 @@
 /**# START: initializing canvas and offscreen canvas #**/
+console.log("mp4", MediaRecorder.isTypeSupported('audio/mp4'))
+console.log("ogg", MediaRecorder.isTypeSupported('audio/ogg'))
+console.log("wav", MediaRecorder.isTypeSupported('audio/wav'))
+console.log("webm", MediaRecorder.isTypeSupported('audio/webm'))
+
 
 let canvas = document.getElementById('visualizer');
 let ctx;
@@ -15,6 +20,27 @@ const stopRecordingIcon = document.getElementById("stop-recording-icon");
 const startRecordingIcon = document.getElementById("start-recording-icon");
 const waitRecordingIcon = document.getElementById("wait-recording-icon");
 const textareaEmptyError = document.getElementById('textarea-error');
+
+var audioOptions;
+if (MediaRecorder.isTypeSupported('audio/ogg')) {
+  audioOptions = { 'type': 'audio/ogg' };
+  document.getElementById('hiddenAudioMIMEtype').value = "audio/ogg";
+} else if (MediaRecorder.isTypeSupported('audio/wav')) {
+  audioOptions = { 'type': 'audio/wav' };
+  document.getElementById('hiddenAudioMIMEtype').value = "audio/wav";
+} else if (MediaRecorder.isTypeSupported('audio/mp4')) {
+  audioOptions = { 'type': 'audio/mp4' };
+  document.getElementById('hiddenAudioMIMEtype').value = "audio/mp4";
+} else if (MediaRecorder.isTypeSupported('audio/webm')) {
+  audioOptions = { 'type': 'audio/webm' };
+  document.getElementById('hiddenAudioMIMEtype').value = "audio/webm";
+} else if (MediaRecorder.isTypeSupported('audio/mpeg')) {
+  audioOptions = { 'type': 'audio/mpeg' };
+  document.getElementById('hiddenAudioMIMEtype').value = "audio/mpeg";
+}
+else {
+    alert("Your browser does not support any of the required audio formats. Please use a different browser.");
+}
 
 function getResponsiveCanvasWidth() {
   // Use the lesser of the window's innerWidth or a max width (e.g., 800)
@@ -167,7 +193,7 @@ const stopRecording = () => {
   offscreenCtx.drawImage(tempCanvas, 0, 0);
 
   // Combine the chunks to form a Blob
-  var blob = new Blob(chunks, { 'type': 'audio/ogg' });
+  var blob = new Blob(chunks, audioOptions);
   recordedAudio.src = URL.createObjectURL(blob);
   replayX = 0;
   recordedAudio.onloadedmetadata = function() {

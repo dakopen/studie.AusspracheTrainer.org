@@ -103,15 +103,25 @@ def initiate_analysis(request):
     audio_data_url = request.POST.get('audio_data')
     text = request.POST.get('text_data')
     selected_language = request.POST.get('selected_language')   
-
+    audio_mimetype = request.POST.get('audio_mimetype')
+    logger.warn(f"Initiating analysis for {selected_language} with mimetype {audio_mimetype}")
     audio_data_base64 = audio_data_url.split(',')[1]
     audio_data = base64.b64decode(audio_data_base64)
-    random_name = str(uuid.uuid4()) + ".wav"
 
     buffer = io.BytesIO()
+    if audio_mimetype == "audio/ogg":
+        audio_segment = AudioSegment.from_ogg(io.BytesIO(audio_data))
+    elif audio_mimetype == "audio/wav":
+        audio_segment = AudioSegment.from_wav(io.BytesIO(audio_data))
+    elif audio_mimetype == "audio/mp4":
+        audio_segment = AudioSegment.from_file(io.BytesIO(audio_data), format="mp4")
+    elif audio_mimetype == "audio/mpeg":
+        audio_segment = AudioSegment.from_file(io.BytesIO(audio_data), format="mp3")
+    elif audio_mimetype == "audio/webm":
+        audio_segment = AudioSegment.from_file(io.BytesIO(audio_data), format="webm")
+    else:
+        return JsonResponse({'error': 'Unsupported audio format'})
 
-    audio_segment = AudioSegment.from_ogg(io.BytesIO(audio_data))
-    
     if len(audio_segment) > 59000:
         audio_segment = audio_segment[:59000]  # max. 59 seconds
     audio_segment.export(buffer, format="wav")
@@ -121,6 +131,7 @@ def initiate_analysis(request):
     content_file = ContentFile(buffer.read())
     
     # Save audio file to disk
+    random_name = str(uuid.uuid4()) + ".wav"
     file_name = 'audio_files/' + random_name  
     default_storage.save(file_name, content_file)
     
