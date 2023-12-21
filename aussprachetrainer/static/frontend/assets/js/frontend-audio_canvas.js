@@ -1,10 +1,4 @@
 /**# START: initializing canvas and offscreen canvas #**/
-console.log("mp4", MediaRecorder.isTypeSupported('audio/mp4'))
-console.log("ogg", MediaRecorder.isTypeSupported('audio/ogg'))
-console.log("wav", MediaRecorder.isTypeSupported('audio/wav'))
-console.log("webm", MediaRecorder.isTypeSupported('audio/webm'))
-
-
 let canvas = document.getElementById('visualizer');
 let ctx;
 
