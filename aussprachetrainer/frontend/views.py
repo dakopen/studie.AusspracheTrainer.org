@@ -26,7 +26,7 @@ random_sentences = {lang: open(os.path.join(settings.BASE_DIR, f'frontend/random
 logger = logging.getLogger(__name__)
 
 
-def render_into_base(request, title, filepaths, context=None, content_type=None, status=None, using=None, css=None):
+def render_into_base(request, title, filepaths, context=None, content_type=None, status=None, using=None, css=None, extra_head=None):
     """
     Render a template into the base template.
     """
@@ -43,6 +43,11 @@ def render_into_base(request, title, filepaths, context=None, content_type=None,
         if not isinstance(css, list):
             css = [css]
     context["css"] = css
+
+    if extra_head:
+        if not isinstance(extra_head, list):
+            extra_head = [extra_head]
+    context["extra_head"] = extra_head
 
     return render(request, 'extend_base.html', context, content_type, status, using)
 
@@ -86,8 +91,13 @@ def index(request):
         placeholder = "Übungssatz"
     context["placeholder"] = placeholder
 
+    extra_head = {
+        "name": "description", 
+        "content": _("Der kostenlose AusspracheTrainer hilft dir, deine Aussprache zu verbessern. Sprich einen Satz ein und erhalte eine Bewertung deiner Aussprache.\ndeutsch · englisch · französisch")
+    }
+
     return render_into_base(request, _("AusspracheTrainer"), ["index.html"], context,
-                            css=['frontend/assets/css/index.css'])
+                            css=['frontend/assets/css/index.css'], extra_head=extra_head)
 
 
 def legal_notice(request):

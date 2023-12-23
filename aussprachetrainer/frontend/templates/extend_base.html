@@ -12,7 +12,15 @@
 {% endblock %}
 
 {% block content %}
-    {% for filepath in filepaths%}
+    {% for filepath in filepaths %}
         {% include filepath %}
     {% endfor %}
+{% endblock %}
+
+{% block extra_head %}
+    {% if extra_head %}
+        {% for metadata in extra_head %}
+            <meta name="{{ metadata.name }}" content="{{ metadata.content }}">
+        {% endfor %}
+    {% endif %}
 {% endblock %}
