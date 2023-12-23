@@ -96,8 +96,8 @@ def index(request):
         "content": _("Der kostenlose AusspracheTrainer hilft dir, deine Aussprache zu verbessern. Sprich einen Satz ein und erhalte eine Bewertung deiner Aussprache.\ndeutsch · englisch · französisch")
     }
 
-    return render_into_base(request, _("AusspracheTrainer"), ["index.html"], context,
-                            css=['frontend/assets/css/index.css'], extra_head=extra_head)
+    return render_into_base(request, _("AusspracheTrainer"), ["index.html", "tutorial.html"], context,
+                            css=['frontend/assets/css/index.css', 'frontend/assets/css/tutorial.css'], extra_head=extra_head)
 
 
 def legal_notice(request):
