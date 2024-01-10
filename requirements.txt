@@ -21,7 +21,7 @@ cycler==0.11.0
 distlib==0.3.7
 Django==4.1.13
 filelock==3.12.2
-fonttools==4.40.0
+fonttools==4.43.0
 fontawesomefree==6.4.2
 idna==3.4
 isodate==0.6.1
