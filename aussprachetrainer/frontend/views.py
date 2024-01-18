@@ -6,7 +6,7 @@ from django.utils import translation
 from django.template.loader import render_to_string
 from analyze.tasks import async_pronunciation_assessment
 from celery.result import AsyncResult
-from django.http import JsonResponse, HttpResponse
+from django.http import JsonResponse, HttpResponse, StreamingHttpResponse
 from django.conf import settings
 import random
 import uuid
@@ -15,10 +15,13 @@ import base64
 import io
 import os
 from analyze.models import PronunciationAssessmentResult
+from analyze.text_to_speech import synthesize_speech
 from frontend.languages import country_class_to_locale
 from django.conf import settings
 from django.urls import reverse
 import logging
+from django.views.decorators.http import require_POST
+from django.templatetags.static import static
 
 languages = ['en-GB', 'de-DE', 'fr-FR']
 random_sentences = {lang: open(os.path.join(settings.BASE_DIR, f'frontend/random_sentences/{lang.split("-")[0]}_validated.txt'), encoding="utf-8-sig").read().splitlines() for lang in languages}  # 5000 per language
@@ -191,3 +194,22 @@ def robots_txt(request):
         # Add other rules here
     ]
     return HttpResponse("\n".join(lines), content_type="text/plain")
+
+def text_to_speech(request):
+        
+    # Extract metadata from request
+    text = request.GET.get('text')
+    language = request.GET.get('language')
+
+
+    if not text or not language:
+        return JsonResponse({'error': 'No text/language provided'}, status=400)
+
+
+    filepath = synthesize_speech(text, language)
+
+    if filepath:
+        # Provide a URL to access the audio file
+        audio_url = request.build_absolute_uri(settings.MEDIA_URL + filepath)
+        return JsonResponse({'audio_url': audio_url})
+

@@ -128,3 +128,90 @@ function generateRandomSentence() {
         }
     });
 }
+
+$('#synthesize-speech-button').click(function() {
+    var text = textarea.val();
+    let language = $('#hiddenSelectedLanguage').val();
+    var selectedLanguage = language.split('-')[2];
+    switch(selectedLanguage) {
+        case "gb":
+            language = "en-GB";
+            break;
+        case "germany":
+            language = "de-DE";
+            break;
+        case "france":
+            language = "fr-FR";
+            break;
+    }
+
+    if (text) {
+        $.ajax({
+            url: '/speech_synthesis/?language=' + encodeURIComponent(language) + '&text=' + encodeURIComponent(text),
+            type: 'POST',
+            data: {
+                csrfmiddlewaretoken: csrftoken // Pass CSRF token
+            },
+            success: function(data) {
+                var audioPlayer = $('#audio-player');
+                var audioSource = $('#audio-source');
+                audioSource.attr('src', data.audio_url);
+                audioPlayer[0].load(); // [0] to get the native HTML element
+                audioPlayer.show();
+                toggleAudio();
+            },
+            error: function(xhr, status, error) {
+                console.error("Error in speech synthesis: " + error);
+            }
+        });
+    }
+});
+
+// https://codepen.io/shahednasser/pen/XWgbGBN
+const playerButton = document.querySelector('.player-button'),
+      audio = document.querySelector('audio'),
+      timeline = document.querySelector('.timeline'),
+      soundButton = document.querySelector('.sound-button'),
+      playIcon = `
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="#3D3132">
+    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd" />
+  </svg>
+      `,
+      pauseIcon = `
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="#3D3132">
+  <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zM7 8a1 1 0 012 0v4a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v4a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd" />
+</svg>
+      `
+function toggleAudio() {
+  if (audio.paused) {
+    audio.play();
+    playerButton.innerHTML = pauseIcon;
+  } else {
+    audio.pause();
+    playerButton.innerHTML = playIcon;
+  }
+}
+
+playerButton.addEventListener('click', toggleAudio);
+
+function changeTimelinePosition () {
+  const percentagePosition = (100*audio.currentTime) / audio.duration;
+  timeline.style.backgroundSize = `${percentagePosition}% 100%`;
+  timeline.value = percentagePosition;
+}
+
+audio.ontimeupdate = changeTimelinePosition;
+
+function audioEnded() {
+  playerButton.innerHTML = playIcon;
+}
+
+audio.onended = audioEnded;
+
+function changeSeek() {
+  const time = (timeline.value * audio.duration) / 100;
+  audio.currentTime = time;
+}
+
+timeline.addEventListener('change', changeSeek);
+
