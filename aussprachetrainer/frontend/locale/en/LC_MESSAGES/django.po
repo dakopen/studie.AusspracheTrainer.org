@@ -995,7 +995,7 @@ msgid "Satz laut und deutlich vorlesen"
 msgstr "Read the sentence aloud and clearly"
 
 #: aussprachetrainer/frontend/templates/tutorial.html:11
-msgid "Aufnahme beenden auf Ergebnis warten"
+msgid "Aufnahme beenden und auf Ergebnis warten"
 msgstr "Stop recording wait for result"
 
 #: aussprachetrainer/frontend/tests.py:29
