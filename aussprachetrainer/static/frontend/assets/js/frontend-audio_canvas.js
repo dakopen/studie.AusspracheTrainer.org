@@ -457,10 +457,19 @@ function colorCanvas(offsets) {
   offsets.forEach((offset) => {
 
     const percentage = offset[2]; // between 0 and 100
-    const red = 255 - Math.round(2.55 * percentage);
-    const green = Math.round(2.55 * percentage);
+    // const red = 255 - Math.round(2.55 * percentage);
+    // const green = Math.round(2.55 * percentage);
 
-    offscreenCtx.fillStyle = `rgba(${red}, ${green}, 0, 0.5)`;
+    // offscreenCtx.fillStyle = `rgba(${red}, ${green}, 0, 0.5)`;
+    if (percentage < 70) {
+      offscreenCtx.fillStyle = "rgba(255, 0, 0, 0.5)";
+    }
+    else if (percentage < 95) {
+      offscreenCtx.fillStyle = "rgba(255, 255, 0, 0.5)";
+    }
+    else {
+      offscreenCtx.fillStyle = "rgba(0, 255, 0, 0.5)";
+    }
     offscreenCtx.fillRect(offset[0] / 1000 * pixelsPerSecond, 0, offset[1] / 1000 * pixelsPerSecond, canvas.height)
   });
 
