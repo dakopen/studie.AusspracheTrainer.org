@@ -150,7 +150,6 @@ const playerButton = document.querySelector('.player-button'),
 </svg>
       `
 function toggleAudio() {
-    console.log(audio.paused);
     if (audio.paused) {
         audio.play();
         playerButton.innerHTML = pauseIcon;
