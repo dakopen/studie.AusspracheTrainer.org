@@ -4,6 +4,9 @@ from .models import PronunciationAssessmentResult, PhonemeAssessmentResult, Synt
 from django.contrib.auth import get_user_model
 from datetime import timedelta
 from django.utils import timezone
+from django.core.files.storage import default_storage
+from django.conf import settings
+import os
 
 @shared_task()
 def async_pronunciation_assessment(filename, reference_text, language, user_id=None):
@@ -48,7 +51,21 @@ def clean_synthesized_audio_files():
     # Calculate the time for 24 hours ago
     time_threshold = timezone.now() - timedelta(hours=24)
 
-    # Filter and delete files older than 24 hours
-    SynthesizedAudioFile.objects.filter(created_at__lte=time_threshold).delete()
+    # Get the queryset of old files
+    old_files = SynthesizedAudioFile.objects.filter(created_at__lte=time_threshold)
 
+    for file in old_files:
+        # Construct the file path
+        if settings.DEBUG:
+            file_path = os.path.join(settings.MEDIA_ROOT, "synthesized_audio_files/" + file.filename)
+        else:
+            file_path = "synthesized_audio_files/" + file.filename
+
+        # Delete the actual file from storage
+        if default_storage.exists(file_path):
+            default_storage.delete(file_path)
+
+        # Delete the database entry
+        file.delete()
+        
     return True
