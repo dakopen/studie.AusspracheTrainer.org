@@ -16,6 +16,7 @@ from aussprachetrainer.keyvault_manager import get_secret
 from django.core.management.utils import get_random_secret_key  
 import sentry_sdk
 from sentry_sdk.integrations.django import DjangoIntegration
+from django.core.files.storage import FileSystemStorage
 
 def before_send(event, hint):
     return None  # Discarding all events
@@ -264,3 +265,5 @@ LOGGING = {
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+SECURE_FILE_STORAGE = FileSystemStorage(location=os.path.join(BASE_DIR, 'secure_storage'))

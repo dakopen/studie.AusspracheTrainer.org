@@ -121,6 +121,8 @@ def initiate_analysis(request):
     audio_data_base64 = audio_data_url.split(',')[1]
     audio_data = base64.b64decode(audio_data_base64)
 
+
+
     buffer = io.BytesIO()
     if audio_mimetype == "audio/ogg":
         audio_segment = AudioSegment.from_ogg(io.BytesIO(audio_data))
@@ -145,9 +147,10 @@ def initiate_analysis(request):
     
     # Save audio file to disk
     random_name = str(uuid.uuid4()) + ".wav"
-    file_name = 'audio_files/' + random_name  
-    default_storage.save(file_name, content_file)
-    
+    file_name = 'audio_files/' + random_name
+    settings.SECURE_FILE_STORAGE.save(file_name, content_file)
+    file_name = 'secure_storage/' + file_name
+    logger.warn(f"Saved audio file to {file_name}")
     user_id = request.user.id if request.user.is_authenticated else None
 
     task = async_pronunciation_assessment.delay(file_name, text, country_class_to_locale(selected_language), user_id=user_id)
