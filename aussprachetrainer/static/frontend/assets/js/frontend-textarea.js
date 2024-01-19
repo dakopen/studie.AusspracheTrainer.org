@@ -10,6 +10,8 @@ windowResize();
 /* EVENT LISTENERS */
 textarea.on('input change keyup paste', function(){
     resizeTextarea();
+    switchFromTimelineToText();
+    checkTextareaError();
 });
 
 $(window).resize(windowResize);
@@ -121,6 +123,8 @@ function generateRandomSentence() {
         success: function (data) {
             textarea.val(data.sentence);
             resizeTextarea();
+            checkTextareaError();
+            switchFromTimelineToText();
         },
         error: function (xhr, status, error) {
             // Handle error
@@ -129,7 +133,45 @@ function generateRandomSentence() {
     });
 }
 
-$('#synthesize-speech-button').click(function() {
+
+// https://codepen.io/shahednasser/pen/XWgbGBN
+const playerButton = document.querySelector('.player-button'),
+      audio = document.querySelector('audio'),
+      timeline = document.getElementById('synth-timeline'),
+      soundButton = document.querySelector('.sound-button'),
+      playIcon = `
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill=var(--rosa)>
+    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd" />
+  </svg>
+      `,
+      pauseIcon = `
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill=var(--rosa)>
+  <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zM7 8a1 1 0 012 0v4a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v4a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd" />
+</svg>
+      `
+function toggleAudio() {
+    console.log(audio.paused);
+    if (audio.paused) {
+        audio.play();
+        playerButton.innerHTML = pauseIcon;
+        switchFromTextToTimeline();
+    } else {
+        audio.pause();
+        playerButton.innerHTML = playIcon;
+    }
+}
+
+function switchFromTextToTimeline() {
+    timeline.style.display = 'inherit';
+    $('#synth-text').css('display', 'none');
+}
+
+function switchFromTimelineToText() {
+    timeline.style.display = 'none';
+    $('#synth-text').css('display', 'inherit');
+}
+
+function synthSpeech() {
     var text = textarea.val();
     let language = $('#hiddenSelectedLanguage').val();
     var selectedLanguage = language.split('-')[2];
@@ -165,34 +207,30 @@ $('#synthesize-speech-button').click(function() {
             }
         });
     }
-});
-
-// https://codepen.io/shahednasser/pen/XWgbGBN
-const playerButton = document.querySelector('.player-button'),
-      audio = document.querySelector('audio'),
-      timeline = document.querySelector('.timeline'),
-      soundButton = document.querySelector('.sound-button'),
-      playIcon = `
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill=var(--rosa)>
-    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd" />
-  </svg>
-      `,
-      pauseIcon = `
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill=var(--rosa)>
-  <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zM7 8a1 1 0 012 0v4a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v4a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd" />
-</svg>
-      `
-function toggleAudio() {
-  if (audio.paused) {
-    audio.play();
-    playerButton.innerHTML = pauseIcon;
-  } else {
-    audio.pause();
-    playerButton.innerHTML = playIcon;
-  }
+    sessionStorage.setItem('last_synth', (text + $('#hiddenSelectedLanguage').val()));
 }
 
-playerButton.addEventListener('click', toggleAudio);
+playerButton.addEventListener('click', function (e) {
+    e.preventDefault();
+    if (textarea.val() != "") {
+        let last_synth = sessionStorage.getItem('last_synth');
+        if (last_synth === null) {
+            synthSpeech();
+        }
+        else {
+            if (last_synth !== (textarea.val() + $('#hiddenSelectedLanguage').val())) {
+                synthSpeech();
+            }
+            else {
+                toggleAudio();
+            }
+        }
+    }
+    else {
+        checkTextareaError();
+    }
+}
+);
 
 function changeTimelinePosition () {
   const percentagePosition = (100*audio.currentTime) / audio.duration;

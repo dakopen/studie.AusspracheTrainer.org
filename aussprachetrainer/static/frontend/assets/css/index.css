@@ -398,8 +398,8 @@
 .audio-player-container {
     --player-button-width: 3em;
     --space: .5em;
-    width: 15rem;
-    height: 15rem;
+    width: 20rem;
+    height: 3rem;
     position: relative;
     display: flex;
     flex-direction: column;
@@ -428,6 +428,7 @@
     align-items: center;
     width: 100%;
     margin-top: 10px;
+    justify-content: center;
 }
 
 .player-button {
@@ -449,6 +450,7 @@
     background-image: linear-gradient(var(--rosa), var(--rosa));
     background-repeat: no-repeat;
     margin-right: var(--space);
+    display: none;
 }
 
 .timeline::-webkit-slider-thumb {
@@ -529,3 +531,17 @@
     background: transparent;
 }
 
+#synth-text {
+    font-size: small;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    display: inherit;
+}
+
+#synthesize-speech-button {
+    position: absolute;
+    background-color: var(--rosa);
+    border-radius: 30px;
+    width: 15rem;
+}
