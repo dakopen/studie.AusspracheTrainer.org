@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-12-23 18:16+0100\n"
+"POT-Creation-Date: 2024-01-19 22:06+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Daniel Busch <dakopen185@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -75,7 +75,7 @@ msgid "französisch"
 msgstr "french"
 
 #: aussprachetrainer/dashboard/templates/dashboard.html:61
-#: aussprachetrainer/frontend/templates/index.html:115
+#: aussprachetrainer/frontend/templates/index.html:119
 msgid "Genauigkeit"
 msgstr "Accuracy"
 
@@ -86,7 +86,7 @@ msgid ""
 msgstr "This scores shows how well your pronunciation matches the correct one."
 
 #: aussprachetrainer/dashboard/templates/dashboard.html:77
-#: aussprachetrainer/frontend/views.py:101
+#: aussprachetrainer/frontend/views.py:102
 msgid "AusspracheTrainer"
 msgstr "AusspracheTrainer"
 
@@ -99,7 +99,7 @@ msgstr ""
 "difficulty. [Coming soon]"
 
 #: aussprachetrainer/dashboard/templates/dashboard.html:93
-#: aussprachetrainer/frontend/templates/index.html:117
+#: aussprachetrainer/frontend/templates/index.html:121
 msgid "Redefluss"
 msgstr "Fluency"
 
@@ -135,13 +135,21 @@ msgstr ""
 "By using the app, you agree to the privacy policy, including the "
 "transmission of the audio recording to Microsoft."
 
-#: aussprachetrainer/frontend/templates/index.html:116
+#: aussprachetrainer/frontend/templates/index.html:100
+msgid "Dein Browser unterstützt das Audioelement nicht."
+msgstr ""
+
+#: aussprachetrainer/frontend/templates/index.html:109
+msgid " die korrekte Aussprache anhören"
+msgstr " listen to the correct pronunciation"
+
+#: aussprachetrainer/frontend/templates/index.html:120
 msgid "Vollständigkeit"
 msgstr "Completeness"
 
 #: aussprachetrainer/frontend/templates/legal_notice.html:5
 #: aussprachetrainer/frontend/templates/module/footer.html:11
-#: aussprachetrainer/frontend/views.py:107
+#: aussprachetrainer/frontend/views.py:108
 msgid "Impressum"
 msgstr "legal notice"
 
@@ -181,6 +189,10 @@ msgstr "Register court: Local court Frankfurt am Main"
 msgid "Registernummer: VR 17083"
 msgstr "Register number: VR 17083"
 
+#: aussprachetrainer/frontend/templates/legal_notice.html:20
+msgid "Verwendete Tools"
+msgstr ""
+
 #: aussprachetrainer/frontend/templates/module/footer.html:12
 msgid "Datenschutz"
 msgstr "privacy policy"
@@ -212,7 +224,7 @@ msgid "Registrieren"
 msgstr "register"
 
 #: aussprachetrainer/frontend/templates/privacy_policy.html:5
-#: aussprachetrainer/frontend/views.py:111
+#: aussprachetrainer/frontend/views.py:112
 #: aussprachetrainer/user_auth/templates/user_auth/register.html:33
 msgid "Datenschutzerklärung"
 msgstr "privacy policy"
@@ -1002,15 +1014,15 @@ msgstr "Stop recording wait for result"
 msgid "Willkommen"
 msgstr "Welcome"
 
-#: aussprachetrainer/frontend/views.py:76
+#: aussprachetrainer/frontend/views.py:77
 msgid "Zurück zum Lernbereich"
 msgstr "Back to the learning area"
 
-#: aussprachetrainer/frontend/views.py:79
+#: aussprachetrainer/frontend/views.py:80
 msgid "Zurück zum Dashboard"
 msgstr "Back to the dashboard"
 
-#: aussprachetrainer/frontend/views.py:98
+#: aussprachetrainer/frontend/views.py:99
 msgid ""
 "Der kostenlose AusspracheTrainer hilft dir, deine Aussprache zu verbessern. "
 "Sprich einen Satz ein und erhalte eine Bewertung deiner Aussprache.\n"
@@ -2676,6 +2688,10 @@ msgstr ""
 #: venv/lib/python3.8/site-packages/kombu/transport/qpid.py:1334
 #, python-format
 msgid "Unable to connect to qpid with SASL mechanism %s"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/timezone_field/rest_framework.py:10
+msgid "A valid timezone is required."
 msgstr ""
 
 #~ msgid "Wähle Sprache aus"
