@@ -20,11 +20,14 @@ services:
 
   celerybeat:
     build: .
-    command: celery -A aussprachetrainer beat --loglevel=info --scheduler django_celery_beat.schedulers:DatabaseScheduler
+    command: >
+      sh -c "python manage.py makemigrations && python manage.py migrate &&
+            celery -A aussprachetrainer beat --loglevel=info --scheduler django_celery_beat.schedulers:DatabaseScheduler"
     volumes:
       - .:/usr/src/app
     depends_on:
       - redis
+
 
   nginx:
     build: ./nginx

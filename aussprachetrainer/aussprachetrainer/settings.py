@@ -24,6 +24,7 @@ def before_send(event, hint):
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DJANGO_DEBUG', 'False') == 'True'
 GITHUB_TEST = os.environ.get('DJANGO_GITHUB_TEST', 'False') == 'True'
+IS_DOCKER_APP = os.environ.get('IS_DOCKER_APP', 'False') == 'True'
 
 if DEBUG:
     sentry_sdk.init(
@@ -89,6 +90,7 @@ INSTALLED_APPS = [
     'learn',
     'fontawesomefree',
     'corsheaders',
+    'django_celery_beat',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -225,7 +227,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-if DEBUG:
+if DEBUG and not IS_DOCKER_APP:
     CELERY_BROKER_URL = 'redis://localhost:6379/0'
     CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
 else:
