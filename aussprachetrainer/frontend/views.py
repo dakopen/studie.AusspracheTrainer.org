@@ -214,5 +214,7 @@ def text_to_speech(request):
     if filepath:
         # Provide a URL to access the audio file
         audio_url = request.build_absolute_uri(settings.MEDIA_URL + filepath)
+        # audio_url starts with http://, but we want https://
+        audio_url = "https://" + audio_url[7:]
         return JsonResponse({'audio_url': audio_url})
 
