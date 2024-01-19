@@ -1,8 +1,9 @@
 from celery import shared_task
 from .pronunciation_assessment import pronunciation_assessment_continuous_from_file
-from .models import PronunciationAssessmentResult, PhonemeAssessmentResult
+from .models import PronunciationAssessmentResult, PhonemeAssessmentResult, SynthesizedAudioFile
 from django.contrib.auth import get_user_model
-
+from datetime import timedelta
+from django.utils import timezone
 
 @shared_task()
 def async_pronunciation_assessment(filename, reference_text, language, user_id=None):
@@ -42,3 +43,12 @@ def async_pronunciation_assessment(filename, reference_text, language, user_id=N
 
     return result, word_offset_duration
 
+@shared_task()
+def clean_synthesized_audio_files():
+    # Calculate the time for 24 hours ago
+    time_threshold = timezone.now() - timedelta(hours=24)
+
+    # Filter and delete files older than 24 hours
+    SynthesizedAudioFile.objects.filter(created_at__lte=time_threshold).delete()
+
+    return True

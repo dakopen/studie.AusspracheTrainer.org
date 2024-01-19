@@ -7,9 +7,20 @@ import uuid
 import datetime
 from django.conf import settings
 import os
+from .models import SynthesizedAudioFile
+from django.utils import timezone
 
 speech_config = speechsdk.SpeechConfig(subscription=speech_key, region=service_region)
 def synthesize_speech(text, language):
+
+    existing_file = SynthesizedAudioFile.objects.filter(text=text, language=language).first()
+    if existing_file:
+        # Update the 'created_at' field to the current time
+        existing_file.created_at = timezone.now()
+        existing_file.save()
+        return os.path.join(settings.MEDIA_ROOT, "synthesized_audio_files/" + existing_file.filename)
+
+
     if language == "de-DE":
         speech_config.speech_synthesis_voice_name = "de-DE-ChristophNeural"
     elif language == "en-GB":
@@ -26,6 +37,14 @@ def synthesize_speech(text, language):
     # Check if the synthesis was successful
     if result.reason == speechsdk.ResultReason.SynthesizingAudioCompleted:
         path = default_storage.save(os.path.join(settings.MEDIA_ROOT, "synthesized_audio_files/" + filename), ContentFile(result.audio_data))
+        
+        # store created file in database
+        SynthesizedAudioFile.objects.create(
+            language=language,
+            text=text,
+            filename=filename
+        )
+        
         return path
     
     elif result.reason == speechsdk.ResultReason.Canceled:
@@ -34,4 +53,4 @@ def synthesize_speech(text, language):
         if cancellation_details.reason == speechsdk.CancellationReason.Error:
             print(f"Error details: {cancellation_details.error_details}")
     
-        return None    
+        return None
