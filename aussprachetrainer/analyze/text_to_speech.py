@@ -36,7 +36,10 @@ def synthesize_speech(text, language):
 
     # Check if the synthesis was successful
     if result.reason == speechsdk.ResultReason.SynthesizingAudioCompleted:
-        path = default_storage.save(os.path.join(settings.MEDIA_ROOT, "synthesized_audio_files/" + filename), ContentFile(result.audio_data))
+        if settings.DEBUG:
+            path = default_storage.save(os.path.join(settings.MEDIA_ROOT, "synthesized_audio_files/" + filename), ContentFile(result.audio_data))
+        else:
+            path = default_storage.save("synthesized_audio_files/" + filename, ContentFile(result.audio_data))
         
         # store created file in database
         SynthesizedAudioFile.objects.create(
