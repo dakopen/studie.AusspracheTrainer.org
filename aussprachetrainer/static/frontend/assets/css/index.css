@@ -545,3 +545,8 @@
     border-radius: 30px;
     width: 15rem;
 }
+
+.transition-move {
+    transition: top 0.5s ease-in-out, height 0.5s ease-in-out;
+}
+  
