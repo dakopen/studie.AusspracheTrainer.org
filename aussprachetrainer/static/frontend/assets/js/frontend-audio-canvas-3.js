@@ -19,6 +19,7 @@ let starttimeRecording, endtimeRecording;
 let stream;
 let animationFrameId;
 let counter = 0;
+let lastMeanFrequency = 0;
 
 // icons and other visuals
 const stopRecordingIcon = document.getElementById("stop-recording-icon");
@@ -129,21 +130,37 @@ function checkEmptyTextarea() {
   return !isEmpty; // Return true if NOT empty, false otherwise
 };
 
-function updateUIForRecordingState() {
-  if (isRecording) {
-      rightRecordingButton.style.display = "flex"; // ??? or style opacity 1 (from 0, check if this works)
-      rightRecordingButton.style.opacity = '1'; // ??? add this later to css and make it display none
 
-      startRecordingIcon.style.display = "none";
-      stopRecordingIcon.style.display = "block";
-      waitRecordingIcon.style.display = "none";
+function updateUIForRecordingState(state) {
+  switch (state) {
+      case 'start':
+          rightRecordingButton.style.display = "flex";  // ??? or style opacity 1 (from 0, check if this works)
+          rightRecordingButton.style.opacity = '1'; // ??? add this later to css and make it display none
 
-  } else {
-      rightRecordingButton.style.display = "none"; // ??? same as above
+          startRecordingIcon.style.display = "none"; 
+          stopRecordingIcon.style.display = "block"; 
+          waitRecordingIcon.style.display = "none"; 
+          break;
 
-      startRecordingIcon.style.display = "none";
-      stopRecordingIcon.style.display = "none";
-      waitRecordingIcon.style.display = "inherit";
+      case 'stop':
+          rightRecordingButton.style.display = "none";
+
+          startRecordingIcon.style.display = "none"; 
+          stopRecordingIcon.style.display = "none"; 
+          waitRecordingIcon.style.display = "inherit";
+          break;
+
+      case 'cancel':
+          rightRecordingButton.style.display = "none"; 
+
+          startRecordingIcon.style.display = "block"; 
+          stopRecordingIcon.style.display = "none"; 
+          waitRecordingIcon.style.display = "none"; 
+          break;
+
+      default:
+          console.error('Invalid recording state:', state);
+          // Handle invalid state if necessary
   }
 }
 
@@ -170,7 +187,8 @@ function startRecording() {
   isRecording = true;
   isShowingResults = false;
 
-  updateUIForRecordingState();
+  chunks = []; // Clear any previous chunks
+  updateUIForRecordingState("start");
   // ??? disable textarea updates
 
   initializeCanvasAndOffscreen();
@@ -249,10 +267,32 @@ function stopRecording() {
     }
     endtimeRecording = Date.now();
     isRecording = false;
-    updateUIForRecordingState();
+    updateUIForRecordingState("stop");
     
     processRecording(chunks);
 };
+
+function cancelRecording() {
+  if (mediaRecorder && mediaRecorder.state !== "inactive") {
+    mediaRecorder.stop(); // Stop the media recorder if it's recording
+  }
+
+  // Reset recording flags and UI elements
+  isRecording = false;
+  updateUIForRecordingState("cancel");
+  // ??? enable textarea updates
+
+  // Release the media stream and reset the canvas
+  stopUserMediaStream();
+
+  // Cancel any ongoing animation frames related to waveform drawing
+  if (typeof animationFrameId !== "undefined") {
+      cancelAnimationFrame(animationFrameId);
+  }
+
+  initializeCanvasAndOffscreen(); // clear the canvas
+}
+
 
 rightRecordingButton.addEventListener("click", function(e) {
   e.preventDefault();
@@ -272,11 +312,12 @@ const resetFormReturnTextarea = () => {
 
   isShowingResults = false;
   initializeCanvasAndOffscreen();
-  let replayAreaShown = (window.getComputedStyle(replayButton).display != 'none');
+
+  const replayAreaShown = (window.getComputedStyle(replayButton).display != 'none');
   replayButton.style.display = 'none';
   replayLine.style.display = 'none';
-  responsearea.css('display', 'none');
-  responseareaScores.css('display', 'none');
+  responsearea.css('display', 'none'); // referenced in frontend-backend.js
+  responseareaScores.css('display', 'none'); // referenced in frontend-backend.js
 
   if (replayAreaShown) {
     moveRecButton(false);
@@ -285,100 +326,88 @@ const resetFormReturnTextarea = () => {
   return trainingstext;
 }
 
-function cancelRecording() {
 
-  mediaRecorder.stop();
-  stopUserMediaStream();
+function moveRecButton(down) {
+  // Define the adjustment value
+  const adjustment = 150;
 
-  isRecording = false;
-  startRecordingIcon.style.display = "block";
-  waitRecordingIcon.style.display = "none";
-  stopRecordingIcon.style.display = "none";
+  const currentTop = parseInt(window.getComputedStyle(recButtonContainer).getPropertyValue('top'), 10);
+  const currentHeight = parseInt(window.getComputedStyle(audioContainer).getPropertyValue('height'), 10);
+  const newTop = down ? currentTop + adjustment : currentTop - adjustment;
+  const newHeight = down ? currentHeight + adjustment : currentHeight - adjustment;
 
-  // Stop all tracks to release the media stream
-  if (stream) {
-    const tracks = stream.getTracks();
-    tracks.forEach((track) => track.stop());
-  }
+  // Update styles
+  recButtonContainer.style.top = `${newTop}px`;
+  audioContainer.style.height = `${newHeight}px`;
 
-  initializeCanvasAndOffscreen();
-  rightRecordingButton.style.opacity = '0';
-}
-/*## END: start and stop recording functions which also triggers the drawing of the waveform ##*/
-
-
-let lastMeanFrequency = 0;
-
-
-/**# START: move the waveform down in order to make space for the waveform #**/
-const moveRecButton = (down) => {
-  const recButtonContainer = document.querySelector(".button-container");
-
-  let currentTop = parseInt(window.getComputedStyle(recButtonContainer).getPropertyValue('top'), 10);
-  let currentHeight = parseInt(window.getComputedStyle(audioContainer).getPropertyValue('height'), 10);
-  let newTop, newHeight;
-  if (down) {
-    newTop = currentTop + 150;
-    newHeight = currentHeight + 150;
-  }
-  else {
-    newTop = currentTop - 150;
-    newHeight = currentHeight - 150;
-  }
-  
-  recButtonContainer.style.transition = 'top 0.5s ease-in-out';
-  audioContainer.style.transition = 'height 0.5s ease-in-out';
-
-  audioContainer.style.height = newHeight + 'px';
-  recButtonContainer.style.top = newTop + 'px';
-
-  
   // place the replay button with right margin
   replayButton.style.marginRight = (Math.min(offscreenCanvas.width, getResponsiveCanvasWidth()) + 22) + "px";
   replayLine.style.marginRight = (Math.min(offscreenCanvas.width, getResponsiveCanvasWidth()) - 2) + "px";
-  
-  if (down) {
-    setTimeout(() => {
-      replayButton.style.display = 'flex';
-      replayLine.style.display = 'inherit'
-    }, 500);
-  }
-};
-/*## END: move the waveform down in order to make space for the waveform ##*/
 
-/**# START: start recording on first click and submit form on second click #**/
+  if (down) {
+      setTimeout(() => {
+        replayButton.style.display = 'flex';
+        replayLine.style.display = 'inherit'
+      }, 500);
+  }
+}
+
+
 recButton.addEventListener('click', function(e) {
   e.preventDefault();
   
+  // Start recording if not currently recording and not showing results
   if (!isRecording && !isShowingResults) {
-    startRecording();
-  } 
-  else if (!isRecording && isShowingResults) {
-    textarea.val(resetFormReturnTextarea());
-    resizeTextarea();
-    startRecording();
+    handleStartRecording();
+    return; // Exit early to avoid further checks
   }
-  else {
-    setTimeout(() => {
-      rightRecordingButton.style.opacity = '0';
-      stopRecording();
 
-      moveRecButton(true);
-      cancelAnimationFrame(animationFrameId);
-    
+  // Reset and start a new recording if showing results but not currently recording
+  if (!isRecording && isShowingResults) {
+    handleResetAndStartRecording();
+    return; // Exit early to avoid further checks
+  }
 
-      // replace canvas with offscreen canvas
-      canvas.replaceWith(offscreenCanvas);
-
-      // center canvas
-      offscreenCanvas.style.left = '0';
-      void offscreenCanvas.offsetWidth;
-      offscreenCanvas.style.left = '50%';
-      offscreenCanvas.style.transform = 'translateX(-50%)';
-    }, 350); // record a bit longer than before
+  // Handle stopping recording explicitly to cover any edge cases
+  // Consider integrating this logic into the stopRecording function if appropriate
+  if (isRecording) {
+    handleStopRecording();
   }
 });
-/*## END: start recording on first click and submit form on second click ##*/
+
+// Encapsulate the start recording logic
+function handleStartRecording() {
+  startRecording();
+}
+
+// Encapsulate the logic for resetting the UI and starting a new recording
+function handleResetAndStartRecording() {
+  textarea.val(resetFormReturnTextarea());
+  resizeTextarea();
+  startRecording();
+}
+
+// Encapsulate the stop recording and UI adjustment logic
+function handleStopRecording() {
+  setTimeout(() => {
+      stopRecording();
+      moveRecButton(true); // Move recording button to accommodate space for results or waveform
+      cancelAnimationFrame(animationFrameId); // Ensure no lingering animation frames
+
+      // Replace the visible canvas with the offscreen canvas prepared during recording
+      if (canvas.parentNode && offscreenCanvas) {
+          canvas.parentNode.replaceChild(offscreenCanvas, canvas);
+          offscreenCanvas.id = canvas.id; // Maintain any necessary ID or attributes
+          canvas = offscreenCanvas; // Update the reference to point to the now visible offscreenCanvas
+
+          // Adjust canvas styling to center it, assuming your CSS doesn't already handle this
+          offscreenCanvas.style.cssText = "left: 50%; transform: translateX(-50%);";
+      }
+	  resizeAndCopyCanvasContent();
+  }, 350); // A slight delay to allow for any needed cleanup or UI transitions
+}
+
+
 
 function disableRecordButtonWhileLoading() {
   recButton.disabled = true;
@@ -388,167 +417,169 @@ function enableRecordButtonAfterLoading() {
   recButton.disabled = false;
 }
 
-/**# START: draw the waveform from microphone amplitude #**/
 function draw() {
-  if (!isRecording) return;
-  let width = getResponsiveCanvasWidth();
-  const imageData = ctx.getImageData(0, 0, width, canvas.height);
-  ctx.clearRect(0, 0, width, canvas.height);
-  ctx.putImageData(imageData, -1, 0);
-  
-  analyser.getByteFrequencyData(dataArray);
-  const meanFrequency = dataArray.reduce((a, b) => a + b) / bufferLength;
-  
-  const smoothFrequency = (lastMeanFrequency + meanFrequency) / 2;
+    if (!isRecording) return;
+    let width = getResponsiveCanvasWidth();
+    const imageData = ctx.getImageData(0, 0, width, canvas.height);
+    ctx.clearRect(0, 0, width, canvas.height);
+    ctx.putImageData(imageData, -1, 0);
+    
+    analyser.getByteFrequencyData(dataArray);
+    const meanFrequency = dataArray.reduce((a, b) => a + b) / bufferLength;
+    
+    const smoothFrequency = (lastMeanFrequency + meanFrequency) / 2;
 
-  if (counter <= 1) {
-    const yHeight = Math.max((smoothFrequency / 64) * canvas.height / 2, 1);
-    //y = (canvas.height / 2 + 20) - yHeight;
-    //yMirrored = (canvas.height / 2 + 20) + yHeight;
-    y = (canvas.height / 2) - yHeight;
-    yMirrored = (canvas.height / 2) + yHeight;
+    if (counter <= 1) {
+        const yHeight = Math.max((smoothFrequency / 64) * canvas.height / 2, 1);
+        //y = (canvas.height / 2 + 20) - yHeight;
+        //yMirrored = (canvas.height / 2 + 20) + yHeight;
+        y = (canvas.height / 2) - yHeight;
+        yMirrored = (canvas.height / 2) + yHeight;
 
-    ctx.beginPath();
-    ctx.moveTo(x, y);
-    ctx.lineTo(x, yMirrored);
-    ctx.strokeStyle = 'var(--lila)';
-    ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(x, y);
+        ctx.lineTo(x, yMirrored);
+        ctx.strokeStyle = 'var(--lila)';
+        ctx.stroke();
 
-    // draw an offscreen canvas
-    offscreenCtx.beginPath();
-    offscreenCtx.moveTo(offscreenX, y);
-    offscreenCtx.lineTo(offscreenX, yMirrored);
-    offscreenCtx.strokeStyle = 'var(--lila)';
-    offscreenCtx.stroke();
-    offscreenX += 4;
-  } else if (counter <= 3) {
-    // Gap
-  } else {
-    counter = 0;
-  }
+        // draw an offscreen canvas
+        offscreenCtx.beginPath();
+        offscreenCtx.moveTo(offscreenX, y);
+        offscreenCtx.lineTo(offscreenX, yMirrored);
+        offscreenCtx.strokeStyle = 'var(--lila)';
+        offscreenCtx.stroke();
+        offscreenX += 4;
+    } else if (counter <= 3) {
+        // Gap
+    } else {
+        counter = 0;
+    }
 
-  counter++;
-  lastMeanFrequency = meanFrequency;
-  animationFrameId = requestAnimationFrame(draw);
+    counter++;
+    lastMeanFrequency = meanFrequency;
+    animationFrameId = requestAnimationFrame(draw);
 }
-/*## END: draw the waveform from microphone amplitude ##*/
 
-
-/**# START: add colored boxes to the canvas for each recognized word #**/
 
 function colorCanvas(offsets) {
-  const maxWidth = getResponsiveCanvasWidth();
+    replayLine.style.height = `${offscreenCanvas.height}px`;
+	audioContainer.style.maskImage = 'none'; // Disable mask image
 
-  // Original dimensions
-  const originalWidth = offscreenCanvas.width;
-  const originalHeight = offscreenCanvas.height;
 
-  // Aspect ratio
-  const aspectRatio = originalWidth / originalHeight;
+	offsets.forEach((offset) => {
+		const startTime = offset[0];
+		const endTime = offset[1];
+		const percentage = offset[2];
+		const color = getColorBasedOnPercentage(percentage);
+		offscreenCtx.fillStyle = color;
+		offscreenCtx.fillRect(startTime / 1000 * pixelsPerSecond, 0, endTime / 1000 * pixelsPerSecond, canvas.height)
+	});
 
-  // Create a temporary canvas and context
-  const tempCanvas = document.createElement("canvas");
-  const tempCtx = tempCanvas.getContext("2d", { willReadFrequently: true });
+	// Ensure a single event listener for click events
+	offscreenCanvas.removeEventListener('click', handleCanvasClick);
+	offscreenCanvas.addEventListener('click', handleCanvasClick);
+	
+	updateUIForPlayback(); // Simplify UI updates for playback
+}
 
-  // Set the temporary canvas dimensions
-  tempCanvas.width = originalWidth;
-  tempCanvas.height = originalHeight;
+function resizeAndCopyCanvasContent() {
+    const maxWidth = getResponsiveCanvasWidth();
+    const aspectRatio = offscreenCanvas.width / offscreenCanvas.height;
+    const newWidth = Math.min(offscreenX, maxWidth);
+    const newHeight = newWidth / aspectRatio;
+  
+    // Create a temporary canvas to hold current content
+    const tempCanvas = document.createElement("canvas");
+    tempCanvas.width = offscreenCanvas.width; // Original dimensions
+    tempCanvas.height = offscreenCanvas.height;
+    const tempCtx = tempCanvas.getContext("2d");
+    tempCtx.drawImage(offscreenCanvas, 0, 0); // Copy content
+  
+    // Resize offscreen canvas
+    offscreenCanvas.width = newWidth;
+    offscreenCanvas.height = newHeight;
+  
+    // Copy content back to resized offscreen canvas
+    offscreenCtx.drawImage(tempCanvas, 0, 0, newWidth, newHeight);
+}
 
-  // Copy current content of offscreenCanvas to temporary canvas
-  tempCtx.drawImage(offscreenCanvas, 0, 0);
 
-  // Update the dimensions of the offscreenCanvas
-  if (offscreenX > maxWidth) {
-    offscreenCanvas.width = maxWidth;
-    offscreenCanvas.height = maxWidth / aspectRatio;
-  } else {
-    offscreenCanvas.width = offscreenX;
-    offscreenCanvas.height = offscreenX / aspectRatio;
-  }
+function getColorBasedOnPercentage(percentage) {
+    if (percentage < 70) return "rgba(255, 0, 0, 0.5)";
+    if (percentage < 95) return "rgba(255, 255, 0, 0.5)";
+    return "rgba(0, 255, 0, 0.5)";
+}
 
-  replayLine.style.height = offscreenCanvas.height + "px";
-  // Scale and draw back the copied content to resized offscreenCanvas
-  offscreenCtx.drawImage(tempCanvas, 0, 0, originalWidth, originalHeight, 0, 0, offscreenCanvas.width, offscreenCanvas.height); 
-
-  // disable audio container mask-image:
-  audioContainer.style.maskImage = 'none';
-
-  offsets.forEach((offset) => {
-
-    const percentage = offset[2]; // between 0 and 100
-    // const red = 255 - Math.round(2.55 * percentage);
-    // const green = Math.round(2.55 * percentage);
-
-    // offscreenCtx.fillStyle = `rgba(${red}, ${green}, 0, 0.5)`;
-    if (percentage < 70) {
-      offscreenCtx.fillStyle = "rgba(255, 0, 0, 0.5)";
-    }
-    else if (percentage < 95) {
-      offscreenCtx.fillStyle = "rgba(255, 255, 0, 0.5)";
-    }
-    else {
-      offscreenCtx.fillStyle = "rgba(0, 255, 0, 0.5)";
-    }
-    offscreenCtx.fillRect(offset[0] / 1000 * pixelsPerSecond, 0, offset[1] / 1000 * pixelsPerSecond, canvas.height)
-  });
-
-  // add the Event Listener for a click that changes the replay line position
-  offscreenCanvas.addEventListener('click', function(event) {
+function handleCanvasClick(event) {
     event.preventDefault();
     const rect = offscreenCanvas.getBoundingClientRect();
     const x = event.clientX - rect.left;
-    replayX = x * 2;
-    replayLine.style.marginRight = (Math.min(offscreenCanvas.width, getResponsiveCanvasWidth()) - replayX) + "px";
+    replayX = x * 2; // Adjust if necessary for your visualization scale
+    const marginRight = Math.min(offscreenCanvas.width, getResponsiveCanvasWidth()) - replayX;
+    replayLine.style.marginRight = `${marginRight}px`;
     recordedAudio.currentTime = x / pixelsPerSecond;
-  });
-
-  startRecordingIcon.style.display = "inherit";
-  waitRecordingIcon.style.display = "none";
-  stopRecordingIcon.style.display = "none";
 }
-/*## END: add colored boxes to the canvas for each recognized word ##*/
+  
+function updateUIForPlayback() {
+    startRecordingIcon.style.display = "inherit";
+    waitRecordingIcon.style.display = "none";
+    stopRecordingIcon.style.display = "none";
+}
 
 
-/**# START: submit the whole form including FormData #**/
+
 $(document).ready(function() {
-  $('#recordAudioForm').on('submit', function(e) {
-    e.preventDefault();  // Prevent the form from submitting the traditional way
-
-    var formData = new FormData(this);  // Create a FormData object from the form
-
-    $.ajax({
-      url: $(this).attr('action'),  // Get the action URL from the form
-      type: 'POST',
-      data: formData,
-      processData: false,
-      contentType: false,
-      headers: {
-        'X-CSRFToken': $('input[name=csrfmiddlewaretoken]').val()  // Get the CSRF token from the form
-      },
-      success: function(data) {
-        disableRecordButtonWhileLoading();
-        var taskID = data.task_id;
-        checkStatus(taskID);
-        isShowingResults = true;
-      },
-      error: function(err) {
-        enableRecordButtonAfterLoading();
-        console.error('Error:', err);
-      }
-    });
-  });
+    $('#recordAudioForm').on('submit', handleSubmit);
 });
-/*## END: submit the whole form including FormData ##*/
+
+function handleSubmit(event) {
+    event.preventDefault(); // Prevent the default form submission
+    const form = $(this);
+    const formData = new FormData(form[0]); // Assuming 'this' is the form element
+
+    disableRecordButtonWhileLoading(); // Disable the button before the AJAX call
+    submitFormData(form.attr('action'), formData)
+        .then(handleSuccess)
+        .catch(handleError)
+        .always(enableRecordButtonAfterLoading); // Re-enable the button after AJAX call
+}
+
+function submitFormData(url, formData) {
+    return $.ajax({
+        url: url,
+        type: 'POST',
+        data: formData,
+        processData: false,
+        contentType: false,
+        headers: {
+            'X-CSRFToken': $('input[name=csrfmiddlewaretoken]').val() // CSRF token
+        }
+    });
+}
+
+function handleSuccess(data) {
+    // Assuming 'checkStatus' is a function that checks the status of the task
+    const taskID = data.task_id;
+    checkStatus(taskID);
+    isShowingResults = true; // Update the state to show results
+}
+
+function handleError(err) {
+    console.error('Error:', err);
+    // Handle error (e.g., show error message to the user)
+}
 
 
-/**# START: audio replay (including visual replay) #**/
+
 let isPlaying = false;
 let replayAnimationFrameId;
 let lastTimestamp = 0;
 let justResumed = false;
 const replayButtonIcon = document.getElementById('replay-button-icon');
 
-const moveReplayLine = (timestamp) => {
+
+
+function moveReplayLine(timestamp) {
     if (!lastTimestamp || justResumed) {
       lastTimestamp = timestamp;
       justResumed = false;  // Reset the flag
@@ -558,57 +589,55 @@ const moveReplayLine = (timestamp) => {
     lastTimestamp = timestamp;
 
     replayX += pixelsPerSecond * deltaTime * 2; 
+    replayControl.updateReplayLinePosition();
 
-    if (replayX * 1/2 >= (Math.min(offscreenCanvas.width, getResponsiveCanvasWidth()) - 2)) {
-        stopReplay();
-        isPlaying = !isPlaying;
-        return;
+    if (replayX * 1/2 < (Math.min(offscreenCanvas.width, getResponsiveCanvasWidth()) - 2)) {
+		replayAnimationFrameId = requestAnimationFrame(moveReplayLine);
     }
-
-    replayLine.style.marginRight = (Math.min(offscreenCanvas.width, getResponsiveCanvasWidth()) - 2 - replayX) + "px";
-    replayAnimationFrameId = requestAnimationFrame(moveReplayLine);
+	else {
+		replayControl.stop();
+	}
 };
 
-const startReplay = () => {
-    recordedAudio.play();
-    replayButtonIcon.classList.remove('fa-play');
-    replayButtonIcon.classList.add('fa-pause');
-    justResumed = true;  // Set the flag
-    replayAnimationFrameId = requestAnimationFrame(moveReplayLine);
-};
+const replayControl = {
+	start() {
+		recordedAudio.play();
+		isPlaying = true;
+		replayButtonIcon.classList.replace('fa-play', 'fa-pause');
+		justResumed = true;  // Set the flag
+		replayAnimationFrameId = requestAnimationFrame(moveReplayLine);
+	},
+	pause() {
+		recordedAudio.pause();
+		isPlaying = false;
+		cancelAnimationFrame(replayAnimationFrameId);
+		replayButtonIcon.classList.replace('fa-pause', 'fa-play');
+	},
 
-const pauseReplay = () => {
-    recordedAudio.pause();
-    cancelAnimationFrame(replayAnimationFrameId);
-    replayButtonIcon.classList.remove('fa-pause');
-    replayButtonIcon.classList.add('fa-play');
-};
+	stop() {
+		recordedAudio.pause();
+		isPlaying = false;
+		recordedAudio.currentTime = 0;
+		cancelAnimationFrame(replayAnimationFrameId);
+		replayX = 0;
+        this.updateReplayLinePosition();
+		lastTimestamp = 0;
+		replayButtonIcon.classList.replace('fa-pause', 'fa-play');
+	},
 
-const stopReplay = () => {
-    recordedAudio.pause();
-    recordedAudio.currentTime = 0;
-    cancelAnimationFrame(replayAnimationFrameId);
-    replayX = 0;
-    replayLine.style.marginRight = (Math.min(offscreenCanvas.width, getResponsiveCanvasWidth()) - 2) + "px";
-    lastTimestamp = 0;
-    replayButtonIcon.classList.remove('fa-pause');
-    replayButtonIcon.classList.add('fa-play');
-};
+	updateReplayLinePosition() {
+        replayLine.style.marginRight = `${Math.min(offscreenCanvas.width, getResponsiveCanvasWidth()) - replayX - 2}px`;
+    }
+}
 
-document.getElementById('replay-button').addEventListener('click', function(event) {
+document.getElementById('replay-button').addEventListener('click', (event) => {
     event.preventDefault();
-
-    if (isPlaying) {
-        pauseReplay();
-    } else {
-        startReplay();
-    }
-    isPlaying = !isPlaying;
+    isPlaying ? replayControl.pause() : replayControl.start();
 });
 
+// Function to jump to a specific timestamp in the waveform
 function jumpToWaveformTimestamp(timestamp) {
     recordedAudio.currentTime = timestamp;
     replayX = timestamp * pixelsPerSecond * 2;
-    replayLine.style.marginRight = (Math.min(offscreenCanvas.width, getResponsiveCanvasWidth()) - 2 - replayX) + "px";
+    replayControl.updateReplayLinePosition();
 }
-/*## END: audio replay (including visual replay) ##*/

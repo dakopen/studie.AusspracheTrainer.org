@@ -241,7 +241,7 @@ else:
 MS_SPEECH_SERVICES_API_KEY = get_secret("AzureSpeechKey1")
 MS_SPEECH_SERVICES_REGION = "germanywestcentral"
 
-DELETE_AUDIO_FILE_AFTER_ANALYSIS = not DEBUG
+DELETE_AUDIO_FILE_AFTER_ANALYSIS = True
 
 # EMAIL SETTINGS:
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
