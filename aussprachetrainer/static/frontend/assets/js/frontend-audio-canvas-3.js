@@ -183,12 +183,10 @@ function startRecording() {
   if (!beforeRecordingChecks()) return
   ensureAudioContext();
 
-  starttimeRecording = Date.now();
   isRecording = true;
   isShowingResults = false;
 
   chunks = []; // Clear any previous chunks
-  updateUIForRecordingState("start");
   // ??? disable textarea updates
 
   initializeCanvasAndOffscreen();
@@ -198,6 +196,9 @@ function startRecording() {
       mediaRecorder.ondataavailable = event => chunks.push(event.data);
       mediaRecorder.start(100);
       animationFrameId = requestAnimationFrame(draw);
+	  starttimeRecording = Date.now();
+	  updateUIForRecordingState("start");
+
   }).catch(console.error);
 }
 
