@@ -67,9 +67,9 @@ SECRET_KEY = get_random_secret_key()
 
 
 if DEBUG or ENV != "production":
-    ALLOWED_HOSTS = ["localhost", "127.0.0.1", ".ngrok-free.app"]
+    ALLOWED_HOSTS = ["localhost", "127.0.0.1", ".ngrok-free.app", "0.0.0.0"]
 else:
-    ALLOWED_HOSTS = [".aussprachetrainer.org", "localhost", ".dakopen.de", "167.172.185.33"] # ip address of the server
+    ALLOWED_HOSTS = ["0.0.0.0", ".aussprachetrainer.org", "localhost", ".dakopen.de", "167.172.185.33"] # ip address of the server
 
 ADMINS = [("Daniel Busch", "dakopen185@gmail.com")]
 
@@ -241,7 +241,7 @@ else:
 MS_SPEECH_SERVICES_API_KEY = get_secret("AzureSpeechKey1")
 MS_SPEECH_SERVICES_REGION = "germanywestcentral"
 
-DELETE_AUDIO_FILE_AFTER_ANALYSIS = True
+DELETE_AUDIO_FILE_AFTER_ANALYSIS = not DEBUG
 
 # EMAIL SETTINGS:
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'

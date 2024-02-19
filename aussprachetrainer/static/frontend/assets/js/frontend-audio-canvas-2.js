@@ -18,6 +18,7 @@ let starttimeRecording, endtimeRecording;
 let stream;
 let animationFrameId;
 let counter = 0;
+lastMeanFrequency = 0;
 
 // icons and other visuals
 const stopRecordingIcon = document.getElementById("stop-recording-icon");
@@ -71,24 +72,27 @@ function createCanvas(width, height, marginTop = '36px', addClass = 'canvas-visu
 
 function clearAndAppendCanvas(parentSelector, newCanvas, classToRemove) {
     const parent = document.getElementById(parentSelector);
-    const oldCanvases = parent.querySelector(`.${classToRemove}`);
+    const oldCanvases = parent.querySelectorAll(`.${classToRemove}`);
     oldCanvases.forEach(oldCanvas => parent.removeChild(oldCanvas));
     parent.appendChild(newCanvas);
 }
-
 function initializeCanvasAndOffscreen() {
-    elements.canvas = createCanvas(getResponsiveCanvasWidth(), 130);
+    canvas = createCanvas(getResponsiveCanvasWidth(), 130);
     clearAndAppendCanvas('canvas-parent-container', canvas, 'canvas-visualizer');
     ctx = canvas.getContext('2d', { willReadFrequently: true });
 
     // Create offscreen canvas
-    offscreenCanvas = createCanvas(30000, canvas.height, '', 'offscreen-canvas-class');
+    offscreenCanvas = document.createElement('canvas');
     offscreenCtx = offscreenCanvas.getContext('2d', { willReadFrequently: true });
+    offscreenCanvas.width = 30000;  // more than enough
+    offscreenCanvas.height = canvas.height;
+    offscreenCanvas.className = 'offscreen-canvas-class';
+
     offscreenX = 0;
-    x = canvas.width / 2 - document.getElementById("record-button").offsetWidth / 2;
+    x = getResponsiveCanvasWidth() / 2 - document.getElementById("record-button").offsetWidth / 2;
 }
 
-window.addEventListener('load', initializeCanvasAndOffscreen); // ??? Is this evene necessary?
+window.addEventListener('load', initializeCanvasAndOffscreen);
 
 // maybe put that in the other file
 function checkEmptyTextarea() {
@@ -118,6 +122,7 @@ function beforeRecordingChecks() {
 function updateUIForRecordingState() {
     if (isRecording) {
         rightRecordingButton.style.display = "flex"; // ??? or style opacity 1 (from 0, check if this works)
+        rightRecordingButton.style.opacity = '1'; // ??? add this later to css and make it display none
 
         startRecordingIcon.style.display = "none";
         stopRecordingIcon.style.display = "block";
@@ -132,15 +137,22 @@ function updateUIForRecordingState() {
     }
 }
 
-async function startUserMediaStream() { // ??? async?
-    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-    window.streamReference = stream; // Keep a reference to the stream for stopping later
-    const source = audioContext.createMediaStreamSource(stream);
-    source.connect(analyser);
-    return stream;
-}
 
-async function stopUserMediaStream() { // ??? async?
+async function startUserMediaStream() {
+    try {
+        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        window.streamReference = stream; // Keep a reference to the stream for stopping later
+        const source = audioContext.createMediaStreamSource(stream);
+        source.connect(analyser);
+        return stream;
+    } catch (error) {
+        console.error('Error accessing the media devices.', error);
+        throw error; // Rethrow or handle as needed
+    }
+}
+  
+
+function stopUserMediaStream() {
     if (window.streamReference) {
         window.streamReference.getTracks().forEach(track => track.stop());
         window.streamReference = null;

@@ -11,7 +11,6 @@ windowResize();
 textarea.on('input change keyup paste', function(){
     resizeTextarea();
     switchFromTimelineToText();
-    checkTextareaError();
 });
 
 $(window).resize(windowResize);
@@ -123,7 +122,6 @@ function generateRandomSentence() {
         success: function (data) {
             textarea.val(data.sentence);
             resizeTextarea();
-            checkTextareaError();
             switchFromTimelineToText();
         },
         error: function (xhr, status, error) {
@@ -226,7 +224,7 @@ playerButton.addEventListener('click', function (e) {
         }
     }
     else {
-        checkTextareaError();
+        checkEmptyTextarea();
     }
 }
 );
