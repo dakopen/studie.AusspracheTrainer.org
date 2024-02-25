@@ -6,7 +6,7 @@ services:
     command: gunicorn --bind 0.0.0.0:8000 aussprachetrainer.wsgi:application
     volumes:
       - .:/usr/src/app
-      - static_volume:/usr/src/app/staticfiles
+      #- static_volume:/usr/src/app/staticfiles
       - media_volume:/usr/src/app/media
     depends_on:
       - redis
@@ -35,7 +35,7 @@ services:
     ports:
       - "80:80"
     volumes:
-      - static_volume:/usr/src/app/staticfiles
+    #  - static_volume:/usr/src/app/staticfiles
       - media_volume:/usr/src/app/media
     depends_on:
       - web
@@ -44,5 +44,5 @@ services:
     image: "redis:alpine"
 
 volumes:
-  static_volume:
+  #static_volume:
   media_volume:

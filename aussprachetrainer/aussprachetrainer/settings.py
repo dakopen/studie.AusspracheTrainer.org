@@ -26,7 +26,7 @@ DEBUG = os.environ.get('DJANGO_DEBUG', 'False') == 'True'
 GITHUB_TEST = os.environ.get('DJANGO_GITHUB_TEST', 'False') == 'True'
 IS_DOCKER_APP = os.environ.get('IS_DOCKER_APP', 'False') == 'True'
 ENV = os.environ.get('ENVIRONMENT', 'production')
-
+BETA = os.environ.get('BETA', 'False') == 'True'
 
 if DEBUG:
     sentry_sdk.init(
@@ -149,20 +149,38 @@ if DEBUG or ENV != "production":
         }
     }
 else:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': 'defaultdb',
-            'USER': 'doadmin',
-            'PASSWORD': get_secret("DO-DATABASE-PASSWORD"),
-            'HOST': 'db-postgresql-fra-docker-do-user-10555764-0.c.db.ondigitalocean.com',  # This should match the service name in docker-compose
-            'PORT': '25060',
-            'OPTIONS': {
-                'sslmode': 'require',
-                'sslrootcert': os.path.join(BASE_DIR, 'certificates/ca-certificate.crt'),
+    if not BETA:
+        DATABASES = {
+            'default': {
+                'ENGINE': 'django.db.backends.postgresql',
+                'NAME': 'defaultdb',
+                'USER': 'doadmin',
+                'PASSWORD': get_secret("DO-DATABASE-PASSWORD"),
+                'HOST': 'db-postgresql-fra-docker-do-user-10555764-0.c.db.ondigitalocean.com',  # This should match the service name in docker-compose
+                'PORT': '25060',
+                'OPTIONS': {
+                    'sslmode': 'require',
+                    'sslrootcert': os.path.join(BASE_DIR, 'certificates/ca-certificate.crt'),
+                }
             }
         }
-    }
+
+    else:  # BETA
+        DATABASES = {
+            'default': {
+                'ENGINE': 'django.db.backends.postgresql',
+                'NAME': 'defaultdb',
+                'USER': 'doadmin',
+                'PASSWORD': get_secret("BETA-DO-DATABASE-PASSWORD"),
+                'HOST': 'dbaas-db-4088918-do-user-10555764-0.c.db.ondigitalocean.com',  # This should match the service name in docker-compose
+                'PORT': '25060',
+                'OPTIONS': {
+                    'sslmode': 'require',
+                    'sslrootcert': os.path.join(BASE_DIR, 'certificates/ca-certificate.crt'),
+                }
+            }
+        }
+
 
 
 AUTHENTICATION_BACKENDS = [
@@ -221,8 +239,8 @@ LOCALE_PATHS = [
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
-AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
+AWS_ACCESS_KEY_ID = get_secret('AWS-access-key-ID')
+AWS_SECRET_ACCESS_KEY = get_secret('AWS-secret-access-key')
 AWS_STORAGE_BUCKET_NAME = 'aussprachetrainer'
 AWS_S3_ENDPOINT_URL = 'https://fra1.digitaloceanspaces.com'
 AWS_S3_OBJECT_PARAMETERS = {
