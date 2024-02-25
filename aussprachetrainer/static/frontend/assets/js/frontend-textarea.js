@@ -146,17 +146,29 @@ const playerButton = document.querySelector('.player-button'),
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill=var(--rosa)>
   <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zM7 8a1 1 0 012 0v4a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v4a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd" />
 </svg>
-      `
+`
 function toggleAudio() {
     if (audio.paused) {
-        audio.play();
-        playerButton.innerHTML = pauseIcon;
-        switchFromTextToTimeline();
+        audio.play().then(() => {
+            playerButton.innerHTML = pauseIcon;
+            switchFromTextToTimeline();
+        }).catch((error) => {
+            if (error.name === 'AbortError') {
+                // Handle the AbortError
+                console.log('Play request was interrupted, but everything is still okay.');
+                Sentry.captureException(error);
+            } else {
+                // Handle other errors
+                console.error('Error playing the audio:', error);
+                Sentry.captureException(error);
+            }
+        });
     } else {
         audio.pause();
         playerButton.innerHTML = playIcon;
     }
 }
+    
 
 function switchFromTextToTimeline() {
     timeline.style.display = 'inherit';
