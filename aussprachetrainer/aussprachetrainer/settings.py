@@ -92,6 +92,7 @@ INSTALLED_APPS = [
     'learn',
     'fontawesomefree',
     'corsheaders',
+    'storages',
     'django_celery_beat',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -220,12 +221,31 @@ LOCALE_PATHS = [
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = 'static/'
-STATICFILES_DIRS = [
-    BASE_DIR / "static",
-]
+AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
+AWS_STORAGE_BUCKET_NAME = 'aussprachetrainer'
+AWS_S3_ENDPOINT_URL = 'https://fra1.digitaloceanspaces.com'
+AWS_S3_OBJECT_PARAMETERS = {
+    'CacheControl': 'max-age=86400',
+}
+
+AWS_LOCATION = 'staticfiles'  # Optional: Use if you want to store files in a specific folder within your Space
+
+# Static files settings
+STATIC_URL = f'https://{AWS_STORAGE_BUCKET_NAME}.{AWS_S3_ENDPOINT_URL}/{AWS_LOCATION}/static/'
+STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
+#
+#STATIC_URL = 'static/'
+#STATICFILES_DIRS = [  # unsure whether this is needed
+#    BASE_DIR / "static",
+#]
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+# Media files settings (optional, if you want to serve user-uploaded files from Spaces)
+# DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+# MEDIA_URL = f'https://{AWS_STORAGE_BUCKET_NAME}.nyc3.digitaloceanspaces.com/{AWS_LOCATION}/media/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field

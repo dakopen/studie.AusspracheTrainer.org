@@ -14,7 +14,7 @@
 
 @font-face {
     font-family: "Montserrat";
-    src: url("/static/frontend/assets/fonts/Montserrat-Regular.ttf") format('truetype');
+    src: url("/aussprachetrainer/staticfiles/frontend/assets/fonts/Montserrat-Regular.ttf") format('truetype');
 }
 
 /* General Styles */

@@ -63,4 +63,6 @@ sentry_sdk
 gunicorn==21.2.0
 django-cors-headers==4.0.0
 psycopg2-binary==2.9.9
-django-celery-beat==2.5.0 
+django-celery-beat==2.5.0
+boto3==1.34.49
+django-storages==1.14.2
