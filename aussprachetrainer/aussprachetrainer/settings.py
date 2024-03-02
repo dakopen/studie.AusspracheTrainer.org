@@ -141,7 +141,7 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-if DEBUG or ENV != "production":
+if DEBUG or ENV != "production" or GITHUB_TEST:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
