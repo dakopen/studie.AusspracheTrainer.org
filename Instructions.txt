@@ -12,6 +12,7 @@ pip install -r requirements.txt
 
 sudo apt install redis-server
 sudo apt-get install gettext
+sudo apt install ffmpeg
 
 ADD env file
 
