@@ -1,0 +1,28 @@
+<div class="center-container">
+    <h2 style="color: #7E20FC;">Login</h2> <!-- Lila color -->
+    <div class="input-field uppercase">
+        <input type="text" id="char1" maxlength="1" oninput="autoJump(true, this, 'char2')" onkeydown="autoJump(false, this, 'char1')">
+        <input type="text" id="char2" maxlength="1" oninput="autoJump(true, this, 'char3')" onkeydown="autoJump(false, this, 'char1')">
+        <input type="text" id="char3" maxlength="1" oninput="autoJump(true, this, 'char4')" onkeydown="autoJump(false, this, 'char2')">
+        <input type="text" id="char4" maxlength="1" oninput="autoJump(true, this, 'char5')" onkeydown="autoJump(false, this, 'char3')">
+        <div>_</div>
+        <input type="text" id="char5" maxlength="1" oninput="autoJump(true, this, 'char6')" onkeydown="autoJump(false, this, 'char4')">
+        <input type="text" id="char6" maxlength="1" oninput="autoJump(true, this, 'char7')" onkeydown="autoJump(false, this, 'char5')">
+        <input type="text" id="char7" maxlength="1" oninput="autoJump(true, this, 'char8')" onkeydown="autoJump(false, this, 'char6')">
+        <input type="text" id="char8" maxlength="1" oninput="autoJump(true, this, 'submit-button')" onkeydown="autoJump(false, this, 'char7')">
+    </div>
+    <button type="submit" class="submit-button" id="submit-button">Submit</button>
+</div>
+<script>
+    function autoJump(isInput, current, targetId) {
+        if (isInput && current.value.length >= current.maxLength) {
+            document.getElementById(targetId).focus();
+        }
+        if (!isInput && current.value.length === 0 && event.key === "Backspace") {
+            let target = document.getElementById(targetId);
+            target.value = ''; // Clear the value of the previous input
+            target.focus(); // Move focus to the previous input
+        }
+    }
+</script>
+
