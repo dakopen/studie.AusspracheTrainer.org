@@ -83,12 +83,14 @@ CORS_ALLOWED_ORIGINS = [
 if DEBUG:
     CORS_ALLOWED_ORIGINS.append("http://localhost:8000")
     CORS_ALLOWED_ORIGINS.append("https://silver-halibut-6wp6w7jwj45fgxv-8000.app.github.dev")
+    CORS_ALLOWED_ORIGINS.append("https://super-enigma-p96v9qx6j7xf967q-8000.app.github.dev")
 
 CSRF_TRUSTED_ORIGINS = ['https://*.dakopen.de','https://*.aussprachetrainer.org', 'https://dakopen.de', 'https://aussprachetrainer.org']
 
 if DEBUG:
     CSRF_TRUSTED_ORIGINS.append('http://localhost:8000')
     CSRF_TRUSTED_ORIGINS.append('https://silver-halibut-6wp6w7jwj45fgxv-8000.app.github.dev')
+    CSRF_TRUSTED_ORIGINS.append('https://super-enigma-p96v9qx6j7xf967q-8000.app.github.dev')
 
 
 # Application definition
