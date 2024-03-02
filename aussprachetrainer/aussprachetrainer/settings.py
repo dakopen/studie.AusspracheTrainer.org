@@ -67,7 +67,7 @@ SECRET_KEY = get_random_secret_key()
 
 
 if DEBUG or ENV != "production":
-    ALLOWED_HOSTS = ["localhost", "127.0.0.1", ".ngrok-free.app", "0.0.0.0"]
+    ALLOWED_HOSTS = ["localhost", "127.0.0.1", ".ngrok-free.app", "0.0.0.0", "silver-halibut-6wp6w7jwj45fgxv-8000.app.github.dev"]
 else:
     ALLOWED_HOSTS = ["0.0.0.0", ".aussprachetrainer.org", "localhost", ".dakopen.de", "167.172.185.33"] # ip address of the server
 
@@ -80,7 +80,16 @@ CORS_ALLOWED_ORIGINS = [
     # Add any other origins you want to allow
 ]
 
+if DEBUG:
+    CORS_ALLOWED_ORIGINS.append("http://localhost:8000")
+    CORS_ALLOWED_ORIGINS.append("https://silver-halibut-6wp6w7jwj45fgxv-8000.app.github.dev")
+
 CSRF_TRUSTED_ORIGINS = ['https://*.dakopen.de','https://*.aussprachetrainer.org', 'https://dakopen.de', 'https://aussprachetrainer.org']
+
+if DEBUG:
+    CSRF_TRUSTED_ORIGINS.append('http://localhost:8000')
+    CSRF_TRUSTED_ORIGINS.append('https://silver-halibut-6wp6w7jwj45fgxv-8000.app.github.dev')
+
 
 # Application definition
 

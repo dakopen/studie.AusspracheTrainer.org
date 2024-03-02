@@ -19,3 +19,19 @@ You get these secrets from Azure.
 https://github.com/Azure/actions-workflow-samples/blob/master/assets/create-secrets-for-GitHub-workflows.md#set-secret-with-azure-credentials
 
 **Set the --years flag to 1 or higher in order to now have to renew them every 30 days.**
+
+## Codespaces:
+`python -m venv venv` (creates virtual environment "venv")
+`source venv/bin/activate` (activates the env)
+`pip install -r aussprachetrainer/requirements.txt`
+create `.env` file and fill with secrets
+`cd aussprachetrainer`
+`python manage.py test` (should work)
+
+`sudo apt-get update`
+`sudo apt install redis-server`
+`sudo apt install ffmpeg`
+
+`python manage.py makemigrations`
+`cd ..`
+`./start_project.sh` (should work now)
