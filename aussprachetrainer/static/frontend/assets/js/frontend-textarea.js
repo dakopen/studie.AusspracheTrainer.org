@@ -20,7 +20,7 @@ function resizeTextarea() {
     let computedFontSize = textarea.css("font-size");
     let fontAttr = "500 " + String(Math.max(Math.min(parseInt(computedFontSize) + 1, 50), 30)) + "px Montserrat";
     let textwidth = getTextWidth(textarea.val(), fontAttr);
-    textarea.width(Math.max(textareaWidth, Math.min(textwidth + (parseInt(computedFontSize) + 1 - 36.8), window.outerWidth * 0.95)) + 'px');
+    textarea.width(Math.max(textareaWidth, Math.min(textwidth + (parseInt(computedFontSize) + 1 - 36.8), window.outerWidth * 0.95, window.innerWidth * 0.95,)) + 'px');
 
     textarea.css("height", "1.6em");
     textarea.css("height", textarea.prop("scrollHeight") + "px");
@@ -28,9 +28,9 @@ function resizeTextarea() {
 }
 
 function windowResize() {
-    textareaMaxWidth = Math.min(window.outerWidth * 0.85, 800);
+    textareaMaxWidth = Math.min(window.outerWidth * 0.85, window.innerWidth * 0.85, 800);
     textarea.css("max-width", textareaMaxWidth + "px");
-    textareaWidth = Math.min(window.outerWidth * 0.85, 475);
+    textareaWidth = Math.min(window.outerWidth * 0.85, window.innerWidth * 0.85, 475);
     resizeTextarea();
 }
 
@@ -178,6 +178,8 @@ function switchFromTextToTimeline() {
 function switchFromTimelineToText() {
     timeline.style.display = 'none';
     $('#synth-text').css('display', 'inherit');
+    audio.pause();
+    playerButton.innerHTML = playIcon;
 }
 
 function synthSpeech() {

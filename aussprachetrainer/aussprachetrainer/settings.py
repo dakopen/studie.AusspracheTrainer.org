@@ -249,11 +249,17 @@ AWS_S3_OBJECT_PARAMETERS = {
 
 AWS_LOCATION = 'staticfiles'  # Optional: Use if you want to store files in a specific folder within your Space
 
-# Static files settings
-STATIC_URL = f'https://{AWS_STORAGE_BUCKET_NAME}.{AWS_S3_ENDPOINT_URL}/{AWS_LOCATION}/static/'
-STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+COLLECT_STATIC = True
 
-#
+# Static files settings
+if not DEBUG or COLLECT_STATIC:
+    STATIC_URL = f'https://{AWS_STORAGE_BUCKET_NAME}.{AWS_S3_ENDPOINT_URL}/{AWS_LOCATION}/static/'
+    STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+    
+else:
+    STATIC_URL = '/static/'
+    STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
+    
 #STATIC_URL = 'static/'
 #STATICFILES_DIRS = [  # unsure whether this is needed
 #    BASE_DIR / "static",

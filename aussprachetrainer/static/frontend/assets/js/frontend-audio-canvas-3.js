@@ -59,7 +59,7 @@ function determineAudioOptions() {
 
 function getResponsiveCanvasWidth() {
   // Use the lesser of the window's innerWidth or a max width (e.g., 800)
-  return Math.min(window.outerWidth - 50, 800);
+  return Math.min(window.outerWidth - 50, window.innerWidth - 50,  800);
 }
 
 function createCanvas(width, height, marginTop = '36px', addClass = 'canvas-visualizer') {
