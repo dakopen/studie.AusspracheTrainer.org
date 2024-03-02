@@ -67,7 +67,7 @@ SECRET_KEY = get_random_secret_key()
 
 
 if DEBUG or ENV != "production":
-    ALLOWED_HOSTS = ["localhost", "127.0.0.1", ".ngrok-free.app", "0.0.0.0", "silver-halibut-6wp6w7jwj45fgxv-8000.app.github.dev"]
+    ALLOWED_HOSTS = ["localhost", "127.0.0.1", ".ngrok-free.app", "0.0.0.0", "silver-halibut-6wp6w7jwj45fgxv-8000.app.github.dev", "https://super-enigma-p96v9qx6j7xf967q-8000.app.github.dev"]
 else:
     ALLOWED_HOSTS = ["0.0.0.0", ".aussprachetrainer.org", "localhost", ".dakopen.de", "167.172.185.33"] # ip address of the server
 
