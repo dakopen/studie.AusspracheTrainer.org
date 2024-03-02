@@ -47,8 +47,8 @@ function displayResult(result) {
     let index = 0;
     words.forEach(word => {
      
-        const red = 255 - Math.round(2.55 * word.accuracy_score);
-        const green = Math.round(2.55 * word.accuracy_score);
+        // const red = 255 - Math.round(2.55 * word.accuracy_score);
+        // const green = Math.round(2.55 * word.accuracy_score);
         let wordSpan = document.createElement('span');
 
         switch (word.error_type) {
@@ -63,7 +63,17 @@ function displayResult(result) {
             case 'Mispronunciation':
                 // no break here!!
             case 'None':
-                wordSpan.style.color = `rgba(${red}, ${green}, 0, 0.5)`;
+                // wordSpan.style.color = `rgba(${red}, ${green}, 0, 0.5)`;
+                if (word.accuracy_score < 70) {
+                    wordSpan.style.color = "var(--darkred)";
+                }
+                else if (word.accuracy_score < 95) {
+                    wordSpan.style.color = "var(--yellow)";
+                }
+                else {
+                    wordSpan.style.color = "black";
+                }
+                
                 wordSpan.innerText = word.word;
                 wordSpan.classList.add('waveform-word');
                 let timestamp = result[1][index++][0] / 1000;

@@ -35,6 +35,7 @@ jobs:
       run: |
         sudo apt-get install gettext
         python -m pip install --upgrade pip
+        cd aussprachetrainer
         pip install -r requirements.txt
 
     - name: Run Tests

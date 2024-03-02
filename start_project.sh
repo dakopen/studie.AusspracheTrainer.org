@@ -16,7 +16,7 @@ celery -A aussprachetrainer worker --loglevel=info &
 
 # Start Celery Beat if needed
 # echo "Starting Celery Beat..."
-# celery -A aussprachetrainer beat --loglevel=info &
+celery -A aussprachetrainer beat --loglevel=info &
 
 echo "Django and Celery are running."
 

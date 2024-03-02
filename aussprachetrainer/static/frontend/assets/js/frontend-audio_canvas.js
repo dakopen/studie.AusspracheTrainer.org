@@ -1,5 +1,4 @@
 /**# START: initializing canvas and offscreen canvas #**/
-
 let canvas = document.getElementById('visualizer');
 let ctx;
 
@@ -15,10 +14,33 @@ const stopRecordingIcon = document.getElementById("stop-recording-icon");
 const startRecordingIcon = document.getElementById("start-recording-icon");
 const waitRecordingIcon = document.getElementById("wait-recording-icon");
 const textareaEmptyError = document.getElementById('textarea-error');
+let starttimeRecording;
+let endtimeRecording;
+
+var audioOptions;
+if (MediaRecorder.isTypeSupported('audio/ogg')) {
+  audioOptions = { 'type': 'audio/ogg' };
+  document.getElementById('hiddenAudioMIMEtype').value = "audio/ogg";
+} else if (MediaRecorder.isTypeSupported('audio/wav')) {
+  audioOptions = { 'type': 'audio/wav' };
+  document.getElementById('hiddenAudioMIMEtype').value = "audio/wav";
+} else if (MediaRecorder.isTypeSupported('audio/mp4')) {
+  audioOptions = { 'type': 'audio/mp4' };
+  document.getElementById('hiddenAudioMIMEtype').value = "audio/mp4";
+} else if (MediaRecorder.isTypeSupported('audio/webm')) {
+  audioOptions = { 'type': 'audio/webm' };
+  document.getElementById('hiddenAudioMIMEtype').value = "audio/webm";
+} else if (MediaRecorder.isTypeSupported('audio/mpeg')) {
+  audioOptions = { 'type': 'audio/mpeg' };
+  document.getElementById('hiddenAudioMIMEtype').value = "audio/mpeg";
+}
+else {
+    alert("Your browser does not support any of the required audio formats. Please use a different browser.");
+}
 
 function getResponsiveCanvasWidth() {
   // Use the lesser of the window's innerWidth or a max width (e.g., 800)
-  return Math.min(window.innerWidth - 50, 800);
+  return Math.min(window.outerWidth - 50, window.innerWidth - 50,  800);
 }
 
 function initializeCanvasAndOffscreen() {
@@ -43,7 +65,7 @@ function initializeCanvasAndOffscreen() {
   
 
   // Re-initialize any necessary variables or event listeners for the new canvas
-  ctx = canvas.getContext('2d');
+  ctx = canvas.getContext('2d', { willReadFrequently: true });
 
 
 
@@ -58,7 +80,7 @@ function initializeCanvasAndOffscreen() {
 
   // Initialize new OffscreenCanvas
   offscreenCanvas = document.createElement('canvas');
-  offscreenCtx = offscreenCanvas.getContext('2d');
+  offscreenCtx = offscreenCanvas.getContext('2d', { willReadFrequently: true });
   offscreenCanvas.width = 30000;  // more than enough
   offscreenCanvas.height = canvas.height;
   offscreenCanvas.className = 'offscreen-canvas-class';
@@ -71,11 +93,18 @@ window.addEventListener('load', initializeCanvasAndOffscreen);
 /*## END: initializing canvas and offscreen canvas ##*/
 
 /*** Variable declarations for the audio ***/
-const audioContext = new AudioContext();
-const analyser = audioContext.createAnalyser();
-analyser.fftSize = 2048;
-const bufferLength = analyser.frequencyBinCount;
-const dataArray = new Uint8Array(bufferLength);
+let audioContext, analyser, bufferLength, dataArray;
+
+function ensureAudioContext() {
+  if (!audioContext) {
+    audioContext = new AudioContext();
+    analyser = audioContext.createAnalyser();
+    analyser.fftSize = 2048;
+    bufferLength = analyser.frequencyBinCount;
+    dataArray = new Uint8Array(bufferLength);
+  }
+}
+
 
 let mediaRecorder;
 let chunks = [];
@@ -97,6 +126,8 @@ const checkTextareaError = () => {
 /**# START: start and stop recording functions which also triggers the drawing of the waveform #**/
 const startRecording = () => {
   if (!checkTextareaError()) return;
+  ensureAudioContext();
+  starttimeRecording = Date.now();
   isRecording = true;
   isShowingResults = false;
   rightRecordingButton.style.opacity = '1';
@@ -135,6 +166,9 @@ const startRecording = () => {
 
 const stopRecording = () => {
   mediaRecorder.stop();
+  endtimeRecording = Date.now();
+
+
   isRecording = false;
   startRecordingIcon.style.display = "none";
   waitRecordingIcon.style.display = "inherit";
@@ -142,7 +176,7 @@ const stopRecording = () => {
 
   /** RESIZE OFFSCREEN CANVAS **/
   const tempCanvas = document.createElement("canvas");
-  const tempCtx = tempCanvas.getContext("2d");
+  const tempCtx = tempCanvas.getContext("2d", { willReadFrequently: true });
 
   // Set the temporary canvas dimensions
   tempCanvas.width = offscreenCanvas.width;
@@ -159,11 +193,11 @@ const stopRecording = () => {
   offscreenCtx.drawImage(tempCanvas, 0, 0);
 
   // Combine the chunks to form a Blob
-  var blob = new Blob(chunks, { 'type': 'audio/ogg' });
+  var blob = new Blob(chunks, audioOptions);
   recordedAudio.src = URL.createObjectURL(blob);
   replayX = 0;
   recordedAudio.onloadedmetadata = function() {
-    const audioDuration = recordedAudio.duration; // duration in seconds
+    const audioDuration = (endtimeRecording - starttimeRecording) / 1000; // duration in seconds
     pixelsPerSecond = Math.min(offscreenCanvas.width, getResponsiveCanvasWidth()) / audioDuration;
     realPixelsPerSecond = offscreenCanvas.width / audioDuration; // use later when drawing the colored boxes (words)
   };
@@ -395,7 +429,7 @@ function colorCanvas(offsets) {
 
   // Create a temporary canvas and context
   const tempCanvas = document.createElement("canvas");
-  const tempCtx = tempCanvas.getContext("2d");
+  const tempCtx = tempCanvas.getContext("2d", { willReadFrequently: true });
 
   // Set the temporary canvas dimensions
   tempCanvas.width = originalWidth;
@@ -423,10 +457,19 @@ function colorCanvas(offsets) {
   offsets.forEach((offset) => {
 
     const percentage = offset[2]; // between 0 and 100
-    const red = 255 - Math.round(2.55 * percentage);
-    const green = Math.round(2.55 * percentage);
+    // const red = 255 - Math.round(2.55 * percentage);
+    // const green = Math.round(2.55 * percentage);
 
-    offscreenCtx.fillStyle = `rgba(${red}, ${green}, 0, 0.5)`;
+    // offscreenCtx.fillStyle = `rgba(${red}, ${green}, 0, 0.5)`;
+    if (percentage < 70) {
+      offscreenCtx.fillStyle = "rgba(255, 0, 0, 0.5)";
+    }
+    else if (percentage < 95) {
+      offscreenCtx.fillStyle = "rgba(255, 255, 0, 0.5)";
+    }
+    else {
+      offscreenCtx.fillStyle = "rgba(0, 255, 0, 0.5)";
+    }
     offscreenCtx.fillRect(offset[0] / 1000 * pixelsPerSecond, 0, offset[1] / 1000 * pixelsPerSecond, canvas.height)
   });
 

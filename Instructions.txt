@@ -3,15 +3,21 @@ sudo apt update
 sudo apt install python3-venv
 python3 -m venv venv
 source venv/bin/activate
+git config --global user.email "dakopen185@gmail.com"
+git config --global user.name "Daniel Busch"
+git clone https://github.com/dakopen/AusspracheTrainer.org.git
+git checkout **CURRENTBRANCH**
+cd AusspracheTrainer.org
 pip install -r requirements.txt
 
 sudo apt install redis-server
 sudo apt-get install gettext
 
-git config --global user.email "dakopen185@gmail.com"
-git config --global user.name "Daniel Busch"
+ADD env file
 
-ADD: .env with AZURE_KEYVAULT_URL=https://...
-
-sudo apt install azure-cli
-az login
+sudo apt install apt-transport-https ca-certificates curl software-properties-common
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"
+sudo apt update
+apt-cache policy docker-ce
+sudo apt install docker-ce

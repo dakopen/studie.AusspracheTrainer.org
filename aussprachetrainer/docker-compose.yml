@@ -1,0 +1,48 @@
+version: '3'
+
+services:
+  web:
+    build: .
+    command: gunicorn --bind 0.0.0.0:8000 aussprachetrainer.wsgi:application
+    volumes:
+      - .:/usr/src/app
+      #- static_volume:/usr/src/app/staticfiles
+      - media_volume:/usr/src/app/media
+    depends_on:
+      - redis
+
+  celery:
+    build: .
+    command: celery -A aussprachetrainer worker --loglevel=info
+    volumes:
+      - .:/usr/src/app
+    depends_on:
+      - redis
+
+  celerybeat:
+    build: .
+    command: >
+      sh -c "python manage.py makemigrations && python manage.py migrate &&
+            celery -A aussprachetrainer beat --loglevel=info --scheduler django_celery_beat.schedulers:DatabaseScheduler"
+    volumes:
+      - .:/usr/src/app
+    depends_on:
+      - redis
+
+
+  nginx:
+    build: ./nginx
+    ports:
+      - "80:80"
+    volumes:
+    #  - static_volume:/usr/src/app/staticfiles
+      - media_volume:/usr/src/app/media
+    depends_on:
+      - web
+
+  redis:
+    image: "redis:alpine"
+
+volumes:
+  #static_volume:
+  media_volume:

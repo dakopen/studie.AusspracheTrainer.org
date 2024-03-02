@@ -5,6 +5,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="og:title" content="AusspracheTrainer">
+    <meta property="og:description" content="{% trans 'Trainiere Deine Aussprache in Deutsch, Englisch und Französisch' %}">
+    <meta property="og:image" content="{% static 'frontend/assets/images/AT-default.svg' %}">
+    <meta property="og:url" content="AusspracheTrainer.org">
+
+
     <link rel="stylesheet" href="{% static 'frontend/assets/css/global.css' %}" type="text/css">
     <link rel="stylesheet" href="{% static 'frontend/assets/css/header.css' %}" type="text/css">
     <link rel="stylesheet" href="{% static 'frontend/assets/css/footer.css' %}" type="text/css">
@@ -14,6 +20,9 @@
 
     <link rel="icon" href="{% static 'frontend/assets/images/favicon.png' %}" type="image/png">
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://js.sentry-cdn.com/8c306e7425f34fd94efa6d6a29331df4.min.js" crossorigin="anonymous"></script>
+    <script src="https://browser.sentry-cdn.com/7.102.1/replay-canvas.min.js" integrity="sha384-IULWc6n/ceDcltpwEeezIl8RC82ACcdiFDSRAaZxakO4W7tjvwbC97hy8TmDuGKD" crossorigin="anonymous"></script>
+
     <title>{% block title %}AusspracheTrainer{% endblock %}</title>
       
     <!-- other meta tags -->

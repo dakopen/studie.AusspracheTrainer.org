@@ -1,0 +1,46 @@
+.tutorial-container {
+    width: 95%;
+    max-width: 800px;
+    position: relative;
+    margin: auto;
+    margin-top: 2em;
+}
+
+.tutorial-headline {
+    font-size: 1.5em;
+    margin-bottom: 0.5em;
+    font-weight: 500;
+    margin: 0 auto; /* Centers the headline horizontally */
+    padding-bottom: 0.5em;
+    text-align: center; /* Center aligns the text */
+}
+
+.tutorial-ol {
+    list-style-type: none; /* Removes default list style */
+    padding-left: 0; /* Adjust as needed */
+    counter-reset: item; /* Resets the counter */
+}
+
+.tutorial-ol li {
+    font-size: smaller;
+    position: relative; /* Needed for absolute positioning of pseudo-elements */
+    margin-bottom: 25px; /* Spacing between list items */
+    padding-left: 60px; /* Increased space for the number circles */
+}
+
+.tutorial-ol li::before {
+    content: counter(item); /* Use the counter as content */
+    counter-increment: item; /* Increment the counter */
+    position: absolute;
+    left: 10px; /* Adjusted alignment of the circle */
+    top: 50%; /* Center vertically relative to the list item */
+    transform: translateY(-50%); /* Center the circle */
+    width: 35px; /* Size of the circle */
+    height: 35px; /* Size of the circle */
+    background-color: var(--rosa); /* Lila background */
+    color: white; /* White text */
+    border-radius: 50%; /* Makes it a circle */
+    text-align: center; /* Center the number horizontally */
+    line-height: 35px; /* Center the number vertically */
+    font-weight: bold; /* Optional: makes the number bold */
+}

@@ -8,12 +8,15 @@
     --black: Black;
     --white-rosa: #FBF9FE;
     --light-rosa: #ECDFFE;
+    --yellow: #FFD700;
+    --green: #008000;
 }
 
 @font-face {
     font-family: "Montserrat";
-    src: url("/static/frontend/assets/fonts/Montserrat-Regular.ttf") format('truetype');
+    src: url("https://fra1.digitaloceanspaces.com/aussprachetrainer/staticfiles/frontend/assets/fonts/Montserrat-Regular.ttf") format('truetype');
 }
+
 
 /* General Styles */
 body {

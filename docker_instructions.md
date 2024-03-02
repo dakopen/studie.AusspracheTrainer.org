@@ -1,0 +1,5 @@
+- `cd aussprachetrainer`
+- `docker-compose down`
+- `git pull`
+- `docker system prune --volumes` (and manually remove all volumes: `docker volume rm <volume_name>` (first `docker volume ls`)) in order to have changes to the static files and images take effect
+- `docker-compose up --build`
