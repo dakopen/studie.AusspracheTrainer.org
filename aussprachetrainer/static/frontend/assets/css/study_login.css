@@ -44,3 +44,11 @@ h2 {
     font-size: xx-large;
     margin-bottom: 20px; /* Spacing between title and form */
 }
+
+.study-confirmation {
+    font-size: small;
+    margin-top: 20px; /* Spacing between form and confirmation message */
+    margin-bottom: 30px;
+    text-align: left;
+    padding: 0px 20px;
+}
