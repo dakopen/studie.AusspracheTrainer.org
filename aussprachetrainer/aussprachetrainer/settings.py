@@ -77,6 +77,8 @@ ADMINS = [("Daniel Busch", "dakopen185@gmail.com")]
 CORS_ALLOWED_ORIGINS = [
     "https://dakopen.de",
     'https://aussprachetrainer.org',
+    "https://sentry.io",
+
     # Add any other origins you want to allow
 ]
 
