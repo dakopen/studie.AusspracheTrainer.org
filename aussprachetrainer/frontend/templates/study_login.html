@@ -20,13 +20,50 @@
     <button type="submit" class="submit-button" id="submit-button" onkeydown="handleKey(event, 'study-checkbox')">einloggen</button>      
 </div>
 
-<div class="center-container-no">
+<div class="center-container-no-background">
+    <div class="dropdown-files-container">
+        <div class="dropdown-files">
+          <span class="line-files"></span>
+          <span class="text-files">Weitere Informationen</span>
+          <i class="fa fa-chevron-down dropdown-icon-files"></i>
+          <span class="line-files"></span>
+        </div>
+      </div>
+      
+    <div class="additional-information">
+        <div class="icon-container" id="icon-wrapper-addinfo">
+            <div class="icon-wrapper" onclick="toggleText(1)">
+              <i class="fas fa-user icon fa-sm"></i>
+              <p>Schüler:innen & Eltern</p>
+            </div>
+            <div class="icon-wrapper" onclick="toggleText(2)">
+              <i class="fas fa-chalkboard-teacher icon"></i>
+              <p>Lehrer:innen</p>
+            </div>
+            <div class="icon-wrapper" onclick="toggleText(3)">
+              <i class="fas fa-school icon"></i>
+              <p>Schulen</p>
+            </div>
+          </div>
+          <div id="infoText" class="info-text">
+            <div id="additional-info1" class="text">
+              <p>Als Schüler:in kannst du dich hier einloggen, um an der Studie teilzunehmen. Bitte gib deinen persönlichen Code ein, um fortzufahren.</p>
+            </div>
+            <div id="additional-info2" class="text inactive">
+              <p>Als Lehrer:in kannst du dich hier einloggen, um die Studie zu verwalten. Bitte gib deinen persönlichen Code ein, um fortzufahren.</p>
+            </div>
+            <div id="additional-info3" class="text inactive">
+              <p>Als Schule kannst du dich hier einloggen, um die Studie zu verwalten. Bitte gib deinen persönlichen Code ein, um fortzufahren.</p>
+              <p>Als Schule kannst du dich hier einloggen, um die Studie zu verwalten. Bitte gib deinen persönlichen Code ein, um fortzufahren.</p>
+              <p>Als Schule kannst du dich hier einloggen, um die Studie zu verwalten. Bitte gib deinen persönlichen Code ein, um fortzufahren.</p>
+              <p>Als Schule kannst du dich hier einloggen, um die Studie zu verwalten. Bitte gib deinen persönlichen Code ein, um fortzufahren.</p>
+
+            </div>
 
 
-<div class="dropdown">
-    <span class="label">Dateien</span>
-    <span class="arrow-down">&#x25BC;</span>
-  </div>
-
+          </div>
+          
+    </div>
+</div>
 <script src="{% static 'frontend/assets/js/study_login.js' %}"></script>
 

@@ -93,26 +93,94 @@ h2 {
 }
 
 
-.dropdown {
+.dropdown-files-container {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+    width: 100%;
+}
+  
+.dropdown-files {
+    display: flex;
+    font-size: medium;
+    width: 100%;
     align-items: center;
-    background-color: var(--white);
+    padding: 8px;
+}
+
+.line-files {
+    flex-grow: 1;
+    height: 1px;
+    background-color: var(--black);
+}
+
+.text-files {
+    margin-left: 8px;
+    margin-right: 4px;
+    color: var(--black);
+}
+
+.dropdown-icon-files {
+    margin-right: 8px;
+}
+
+/* Optional: Add a hover effect for the dropdown text and arrow */
+.dropdown-files:hover .text-files, .dropdown-files:hover .dropdown-icon-files {
+    color: var(--lila);
+}
+.icon-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: start; /* Align items to the start of the container */
+    font-size: small;
+    background-color: var(--white-rosa);
+    padding-top: 10px;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+}
+
+.icon-wrapper {
+    flex: 1; /* Allows the wrapper to grow and fill the container */
+    text-align: center; /* Ensures text is centered under the icon */
+    display: flex;
+    flex-direction: column; /* Stacks icon and text vertically */
+    align-items: center; /* Aligns items (icon and text) in the center horizontally */
+    padding: 0 10px; /* Adds some padding on the sides */
+}
+
+.icon {
+    width: 40px; /* Fixed width for the icon */
+    height: 40px; /* Fixed height to maintain a circle */
+    border-radius: 50%; /* Keeps it round */
     padding: 10px;
-    border-top: 2px solid var(--black);
-    border-bottom: 2px solid var(--black);
-  }
+    font-size: 20px; /* Icon size */
+    background-color: var(--lila); /* Icon background color */
+    color: var(--white); /* Icon color */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 5px; /* Space between the icon and the text */
+}
+
+.info-text {
+    margin-top: 10px;
+    font-size: small;
+    text-align: justify;
+}
+
+.icon-wrapper p {
+    white-space: normal;
+    word-wrap: break-word;
+    margin-bottom: 10px;
+}
+
   
-  .label {
-    color: var(--black);
-  }
   
-  .arrow-down {
-    color: var(--black);
-  }
-  
-  /* Optional: Add a hover effect for the dropdown */
-  .dropdown:hover {
-    background-color: var(--light-rosa);
-  }
-  
+.dropdown-rotate  {
+    transform: rotate(90deg);
+    transition: transform 0.3s ease-in-out;
+}
+
+.inactive {
+    height: 0;
+    visibility: hidden;
+}

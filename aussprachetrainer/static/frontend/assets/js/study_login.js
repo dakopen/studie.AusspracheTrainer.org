@@ -74,3 +74,64 @@ function getCookie(name) {
     }
     return null;
 }
+
+
+
+
+function toggleText(iconId) {
+    var infoText = document.getElementById("infoText");
+    let addinfo1 = document.getElementById("additional-info1");
+    let addinfo2 = document.getElementById("additional-info2");
+    let addinfo3 = document.getElementById("additional-info3");
+
+    switch (iconId) {
+      case 1:
+        addinfo1.classList.remove("inactive");
+        addinfo2.classList.add("inactive");
+        addinfo3.classList.add("inactive");
+        break;
+      case 2:
+        addinfo1.classList.add("inactive");
+        addinfo2.classList.remove("inactive");
+        addinfo3.classList.add("inactive");
+        break;
+      case 3:
+        addinfo1.classList.add("inactive");
+        addinfo2.classList.add("inactive");
+        addinfo3.classList.remove("inactive");
+        break;
+      default:
+        addinfo1.classList.add("inactive");
+        addinfo2.classList.add("inactive");
+        addinfo3.classList.add("inactive");
+    }
+  }
+  
+
+document.addEventListener('DOMContentLoaded', () => {
+    const weitereInfoButton = document.querySelector('.dropdown-files');
+    const additionalInfoDiv = document.querySelector('.additional-information');
+    const icon = document.querySelector('.dropdown-icon-files'); // Icon for rotation
+
+    // Initially hide the additional information
+    additionalInfoDiv.style.height = '0';
+    additionalInfoDiv.style.overflow = 'hidden';
+    additionalInfoDiv.style.transition = 'height 0.3s ease';
+    let addinfo1 = document.getElementById("additional-info1");
+    let addinfo2 = document.getElementById("additional-info2");
+    let addinfo3 = document.getElementById("additional-info3");
+    let addinfoIcons = document.getElementById("icon-wrapper-addinfo")
+    var scrollHeight = Math.max(addinfo1.scrollHeight, addinfo2.scrollHeight, addinfo3.scrollHeight) + addinfoIcons.scrollHeight + 10;
+    
+
+    weitereInfoButton.addEventListener('click', () => {
+        // Check if the div is visible
+        if (additionalInfoDiv.style.height === '0px') {
+            additionalInfoDiv.style.height = scrollHeight + 'px';
+            icon.classList.add('dropdown-rotate');
+        } else {
+            additionalInfoDiv.style.height = '0';
+            icon.classList.remove('dropdown-rotate');
+        }
+    });
+});
