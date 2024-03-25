@@ -9,21 +9,34 @@
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     text-align: center;
 }
+
+
+.center-container-no-background {
+    width: 90%;
+    max-width: 500px;
+    margin: 40px auto;
+    padding: 20px;
+    text-align: center;
+}
+
+
 .input-field {
     margin: 20px 0;
     display: flex;
     justify-content: center;
     gap: 10px;
 }
+
 .input-field input {
     font-size: 16px;
-    padding: 10px;
-    width: 36px; /* Adjust based on your preference */
+    padding: 10px 5px;
+    width: 38px; /* Adjust based on your preference */
     text-align: center;
     border: 1px solid #7E20FC; /* Lila */
     border-radius: 8px;
     background-color: #FFFFFF; /* White */
 }
+
 .submit-button {
     padding: 10px 20px;
     border: none;
@@ -52,3 +65,54 @@ h2 {
     text-align: left;
     padding: 0px 20px;
 }
+
+/* Mobile styles */
+@media (max-width: 768px) {
+    .center-container {
+        margin: 10px auto; /* Smaller margin for mobile */
+        padding: 10px; /* Smaller padding for mobile */
+    }
+
+    .input-field {
+        gap: 4px;
+    }
+
+    
+    .input-field input {
+        font-size: 16px;
+        width: 32px; /* Smaller width for mobile */
+        padding: 8px 2px; /* Smaller padding for mobile */
+    }
+
+    .submit-button {
+        padding: 8px 15px; /* Smaller padding for mobile */
+        width: 120px; /* Smaller width for mobile */
+    }
+
+    /* Add other mobile-specific style adjustments here */
+}
+
+
+.dropdown {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--white);
+    padding: 10px;
+    border-top: 2px solid var(--black);
+    border-bottom: 2px solid var(--black);
+  }
+  
+  .label {
+    color: var(--black);
+  }
+  
+  .arrow-down {
+    color: var(--black);
+  }
+  
+  /* Optional: Add a hover effect for the dropdown */
+  .dropdown:hover {
+    background-color: var(--light-rosa);
+  }
+  
