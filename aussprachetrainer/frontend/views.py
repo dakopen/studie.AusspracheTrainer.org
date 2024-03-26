@@ -70,15 +70,6 @@ def index(request):
         else:
             context["language"] = "de-DE"
 
-    return_to = request.GET.get("return_to")
-    if return_to:
-        if return_to == "learn":
-            context["return_to"] = reverse("learn")
-            context["return_to_text"] = _("Zurück zum Lernbereich")
-        elif return_to == "dashboard":
-            context["return_to"] = reverse("dashboard")
-            context["return_to_text"] = _("Zurück zum Dashboard")
-
 
     text = request.GET.get("text")
     if text:
@@ -218,3 +209,5 @@ def text_to_speech(request):
         audio_url = "https://" + audio_url[7:]
         return JsonResponse({'audio_url': audio_url})
 
+def student_login(request):
+    return render_into_base(request, _("AusspracheTrainer"), ["study_login.html"], css=['frontend/assets/css/study_login.css'])

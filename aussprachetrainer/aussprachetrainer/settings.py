@@ -98,11 +98,8 @@ if DEBUG:
 # Application definition
 
 INSTALLED_APPS = [
-    'user_auth',
     'frontend',
     'analyze',
-    'dashboard',
-    'learn',
     'fontawesomefree',
     'corsheaders',
     'storages',
@@ -197,9 +194,10 @@ else:
 
 
 AUTHENTICATION_BACKENDS = [
-    'user_auth.backends.EmailOrUsernameModelBackend',
-    'user_auth.backends.CaseInsensitiveModelBackend',
+#    'user_auth.backends.EmailOrUsernameModelBackend',
+#    'user_auth.backends.CaseInsensitiveModelBackend',
     'django.contrib.auth.backends.ModelBackend',
+#    'user_auth.backends.StudentIDBackend',
 ]
 
 
@@ -222,9 +220,7 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 # Authentication
-
-AUTH_USER_MODEL = 'user_auth.CustomUser'
-LOGIN_URL = '/auth/login/'
+AUTH_USER_MODEL = 'frontend.Teacher'
 
 
 # Internationalization
