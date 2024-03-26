@@ -184,7 +184,7 @@ else:
                 'ENGINE': 'django.db.backends.postgresql',
                 'NAME': 'defaultdb',
                 'USER': 'doadmin',
-                'PASSWORD': get_secret("BETA-DO-DATABASE-PASSWORD"),
+                'PASSWORD': get_secret("BETA-DO-STUDY-DATABASE-PASSWORD"),
                 'HOST': 'dbaas-db-4088918-do-user-10555764-0.c.db.ondigitalocean.com',  # This should match the service name in docker-compose
                 'PORT': '25060',
                 'OPTIONS': {

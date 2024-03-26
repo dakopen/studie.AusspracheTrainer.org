@@ -215,6 +215,7 @@ h2 {
     min-width: 98%;
 }
 
+
 .school-form input[type="submit"] {
     background-color: var(--lila); /* Purple background for the submit button */
     color: var(--white);
@@ -233,4 +234,10 @@ h2 {
 .school-form label.required::after {
     content: " *";
     color: var(--darkred);
+}
+
+.submit-error {
+    color: var(--darkred);
+    font-size: small;
+    margin-top: 10px;
 }

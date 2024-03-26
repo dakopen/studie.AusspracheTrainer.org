@@ -1,10 +1,24 @@
+
 document.addEventListener('DOMContentLoaded', (event) => {
     // Check for EULA agreement cookie
     let studyAgreed = getCookie("studyAgreed");
     if(studyAgreed === "true") {
         document.getElementById("study-checkbox").checked = true;
     }
+
+    enhanceInputsForMobile();
+
+    // Initialize inputs with event listeners for handling input, keydown, and paste events
+    const inputs = document.querySelectorAll('.singlecharinput');
+    inputs.forEach((input, index) => {
+
+        input.addEventListener('paste', function(event) {
+            handlePaste(event, inputs, index);
+        });
+    });
 });
+
+
 
 function handleKey(event, prevId, nextId) {
     let target;
@@ -16,6 +30,10 @@ function handleKey(event, prevId, nextId) {
         checkbox.checked = !checkbox.checked; // Toggle checkbox state
         setCookie("studyAgreed", checkbox.checked, 365); // Save state in cookie
         return;
+    }
+
+    if (event.ctrlKey && event.key === 'v') {
+        return; // Allow default paste action
     }
 
     if (event.key.length === 1 && event.key.match(/[a-zA-Z0-9]/)) {
@@ -49,10 +67,57 @@ function handleKey(event, prevId, nextId) {
             target = document.getElementById(nextId);
             if (target) target.focus();
             break;
-        default:
-            break; // Do nothing for other keys
+        default: 
+            break;
+    }
+    if (event.key.length === 1 ) event.preventDefault(); // Prevent default for all other keys
+}
+
+function enhanceInputsForMobile() {
+    const inputs = document.querySelectorAll('.singlecharinput').forEach(input => {
+        input.oninput = function() {
+
+            // Check if there's a designated next input and focus if applicable
+            const nextId = this.dataset.next;
+            if (nextId && this.value) {
+                const nextInput = document.getElementById(nextId);
+                if (nextInput) {
+                    nextInput.focus();
+                }
+            }
+        };
+    });
+}
+
+// Function to handle paste events and filter out non-alphanumeric characters
+function handlePaste(event) {
+    const inputs = document.querySelectorAll('.singlecharinput');
+
+    event.preventDefault(); // Prevent the default paste action
+
+    // Retrieve text from clipboard
+    const clipboardText = (event.clipboardData || window.clipboardData).getData('text');
+
+    currentIndex = Array.from(inputs).indexOf(event.target);
+
+    const pasteContent = clipboardText.replace(/[^a-zA-Z0-9]/g, '').toUpperCase();
+    // Distribute the paste content across the inputs, starting from the current index
+    for (let i = 0; i < pasteContent.length && (currentIndex + i) < inputs.length; i++) {
+        inputs[currentIndex + i].value = pasteContent.charAt(i);
+    }
+
+    // Move focus to the next input field after the last pasted character
+    const nextInputIndex = currentIndex + pasteContent.length;
+    if (nextInputIndex < inputs.length) {
+        inputs[nextInputIndex].focus();
     }
 }
+
+// Attach the paste event listener to all relevant input fields
+document.querySelectorAll('.singlecharinput').forEach(input => {
+    input.addEventListener('paste', handlePaste);
+});
+
 
 function setCookie(name, value, days) {
     var expires = "";

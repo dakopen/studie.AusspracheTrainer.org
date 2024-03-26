@@ -1,23 +1,33 @@
 {% load static %}
 {% load i18n %}
 <div class="center-container">
+    <form action="{% url 'student_login' %}" method="post">
     <h2 style="color: #7E20FC;">Login</h2> <!-- Lila color -->
     <div class="input-field uppercase">
-        <input type="text" id="char1" maxlength="1" onkeydown="handleKey(event, 'char1', 'char2')">
-        <input type="text" id="char2" maxlength="1" onkeydown="handleKey(event, 'char1', 'char3')">
-        <input type="text" id="char3" maxlength="1" onkeydown="handleKey(event, 'char2', 'char4')">
-        <input type="text" id="char4" maxlength="1" onkeydown="handleKey(event, 'char3', 'char5')">
+        <input type="text" id="char1" maxlength="1" onkeydown="handleKey(event, 'char1', 'char2')" data-next="char2" class="singlecharinput">
+        <input type="text" id="char2" maxlength="1" onkeydown="handleKey(event, 'char1', 'char3')" data-next="char3" class="singlecharinput">
+        <input type="text" id="char3" maxlength="1" onkeydown="handleKey(event, 'char2', 'char4')" data-next="char4" class="singlecharinput">
+        <input type="text" id="char4" maxlength="1" onkeydown="handleKey(event, 'char3', 'char5')" data-next="char5" class="singlecharinput">
         <div>_</div>
-        <input type="text" id="char5" maxlength="1" onkeydown="handleKey(event, 'char4', 'char6')">
-        <input type="text" id="char6" maxlength="1" onkeydown="handleKey(event, 'char5', 'char7')">
-        <input type="text" id="char7" maxlength="1" onkeydown="handleKey(event, 'char6', 'char8')">
-        <input type="text" id="char8" maxlength="1" onkeydown="handleKey(event, 'char7', 'study-checkbox')">
+        <input type="text" id="char5" maxlength="1" onkeydown="handleKey(event, 'char4', 'char6')" data-next="char6" class="singlecharinput">
+        <input type="text" id="char6" maxlength="1" onkeydown="handleKey(event, 'char5', 'char7')" data-next="char7" class="singlecharinput">
+        <input type="text" id="char7" maxlength="1" onkeydown="handleKey(event, 'char6', 'char8')" data-next="char8" class="singlecharinput">
+        <input type="text" id="char8" maxlength="1" onkeydown="handleKey(event, 'char7', 'study-checkbox')" data-next="study-checkbox" class="singlecharinput">
     </div>
     <div class="study-confirmation">
-        <input type="checkbox" id="study-checkbox" name="studyAgreed" onkeydown="handleKey(event, 'char8', 'submit-button')">
+        <input type="checkbox" id="study-checkbox" name="studyAgreed" onkeydown="handleKey(event, 'char8', 'submit-button')" required>
         <label for="study-checkbox">Ich habe die Teilnehmendenaufklärung gelesen und verstanden.</label>
     </div>
-    <button type="submit" class="submit-button" id="submit-button" onkeydown="handleKey(event, 'study-checkbox')">einloggen</button>      
+    {% csrf_token %}
+    <button type="submit" class="submit-button" id="submit-button" onkeydown="handleKey(event, 'study-checkbox')">einloggen</button>
+    {% if wrong_name %}
+      <div class="submit-error">
+        <i class="fas fa-exclamation-triangle"></i>
+        Ungültiger Benutzername. Bitte überprüfe die Eingabe oder wende dich an deine Lehrkraft.
+        <i class="fas fa-exclamation-triangle"></i>
+      </div>
+    {% endif %}
+  </form> 
 </div>
 
 <div class="center-container-no-background">
