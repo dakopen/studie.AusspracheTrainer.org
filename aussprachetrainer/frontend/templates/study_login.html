@@ -30,11 +30,11 @@
         </div>
       </div>
       
-    <div class="additional-information">
+    <div class="additional-information inactive">
         <div class="icon-container" id="icon-wrapper-addinfo">
             <div class="icon-wrapper" onclick="toggleText(1)">
               <i class="fas fa-user icon fa-sm"></i>
-              <p>Schüler:innen & Eltern</p>
+              <p>Schüler:innen &amp; Eltern</p>
             </div>
             <div class="icon-wrapper" onclick="toggleText(2)">
               <i class="fas fa-chalkboard-teacher icon"></i>
@@ -47,16 +47,38 @@
           </div>
           <div id="infoText" class="info-text">
             <div id="additional-info1" class="text">
-              <p>Als Schüler:in kannst du dich hier einloggen, um an der Studie teilzunehmen. Bitte gib deinen persönlichen Code ein, um fortzufahren.</p>
+              <p>Als Schüler:in kannst du dich oben einloggen, um an der Studie teilzunehmen. Bitte gib deinen persönlichen Code ein, um fortzufahren. Den Code erhälst du von deiner Lehrkraft.</p>
+              <span><i class="fa fa-download"></i><a href="https://www.google.com/search?q=Link+wird+sp%C3%A4ter+aktualisiert" target="_blank"> Teilnehmendenaufklärung.pdf</a></span><br>
+              <span><i class="fa fa-download"></i><a href="https://www.google.com/search?q=Link+wird+sp%C3%A4ter+aktualisiert" target="_blank"> Einwilligungserklärung.pdf</a></span>
+
             </div>
-            <div id="additional-info2" class="text inactive">
-              <p>Als Lehrer:in kannst du dich hier einloggen, um die Studie zu verwalten. Bitte gib deinen persönlichen Code ein, um fortzufahren.</p>
+            <div id="additional-info2" class="text inactive">            
+              <p>Als Lehrer:in kannst du dich<a href="https://www.google.com/search?q=Link+wird+sp%C3%A4ter+aktualisiert"> hier <i class="fa fa-sign-in-alt"></i> </a>einloggen, um die Studie zu verwalten.</p>
+              <p>Wenn du Fragen oder Anregungen hast, melde dich gerne bei mir unter <a href="mailto:kontakt@aussprachetrainer.org"><i class="fa fa-envelope"></i> kontakt@aussprachetrainer.org</a>.</p>
+            </a>
             </div>
-            <div id="additional-info3" class="text inactive">
-              <p>Als Schule kannst du dich hier einloggen, um die Studie zu verwalten. Bitte gib deinen persönlichen Code ein, um fortzufahren.</p>
-              <p>Als Schule kannst du dich hier einloggen, um die Studie zu verwalten. Bitte gib deinen persönlichen Code ein, um fortzufahren.</p>
-              <p>Als Schule kannst du dich hier einloggen, um die Studie zu verwalten. Bitte gib deinen persönlichen Code ein, um fortzufahren.</p>
-              <p>Als Schule kannst du dich hier einloggen, um die Studie zu verwalten. Bitte gib deinen persönlichen Code ein, um fortzufahren.</p>
+            <div id="additional-info3" class="text inactive school-form">
+              <p>Wenn deine Schule von der Studie gehört hat, und über eine Teilnahme an der Studie nachdenkt, kannst du dieses unverbindliche Kontaktformular verwenden. Gerne können wir einen Videocall ausmachen.</p>
+
+              <form action="https://formspree.io/f/mrgnybzv" method="post" id="schoolForm">
+                <label for="name" class="required">Name:</label><br>
+                <input type="text" id="name" name="name" placeholder="Vor- und Nachname" required><br>
+                
+                <label for="schoolName" class="required">Schulname:</label><br>
+                <input type="text" id="schoolName" name="schoolName" placeholder="Schulname" required><br>
+                
+                <label for="schoolLocation" class="required">Schulort:</label><br>
+                <input type="text" id="schoolLocation" name="schoolLocation" placeholder="Ort" required><br>
+                
+                <label for="email" class="required">Email Adresse:</label><br>
+                <input type="email" id="email" name="email" placeholder="kontakt@schulname.edu" required><br>
+                
+                <label for="message">Nachricht (optional):</label><br>
+                <textarea id="message" name="message"></textarea><br>
+                
+                <input type="submit" value="Weitere Informationen erhalten">
+            </form>
+              
 
             </div>
 

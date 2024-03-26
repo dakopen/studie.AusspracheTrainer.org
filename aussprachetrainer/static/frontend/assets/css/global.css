@@ -154,10 +154,6 @@ blockquote {
     color: var(--lila);
 }
 
-.required {
-    color: var(--darkred);
-}
-
 .error {
     color: var(--red);
     font-style: italic;

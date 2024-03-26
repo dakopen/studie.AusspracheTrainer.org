@@ -106,32 +106,102 @@ function toggleText(iconId) {
         addinfo3.classList.add("inactive");
     }
   }
-  
 
-document.addEventListener('DOMContentLoaded', () => {
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const weitereInfoButton = document.querySelector('.dropdown-files');
+    const icon = document.querySelector('.dropdown-icon-files'); // Icon für die Rotation
+    const additionalInfoDiv = document.querySelector('.additional-information');
+    const iconWrappers = document.querySelectorAll('.icon-wrapper'); // Icon Wrapper für Hintergrundwechsel
+
+    // Funktion zum Aktualisieren des Hintergrunds der Icons
+    function updateIconBackground() {
+        iconWrappers.forEach((iconWrapper, index) => {
+            // Prüfe, ob der zugehörige Textbereich aktiv ist
+            if (document.getElementById('additional-info' + (index + 1)).classList.contains('inactive')) {
+                iconWrapper.querySelector('.icon').classList.add('icon-inactive');
+            } else {
+                iconWrapper.querySelector('.icon').classList.remove('icon-inactive');
+            }
+        });
+    }
+
+    weitereInfoButton.addEventListener('click', () => {
+        icon.classList.toggle('dropdown-rotate');
+        additionalInfoDiv.classList.toggle('inactive');
+        updateIconBackground(); // Aktualisiere den Hintergrund der Icons, wenn der Hauptbutton geklickt wird
+    });
+    
+    window.toggleText = function(index) {
+        // Verberge alle Textbereiche
+        document.querySelectorAll('.info-text .text').forEach(function(element) {
+            element.classList.add('inactive');
+        });
+
+        // Aktiviere den angeklickten Textbereich
+        document.getElementById('additional-info' + index).classList.remove('inactive');
+
+
+        updateIconBackground(); // Aktualisiere den Hintergrund der Icons basierend auf dem aktiven Bereich
+    }
+
+    updateIconBackground(); // Initialisiere den Hintergrund der Icons beim Laden der Seite
+});
+
+
+/*
+  document.addEventListener('DOMContentLoaded', () => {
     const weitereInfoButton = document.querySelector('.dropdown-files');
     const additionalInfoDiv = document.querySelector('.additional-information');
     const icon = document.querySelector('.dropdown-icon-files'); // Icon for rotation
 
     // Initially hide the additional information
-    additionalInfoDiv.style.height = '0';
+    additionalInfoDiv.style.maxHeight = '0';
     additionalInfoDiv.style.overflow = 'hidden';
-    additionalInfoDiv.style.transition = 'height 0.3s ease';
+    additionalInfoDiv.style.transition = 'max-height 0.5s ease'; // Verlängert für sanfteren Übergang
+
     let addinfo1 = document.getElementById("additional-info1");
     let addinfo2 = document.getElementById("additional-info2");
     let addinfo3 = document.getElementById("additional-info3");
-    let addinfoIcons = document.getElementById("icon-wrapper-addinfo")
-    var scrollHeight = Math.max(addinfo1.scrollHeight, addinfo2.scrollHeight, addinfo3.scrollHeight) + addinfoIcons.scrollHeight + 10;
+    let addinfoIcons = document.getElementById("icon-wrapper-addinfo");
+    var scrollHeight = Math.max(addinfo1.scrollHeight, addinfo2.scrollHeight, addinfo3.scrollHeight, addinfoIcons.scrollHeight); // Etwas zusätzlicher Platz
     
-
     weitereInfoButton.addEventListener('click', () => {
-        // Check if the div is visible
-        if (additionalInfoDiv.style.height === '0px') {
-            additionalInfoDiv.style.height = scrollHeight + 'px';
+        if (additionalInfoDiv.style.maxHeight === '0px') {
+            additionalInfoDiv.style.maxHeight = scrollHeight + 'px';
             icon.classList.add('dropdown-rotate');
+            additionalInfoDiv.style.overflow = 'visible';
         } else {
-            additionalInfoDiv.style.height = '0';
+            additionalInfoDiv.style.maxHeight = '0';
+            setTimeout(() => {
+                additionalInfoDiv.style.overflow = 'hidden';
+            }, 500); // Warte auf das Ende der Transition, bevor overflow auf 'hidden' gesetzt wird
             icon.classList.remove('dropdown-rotate');
         }
     });
 });
+*/
+
+window.onload = function() {
+    const form = document.getElementById("schoolForm");
+
+    form.onsubmit = async function(e) {
+      e.preventDefault(); // Verhindert das Standard-Absendeverhalten
+
+      // Verwendet Fetch API, um das Formular zu senden
+      const response = await fetch("https://formspree.io/f/mrgnybzv", {
+        method: 'POST',
+        body: new FormData(form),
+        headers: {
+          'Accept': 'application/json'
+        }
+      });
+
+      if (response.ok) { // Überprüft, ob die Anfrage erfolgreich war
+        form.reset(); // Setzt das Formular zurück
+        alert("Erfolg! Ihre Nachricht wurde gesendet."); // Zeigt eine Erfolgsmeldung an
+      } else {
+        alert("Es gab einen Fehler beim Senden Ihrer Nachricht. Bitte versuchen Sie es später erneut.");
+      }
+    }
+  }

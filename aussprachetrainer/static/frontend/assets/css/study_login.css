@@ -121,6 +121,7 @@ h2 {
 
 .dropdown-icon-files {
     margin-right: 8px;
+    transition: transform 0.3s ease-in-out;
 }
 
 /* Optional: Add a hover effect for the dropdown text and arrow */
@@ -161,6 +162,10 @@ h2 {
     margin-bottom: 5px; /* Space between the icon and the text */
 }
 
+.icon-inactive {
+    background-color: var(--rosa) !important; /* Grau für inaktive Icons */
+}
+
 .info-text {
     margin-top: 10px;
     font-size: small;
@@ -177,10 +182,55 @@ h2 {
   
 .dropdown-rotate  {
     transform: rotate(90deg);
-    transition: transform 0.3s ease-in-out;
 }
 
 .inactive {
-    height: 0;
-    visibility: hidden;
+    display: none;
+}
+
+
+.school-form form {
+    display: flex;
+    flex-direction: column;
+    width: 98%;
+    margin: 0 auto;
+}
+
+.school-form label {
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+.school-form input[type="text"],
+.school-form input[type="email"],
+.school-form textarea {
+    font-family: "Montserrat";
+    width: 98%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px; /* Rounded corners for input fields */
+    border: 1px solid #ccc; /* Light gray border */
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+    max-width: 98%;
+    min-width: 98%;
+}
+
+.school-form input[type="submit"] {
+    background-color: var(--lila); /* Purple background for the submit button */
+    color: var(--white);
+    padding: 10px;
+    border: none;
+    border-radius: 5px; /* Rounded corners for the button */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 98%;
+}
+
+.school-form input[type="submit"]:hover {
+    background-color: var(--rosa); /* Lighter purple on hover */
+}
+
+.school-form label.required::after {
+    content: " *";
+    color: var(--darkred);
 }
