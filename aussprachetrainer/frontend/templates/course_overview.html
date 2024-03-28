@@ -1,0 +1,21 @@
+{% load static %}
+{% load i18n %}
+<h2>{% trans "Kursübersicht" %}</h2>
+
+<!-- Course Form -->
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">{% trans "Kurs speichern" %}</button>
+</form>
+
+<!-- List Courses -->
+<ul>
+    {% for course in courses %}
+    <li>
+        {{ course.name }} ({{ course.language }})
+        <!-- Include a link to a form or page for editing this course -->
+        <a href="{% url 'edit_course' course.id %}">{% trans "Bearbeiten" %}</a>
+    </li>
+    {% endfor %}
+</ul>

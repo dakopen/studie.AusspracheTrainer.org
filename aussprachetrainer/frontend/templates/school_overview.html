@@ -1,0 +1,18 @@
+{% load static %}
+{% load i18n %}
+<h2>{% trans "Schulübersicht" %}</h2>
+
+<!-- Display Schools with Teacher and Student Counts -->
+<ul>
+    {% for school in schools %}
+    <li>{{ school.name }} ({{ school.federal_land }}) - Teachers: {{ school.teacher_count }}, Students: {{ school.student_count }}, Courses: {{ school.course_count }}</li>
+    {% endfor %}
+    
+</ul>
+
+<!-- School Creation Form -->
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">{% trans "Schule erstellen" %}</button>
+</form>

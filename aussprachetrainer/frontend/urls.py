@@ -1,7 +1,7 @@
 from django.urls import path
 from .views import index, legal_notice, privacy_policy, initiate_analysis, check_status, \
                    analysis_error, change_language, generate_random_sentence, robots_txt, text_to_speech, \
-                   student_login
+                   student_login, view_and_create_school, view_and_create_course, teacher_login
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -17,6 +17,9 @@ urlpatterns = [
     path('robots.txt', robots_txt, name='robots_txt'),
     path('speech_synthesis/', text_to_speech, name='text_to_speech'),
     path('student_login/', student_login, name='student_login'),
+    path('schools/', view_and_create_school, name='school_overview'),
+    path('courses/', view_and_create_course, name='course_overview'),
+    path('teacher_login', teacher_login, name="login"),
     # other URL patterns...
 ]
 

@@ -10,16 +10,16 @@
 
             {% if user.is_authenticated %}
             <li class="nav-item">
-                <p style="margin-bottom: 0rem;"><a href="{% url 'dashboard' %}">{% trans "Dashboard" %}</a></p>
+                <p style="margin-bottom: 0rem;"><a href="">{% trans "ADD LATER DASHBOARD" %}</a></p>
                 <!-- Also adopt the url style below-->
             </li>
             <li class="nav-item">
-                <p style="margin-bottom: 0rem;"><a href="{% url 'learn' %}">{% trans "Lernen" %}</a></p>
+                <p style="margin-bottom: 0rem;"><a href="">{% trans "ADD LATER LEARN" %}</a></p>
                 <!-- Also adopt the url style below-->
 
             </li>
             <li class="nav-item">
-                <p class="nav-link"><a href="{% url 'logout' %}">{% trans "Logout" %}</a></p>
+                <p class="nav-link"><a href="">{% trans "ADD LATER LOGOUT" %}</a></p>
                 <!-- maybe move to user account settings to prevent accidental logout -->
             </li>
             {% endif %}

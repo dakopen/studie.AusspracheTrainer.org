@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.db.models import Count, Prefetch
 from django.core.files.storage import default_storage
 from django.core.files.base import ContentFile
 from django.utils.translation import gettext as _
@@ -22,6 +23,12 @@ from django.urls import reverse
 import logging
 from django.views.decorators.http import require_POST
 from django.templatetags.static import static
+from django.contrib.admin.views.decorators import staff_member_required
+from django.contrib.auth.decorators import user_passes_test
+from .forms import SchoolForm, CourseForm
+from .models import School, Teacher, Course
+from django.contrib.auth import authenticate, login
+from django.contrib import messages
 
 languages = ['en-GB', 'de-DE', 'fr-FR']
 random_sentences = {lang: open(os.path.join(settings.BASE_DIR, f'frontend/random_sentences/{lang.split("-")[0]}_validated.txt'), encoding="utf-8-sig").read().splitlines() for lang in languages}  # 5000 per language
@@ -211,3 +218,69 @@ def text_to_speech(request):
 
 def student_login(request):
     return render_into_base(request, _("AusspracheTrainer"), ["study_login.html"], css=['frontend/assets/css/study_login.css'])
+
+
+@staff_member_required
+def view_and_create_school(request):
+    if request.method == 'POST':
+        form = SchoolForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('view_and_create_school')
+    else:
+        form = SchoolForm()
+
+    schools = School.objects.annotate(
+        teacher_count=Count('teacher')  # Assuming the reverse relation from School to Teacher is named 'teacher'
+    )
+
+    for school in schools:
+        student_count = 0
+        course_count = 0
+        for teacher in school.teacher_set.all():
+            for course in teacher.course_set.all():
+                course_count += 1
+                student_count += course.students.count()
+        school.student_count = student_count
+        school.course_count = course_count
+
+
+    return render_into_base(request, _("Schulübersicht"), "school_overview.html", css=['frontend/assets/css/school_overview.css'], context={'form': form, 'schools': schools,})
+
+def teacher_check(user):
+    return hasattr(user, 'teacher_user')  # Assuming 'teacher_user' attribute is unique to teachers
+
+
+@user_passes_test(teacher_check)
+def view_and_create_course(request):
+    if request.method == 'POST':
+        form = CourseForm(request.POST)
+        if form.is_valid():
+            course = form.save(commit=False)
+            course.teacher = request.user.teacher  # Assuming a OneToOne relationship
+            course.save()
+            form.save_m2m()  # Needed for saving many-to-many fields if there are any
+            return redirect('course_overview')
+    else:
+        form = CourseForm()
+    
+    # Fetch only the courses for the logged-in teacher
+    courses = Course.objects.filter(teacher=request.user.teacher)
+
+
+    return render_into_base(request, _("Kursübersicht"), "course_overview.html", css=['frontend/assets/css/course_overview.css'],
+                            context={'form': form, 'courses': courses,})
+
+def teacher_login(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(request, username=username, password=password)
+        
+        if user is not None and user.is_teacher:  # Assuming your user model has an 'is_teacher' attribute
+            login(request, user)
+            return redirect('teacher_dashboard')  # Redirect to a teacher-specific dashboard
+        else:
+            messages.error(request, _("Falsche Anmeldeinformationen. Bitte versuchen Sie es erneut."))
+
+    return render_into_base(request, _("AusspracheTrainer Lehrer Login"), ["teacher_login.html"], css=['frontend/assets/css/teacher_login.css'])

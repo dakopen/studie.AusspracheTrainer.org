@@ -1,6 +1,9 @@
+import datetime
 from django.contrib.auth.models import AbstractBaseUser, AbstractUser, BaseUserManager
 from django.core.validators import RegexValidator
 from django.db import models
+from django.contrib.auth.models import Group, Permission
+
 
 # Custom manager for Student
 class MyUserManager(BaseUserManager):
@@ -31,6 +34,7 @@ class Student(AbstractBaseUser):
     age = models.IntegerField(null=True, blank=True)
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
+    single_course = models.ForeignKey('Course', on_delete=models.CASCADE, null=True, blank=True)
 
     objects = MyUserManager()
 
@@ -46,8 +50,6 @@ class Student(AbstractBaseUser):
     def has_module_perms(self, app_label):
         return True
 
-
-from django.contrib.auth.models import Group, Permission
 
 class Teacher(AbstractUser):
     school = models.ForeignKey('School', on_delete=models.CASCADE, null=True, blank=True)
@@ -82,9 +84,9 @@ class School(models.Model):
 # Course model
 class Course(models.Model):
     id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=100, default=f"Kurs vom {datetime.date.today}")
     teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE)
     language = models.CharField(max_length=2)
-    students = models.ManyToManyField(Student)
 
     def __str__(self):
         return f'{self.language} by {self.teacher.username}'
